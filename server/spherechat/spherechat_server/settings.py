@@ -131,5 +131,6 @@ USE_TZ = True
 
 STATIC_ROOT = '/var/www/spherechat/server/spherechat/static/'
 
-STATIC_URL = os.path.join(BASE_DIR, "static/")
+STATIC_URL = '/static/'
+
 
