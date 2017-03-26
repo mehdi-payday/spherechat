@@ -1,0 +1,11 @@
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\bin\Debug\SphereCliet.exe.config
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\bin\Debug\SphereCliet.exe
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\bin\Debug\SphereCliet.pdb
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\bin\Debug\websocket-sharp.clone.dll
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\bin\Debug\websocket-sharp.clone.xml
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\obj\Debug\SphereCliet.Form1.resources
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\obj\Debug\SphereCliet.Properties.Resources.resources
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\obj\Debug\SphereCliet.csproj.GenerateResource.Cache
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\obj\Debug\SphereCliet.exe
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\obj\Debug\SphereCliet.pdb
+C:\Users\Vincent\Documents\C#\SphereChat\SphereCliet\SphereCliet\obj\Debug\SphereCliet.csprojResolveAssemblyReference.cache
