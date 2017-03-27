@@ -93,6 +93,16 @@ namespace SphereCliet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap imgres {
+            get {
+                object obj = ResourceManager.GetObject("imgres", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap main_900 {
             get {
                 object obj = ResourceManager.GetObject("main_900", resourceCulture);
@@ -113,6 +123,16 @@ namespace SphereCliet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pexels_photo {
+            get {
+                object obj = ResourceManager.GetObject("pexels_photo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Reverse_Image_Search_Engines_Apps_And_Its_Uses_2016 {
             get {
                 object obj = ResourceManager.GetObject("Reverse_Image_Search_Engines_Apps_And_Its_Uses_2016", resourceCulture);
@@ -126,6 +146,16 @@ namespace SphereCliet.Properties {
         internal static System.Drawing.Bitmap searchicon {
             get {
                 object obj = ResourceManager.GetObject("searchicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap url {
+            get {
+                object obj = ResourceManager.GetObject("url", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
