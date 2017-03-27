@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SphereCliet {
+namespace SphereClient {
     public partial class Form1 : Form {
         public Form1() {
             InitializeComponent();
@@ -59,6 +59,14 @@ namespace SphereCliet {
         }
 
         private void label26_Click( object sender, EventArgs e ) {
+
+        }
+
+        private void label38_Click( object sender, EventArgs e ) {
+
+        }
+
+        private void label5_Click( object sender, EventArgs e ) {
 
         }
     }
