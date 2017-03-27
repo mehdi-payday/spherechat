@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SphereCliet.Properties {
+namespace SphereClient.Properties {
 
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
