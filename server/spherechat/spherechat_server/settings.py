@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'core',
+    'messaging',
+    'friendship',
+    'app',
 ]
 
 REST_FRAMEWORK = {
@@ -60,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTH_USER_MODEL = "core.User"
 
 ROOT_URLCONF = 'spherechat_server.urls'
 
@@ -137,8 +143,18 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 ]
 
-STATIC_ROOT = '/var/www/spherechat/server/spherechat/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
+OMNIBUS_ENDPOINT_SCHEME = 'http'  # 'ws' is used for websocket connections
+OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.sockjs_webapp_factory'
+# OMNIBUS_CONNECTION_FACTORY = 'omnibus.factories.sockjs_connection_factory'
+OMNIBUS_CONNECTION_FACTORY = 'spherechat_server.connection.zpark_connection_factory'
+# OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.userauthenticator_factory'
+OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
 
