@@ -61,5 +61,13 @@ namespace SphereClient {
         private void label26_Click( object sender, EventArgs e ) {
 
         }
+
+        private void label38_Click( object sender, EventArgs e ) {
+
+        }
+
+        private void label5_Click( object sender, EventArgs e ) {
+
+        }
     }
 }
