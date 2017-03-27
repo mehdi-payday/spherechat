@@ -46,12 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeedBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Message.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -65,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +83,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dummypofpic.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\main_900.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10-dithering-opt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image-slider2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\searchicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path4287.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path4352.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgres.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pexels-photo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\url.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
