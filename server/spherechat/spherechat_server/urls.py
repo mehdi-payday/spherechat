@@ -16,7 +16,9 @@ Including another URLconf
 
 from django.conf.urls import url, include
 from rest_framework import routers
-from app import views
+from django.contrib import admin
+from core import views
+import messaging
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet, base_name='users')
@@ -25,6 +27,11 @@ router.register(r'groups', views.GroupViewSet, base_name='groups')
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api/', include(router.urls)),
+#    url(r'^admin/', include('admin.site.urls')),
+    url(r'^api/django-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/messaging/', include('messaging.urls')),
+    url(r'^api/me/', views.MeUserView.as_view()),
+    url(r'^api/auth/', include('rest_auth.urls')),
+    url(r'^api/auth/registration/', include('rest_auth.registration.urls'))
 ]

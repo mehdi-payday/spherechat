@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from django.template.defaultfilters import slugify
 from django.db import models
 from datetime import datetime
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import (Manager, Model, ObjectDoesNotExist)
+import random
+from core.mixins import ObservableManagerMixin
 from messaging.exceptions import (UnmanagedThread, 
     UnauthorizedSender,
     UnauthorizedAction,
@@ -48,7 +51,7 @@ class MembershipManager(Manager):
 
     @property
     def active_memberships(self):
-        return self.objects.filter(active=True)
+        return self.filter(active=True)
 
     def get_membership(self, user, thread):
         try:
@@ -57,7 +60,7 @@ class MembershipManager(Manager):
             raise UnexistentMembership("No membership of user %s to thread %s" % (user, thread), doesNotExist)
 
     def belongs(self, user, thread):
-        return self.objects.filter(user=user, thread=thread, active=True).exists()
+        return self.filter(user=user, thread=thread, active=True).exists()
 
     def list_unchecked_messages(self, user, thread, membership=None):
         membership = self.get_membership(user, thread)
@@ -130,8 +133,8 @@ class ThreadManager(Manager):
 
         if is_private and not user_belongs_to_thread:
             if raise_exception:
-                raise UnauthorizedSender("User %s is not authorized to send messages to thread %s " \
-                    + "because the thread ia not a public channel and the user does not belong to the thread" % (user, thread))
+                raise UnauthorizedSender("User %s is not authorized to send messages to thread %s "  % (user, thread) \
+                    + "because the thread is not a public channel and the user does not belong to the thread")
             return False
 
         return True
@@ -172,7 +175,14 @@ class ThreadManager(Manager):
             description=description,
             creator_user=initiator,
         )
-        return self._create(**private_discussion)
+        private_discussion = self.__create(**private_discussion)
+        try:
+            self.join(initiator, private_discussion)
+            self.join(target, private_discussion)
+        except:
+            private_discussion.delete()
+
+        return private_discussion
 
     def create_channel(self, channel_dict, creator, initial_members=[]):
         if not channel_dict["type"] in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL):
@@ -181,29 +191,35 @@ class ThreadManager(Manager):
 
         channel_dict["manager_user"] = creator
         channel_dict["creator_user"] = creator
-        channel = self._create(**channel_dict)
-        self.join(creator, channel)
 
-        for member in initial_members:
-            try:
-                self.join(member, channel)
-            except ExistingMember:
-                pass
+        channel = self.__create(**channel_dict)
+        try:
+            self.join(creator, channel)
+    
+            for member in initial_members:
+                try:
+                    if creator.pk != member.pk:
+                        self.join(member, channel)
+                except ExistingMember:
+                    pass
+        except:
+            channel.delete()
+            raise
 
         return channel
 
-    def create(**kwargs):
+    def create(self, **kwargs):
         raise NotImplemented()
 
-    def _create(**kwargs):
+    def __create(self, **kwargs):
         if "slug" not in kwargs:
-            kwargs["slug"] = self.form_slug(kwargs["title"])
+            kwargs["slug"] = self._form_slug(kwargs["title"])
         return super(ThreadManager, self).create(**kwargs)
 
     def _form_slug(self, title):
-        slug = slugify(self.title)
-        while self.__class__.objects.filter(slug=slug).exists():
-            import random
+        slug = slugify(title)
+        while self.filter(slug=slug).exists():
+
             nb = random.randint(1, 100000)
             slug = "{}-{}".format(slug, nb)
         return slug
@@ -218,41 +234,41 @@ class ThreadManager(Manager):
         return self.private_discussions().filter(memberships__user=user1).get(memberships__user=user2)[0]
 
     def private_discussion_exists(self, user1, user2):
-	return self.filter(memberships__user=user1).filter(memberships__user=user2).exists()
+	return self.private_discussions().filter(memberships__user=user1).filter(memberships__user=user2).exists()
 
-    def private_discussions(self, user=None):
-        if user:
+    def private_discussions(self, participant_user=None):
+        if participant_user:
             return self.filter(type=Thread.PRIVATE_DISCUSSION, memberships__user=participant_user)
         else:
             return self.filter(type=Thread.PRIVATE_DISCUSSION)
 
     def private_channels(self, participant_user=None):
-        if user:
+        if participant_user:
             return self.filter(type=Thread.PRIVATE_CHANNEL, memberships__user=participant_user)
         else:
             return self.filter(type=Thread.PRIVATE_CHANNEL)
 
     def public_channels(self, participant_user=None):
-        if user:
+        if participant_user:
             return self.filter(type=Thread.PUBLIC_CHANNEL, memberships__user=participant_user)
         else:
             return self.filter(type=Thread.PUBLIC_CHANNEL)
 
     def channels(self, participant_user=None):
-        if user:
+        if participant_user:
             return self.filter(type__in=(Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL), memberships__user=participant_user)
         else:
             return self.filter(type__in=(Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL))
 
-
-class MessageManager(Manager):
+class MessageManager(ObservableManagerMixin, Manager):
     def send(self, message, thread, sender=None, tags=[]):
         assert isinstance(tags, list), ValueError("tags must be a list of tagged users")
+#        assert thread not None, ValueError("Thread must be a valid thread")
 
         if sender:
-            message.sender = sender
+            message.user_sender = sender
         else:
-            sender = message.sender
+            sender = message.user_sender
         message.thread = thread
 
         if message.pk is not None:
@@ -269,22 +285,36 @@ class MessageManager(Manager):
         if len(tags) > 0:
             MessageTag.objects.verify_tags(tags, message.contents)
             for tag in tags:
-                tag.message = message
-                tag.save()
+                Tag.objects.create(message=message, **tag)
+
+        self._message_saved(message)
 
         return message
-            
+
+    def _message_saved(self, message):
+        self.__class__.notify_observers("on_message_saved", message)
+
+
+class MessageBroadcaster(object):
+    @classmethod
+    def on_message_saved(cls, message):
+        # broadcast the message
+        pass
+
+MessageManager.register_observer(MessageBroadcaster)
+
+class TagObserver(object):
+    pass
 
 class MessageTagManager(Manager):
-    def verify_tags(tags, message_contents):
-        
+    def verify_tags(self, tags, message_contents):
         placeholder_positions = dict()
-        for m in re.finditer('@{(%d)}', message_contents):
-            placeholder_positions[m.group(1)] = True
+        for m in re.finditer('\@\{([0-9]+)\}', message_contents):
+            placeholder_positions[int(m.group(1))] = True
         for tag in tags:
-            if tag.placeholder_position not in placeholder_positions:
-                raise IncorrectTags("Incorrect tags for message contents : \"%s\", tags : %s" % message_contents, tags)
-            placeholder_positions.pop(tag.placeholder_position)
+            if int(tag["placeholder_position"]) not in placeholder_positions:
+                raise IncorrectTags("Incorrect tags for message contents : \"%s\", tags : %s, placeholder positions : %s" % (message_contents, tags, placeholder_positions))
+            placeholder_positions.pop(tag["placeholder_position"])
         
 
 class Thread(Model):
@@ -293,6 +323,10 @@ class Thread(Model):
     title = models.CharField(max_length=50, blank=False, null=False)
     slug = models.CharField(max_length=60, blank=False, null=False, unique=True)
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, through="Membership")
+
+    @property
+    def active_memberships(self):
+        return Membership.objects.active_memberships.filter(thread=self)
 
     PRIVATE_DISCUSSION = "discussion"
     PUBLIC_CHANNEL = "public_channel"
@@ -310,24 +344,27 @@ class Thread(Model):
     creator_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name="created_threads")
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return "<Thread %s>" % self.title
+
     def delete(self):
         self.active = False
         self.save()
 
     def is_channel(self):
-        return self.objects.is_channel(self)
+        return self.__class__.objects.is_channel(self)
 
     def is_private_channel(self):
-        return self.objects.is_private_channel(self)
+        return self.__class__.objects.is_private_channel(self)
 
     def is_public_channel(self):
-        return self.objects.is_public_channel(self)
+        return self.__class__.objects.is_public_channel(self)
 
     def is_private_discussion(self):
-        return self.objects.is_private_discusssion(self)
+        return self.__class__.objects.is_private_discusssion(self)
 
     def get_last_message(self):
-        return self.objects.get_last_message(self)
+        return self.__class__.objects.get_last_message(self)
 
 class Message(Model):
     objects = MessageManager()
@@ -357,7 +394,7 @@ class MessageTag(Model):
     objects = MessageTagManager()
 
     tagged_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE)
-    message =  models.ForeignKey(Message, blank=False, null=False, on_delete=models.CASCADE)
+    message =  models.ForeignKey(Message, blank=False, null=False, on_delete=models.CASCADE, related_name="tags")
     placeholder_position = models.PositiveIntegerField()
 
     class Meta:
@@ -372,9 +409,16 @@ class Membership(Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     thread  = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="memberships")
     last_seen_date = models.DateTimeField(null=True)
-    last_seen_message = models.ForeignKey(Message, blank=False, null=False)
-    active = models.BooleanField(default=False)
+    last_seen_message = models.ForeignKey(Message, blank=True, null=True)
+    active = models.BooleanField(default=True)
     join_date = models.DateTimeField(default=datetime.now)
+    
+    @property
+    def unchecked_count(self):
+        if self.last_seen_date is not None:
+            return self.thread.messages.filter(sent_date__gt=self.last_seen_date).count()
+        else:
+            return self.thread.messages.count()
 
     def delete(self):
         self.cancel()

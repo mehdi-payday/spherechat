@@ -74,10 +74,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         (HUMAN, "Human user"),
         (BOT, "Bot")
     )
-    type = models.CharField(max_length=4, choices=USER_TYPE_CHOICES)
+    type = models.CharField(max_length=4, choices=USER_TYPE_CHOICES, default=HUMAN)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = []
 
     def get_author(self):
         return self
@@ -93,6 +93,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         Returns the first_name plus the last_name, with a space in between.
         """
         full_name = '%s %s' % (self.first_name, self.last_name)
+        if self.first_name == "" and self.last_name == "":
+            full_name = self.username
         return full_name.strip()
 
     def get_short_name(self):

@@ -42,11 +42,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'core',
     'messaging',
     'friendship',
+    'omnibus',
     'app',
+    'rest_auth',
+    'django_filters',
+    'rest_auth.registration',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account'
 ]
+
+SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -154,7 +164,8 @@ MEDIA_URL = '/media/'
 OMNIBUS_ENDPOINT_SCHEME = 'http'  # 'ws' is used for websocket connections
 OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.sockjs_webapp_factory'
 # OMNIBUS_CONNECTION_FACTORY = 'omnibus.factories.sockjs_connection_factory'
-OMNIBUS_CONNECTION_FACTORY = 'spherechat_server.connection.zpark_connection_factory'
+# OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
+OMNIBUS_CONNECTION_FACTORY = "omnibus.factories.sockjs_connection_factory"
 # OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.userauthenticator_factory'
 OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
 

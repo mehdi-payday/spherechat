@@ -2,6 +2,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from rest_framework import mixins
 from rest_framework import viewsets
+from rest_framework import filters
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -11,7 +12,10 @@ from messaging.serializers import (MessageTagSerializer,
     MembershipSerializer,
     ChannelSerializer,
     PrivateDiscussionSerializer)
-
+from messaging.models import (Message, Thread, Membership, MessageTag)
+# from rest_framework import filters
+from rest_framework_extensions.mixins import NestedViewSetMixin
+import django_filters
 import logging
 
 logger = logging.getLogger(__name__)
@@ -29,16 +33,25 @@ class ChannelViewSet(viewsets.ModelViewSet):
     serializer_class = ChannelSerializer
 
     def get_queryset(self):
-        return Thread.objects.channels(get_member_from_view(self))
+        return Thread.objects.channels(get_user_from_view(self))
 
 
 class PrivateDiscussionViewSet(viewsets.ModelViewSet):
     serializer_class = PrivateDiscussionSerializer
 
     def get_queryset(self):
-        return Thread.objects.private_discussions(get_member_from_view(self))
+        return Thread.objects.private_discussions(get_user_from_view(self))
 
-class MessageViewSet(mixins.CreateModelMixin,
+class MessageFilter(django_filters.rest_framework.FilterSet):
+    class Meta:
+        model = Message
+        fields = ('user_sender', 'contents', 'attachment_name', 'sent_date')
+    attachment_name = django_filters.CharFilter(method='filter_by_attachment_name')
+    def filter_by_attachment_name(self, queryset, name, value):
+        return queryset.filter(attachment__name__icontains=value)
+
+class MessageViewSet(NestedViewSetMixin,
+                     mixins.CreateModelMixin,
                      mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
@@ -46,7 +59,7 @@ class MessageViewSet(mixins.CreateModelMixin,
     serializer_class = MessageSerializer
 
     filter_class = MessageFilter
-    filter_backends = (filters.SearchFilter,filters.DjangoFilterBackend,filters.OrderingFilter)
+    filter_backends = (filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter)
     search_fields = ('contents', 'attachment')
 
     ordering_fields = ('sent_date',)
@@ -58,6 +71,10 @@ class MessageViewSet(mixins.CreateModelMixin,
             return thread
         else:
             return None
+
+#    def list(self, request, **kwargs):
+#        messages = Message.objects.filter(thread=self.get_message_thread(request, **kwargs)
+#        return Response(MessageSerializer(messages,many=True, context=context).data)
 
     def create(self, request, **kwargs):
         thread = self.get_message_thread(request, **kwargs)
@@ -73,12 +90,12 @@ class MessageViewSet(mixins.CreateModelMixin,
         data = request.data
 
         if thread is not None:
-            data['thread'] = thread
+            data['thread'] = thread.pk
 
         message_serializer = MessageSerializer(
             data=data,
             context=context)
-
+        message_serializer.is_valid(raise_exception=True)
         sent_message = message_serializer.save()
 
         return Response(MessageSerializer(sent_message, context=context).data)

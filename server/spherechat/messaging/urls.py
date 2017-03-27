@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import include
 # from rest_framework_nested import routers as nested_routers
@@ -28,6 +28,6 @@ privatediscussion_router.register(r'messages',
                                   base_name='privatediscussion-messages',
                                   parents_query_lookups=['thread'])
 
-urlpatterns = patterns(
+urlpatterns = [
         url(r'^', include(router.urls)),
-)
+]
