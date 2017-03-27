@@ -1,3 +1,18 @@
+'use strict';
+
+// Declare app level module which depends on views, and components
+angular.module('myApp', [
+  'ngRoute',
+  'myApp.client',
+  'myApp.version'
+]).
+config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+  $locationProvider.hashPrefix('!');
+
+  $routeProvider.otherwise({redirectTo: '/view1'});
+}]);
+
+
 $(document).ready(function() {
   var distX = 0 , distY = 0;
   var viewportX,viewportY;
@@ -218,5 +233,7 @@ $(window).on('keydown', function(e) {
   };
   
   searchFilter.init();
+  
+  angular.bootstrap(document, ["myApp"]);
   
 })();
