@@ -665,6 +665,7 @@
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel13.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
             this.panel13.Controls.Add(this.label44);
             this.panel13.Location = new System.Drawing.Point(86, 462);
             this.panel13.Name = "panel13";
@@ -673,6 +674,7 @@
             // 
             // label44
             // 
+            this.label44.BackColor = System.Drawing.Color.Transparent;
             this.label44.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label44.Location = new System.Drawing.Point(4, 7);
             this.label44.Name = "label44";
@@ -683,6 +685,7 @@
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel12.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
             this.panel12.Controls.Add(this.label47);
             this.panel12.Location = new System.Drawing.Point(86, 320);
             this.panel12.Name = "panel12";
@@ -691,6 +694,7 @@
             // 
             // label47
             // 
+            this.label47.BackColor = System.Drawing.Color.Transparent;
             this.label47.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label47.Location = new System.Drawing.Point(4, 5);
             this.label47.Name = "label47";
@@ -701,6 +705,7 @@
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel11.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
             this.panel11.Controls.Add(this.label46);
             this.panel11.Location = new System.Drawing.Point(86, 264);
             this.panel11.Name = "panel11";
@@ -710,6 +715,7 @@
             // 
             // label46
             // 
+            this.label46.BackColor = System.Drawing.Color.Transparent;
             this.label46.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label46.Location = new System.Drawing.Point(4, 3);
             this.label46.Name = "label46";
@@ -722,6 +728,7 @@
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel10.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
             this.panel10.Controls.Add(this.label45);
             this.panel10.Location = new System.Drawing.Point(86, 199);
             this.panel10.Name = "panel10";
@@ -730,6 +737,7 @@
             // 
             // label45
             // 
+            this.label45.BackColor = System.Drawing.Color.Transparent;
             this.label45.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label45.Location = new System.Drawing.Point(4, 9);
             this.label45.Name = "label45";
