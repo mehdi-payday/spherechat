@@ -83,6 +83,16 @@ namespace SphereCliet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap g4167 {
+            get {
+                object obj = ResourceManager.GetObject("g4167", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap image_slider2 {
             get {
                 object obj = ResourceManager.GetObject("image_slider2", resourceCulture);
@@ -106,6 +116,16 @@ namespace SphereCliet.Properties {
         internal static System.Drawing.Bitmap main_900 {
             get {
                 object obj = ResourceManager.GetObject("main_900", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path4173 {
+            get {
+                object obj = ResourceManager.GetObject("path4173", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +166,16 @@ namespace SphereCliet.Properties {
         internal static System.Drawing.Bitmap searchicon {
             get {
                 object obj = ResourceManager.GetObject("searchicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap text_file_3_xxl {
+            get {
+                object obj = ResourceManager.GetObject("text_file_3_xxl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

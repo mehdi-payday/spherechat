@@ -25,8 +25,6 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -59,25 +57,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.label51 = new System.Windows.Forms.Label();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label50 = new System.Windows.Forms.Label();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.label49 = new System.Windows.Forms.Label();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.label48 = new System.Windows.Forms.Label();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label44 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label47 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label46 = new System.Windows.Forms.Label();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label45 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -113,6 +94,22 @@
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label51 = new System.Windows.Forms.Label();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label50 = new System.Windows.Forms.Label();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.label49 = new System.Windows.Forms.Label();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.label48 = new System.Windows.Forms.Label();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.label44 = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label47 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label46 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label45 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -125,23 +122,16 @@
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            this.panel20.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -156,6 +146,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
+            this.panel17.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel14.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -168,47 +166,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(82)))), ((int)(((byte)(131)))));
-            this.panel1.Controls.Add(this.panel20);
+            this.panel1.Controls.Add(this.pictureBox21);
             this.panel1.Controls.Add(this.label40);
             this.panel1.Controls.Add(this.pictureBox20);
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 117);
             this.panel1.TabIndex = 0;
-            // 
-            // panel20
-            // 
-            this.panel20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
-            this.panel20.Controls.Add(this.label41);
-            this.panel20.Controls.Add(this.pictureBox21);
-            this.panel20.Location = new System.Drawing.Point(4, 91);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(225, 20);
-            this.panel20.TabIndex = 6;
-            // 
-            // label41
-            // 
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(82)))), ((int)(((byte)(131)))));
-            this.label41.Location = new System.Drawing.Point(3, 4);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(185, 16);
-            this.label41.TabIndex = 8;
-            this.label41.Text = "Search";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label40.Location = new System.Drawing.Point(60, 66);
+            this.label40.Location = new System.Drawing.Point(60, 63);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(110, 20);
             this.label40.TabIndex = 5;
@@ -246,6 +225,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
+            this.label20.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label20.Location = new System.Drawing.Point(53, 112);
@@ -257,6 +237,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
+            this.label18.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label18.Location = new System.Drawing.Point(53, 66);
@@ -268,6 +249,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
+            this.label16.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label16.Location = new System.Drawing.Point(53, 20);
@@ -326,6 +308,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label14.Location = new System.Drawing.Point(53, 158);
@@ -337,6 +320,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label13.Location = new System.Drawing.Point(53, 112);
@@ -348,6 +332,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label12.Location = new System.Drawing.Point(53, 66);
@@ -359,6 +344,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(187)))), ((int)(((byte)(249)))));
             this.label10.Location = new System.Drawing.Point(53, 17);
@@ -370,6 +356,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
             this.label3.Location = new System.Drawing.Point(204, 279);
@@ -381,6 +368,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
             this.label4.Location = new System.Drawing.Point(8, 279);
@@ -392,6 +380,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
             this.label2.Location = new System.Drawing.Point(204, 8);
@@ -403,6 +392,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
             this.label1.Location = new System.Drawing.Point(8, 8);
@@ -413,18 +403,18 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(82)))), ((int)(((byte)(131)))));
             this.panel3.Controls.Add(this.label43);
             this.panel3.Controls.Add(this.pictureBox22);
             this.panel3.Controls.Add(this.label42);
-            this.panel3.Location = new System.Drawing.Point(235, 0);
+            this.panel3.Location = new System.Drawing.Point(234, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(665, 117);
+            this.panel3.Size = new System.Drawing.Size(666, 117);
             this.panel3.TabIndex = 1;
             // 
             // label43
             // 
-            this.label43.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label43.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label43.Location = new System.Drawing.Point(105, 36);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(213, 33);
@@ -435,6 +425,7 @@
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(187)))), ((int)(((byte)(249)))));
             this.label42.Location = new System.Drawing.Point(105, 18);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(110, 18);
@@ -444,7 +435,7 @@
             // panel4
             // 
             this.panel4.AutoScroll = true;
-            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.panel18);
             this.panel4.Controls.Add(this.panel19);
@@ -470,7 +461,7 @@
             this.panel4.Controls.Add(this.pictureBox1);
             this.panel4.Location = new System.Drawing.Point(234, 115);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(665, 531);
+            this.panel4.Size = new System.Drawing.Size(666, 531);
             this.panel4.TabIndex = 2;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
@@ -590,162 +581,6 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "15:03:17";
             // 
-            // panel17
-            // 
-            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel17.Controls.Add(this.label51);
-            this.panel17.Location = new System.Drawing.Point(377, -2);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(223, 43);
-            this.panel17.TabIndex = 9;
-            // 
-            // label51
-            // 
-            this.label51.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label51.Location = new System.Drawing.Point(3, -5);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(214, 41);
-            this.label51.TabIndex = 4;
-            this.label51.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            // 
-            // panel16
-            // 
-            this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel16.Controls.Add(this.label50);
-            this.panel16.Location = new System.Drawing.Point(435, 47);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(165, 50);
-            this.panel16.TabIndex = 9;
-            // 
-            // label50
-            // 
-            this.label50.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label50.Location = new System.Drawing.Point(3, 2);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(156, 41);
-            this.label50.TabIndex = 3;
-            this.label50.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            // 
-            // panel15
-            // 
-            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel15.Controls.Add(this.label49);
-            this.panel15.Location = new System.Drawing.Point(315, 103);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(285, 50);
-            this.panel15.TabIndex = 9;
-            // 
-            // label49
-            // 
-            this.label49.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label49.Location = new System.Drawing.Point(3, 6);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(256, 41);
-            this.label49.TabIndex = 2;
-            this.label49.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            // 
-            // panel14
-            // 
-            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel14.Controls.Add(this.label48);
-            this.panel14.Location = new System.Drawing.Point(309, 388);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(285, 50);
-            this.panel14.TabIndex = 8;
-            // 
-            // label48
-            // 
-            this.label48.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label48.Location = new System.Drawing.Point(4, 4);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(256, 41);
-            this.label48.TabIndex = 1;
-            this.label48.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel13.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
-            this.panel13.Controls.Add(this.label44);
-            this.panel13.Location = new System.Drawing.Point(86, 462);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(285, 50);
-            this.panel13.TabIndex = 8;
-            // 
-            // label44
-            // 
-            this.label44.BackColor = System.Drawing.Color.Transparent;
-            this.label44.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label44.Location = new System.Drawing.Point(4, 7);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(256, 41);
-            this.label44.TabIndex = 0;
-            this.label44.Text = "yo wtf dude why u do this???";
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel12.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
-            this.panel12.Controls.Add(this.label47);
-            this.panel12.Location = new System.Drawing.Point(86, 320);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(227, 50);
-            this.panel12.TabIndex = 7;
-            // 
-            // label47
-            // 
-            this.label47.BackColor = System.Drawing.Color.Transparent;
-            this.label47.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label47.Location = new System.Drawing.Point(4, 5);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(210, 41);
-            this.label47.TabIndex = 0;
-            this.label47.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel11.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
-            this.panel11.Controls.Add(this.label46);
-            this.panel11.Location = new System.Drawing.Point(86, 264);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(285, 50);
-            this.panel11.TabIndex = 6;
-            this.panel11.Paint += new System.Windows.Forms.PaintEventHandler(this.panel11_Paint);
-            // 
-            // label46
-            // 
-            this.label46.BackColor = System.Drawing.Color.Transparent;
-            this.label46.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label46.Location = new System.Drawing.Point(4, 3);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(278, 41);
-            this.label46.TabIndex = 1;
-            this.label46.Text = "Audiam nominavi sit ea. Has meliore facilis evertitur te, te pericula mediocritat" +
-    "em sit.  Set latine inermiss ei, aperiri accusamus similique no sit.  His doctus" +
-    " ";
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel10.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
-            this.panel10.Controls.Add(this.label45);
-            this.panel10.Location = new System.Drawing.Point(86, 199);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(285, 59);
-            this.panel10.TabIndex = 5;
-            // 
-            // label45
-            // 
-            this.label45.BackColor = System.Drawing.Color.Transparent;
-            this.label45.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label45.Location = new System.Drawing.Point(4, 9);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(278, 41);
-            this.label45.TabIndex = 1;
-            this.label45.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.  Ad utroque suavitate s" +
-    "uscipiantur est.   Ad conguef conssulatu com, volumus elaboraret eu sea.";
-            // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
@@ -770,24 +605,12 @@
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(581, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(27, 49);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "F";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(554, 4);
+            this.button2.Location = new System.Drawing.Point(548, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(27, 49);
             this.button2.TabIndex = 2;
@@ -863,7 +686,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, -1);
+            this.tabControl1.Location = new System.Drawing.Point(1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(200, 582);
@@ -896,6 +719,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
+            this.label29.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label29.Location = new System.Drawing.Point(52, 113);
@@ -908,6 +732,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
+            this.label30.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.Location = new System.Drawing.Point(81, 113);
             this.label30.Name = "label30";
@@ -919,6 +744,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
+            this.label28.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label28.Location = new System.Drawing.Point(52, 22);
@@ -930,6 +756,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
+            this.label27.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label27.Location = new System.Drawing.Point(52, 67);
@@ -941,6 +768,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.Location = new System.Drawing.Point(52, 99);
             this.label26.Name = "label26";
@@ -952,6 +780,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
+            this.label23.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.Location = new System.Drawing.Point(81, 67);
             this.label23.Name = "label23";
@@ -963,6 +792,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
+            this.label24.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.Location = new System.Drawing.Point(52, 54);
             this.label24.Name = "label24";
@@ -974,6 +804,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
+            this.label22.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label22.Location = new System.Drawing.Point(82, 22);
@@ -985,6 +816,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
+            this.label21.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(52, 7);
             this.label21.Name = "label21";
@@ -1100,6 +932,7 @@
             this.pictureBox14.BackgroundImage = global::SphereCliet.Properties.Resources.a;
             this.pictureBox14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox14.Location = new System.Drawing.Point(6, 98);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(40, 40);
@@ -1113,6 +946,7 @@
             this.pictureBox13.BackgroundImage = global::SphereCliet.Properties.Resources.image_slider2;
             this.pictureBox13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox13.Location = new System.Drawing.Point(6, 52);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(40, 40);
@@ -1126,7 +960,7 @@
             this.pictureBox12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox12.BackgroundImage")));
             this.pictureBox12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox12.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox12.Location = new System.Drawing.Point(6, 6);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(40, 40);
@@ -1135,7 +969,9 @@
             // 
             // pictureBox18
             // 
-            this.pictureBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pictureBox18.BackColor = System.Drawing.Color.White;
+            this.pictureBox18.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox18.BackgroundImage")));
+            this.pictureBox18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox18.Location = new System.Drawing.Point(7, 145);
             this.pictureBox18.Name = "pictureBox18";
             this.pictureBox18.Size = new System.Drawing.Size(40, 40);
@@ -1144,7 +980,9 @@
             // 
             // pictureBox17
             // 
-            this.pictureBox17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pictureBox17.BackColor = System.Drawing.Color.White;
+            this.pictureBox17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox17.BackgroundImage")));
+            this.pictureBox17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox17.Location = new System.Drawing.Point(7, 99);
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.Size = new System.Drawing.Size(40, 40);
@@ -1153,7 +991,9 @@
             // 
             // pictureBox16
             // 
-            this.pictureBox16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pictureBox16.BackColor = System.Drawing.Color.White;
+            this.pictureBox16.BackgroundImage = global::SphereCliet.Properties.Resources.text_file_3_xxl;
+            this.pictureBox16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox16.Location = new System.Drawing.Point(7, 53);
             this.pictureBox16.Name = "pictureBox16";
             this.pictureBox16.Size = new System.Drawing.Size(40, 40);
@@ -1162,7 +1002,9 @@
             // 
             // pictureBox15
             // 
-            this.pictureBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pictureBox15.BackColor = System.Drawing.Color.White;
+            this.pictureBox15.BackgroundImage = global::SphereCliet.Properties.Resources.text_file_3_xxl;
+            this.pictureBox15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox15.Location = new System.Drawing.Point(7, 7);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(40, 40);
@@ -1179,6 +1021,174 @@
             this.pictureBox19.Size = new System.Drawing.Size(100, 100);
             this.pictureBox19.TabIndex = 0;
             this.pictureBox19.TabStop = false;
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.panel17.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel17.Controls.Add(this.label51);
+            this.panel17.Location = new System.Drawing.Point(377, -2);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(223, 43);
+            this.panel17.TabIndex = 9;
+            // 
+            // label51
+            // 
+            this.label51.BackColor = System.Drawing.Color.Transparent;
+            this.label51.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label51.Location = new System.Drawing.Point(4, -5);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(214, 41);
+            this.label51.TabIndex = 4;
+            this.label51.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.panel16.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel16.Controls.Add(this.label50);
+            this.panel16.Location = new System.Drawing.Point(435, 47);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(165, 50);
+            this.panel16.TabIndex = 9;
+            // 
+            // label50
+            // 
+            this.label50.BackColor = System.Drawing.Color.Transparent;
+            this.label50.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label50.Location = new System.Drawing.Point(4, 9);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(156, 38);
+            this.label50.TabIndex = 3;
+            this.label50.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.panel15.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel15.Controls.Add(this.label49);
+            this.panel15.Location = new System.Drawing.Point(352, 103);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(248, 50);
+            this.panel15.TabIndex = 9;
+            // 
+            // label49
+            // 
+            this.label49.BackColor = System.Drawing.Color.Transparent;
+            this.label49.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label49.Location = new System.Drawing.Point(10, 6);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(234, 41);
+            this.label49.TabIndex = 2;
+            this.label49.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
+            this.label49.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel14
+            // 
+            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.panel14.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel14.Controls.Add(this.label48);
+            this.panel14.Location = new System.Drawing.Point(309, 388);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(285, 50);
+            this.panel14.TabIndex = 8;
+            // 
+            // label48
+            // 
+            this.label48.BackColor = System.Drawing.Color.Transparent;
+            this.label48.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label48.Location = new System.Drawing.Point(3, 9);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(278, 41);
+            this.label48.TabIndex = 1;
+            this.label48.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel13.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel13.Controls.Add(this.label44);
+            this.panel13.Location = new System.Drawing.Point(86, 462);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(285, 50);
+            this.panel13.TabIndex = 8;
+            // 
+            // label44
+            // 
+            this.label44.BackColor = System.Drawing.Color.Transparent;
+            this.label44.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label44.Location = new System.Drawing.Point(4, 17);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(256, 41);
+            this.label44.TabIndex = 0;
+            this.label44.Text = "yo wtf dude why u do this???";
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel12.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel12.Controls.Add(this.label47);
+            this.panel12.Location = new System.Drawing.Point(86, 320);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(227, 50);
+            this.panel12.TabIndex = 7;
+            // 
+            // label47
+            // 
+            this.label47.BackColor = System.Drawing.Color.Transparent;
+            this.label47.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label47.Location = new System.Drawing.Point(4, 10);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(210, 41);
+            this.label47.TabIndex = 0;
+            this.label47.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel11.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel11.Controls.Add(this.label46);
+            this.panel11.Location = new System.Drawing.Point(86, 264);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(285, 50);
+            this.panel11.TabIndex = 6;
+            this.panel11.Paint += new System.Windows.Forms.PaintEventHandler(this.panel11_Paint);
+            // 
+            // label46
+            // 
+            this.label46.BackColor = System.Drawing.Color.Transparent;
+            this.label46.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label46.Location = new System.Drawing.Point(4, 5);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(278, 41);
+            this.label46.TabIndex = 1;
+            this.label46.Text = "Audiam nominavi sit ea. Has meliore facilis evertitur te, te pericula mediocritat" +
+    "em sit.  Set latine inermiss ei, aperiri accusamus similique no sit.  His doctus" +
+    " ";
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel10.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel10.Controls.Add(this.label45);
+            this.panel10.Location = new System.Drawing.Point(86, 199);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(285, 59);
+            this.panel10.TabIndex = 5;
+            // 
+            // label45
+            // 
+            this.label45.BackColor = System.Drawing.Color.Transparent;
+            this.label45.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label45.Location = new System.Drawing.Point(4, 9);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(278, 41);
+            this.label45.TabIndex = 1;
+            this.label45.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.  Ad utroque suavitate s" +
+    "uscipiantur est.   Ad conguef conssulatu com, volumus elaboraret eu sea.";
             // 
             // pictureBox4
             // 
@@ -1251,6 +1261,7 @@
             this.pictureBox11.BackgroundImage = global::SphereCliet.Properties.Resources.url;
             this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox11.Location = new System.Drawing.Point(7, 100);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(40, 40);
@@ -1263,6 +1274,7 @@
             this.pictureBox10.BackgroundImage = global::SphereCliet.Properties.Resources.pexels_photo;
             this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox10.Location = new System.Drawing.Point(7, 54);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(40, 40);
@@ -1275,6 +1287,7 @@
             this.pictureBox9.BackgroundImage = global::SphereCliet.Properties.Resources.imgres;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox9.Location = new System.Drawing.Point(7, 8);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(40, 40);
@@ -1287,6 +1300,7 @@
             this.pictureBox8.BackgroundImage = global::SphereCliet.Properties.Resources.image_slider2;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox8.Location = new System.Drawing.Point(7, 146);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(40, 40);
@@ -1299,6 +1313,7 @@
             this.pictureBox7.BackgroundImage = global::SphereCliet.Properties.Resources.Reverse_Image_Search_Engines_Apps_And_Its_Uses_2016;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox7.Location = new System.Drawing.Point(7, 100);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(40, 40);
@@ -1311,7 +1326,7 @@
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox5.Location = new System.Drawing.Point(7, 8);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(40, 40);
@@ -1324,33 +1339,59 @@
             this.pictureBox6.BackgroundImage = global::SphereCliet.Properties.Resources.a;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox6.Location = new System.Drawing.Point(7, 54);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(40, 40);
             this.pictureBox6.TabIndex = 34;
             this.pictureBox6.TabStop = false;
             // 
-            // pictureBox21
-            // 
-            this.pictureBox21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
-            this.pictureBox21.Image = global::SphereCliet.Properties.Resources.searchicon;
-            this.pictureBox21.Location = new System.Drawing.Point(207, 2);
-            this.pictureBox21.Name = "pictureBox21";
-            this.pictureBox21.Size = new System.Drawing.Size(15, 15);
-            this.pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox21.TabIndex = 7;
-            this.pictureBox21.TabStop = false;
-            // 
             // pictureBox20
             // 
             this.pictureBox20.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox20.BackgroundImage = global::SphereCliet.Properties.Resources.path4352;
+            this.pictureBox20.BackgroundImage = global::SphereCliet.Properties.Resources.path4173;
             this.pictureBox20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox20.Location = new System.Drawing.Point(85, 4);
+            this.pictureBox20.Location = new System.Drawing.Point(93, 11);
             this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox20.Size = new System.Drawing.Size(44, 49);
             this.pictureBox20.TabIndex = 4;
             this.pictureBox20.TabStop = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.BackgroundImage = global::SphereCliet.Properties.Resources.g4167;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(575, 5);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(27, 49);
+            this.button3.TabIndex = 3;
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(82)))), ((int)(((byte)(131)))));
+            this.textBox1.Location = new System.Drawing.Point(3, 90);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(225, 19);
+            this.textBox1.TabIndex = 32;
+            this.textBox1.Text = "Search";
+            // 
+            // pictureBox21
+            // 
+            this.pictureBox21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
+            this.pictureBox21.BackgroundImage = global::SphereCliet.Properties.Resources.searchicon;
+            this.pictureBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox21.Location = new System.Drawing.Point(208, 91);
+            this.pictureBox21.Name = "pictureBox21";
+            this.pictureBox21.Size = new System.Drawing.Size(15, 15);
+            this.pictureBox21.TabIndex = 33;
+            this.pictureBox21.TabStop = false;
             // 
             // Form1
             // 
@@ -1369,7 +1410,6 @@
             this.Text = "Sphere chat";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel20.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -1380,14 +1420,6 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel16.ResumeLayout(false);
-            this.panel15.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -1405,6 +1437,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
+            this.panel17.ResumeLayout(false);
+            this.panel16.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -1417,8 +1457,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1512,9 +1552,6 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.PictureBox pictureBox19;
-        private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.PictureBox pictureBox21;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.PictureBox pictureBox20;
         private System.Windows.Forms.Label label43;
@@ -1528,6 +1565,8 @@
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.PictureBox pictureBox21;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
