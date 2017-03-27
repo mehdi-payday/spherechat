@@ -1,4 +1,4 @@
-﻿namespace SphereCliet {
+﻿namespace SphereClient {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -187,7 +187,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label40.Location = new System.Drawing.Point(60, 63);
+            this.label40.Location = new System.Drawing.Point(60, 68);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(110, 20);
             this.label40.TabIndex = 5;
@@ -929,7 +929,7 @@
             // pictureBox14
             // 
             this.pictureBox14.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox14.BackgroundImage = global::SphereCliet.Properties.Resources.a;
+            this.pictureBox14.BackgroundImage = global::SphereClient.Properties.Resources.a;
             this.pictureBox14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox14.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -943,7 +943,7 @@
             // pictureBox13
             // 
             this.pictureBox13.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox13.BackgroundImage = global::SphereCliet.Properties.Resources.image_slider2;
+            this.pictureBox13.BackgroundImage = global::SphereClient.Properties.Resources.image_slider2;
             this.pictureBox13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox13.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -992,7 +992,7 @@
             // pictureBox16
             // 
             this.pictureBox16.BackColor = System.Drawing.Color.White;
-            this.pictureBox16.BackgroundImage = global::SphereCliet.Properties.Resources.text_file_3_xxl;
+            this.pictureBox16.BackgroundImage = global::SphereClient.Properties.Resources.text_file_3_xxl;
             this.pictureBox16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox16.Location = new System.Drawing.Point(7, 53);
             this.pictureBox16.Name = "pictureBox16";
@@ -1003,7 +1003,7 @@
             // pictureBox15
             // 
             this.pictureBox15.BackColor = System.Drawing.Color.White;
-            this.pictureBox15.BackgroundImage = global::SphereCliet.Properties.Resources.text_file_3_xxl;
+            this.pictureBox15.BackgroundImage = global::SphereClient.Properties.Resources.text_file_3_xxl;
             this.pictureBox15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox15.Location = new System.Drawing.Point(7, 7);
             this.pictureBox15.Name = "pictureBox15";
@@ -1025,7 +1025,7 @@
             // panel17
             // 
             this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel17.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel17.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel17.Controls.Add(this.label51);
             this.panel17.Location = new System.Drawing.Point(377, -2);
             this.panel17.Name = "panel17";
@@ -1046,7 +1046,7 @@
             // panel16
             // 
             this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel16.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel16.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel16.Controls.Add(this.label50);
             this.panel16.Location = new System.Drawing.Point(435, 47);
             this.panel16.Name = "panel16";
@@ -1067,7 +1067,7 @@
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel15.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel15.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel15.Controls.Add(this.label49);
             this.panel15.Location = new System.Drawing.Point(352, 103);
             this.panel15.Name = "panel15";
@@ -1088,7 +1088,7 @@
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel14.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel14.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel14.Controls.Add(this.label48);
             this.panel14.Location = new System.Drawing.Point(309, 388);
             this.panel14.Name = "panel14";
@@ -1109,7 +1109,7 @@
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel13.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel13.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel13.Controls.Add(this.label44);
             this.panel13.Location = new System.Drawing.Point(86, 462);
             this.panel13.Name = "panel13";
@@ -1129,7 +1129,7 @@
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel12.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel12.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel12.Controls.Add(this.label47);
             this.panel12.Location = new System.Drawing.Point(86, 320);
             this.panel12.Name = "panel12";
@@ -1149,7 +1149,7 @@
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel11.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel11.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel11.Controls.Add(this.label46);
             this.panel11.Location = new System.Drawing.Point(86, 264);
             this.panel11.Name = "panel11";
@@ -1172,7 +1172,7 @@
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panel10.BackgroundImage = global::SphereCliet.Properties.Resources.Untitled;
+            this.panel10.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
             this.panel10.Controls.Add(this.label45);
             this.panel10.Location = new System.Drawing.Point(86, 199);
             this.panel10.Name = "panel10";
@@ -1246,7 +1246,7 @@
             // pictureBox22
             // 
             this.pictureBox22.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox22.BackgroundImage = global::SphereCliet.Properties.Resources.main_900;
+            this.pictureBox22.BackgroundImage = global::SphereClient.Properties.Resources.main_900;
             this.pictureBox22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox22.Location = new System.Drawing.Point(13, 14);
@@ -1258,7 +1258,7 @@
             // pictureBox11
             // 
             this.pictureBox11.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox11.BackgroundImage = global::SphereCliet.Properties.Resources.url;
+            this.pictureBox11.BackgroundImage = global::SphereClient.Properties.Resources.url;
             this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1271,7 +1271,7 @@
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox10.BackgroundImage = global::SphereCliet.Properties.Resources.pexels_photo;
+            this.pictureBox10.BackgroundImage = global::SphereClient.Properties.Resources.pexels_photo;
             this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1284,7 +1284,7 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox9.BackgroundImage = global::SphereCliet.Properties.Resources.imgres;
+            this.pictureBox9.BackgroundImage = global::SphereClient.Properties.Resources.imgres;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1297,7 +1297,7 @@
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox8.BackgroundImage = global::SphereCliet.Properties.Resources.image_slider2;
+            this.pictureBox8.BackgroundImage = global::SphereClient.Properties.Resources.image_slider2;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1310,7 +1310,7 @@
             // pictureBox7
             // 
             this.pictureBox7.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox7.BackgroundImage = global::SphereCliet.Properties.Resources.Reverse_Image_Search_Engines_Apps_And_Its_Uses_2016;
+            this.pictureBox7.BackgroundImage = global::SphereClient.Properties.Resources.Reverse_Image_Search_Engines_Apps_And_Its_Uses_2016;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1336,7 +1336,7 @@
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox6.BackgroundImage = global::SphereCliet.Properties.Resources.a;
+            this.pictureBox6.BackgroundImage = global::SphereClient.Properties.Resources.a;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1349,9 +1349,9 @@
             // pictureBox20
             // 
             this.pictureBox20.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox20.BackgroundImage = global::SphereCliet.Properties.Resources.path4173;
+            this.pictureBox20.BackgroundImage = global::SphereClient.Properties.Resources.path4173;
             this.pictureBox20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox20.Location = new System.Drawing.Point(93, 11);
+            this.pictureBox20.Location = new System.Drawing.Point(93, 16);
             this.pictureBox20.Name = "pictureBox20";
             this.pictureBox20.Size = new System.Drawing.Size(44, 49);
             this.pictureBox20.TabIndex = 4;
@@ -1360,7 +1360,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.BackgroundImage = global::SphereCliet.Properties.Resources.g4167;
+            this.button3.BackgroundImage = global::SphereClient.Properties.Resources.g4167;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1376,7 +1376,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(82)))), ((int)(((byte)(131)))));
-            this.textBox1.Location = new System.Drawing.Point(3, 90);
+            this.textBox1.Location = new System.Drawing.Point(3, 95);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(225, 19);
             this.textBox1.TabIndex = 32;
@@ -1385,9 +1385,9 @@
             // pictureBox21
             // 
             this.pictureBox21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
-            this.pictureBox21.BackgroundImage = global::SphereCliet.Properties.Resources.searchicon;
+            this.pictureBox21.BackgroundImage = global::SphereClient.Properties.Resources.searchicon;
             this.pictureBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox21.Location = new System.Drawing.Point(208, 91);
+            this.pictureBox21.Location = new System.Drawing.Point(208, 96);
             this.pictureBox21.Name = "pictureBox21";
             this.pictureBox21.Size = new System.Drawing.Size(15, 15);
             this.pictureBox21.TabIndex = 33;
