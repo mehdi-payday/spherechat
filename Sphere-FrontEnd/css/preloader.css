@@ -1,0 +1,107 @@
+.spinning_circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-radius: 50%;
+    border: 2.5px solid #b0c8d9;
+    border-bottom-color: #3097d1;
+    -webkit-animation: rotateSpinner 700ms linear infinite;
+    animation: rotateSpinner 700ms linear infinite;
+}
+@-webkit-keyframes rotateSpinner {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotateSpinner {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f8fa;
+  /* change if the mask should have another color then white */
+  z-index: 500;
+  /* makes sure it stays on top */
+}
+
+#status {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
+}
+
+
+
+
+
+
+.spinner2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(178,124,57, .6);
+    border-bottom-color: #B27C39;
+    -webkit-animation: rotateSpinner 700ms linear infinite;
+    animation: rotateSpinner 700ms linear infinite;
+}
+
+.spinner3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 0px;
+    margin-left: -50px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(178,124,57, .6);
+    border-bottom-color: #B27C39;
+    -webkit-animation: rotateSpinner 700ms linear infinite;
+    animation: rotateSpinner 700ms linear infinite;
+}
+#status2 {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
+}

@@ -1,0 +1,17 @@
+#particles-js-02,
+#particles-js-03,
+#particles-js-05,
+#particles-js-08,
+#particles-js-11,
+#particles-js-12,
+#particles-js-13,
+#particles-js-14,
+#particles-js-15,
+#confetti {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}

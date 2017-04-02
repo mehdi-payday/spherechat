@@ -1,0 +1,241 @@
+a,
+a:hover {
+    cursor: pointer
+}
+@font-face {
+    font-family: "Raleway Light";
+    src: url(https://crisp.im/static/fonts/raleway_light.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_light.woff?54f26f2) format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: "Raleway Light";
+    src: url(https://crisp.im/static/fonts/raleway_light_italic.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_light_italic.woff?54f26f2) format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+@font-face {
+    font-family: "Raleway Regular";
+    src: url(https://crisp.im/static/fonts/raleway_regular.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_regular.woff?54f26f2) format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: "Raleway Regular";
+    src: url(https://crisp.im/static/fonts/raleway_regular_italic.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_regular_italic.woff?54f26f2) format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+@font-face {
+    font-family: "Raleway Semibold";
+    src: url(https://crisp.im/static/fonts/raleway_semibold.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_semibold.woff?54f26f2) format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: "Raleway Semibold";
+    src: url(https://crisp.im/static/fonts/raleway_semibold_italic.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_semibold_italic.woff?54f26f2) format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+@font-face {
+    font-family: "Raleway Bold";
+    src: url(https://crisp.im/static/fonts/raleway_bold.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_bold.woff?54f26f2) format("woff");
+    font-weight: 700;
+    font-style: normal
+}
+@font-face {
+    font-family: "Raleway Bold";
+    src: url(https://crisp.im/static/fonts/raleway_bold_italic.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_bold_italic.woff?54f26f2) format("woff");
+    font-weight: 700;
+    font-style: italic
+}
+@font-face {
+    font-family: "Raleway Black";
+    src: url(https://crisp.im/static/fonts/raleway_black.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_black.woff?54f26f2) format("woff");
+    font-weight: bolder;
+    font-style: normal
+}
+@font-face {
+    font-family: "Raleway Black";
+    src: url(https://crisp.im/static/fonts/raleway_black_italic.woff2?54f26f2) format("woff2"), url(https://crisp.im/static/fonts/raleway_black_italic.woff?54f26f2) format("woff");
+    font-weight: bolder;
+    font-style: italic
+}
+.font-sans-light {
+    font-family: "Raleway Light", sans-serif
+}
+.font-sans-regular {
+    font-family: "Raleway Regular", sans-serif
+}
+.font-sans-semibold {
+    font-family: "Raleway Semibold", sans-serif
+}
+.font-sans-bold {
+    font-family: "Raleway Bold", sans-serif
+}
+.font-sans-black {
+    font-family: "Raleway Black", sans-serif
+}
+
+button:disabled,
+input:disabled,
+textarea:disabled {
+    filter: alpha(Opacity=50);
+    opacity: .5
+}
+input,
+textarea {
+    background: #fff;
+    border: 1px solid #555B61;
+    color: #000;
+    letter-spacing: .5px;
+    outline-style: none;
+    width: 440px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -o-border-radius: 1px;
+    border-radius: 1px
+}
+input:focus,
+textarea:focus {
+    border-color: #000
+}
+input[data-error=true],
+textarea[data-error=true] {
+    border-color: #D41E1E
+}
+input {
+    font-size: 16.2px;
+    text-align: center;
+    line-height: 44px;
+    height: 46px
+}
+input:placeholder {
+    color: #A1A1A1
+}
+input:-moz-placeholder {
+    color: #A1A1A1
+}
+input::-moz-placeholder {
+    color: #A1A1A1
+}
+input:-ms-input-placeholder {
+    color: #A1A1A1
+}
+input::-webkit-input-placeholder {
+    color: #A1A1A1
+}
+textarea {
+    font-size: 13.5px;
+    text-align: left;
+    line-height: 22px;
+    padding: 10px 16px
+}
+textarea:placeholder {
+    color: #A1A1A1
+}
+textarea:-moz-placeholder {
+    color: #A1A1A1
+}
+textarea::-moz-placeholder {
+    color: #A1A1A1
+}
+textarea:-ms-input-placeholder {
+    color: #A1A1A1
+}
+textarea::-webkit-input-placeholder {
+    color: #A1A1A1
+}
+a,
+button {
+    outline: 0!important;
+    -webkit-transition: all .15s ease-in-out;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    -webkit-transition-property: background, border, color;
+    -moz-transition-property: background, border, color;
+    -o-transition-property: background, border, color;
+    transition-property: background, border, color
+}
+a {
+    text-decoration: none
+}
+a[data-disabled=true] {
+    filter: alpha(Opacity=25);
+    opacity: .25
+}
+a[data-disabled=true],
+a[data-disabled=true]:hover {
+    cursor: not-allowed
+}
+.wow {
+    visibility: hidden
+}
+.clear {
+    display: block!important;
+    clear: both!important
+}
+::selection {
+    background: #E8F1FE
+}
+::-moz-selection {
+    background: #E8F1FE
+}
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+#body {
+    overflow-x: hidden;
+    background: #fff
+}
+#body .body-wrapper {
+    width: 1120px;
+    margin: 0 auto
+}
+@media screen and (max-width: 1099px) {
+    #body .body-wrapper {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px
+    }
+}
+
+.body-button {
+    color: #fff;
+    font-size: 12.6px;
+    background: linear-gradient(to right, #3f9dec, #a637ca);;
+    padding: 18px 38px;
+    -webkit-border-radius: 64px;
+    -moz-border-radius: 64px;
+    -ms-border-radius: 64px;
+    -o-border-radius: 64px;
+    border-radius: 64px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    display: inline-block;
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out
+}
+.body-button:hover {
+    color: #fff;
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    transform: scale(1.03)
+}
+.body-button:active {
+    -webkit-transform: scale(.99);
+    -moz-transform: scale(.99);
+    -ms-transform: scale(.99);
+    -o-transform: scale(.99);
+    transform: scale(.99)
+}
