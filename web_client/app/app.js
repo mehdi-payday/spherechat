@@ -9,7 +9,7 @@ angular
     .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
     
-      $routeProvider.otherwise({redirectTo: '/view1'});
+      $routeProvider.otherwise({redirectTo: '/login'});
     }])
     .factory('Thread', function(){
     	Thread = function(title, slug, members, type, description, manager_user, creator_user, active){
@@ -69,11 +69,13 @@ angular
     .run(function(){
         var distX = 0 , distY = 0;
         var viewportX,viewportY;
+        
         $(document).on('mousedown touchstart', '.touch-y', function(e) {
           var $ele = $(this);
           viewportY = (-1 * $ele.height()) + viewport($ele).height();
           var startY = e.pageY || e.originalEvent.touches[0].pageY;
           var currentY = parseFloat($ele.css('transform').split(',')[5]);
+          
           $(document).on('mousemove touchmove', function(e) {
             e.preventDefault();
             var y = e.pageY || e.originalEvent.touches[0].pageY;
@@ -101,6 +103,7 @@ angular
               });
             }
           });
+          
           $(document).on('mouseup touchend', function() {
             $(document).off('mousemove touchmove mouseup touchend');
             if (!distY) return;
@@ -145,6 +148,7 @@ angular
                 left: leftPos
             });
         });
+        
         function navItemPos(index){
           $("#master-nav-items > div").removeClass("active after before");
           $("#master-nav-items > div").eq(index).addClass("active");
@@ -152,6 +156,7 @@ angular
           $("#master-nav-items > div").eq(index).prevAll().addClass("before");
         }
         $(".messages-list > ul > li").bind('click',showMessages);
+        
         function showMessages(){
           $('.view-main').addClass("deactive");
           $('.view-message').addClass("active");
@@ -167,6 +172,7 @@ angular
             sendMassage();
           }
         })
+        
         function sendMassage(){
           var date = new Date();
           var message = $("#message-text").val();
@@ -179,6 +185,7 @@ angular
             messageScrollFix();
           },50);
         }
+        
         function systemMessage(date){
           var messages=[
             "Hi my name is yousef sami",
@@ -192,6 +199,7 @@ angular
             messageScrollFix();
           },1500);
         }
+        
         function getTime(date) {
           var hours = date.getHours();
           var minutes = date.getMinutes();
@@ -202,6 +210,7 @@ angular
           var strTime = hours + ':' + minutes + ' ' + ampm;
           return strTime;
         }
+        
         function messageScrollFix(){
           setTimeout(function(){
             var mes_hieght=parseInt($(".messages-area > ul").height());
@@ -211,7 +220,8 @@ angular
           },100);
         }
       });
-      $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+      
+	  $(".messages").animate({ scrollTop: $(document).height() }, "fast");
 
       $("#profile-img").click(function() {
         $("#status-options").toggleClass("active");
