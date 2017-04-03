@@ -13,7 +13,7 @@ namespace SphereClient.Entities {
         public Membership Membership { get; set; }
 
         public enum Types {
-            PRIVATE_DISCUSSION = 0,
+            DISCUSSION = 0,
             PRIVATE_CHANNEL = 1,
             PUBLIC_CHANNEL = 2
         }

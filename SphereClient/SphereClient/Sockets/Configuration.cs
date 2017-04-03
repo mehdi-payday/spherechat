@@ -5,8 +5,6 @@ using System.Security.Cryptography;
 
 namespace SphereClient.Sockets {
     class Configuration {
-        private const string NEW_LINE = "\r\n";
-
         public Configuration(IPEndPoint ep, string path, string key) {
             EP = ep;
             Path = path;

@@ -9,5 +9,7 @@ namespace SphereClient.Entities {
         public int LastSeenMessageId { get; set; }
         public bool IsParticipant { get; set; }
         public DateTime JoinDate { get; set; }
+        public User UserDetails { get; set; }
+        public int UncheckedCount { get; set; }
     }
 }

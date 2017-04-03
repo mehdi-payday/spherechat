@@ -18,41 +18,43 @@ namespace SphereClient.Sockets.Buffers.WebSocket {
 
         public byte[] Parsed {
             get {
-                var bits = new List<bool>();
+                var bits = new List<char>();
 
-                List<bool> mask = new List<bool>();
-                for (; mask.Count < 32; mask.Add(r.Next(0, 2) == 0)) ;
+                List<char> mask = new List<char>();
+                for (; mask.Count < 32; mask.Add(r.Next(0, 2) == 0 ? '1' : '0')) ;
 
                 // FIN
-                bits.Add(true);
+                bits.Add('1');
 
                 // RSV1
-                bits.Add(false);
+                bits.Add('0');
 
                 // RSV2
-                bits.Add(false);
+                bits.Add('0');
 
                 // RSV3
-                bits.Add(false);
+                bits.Add('0');
 
                 // OPCODE
-                bits.AddRange(Convert.ToString((byte)Type, 2).PadLeft(8, '0').Substring(4).Select(x => x == '1' ? true : false).ToArray());
+                bits.AddRange(Convert.ToString((byte)Type, 2).PadLeft(8, '0').Substring(4).ToArray());
 
                 // MASK
-                bits.Add(Masked);
+                bits.Add(Masked ? '1' : '0');
 
                 // LENGTH
                 if (Buffer.Length < 126) {
                     // 7bit number
-                    bits.AddRange(Convert.ToString(Buffer.Length, 2).PadLeft(7, '0').Select(x => x == '1' ? true : false).ToArray());
+                    bits.AddRange(Convert.ToString(Buffer.Length, 2).PadLeft(7, '0').ToArray());
                 }
                 else if (Buffer.Length == 126) {
                     // 126 + 16bit number
-                    bits.AddRange(new bool[] { true, true, true, true, true, true, false }.Concat(Convert.ToString(Buffer.Length, 2).PadLeft(16, '0').Select(x => x == '1' ? true : false)).ToArray());
+                    bits.AddRange("1111110");
+                    bits.AddRange(Convert.ToString(Buffer.Length, 2).PadLeft(16, '0').ToArray());
                 }
                 else {
                     // 127 + 64bit number
-                    bits.AddRange(new bool[] { true, true, true, true, true, true, true }.Concat(Convert.ToString(Buffer.Length, 2).PadLeft(64, '0').Select(x => x == '1' ? true : false)).ToArray());
+                    bits.AddRange("1111111");
+                    bits.AddRange(Convert.ToString(Buffer.Length, 2).PadLeft(64, '0').ToArray());
                 }
 
                 // MASK
@@ -65,21 +67,19 @@ namespace SphereClient.Sockets.Buffers.WebSocket {
                     string bin = Convert.ToString(Buffer[a], 2).PadLeft(8, '0');
                     for (int b = 0; b < bin.Length; b++, c++) {
                         if (Masked) {
-                            bool m = mask[c % 32],
-                                 v = bin[b] == '1' ? true : false,
-                                 xor = ((!m && v) || (m && !v)) ? true : false; // XOR
-                            Console.Write(m ? '1' : '0');
-                            sb.Append(xor ? '1' : '0');
+                            char m = mask[c % 32],
+                                 v = bin[b];
+                            sb.Append(((m == '0' && v == '1') || (m == '1' && v == '0')) ? '1' : '0');// XOR
                         }
                         else {
                             sb.Append(bin[b]);
                         }
                     }
                 }
-                bits.AddRange(sb.ToString().Select(x => x == '1' ? true : false).ToArray());
+                bits.AddRange(sb.ToString().ToArray());
 
                 // CONVERT TO BYTE ARRAY
-                byte[] bytes = bits.Select((v, i) => new { Value = v ? '1' : '0', Index = i })
+                byte[] bytes = bits.Select((v, i) => new { Value = v, Index = i })
                     .GroupBy(x => x.Index / 8)
                     .Select(g => new string(g.Select(x => x.Value).ToArray()))
                     .Select(s => Convert.ToByte(s, 2)).ToArray();
