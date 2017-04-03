@@ -1,18 +1,13 @@
 'use strict';
 
+var serverAddress = 'spherechat.tk:8080/api/';
+
 angular
-    .module('myApp', [
-      'ngRoute',
-      'myApp.client',
-      'myApp.version'
-    ])
-    .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-      $locationProvider.hashPrefix('!');
-    
-      $routeProvider.otherwise({redirectTo: '/login'});
-    }])
-    .factory('Thread', function(){
-    	Thread = function(title, slug, members, type, description, manager_user, creator_user, active){
+	.module('objects' [])
+	.factory('Objects', function(){
+		var objects = {};
+		
+    	objects.thread = function(title, slug, members, type, description, manager_user, creator_user, active){
     		this.title = title,
     		this.slug = slug,
     		this.members = members,
@@ -22,10 +17,8 @@ angular
     		this.creator_user = creator_user,
     		this.active = active;
     	}
-    	return Thread;
-    })
-    .factory('Message', function(){
-    	Message = function(user_sender, thread, contents, sent_date, attachment, message_type){
+    	
+    	objects.message = function(user_sender, thread, contents, sent_date, attachment, message_type){
     		this.user_sender = user_sender,
     		this.thread = thread,
     		this.contents = contents,
@@ -33,18 +26,14 @@ angular
     		this.attachment = attachment,
     		this.message_type = message_type;
     	}
-    	return Message;
-    })
-    .factory('MessageTag', function(){
-    	MessageTag = function(tagged_user, message, placeholder_position){
+    	
+    	objects.messageTag = function(tagged_user, message, placeholder_position){
     		this.tagged_user = tagged_user,
     		this.message = message,
     		this.placeholder_position;
     	}
-    	return MessageTag;
-    })
-    .factory('Membership', function(){
-    	Membership = function(user, thread, last_seen_date, last_seen_message, active, join_date){
+    	
+    	objects.membership = function(user, thread, last_seen_date, last_seen_message, active, join_date){
     		this.user = user,
     		this.thread = thread,
     		this.last_seen_date = last_seen_date,
@@ -52,10 +41,8 @@ angular
     		this.active = active,
     		this.join_date = join_date;
     	}
-    	return Membership;
-    })
-    .factory('Friendship', function(){
-    	Friendship = function(requester_user, addresser, status, request_date, approval_date, friendship_end_date, active){
+    	
+    	objects.friendship = function(requester_user, addresser, status, request_date, approval_date, friendship_end_date, active){
     		this.requester_user = requester_user,
     		this.addresser = addresser,
     		this.status = status,
@@ -64,8 +51,97 @@ angular
     		this.friendship_end_date = friendship_end_date,
     		this.active = active;
     	}
-    	return Friendship;
-    })
+    	return objects;
+    });
+
+angular
+	.module('api', ['ngResource'])
+    .factory('Api', function($resource){
+    	var api = {};
+    	
+    	api.login = function() {return $resource(serverAddress + 'auth/login');};
+    	api.register = function() {return $resource(serverAddress + 'auth/registration');};
+    	
+    	api.friendship = function() {return $resource(serverAddress + 'api/friendship/friendship');};
+    	api.friendrequest = function() {return $resource(serverAddress + 'api/friendship/friendrequest');};
+    	
+    	api.user = function() {return $resource(serverAddress + 'user', {}, {
+    		getCurrent: {
+    			method: 'GET',
+    			url: serverAddress + 'me'
+    		}
+    		getOne: {
+    			method: 'GET',
+    			url: serverAddress + 'user/:id',
+    			params: {id: '@id'}
+    		}
+    	});};
+    	
+    	api.channel = function() {return $resource(serverAddress + 'api/messaging/channel', {}, {
+    		getOne: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/channel/:id',
+    			params: {id: '@id'}
+    		}
+	    	getMessages: {
+				method: 'GET',
+				url: serverAddress + 'api/messaging/channel/:id/message',
+				params: {id: '@id'}
+			}
+    		getOneMessage: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/channel/:channelId/message/:messageId',
+    			params: {discussionId: '@channelId', messageId: '@messageId'}
+    		}
+			postMessage: {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/channel/:channelId/message/',
+    			params: {discussionId: '@channelId'}
+    		}
+    	});};
+    	
+    	api.privateDiscussion = function() {return $resource(serverAddress + 'api/messaging/privatediscussion', {}, {
+    		getOne: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id',
+    			params: {id: '@id'}
+    		}
+    		getMessages: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/message',
+    			params: {id: '@id'}
+    		}
+    		getOneMessage: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/:messageId',
+    			params: {discussionId: '@discussionId', messageId: '@messageId'}
+    		}
+    		postMessage: {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/',
+    			params: {discussionId: '@discussionId'}
+    		}
+    	});};
+
+    	return api;
+    });
+	
+
+
+angular
+	.module('myApp', [
+      'ngRoute',
+      'myApp.client',
+      'myApp.version',
+      'objects',
+      'api'
+    ])
+    .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+      $locationProvider.hashPrefix('!');
+    
+      $routeProvider.otherwise({redirectTo: '/login'});
+    }])
+    
     .run(function(){
         var distX = 0 , distY = 0;
         var viewportX,viewportY;
