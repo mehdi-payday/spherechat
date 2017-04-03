@@ -79,7 +79,7 @@ class PrivateDiscussionSerializer(ThreadSerializer):
         return Thread.objects.discussion_between(initiator, target)
 
     def update(self, discussion, data):
-        raise NotImplemented()
+        raise NotImplementedError()
 
 
 class ChannelSerializer(ThreadSerializer):
@@ -104,10 +104,10 @@ class ChannelSerializer(ThreadSerializer):
                                             initial_members=members)
 
     def update(self, channel, validated_data):
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def delete(self, channel):
-        raise NotImplemented()
+        raise NotImplementedError()
 
 
 class MessageTagSerializer(serializers.ModelSerializer):
