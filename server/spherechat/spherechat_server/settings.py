@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'django.contrib.sites',
     'core',
     'messaging',
     'friendship',
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'django_filters',
     'rest_auth.registration',
-    'django.contrib.sites',
+    
     'allauth',
     'allauth.account'
 ]
@@ -60,8 +61,12 @@ SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-	'rest_framework.permissions.IsAdminUser'
+        'rest_framework.permissions.IsAdminUser'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
     'PAGE_SIZE': 10
 }
 
