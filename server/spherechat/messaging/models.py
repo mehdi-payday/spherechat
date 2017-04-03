@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 from django.template.defaultfilters import slugify
 from django.db import models
+from django.db.models import Count, Avg
 from datetime import datetime
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -225,38 +226,72 @@ class ThreadManager(Manager):
         return slug
 
     def discussion_between(self, initiator, target):
+        """
+        Retrieves or creates a discussion (in case it does not exist) 
+        between `initiator` and `target`.
+        """
         try:
             return self.find_discussion_between(initiator, target)
         except ObjectDoesNotExist:
             return self.create_discussion(initiator, target)
 
     def find_discussion_between(self, user1, user2):
-        return self.private_discussions().filter(memberships__user=user1).get(memberships__user=user2)[0]
+        """
+        Retrieves the discussion thread between `user1` and `user2`
+        """
+        return self.private_discussions().filter(memberships__user=user1) \
+            .get(memberships__user=user2)[0]
 
     def private_discussion_exists(self, user1, user2):
-	return self.private_discussions().filter(memberships__user=user1).filter(memberships__user=user2).exists()
+        return self.private_discussions().filter(memberships__user=user1).filter(memberships__user=user2).exists()
 
-    def private_discussions(self, participant_user=None):
-        if participant_user:
-            return self.filter(type=Thread.PRIVATE_DISCUSSION, memberships__user=participant_user)
-        else:
-            return self.filter(type=Thread.PRIVATE_DISCUSSION)
+    def private_discussions(self, participant_user=None, order_by='-unseen_mention'):
+        return self.threads(participant_user=participant_user, types=(Thread.PRIVATE_DISCUSSION, ), order_by=order_by)
 
-    def private_channels(self, participant_user=None):
-        if participant_user:
-            return self.filter(type=Thread.PRIVATE_CHANNEL, memberships__user=participant_user)
-        else:
-            return self.filter(type=Thread.PRIVATE_CHANNEL)
+    def private_channels(self, participant_user=None, order_by='-unseen_mention'):
+        return self.channels(
+            participant_user=participant_user, 
+            channel_type=Thread.PRIVATE_CHANNEL, 
+            order_by=order_by)
 
-    def public_channels(self, participant_user=None):
-        if participant_user:
-            return self.filter(type=Thread.PUBLIC_CHANNEL, memberships__user=participant_user)
-        else:
-            return self.filter(type=Thread.PUBLIC_CHANNEL)
+    def public_channels(self, participant_user=None, order_by='-unseen_mention'):
+        return self.channels(participant_user=participant_user, channel_type=Thread.PUBLIC_CHANNEL, order_by=order_by)
 
-    def channels(self, participant_user=None):
+    def _annotate_unseen_mentions(self, threads_query, user, unseen_mention_keyword):
+        threads_query = threads_query.extra(select ={unseen_mention_keyword: 'SELECT COUNT(*) FROM messaging_message INNER JOIN messaging_thread ON messaging_message.thread_id = messaging_thread.id INNER JOIN messaging_membership ON messaging_membership.thread_id = messaging_thread.id  WHERE messaging_membership.user_id = %i AND (messaging_message.sent_date > messaging_membership.last_seen_date OR messaging_membership.last_seen_date is null)' % user.id})
+#        else:
+#            annotations = {unseen_mention_keyword: Count('messages')}
+#            threads_query = threads_query.annotate(**annotations)
+
+        return threads_query
+
+    def channels(self, participant_user=None, channel_type=None, order_by='-unseen_mention'):
+        thread_types = None
+
+        if channel_type:
+            assert channel_type in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL)
+            thread_types = (channel_type, )
+
+        return self.threads(participant_user, types=thread_types, order_by=order_by)
+
+    def threads(self, participant_user=None, types=None, order_by='-unseen_mention'):
+        filters = dict()
+        if types:
+#            for thread_type in types:
+#                assert thread_type in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL, Thread.PRIVATE_DISCUSSION)
+            if isinstance(types, str):
+                types = (types, )
+            filters['type__in'] = types
+
         if participant_user:
-            return self.filter(type__in=(Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL), memberships__user=participant_user)
+            filters["memberships__user"] = participant_user
+            query = self.filter(**filters)
+            query = self._annotate_unseen_mentions(query, participant_user, 'unseen_mention')
+
+            if order_by:
+                query = query.order_by(order_by)
+
+            return query
         else:
             return self.filter(type__in=(Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL))
 
@@ -374,6 +409,7 @@ class Message(Model):
     contents = models.CharField(max_length=250, blank=False, null=False)
     sent_date = models.DateTimeField(default=datetime.now)
     attachment = models.FileField(upload_to='uploads/', null=True, blank=True)
+#    active = models.BooleanField(default=True)
 
     SYSTEM_MESSAGE  = 'system'
     USER_MESSAGE = 'user'

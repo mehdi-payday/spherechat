@@ -31,6 +31,7 @@ urlpatterns = [
 #    url(r'^admin/', include('admin.site.urls')),
     url(r'^api/django-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/messaging/', include('messaging.urls')),
+    url(r'^api/messaging/', include('friendship.urls')),
     url(r'^api/me/', views.MeUserView.as_view()),
     url(r'^api/auth/', include('rest_auth.urls')),
     url(r'^api/auth/registration/', include('rest_auth.registration.urls'))
