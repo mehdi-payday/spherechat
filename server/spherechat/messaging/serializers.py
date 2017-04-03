@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from messaging.models import (Message, MessageTag, Membership, Thread)
+from core.serializers import UserSerializer
 from rest_framework import serializers
+from datetime import datetime
 from core.models import User
 from django.db.models import Q
-
+from messaging.exceptions import UnexistentMembership
 
 def get_user_from_serializer(serializer):
     request = serializer.context.get('request', None)
@@ -19,8 +21,11 @@ def get_user_from_serializer(serializer):
 
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Thread
-        fields = ("user", "thread", "last_seen_date", "last_seen_message", "is_participant", "join_date")
+        model = Membership
+        fields = ("id", "user", "thread", "last_seen_date", "last_seen_message", "active", "join_date", "user_details", "unchecked_count")
+
+    user_details = UserSerializer(source="user", read_only=True)
+    unchecked_count = serializers.IntegerField(read_only=True)
 
 class UserMembershipSerializer(MembershipSerializer):
     class Meta(MembershipSerializer.Meta):
@@ -31,36 +36,35 @@ class UserMembershipSerializer(MembershipSerializer):
 class ThreadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Thread
-        fields = ("id", "slug", "title", "type", "description", "creator_user", "manager_user", "manager_details")
-        extra_kwargs = {
-            "creator_user": {"read_only": True},
-            "manager_user": {"read_only": True},
-        }
-    manager_details = UserSerializer(source="manager_user", read_only=True)
-    membership = serializers.SerializerMethodField()
-    memberships = MembershipSerializer(many=True, read_only=True)
-
-    def get_membership(self, thread):
-        try:
-            membership = Membership.objects.get_membership(user, thread)
-        except:
-            return None
-        return MembershipSerializer(membership, context=self.context).data
-
-class PrivateDiscussionSerializer(serializers.ModelSerializer):
-     class Meta(ThreadSerializer.Meta):
-        fields = ThreadSerializer.Meta.fields + ("interlocutor_membership", "with_user")
+        fields = ("id", "slug", "title", "type", "description", "creator_user", "manager_user", "manager_details", "membership", "memberships")
         extra_kwargs = {
             "creator_user": {"read_only": True},
             "manager_user": {"read_only": True},
             "slug": {"read_only": True},
-            "title": {"read_only": True},
-            "type": {"read_only": True},
-            "description": {"read_only": True},
         }
+    manager_details = UserSerializer(source="manager_user", read_only=True)
+    membership = serializers.SerializerMethodField()
+    memberships = MembershipSerializer(many=True, read_only=True, source="active_memberships")
+
+    def get_membership(self, thread):
+        try:
+            user = get_user_from_serializer(self)
+            membership = Membership.objects.get_membership(user, thread)
+        except UnexistentMembership:
+            return None
+        return MembershipSerializer(membership, context=self.context).data
+
+class PrivateDiscussionSerializer(ThreadSerializer):
+    class Meta(ThreadSerializer.Meta):
+        fields = ThreadSerializer.Meta.fields + ("interlocutor_membership", "with_user")
+        extra_kwargs = dict(
+            title={"read_only": True},
+            type={"read_only": True},
+            description={"read_only": True},
+            **ThreadSerializer.Meta.extra_kwargs)
 
     interlocutor_membership = serializers.SerializerMethodField()
-    with_user = PrimaryKeyRelatedField(queryset=User.objects.active_users(), write_only=True, required=True)
+    with_user = serializers.PrimaryKeyRelatedField(queryset=User.objects.active_users(), write_only=True, required=True)
 
     def get_interlocutor_membership(self, discussion):
         user = get_user_from_serializer(self)
@@ -69,30 +73,27 @@ class PrivateDiscussionSerializer(serializers.ModelSerializer):
         return MembershipSerializer(interlocutor_membership, context=self.context).data
 
     def create(self, validated_data):
-        initiator = get_user_from_serializer(self
+        initiator = get_user_from_serializer(self)
         target = validated_data["with_user"]
 
         return Thread.objects.discussion_between(initiator, target)
 
     def update(self, discussion, data):
-        raise NotImplemented()
+        raise NotImplementedError()
 
 
 class ChannelSerializer(ThreadSerializer):
     class Meta(ThreadSerializer.Meta):
         fields = ThreadSerializer.Meta.fields + ("members", )
-        extra_kwargs = {
-            "creator_user": {"read_only": True},
-            "manager_user": {"read_only": True},
-            "type": {
+        extra_kwargs = dict(
+            type={
                 "choices": (
                     (Thread.PRIVATE_CHANNEL, "Private channel"), 
                     (Thread.PUBLIC_CHANNEL, "Public channel"),
                 )
-            }
-        }
+            }, **ThreadSerializer.Meta.extra_kwargs)
 
-    members = PrimaryKeyRelatedField(many=True, write_only=True, queryset=User.objects.active_users())
+    members = serializers.PrimaryKeyRelatedField(many=True, write_only=True, queryset=User.objects.active_users())
 
     def create(self, validated_data):
         creator = get_user_from_serializer(self)
@@ -103,10 +104,10 @@ class ChannelSerializer(ThreadSerializer):
                                             initial_members=members)
 
     def update(self, channel, validated_data):
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def delete(self, channel):
-        raise NotImplemented()
+        raise NotImplementedError()
 
 
 class MessageTagSerializer(serializers.ModelSerializer):
@@ -121,10 +122,11 @@ class MessageTagSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ("id", "user_sender", "sender_details", "thread", "contents", "sent_date", "message_type", "tags")
+        fields = ("id", "user_sender", "sender_details", "thread", "contents", "sent_date", "message_type", "tags", "attachment")
         extra_kwargs = {
             "message_type": {"read_only": True},
             "user_sender": {"read_only": True},
+            "sent_date": {"read_only": True},
 #            "thread": {"read_only": True},
         }
     sender_details = UserSerializer(source="sender", read_only=True)
@@ -137,14 +139,16 @@ class MessageSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         data = super(MessageSerializer, self).validate(data)
-        data['sender'] = get_user_from_serializer(self)
+        data['user_sender'] = get_user_from_serializer(self)
+        data['sent_date'] = datetime.now()
 
         return data
 
     def create(self, validated_data):
+        tags = validated_data.pop("tags", [])
         message = Message(**validated_data)
         thread = validated_data.get("thread")
-        message = Message.objects.send(message, thread)
+        message = Message.objects.send(message, thread, tags=tags)
 
         return message
 

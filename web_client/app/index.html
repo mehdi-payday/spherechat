@@ -25,7 +25,7 @@
     <style></style>
     <script src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/kDIhsYoS9z9.js" async="" crossorigin="anonymous"></script>
   </head>
-  <body class="chrome webkit win x1-5 Locale_fr_FR _z4_">
+  <body ng-app="myApp" class="chrome webkit win x1-5 Locale_fr_FR _z4_">
     <div class="_2sdm" id="u_0_0">
       <div class="_li">
         <div class="_4sp8">
@@ -42,44 +42,44 @@
                       <div class="uiScrollableAreaBody" style="margin-right: -17px;">
                         <div class="uiScrollableAreaContent">
                           <div aria-label="Conversations" class="" role="navigation">
-        <div class="app-wrapp" id="people-list"> 
-          <div class="app-container">
-            <!-- @main page view -->
-            <div class="view-main">
-                                <div id="profile">
-            <div class="wrap">
-                <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-                <p>Mike Ross</p>
-                <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-                <div id="status-options">
-                    <ul>
-                        <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-                        <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-                        <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-                        <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-                    </ul>
-                </div>
-                <div id="expanded">
-                    <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-                    <input name="twitter" type="text" value="mikeross" />
-                    <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-                    <input name="twitter" type="text" value="ross81" />
-                    <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-                    <input name="twitter" type="text" value="mike.ross" />
-                </div>
-            </div>
-        </div>
-              <div class="content-wrapp">
-                <div class="nav-group">
-                  <nav id="master-nav">
-                    <ul>
-                      <li><i class="material-icons">perm_identity</i></li>
-                      <li class="active"><i class="material-icons">chat_bubble_outline</i></li>
-                      <li><i class="material-icons">favorite_border</i></li>
-                      <li><i class="material-icons">tune</i></li>
-                      <li id="active-line"></li>
-                    </ul>
-                  </nav>
+					        <div class="app-wrapp" id="people-list"> 
+					          <div class="app-container">
+					            <!-- @main page view -->
+					            <div class="view-main">
+					                                <div id="profile">
+					            <div class="wrap">
+					                <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+					                <p>Mike Ross</p>
+					                <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+					                <div id="status-options">
+					                    <ul>
+					                        <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+					                        <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+					                        <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+					                        <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+					                    </ul>
+					                </div>
+					                <div id="expanded">
+					                    <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+					                    <input name="twitter" type="text" value="mikeross" />
+					                    <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+					                    <input name="twitter" type="text" value="ross81" />
+					                    <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+					                    <input name="twitter" type="text" value="mike.ross" />
+					                </div>
+					            </div>
+					        </div>
+			              <div class="content-wrapp">
+			                <div class="nav-group">
+			                  <nav id="master-nav">
+			                    <ul>
+			                      <li><i class="material-icons">perm_identity</i></li>
+			                      <li class="active"><i class="material-icons">chat_bubble_outline</i></li>
+			                      <li><i class="material-icons">favorite_border</i></li>
+			                      <li><i class="material-icons">tune</i></li>
+			                      <li id="active-line"></li>
+			                    </ul>
+			                  </nav>
                           <div class="_3rh8 search" id="search">
                             <span class="_5iwm _150g _58ah"><label class="_58ak"><input type="text" class="_58al" placeholder="Rechercher dans Messenger" spellcheck="false" value=""><a aria-label="Nouveau message" class="_30yy _2oc8" role="button" title="Nouveau message" href="/new"></a></label></span>
                             <span class="_58-3" aria-hidden="true">
@@ -851,6 +851,16 @@
         </div>
       </div>
     </div>
+    <script src="bower_components/angular/angular.js"></script>
+  	<script src="bower_components/angular-route/angular-route.js"></script>
+  	<script src="bower_components/angular-resource/angular-resource.js"></script>
+  	<script src="app.js"></script>
+  	<script src="client/client.js"></script>
+  	<script src="login/login.js"></script>
+  	<script src="register/register.js"></script>
+  	<script src="components/version/version.js"></script>
+  	<script src="components/version/version-directive.js"></script>
+  	<script src="components/version/interpolate-filter.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
