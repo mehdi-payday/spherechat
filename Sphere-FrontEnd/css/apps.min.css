@@ -1,0 +1,226 @@
+.download-main .download-wrapper {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    left: 0;
+    bottom: 200px;
+    top: 0;
+
+}
+.download-main{
+    position: relative;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    -webkit-box-shadow: 0px 10px 40px 30px #eef4fc;
+    -moz-box-shadow: 0px 10px 40px 30px #eef4fc;
+    box-shadow: 22px 55px 38px #eef4fc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.download-main.body-wrapper {
+    overflow: hidden
+}
+.download-subtitle{
+	color: #748598 !important;
+}
+@media screen and (max-width: 659px) {
+    .download-main{
+        margin-top: 0;
+        padding-top: 0
+    }
+}
+.download-main .download-title {
+    color: #47608B;
+    font-size: 19.8px;
+    line-height: 38px;
+    letter-spacing: .83px
+}
+.download-main .download-main-wrapper {
+    text-align: center;
+    margin-top: 100px
+}
+.download-main .download-main-wrapper .download-main-title {
+    font-size: 30.6px;
+    line-height: 46px;
+    color: #fff;
+    letter-spacing: .5px
+}
+.download-main .download-main-wrapper .download-main-subtitle {
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    margin-top: 27px;
+    letter-spacing: .5px
+}
+.download-main .download-main-wrapper .download-main-notice {
+    font-size: 14.4px;
+    color: #fff;
+    letter-spacing: .1px;
+    margin-top: 21px;
+    filter: alpha(Opacity=60);
+    opacity: .6
+}
+.download-main .download-main-wrapper .download-main-list {
+    text-align: center;
+    margin-top: 40px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper {
+    display: inline-block;
+    background: #fff;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 24px 54px 0 rgba(121, 160, 189, .22);
+    -moz-box-shadow: 0 24px 54px 0 rgba(121, 160, 189, .22);
+    box-shadow: 0 24px 54px 0 rgba(121, 160, 189, .22);
+    padding: 32px 40px 31px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one,
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-separator {
+    float: left
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one {
+    margin: 0 18px;
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=web] .download-main-list-one-platform .download-main-list-one-platform-logo .download-main-list-one-platform-logo-itself {
+    background-image: url(https://crisp.im/static/images/features/apps/main/platform_web.svg?1f5e835);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 40px;
+    height: 26px;
+    margin-top: 2px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=windows] .download-main-list-one-platform .download-main-list-one-platform-logo .download-main-list-one-platform-logo-itself {
+    background-image: url(https://crisp.im/static/images/features/apps/main/platform_windows.svg?1f5e835);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin-top: 1px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=macos] .download-main-list-one-platform .download-main-list-one-platform-logo .download-main-list-one-platform-logo-itself {
+    background-image: url(https://crisp.im/static/images/features/apps/main/platform_mac.svg?1f5e835);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin-top: 1px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=android] .download-main-list-one-platform .download-main-list-one-platform-logo .download-main-list-one-platform-logo-itself {
+    background-image: url(https://crisp.im/static/images/features/apps/main/platform_android.svg?1f5e835);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 25px;
+    height: 30px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=ios] .download-main-list-one-platform .download-main-list-one-platform-logo .download-main-list-one-platform-logo-itself {
+    background-image: url(https://crisp.im/static/images/features/apps/main/platform_ios.svg?1f5e835);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 24px;
+    height: 28px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=slack] .download-main-list-one-platform .download-main-list-one-platform-logo .download-main-list-one-platform-logo-itself {
+    background-image: url(https://crisp.im/static/images/features/apps/main/platform_slack.svg?1f5e835);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 30px;
+    height: 30px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one .download-main-list-one-platform .download-main-list-one-platform-logo,
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one .download-main-list-one-platform .download-main-list-one-platform-name {
+    text-align: center;
+    display: block
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one .download-main-list-one-platform .download-main-list-one-platform-logo {
+    height: 40px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one .download-main-list-one-platform .download-main-list-one-platform-name {
+    font-size: 13.5px;
+    color: #384C78;
+    line-height: 20px;
+    letter-spacing: .54px
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one:hover {
+    -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    -o-transform: scale(1.08);
+    transform: scale(1.08)
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one:active {
+    -webkit-transform: scale(1.04);
+    -moz-transform: scale(1.04);
+    -ms-transform: scale(1.04);
+    -o-transform: scale(1.04);
+    transform: scale(1.04)
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-one .download-main-list-one-soon {
+    font-size: 11.7px;
+    color: #101010;
+    line-height: 16px;
+    font-style: italic;
+    margin-top: 7px;
+    display: block
+}
+.download-main .download-main-wrapper .download-main-list .download-main-list-wrapper .download-main-list-separator {
+    background-color: #edf2ff;
+    width: 2px;
+    height: 58px;
+    margin: 0 20px
+}
+@media screen and (max-width: 1099px) {
+    .download-main .download-main-wrapper .download-main-title {
+        font-size: 27px
+    }
+}
+@media screen and (max-width: 1039px) {
+    .download-main .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=slack],
+    .download-main .download-main-list .download-main-list-wrapper .download-main-list-separator:nth-of-type(3) {
+        display: none
+    }
+}
+@media screen and (max-width: 939px) {
+    .download-main .download-main-list .download-main-list-wrapper .download-main-list-one[data-platform-id=web],
+    .download-main .download-main-list .download-main-list-wrapper .download-main-list-separator:nth-of-type(1) {
+        display: none
+    }
+}
+@media screen and (max-width: 659px) {
+    .download-main .download-main-wrapper {
+        margin-top: 140px
+    }
+    .download-main .download-main-list-wrapper .download-main-list-one,
+    .download-main .download-main-notice {
+        display: none
+    }
+    .download-main .download-main-list-wrapper .download-main-list-one[data-platform-id=android],
+    .download-main .download-main-list-wrapper .download-main-list-one[data-platform-id=ios] {
+        display: block
+    }
+    .download-main .download-main-list-wrapper .download-main-list-separator:nth-of-type(2),
+    .download-main .download-main-split {
+        display: none
+    }
+}

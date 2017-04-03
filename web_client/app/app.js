@@ -1,24 +1,157 @@
 'use strict';
 
+var serverAddress = 'spherechat.tk:8080/api/';
+
 angular
-    .module('myApp', [
+	.module('objects' [])
+	.factory('Objects', function(){
+		var objects = {};
+		
+    	objects.thread = function(title, slug, members, type, description, manager_user, creator_user, active){
+    		this.title = title,
+    		this.slug = slug,
+    		this.members = members,
+    		this.type = type,
+    		this.description = description,
+    		this.manager_user = manager_user,
+    		this.creator_user = creator_user,
+    		this.active = active;
+    	}
+    	
+    	objects.message = function(user_sender, thread, contents, sent_date, attachment, message_type){
+    		this.user_sender = user_sender,
+    		this.thread = thread,
+    		this.contents = contents,
+    		this.sent_date = sent_date,
+    		this.attachment = attachment,
+    		this.message_type = message_type;
+    	}
+    	
+    	objects.messageTag = function(tagged_user, message, placeholder_position){
+    		this.tagged_user = tagged_user,
+    		this.message = message,
+    		this.placeholder_position;
+    	}
+    	
+    	objects.membership = function(user, thread, last_seen_date, last_seen_message, active, join_date){
+    		this.user = user,
+    		this.thread = thread,
+    		this.last_seen_date = last_seen_date,
+    		this.last_seen_message = last_seen_message,
+    		this.active = active,
+    		this.join_date = join_date;
+    	}
+    	
+    	objects.friendship = function(requester_user, addresser, status, request_date, approval_date, friendship_end_date, active){
+    		this.requester_user = requester_user,
+    		this.addresser = addresser,
+    		this.status = status,
+    		this.request_date = request_date,
+    		this.approval_date = approval_date,
+    		this.friendship_end_date = friendship_end_date,
+    		this.active = active;
+    	}
+    	return objects;
+    });
+
+angular
+	.module('api', ['ngResource'])
+    .factory('Api', function($resource){
+    	var api = {};
+    	
+    	api.login = function() {return $resource(serverAddress + 'auth/login');};
+    	api.register = function() {return $resource(serverAddress + 'auth/registration');};
+    	
+    	api.friendship = function() {return $resource(serverAddress + 'api/friendship/friendship');};
+    	api.friendrequest = function() {return $resource(serverAddress + 'api/friendship/friendrequest');};
+    	
+    	api.user = function() {return $resource(serverAddress + 'user', {}, {
+    		getCurrent: {
+    			method: 'GET',
+    			url: serverAddress + 'me'
+    		}
+    		getOne: {
+    			method: 'GET',
+    			url: serverAddress + 'user/:id',
+    			params: {id: '@id'}
+    		}
+    	});};
+    	
+    	api.channel = function() {return $resource(serverAddress + 'api/messaging/channel', {}, {
+    		getOne: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/channel/:id',
+    			params: {id: '@id'}
+    		}
+	    	getMessages: {
+				method: 'GET',
+				url: serverAddress + 'api/messaging/channel/:id/message',
+				params: {id: '@id'}
+			}
+    		getOneMessage: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/channel/:channelId/message/:messageId',
+    			params: {discussionId: '@channelId', messageId: '@messageId'}
+    		}
+			postMessage: {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/channel/:channelId/message/',
+    			params: {discussionId: '@channelId'}
+    		}
+    	});};
+    	
+    	api.privateDiscussion = function() {return $resource(serverAddress + 'api/messaging/privatediscussion', {}, {
+    		getOne: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id',
+    			params: {id: '@id'}
+    		}
+    		getMessages: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/message',
+    			params: {id: '@id'}
+    		}
+    		getOneMessage: {
+    			method: 'GET',
+    			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/:messageId',
+    			params: {discussionId: '@discussionId', messageId: '@messageId'}
+    		}
+    		postMessage: {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/',
+    			params: {discussionId: '@discussionId'}
+    		}
+    	});};
+
+    	return api;
+    });
+	
+
+
+angular
+	.module('myApp', [
       'ngRoute',
       'myApp.client',
-      'myApp.version'
+      'myApp.version',
+      'objects',
+      'api'
     ])
     .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
     
-      $routeProvider.otherwise({redirectTo: '/view1'});
+      $routeProvider.otherwise({redirectTo: '/login'});
     }])
+    
     .run(function(){
         var distX = 0 , distY = 0;
         var viewportX,viewportY;
+        
         $(document).on('mousedown touchstart', '.touch-y', function(e) {
           var $ele = $(this);
           viewportY = (-1 * $ele.height()) + viewport($ele).height();
           var startY = e.pageY || e.originalEvent.touches[0].pageY;
           var currentY = parseFloat($ele.css('transform').split(',')[5]);
+          
           $(document).on('mousemove touchmove', function(e) {
             e.preventDefault();
             var y = e.pageY || e.originalEvent.touches[0].pageY;
@@ -46,6 +179,7 @@ angular
               });
             }
           });
+          
           $(document).on('mouseup touchend', function() {
             $(document).off('mousemove touchmove mouseup touchend');
             if (!distY) return;
@@ -90,6 +224,7 @@ angular
                 left: leftPos
             });
         });
+        
         function navItemPos(index){
           $("#master-nav-items > div").removeClass("active after before");
           $("#master-nav-items > div").eq(index).addClass("active");
@@ -97,6 +232,7 @@ angular
           $("#master-nav-items > div").eq(index).prevAll().addClass("before");
         }
         $(".messages-list > ul > li").bind('click',showMessages);
+        
         function showMessages(){
           $('.view-main').addClass("deactive");
           $('.view-message').addClass("active");
@@ -112,6 +248,7 @@ angular
             sendMassage();
           }
         })
+        
         function sendMassage(){
           var date = new Date();
           var message = $("#message-text").val();
@@ -124,6 +261,7 @@ angular
             messageScrollFix();
           },50);
         }
+        
         function systemMessage(date){
           var messages=[
             "Hi my name is yousef sami",
@@ -137,6 +275,7 @@ angular
             messageScrollFix();
           },1500);
         }
+        
         function getTime(date) {
           var hours = date.getHours();
           var minutes = date.getMinutes();
@@ -147,6 +286,7 @@ angular
           var strTime = hours + ':' + minutes + ' ' + ampm;
           return strTime;
         }
+        
         function messageScrollFix(){
           setTimeout(function(){
             var mes_hieght=parseInt($(".messages-area > ul").height());
@@ -156,7 +296,8 @@ angular
           },100);
         }
       });
-      $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+      
+	  $(".messages").animate({ scrollTop: $(document).height() }, "fast");
 
       $("#profile-img").click(function() {
         $("#status-options").toggleClass("active");

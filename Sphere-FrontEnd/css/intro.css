@@ -1,0 +1,58 @@
+ 
+ html,
+ body {
+     height: 100%;
+     margin: 0;
+ }
+ .content {
+     height: 100%;
+     min-height: 100%;
+     /*for mozilla*/
+ }
+ html>body .content {
+     height: auto;
+ }
+ #one {     
+     background: url(../img/main-bg.png) repeat center center scroll;
+         -webkit-box-shadow: 0px 10px 40px 30px #eef4fc;
+    -moz-box-shadow: 0px 10px 40px 30px #eef4fc;
+    box-shadow: 22px 55px 38px #eef4fc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+ }
+ .overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 0;
+     background: red;
+     /* For browsers that do not support gradients */
+     
+     background: -webkit-linear-gradient(left top, transparent, rgba(255, 182, 193, 0.6), rgba(255, 182, 193, 0.8));
+     /* For Safari 5.1 to 6.0 */
+     
+     background: -o-linear-gradient(bottom right, transparent, rgba(255, 182, 193, 0.6), rgba(255, 182, 193, 0.8));
+     /* For Opera 11.1 to 12.0 */
+     
+     background: -moz-linear-gradient(bottom right, transparent, rgba(255, 182, 193, 0.6), rgba(255, 182, 193, 0.8));
+     /* For Firefox 3.6 to 15 */
+     
+     background: linear-gradient(to bottom right, rgba(101,176,239,0.2), rgba(63,157,236,0.4), rgba(184,95,213,0.5), rgba(166,55,202,0.8));
+     /* Standard syntax */
+ }
+ .overlay2 {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 1;
+     /*background-color: rgba(0,0,0,.1);*/
+ }
+ .clearfixes {
+     margin-top: 30% !important;
+ }
