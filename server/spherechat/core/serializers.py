@@ -11,6 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
             "is_staff": {"read_only": True},
             "is_active": {"read_only": True},
             "groups": {"read_only": True},
+            "listening_thread": {"read_only": True},
+            "last_listening_date": {"read_only": True},
         }
 
 

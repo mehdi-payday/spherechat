@@ -75,6 +75,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         (BOT, "Bot")
     )
     type = models.CharField(max_length=4, choices=USER_TYPE_CHOICES, default=HUMAN)
+    listening_thread = models.ForeignKey("messaging.Thread", null=True, blank=True)
+    last_listening_date = models.DateTimeField(null=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

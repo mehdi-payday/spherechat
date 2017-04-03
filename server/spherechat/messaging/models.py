@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import (Manager, Model, ObjectDoesNotExist)
 import random
 from core.mixins import ObservableManagerMixin
+from core.models import User
 from messaging.exceptions import (UnmanagedThread, 
     UnauthorizedSender,
     UnauthorizedAction,
@@ -19,6 +20,9 @@ from messaging.exceptions import (UnmanagedThread,
     UnexistentMembership,
     IncorrectTags)
 import re
+
+# Every 60 seconds, a ``listening to Thread` signal should be sent by the client in order for him to be considered as connected to thread
+LISTENING_RENEWAL_RATE = 60
 
 class MembershipManager(Manager):
     def create_membership(self, user, thread, **kwargs):
@@ -40,6 +44,7 @@ class MembershipManager(Manager):
     def seen_thread(self, user, thread):
         membership = self.get_membership(user, thread)
         seen = membership.last_seen_message.pk == thread.get_last_message().pk
+
         return seen
 
     def seen_message(self, user, message, thread=None):
@@ -66,6 +71,26 @@ class MembershipManager(Manager):
         membership = self.get_membership(user, thread)
         last_seen_date = membership.last_seen_date
         return thread.messages.filter(sent_date__gt=last_seen_date)
+
+    def get_last_seen_date(self, user, thread):
+        last_seen_date = None
+
+        if isinstance(user, User):
+            try:
+                last_seen_date = self.get_membership(user, thread).last_seen_date
+            except UnexistentMembership:
+                pass
+        elif isinstance(user, Membership):
+            membership = user
+            last_seen_date = membership.last_seen_date
+
+        return last_seen_date
+
+#    def set_last_seen_date(self, user, thread, last_seen_date):
+#        membership = Membership.objects.get_membership(user, thread)
+#        membership.last_seen_date = last_seen_date
+#        membership.save()
+
 
 class MembershipManager(Manager):
     def create_membership(self, user, thread, **kwargs):
@@ -116,7 +141,7 @@ class MembershipManager(Manager):
 
 class TuneManager(object):
     @classmethod
-    def get_manager(cls):
+    def get(cls):
         if not hasattr(cls, "_instance"):
             cls._instance = TuneManager()
         return cls._instance
@@ -156,6 +181,10 @@ class TuneManager(object):
 
         return user.listening_thread.pk == thread.pk
 
+    def is_listening(self, user, thread):
+        heartbeat_ancienty = datetime.now() - user.last_listening_date
+
+        return self.is_tuned(user, thread) and heartbeat_ancienty.seconds > LISTENING_RENEWAL_RATE
 
 class ThreadManager(Manager):
     def is_channel(self, thread):
@@ -310,8 +339,8 @@ class ThreadManager(Manager):
             select={
                 unseen_mention_keyword: \
                     'SELECT COUNT(*) FROM messaging_message INNER JOIN messaging_thread ON messaging_message.thread_id = messaging_thread.id ' \
-                    + 'INNER JOIN messaging_membership ON messaging_membership.thread_id = messaging_thread.id WHERE messaging_membership.user_id = %i ' \
-                    + ' AND (messaging_message.sent_date > messaging_membership.last_seen_date OR messaging_membership.last_seen_date is null)' % user.id
+                    + 'INNER JOIN messaging_membership ON messaging_membership.thread_id = messaging_thread.id WHERE messaging_membership.user_id = %i ' % user.id \
+                    + ' AND (messaging_message.sent_date > messaging_membership.last_seen_date OR messaging_membership.last_seen_date is null)'
             }
         )
 #        else:
