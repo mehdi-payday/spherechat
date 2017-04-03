@@ -20,6 +20,52 @@ from messaging.exceptions import (UnmanagedThread,
     IncorrectTags)
 import re
 
+class MembershipManager(Manager):
+    def create_membership(self, user, thread, **kwargs):
+        if self.belongs(user, thread):
+            raise ExistingMember("User %s is already a member of thread %s" % (user, thread))
+        return self.create(user=user, thread=thread)
+
+    def get_or_create_membership(self, user, thread, **kwargs):
+        try:
+            return self.get_membership(user, thread)
+        except UnexistentMembership:
+            return self.create(user=user, thread=thread)
+ 
+    def cancel_membership(self, membership):
+        membership.is_participant = False
+        membership.save()
+        return membership
+
+    def seen_thread(self, user, thread):
+        membership = self.get_membership(user, thread)
+        seen = membership.last_seen_message.pk == thread.get_last_message().pk
+        return seen
+
+    def seen_message(self, user, message, thread=None):
+        if thread is None:
+            thread = message.thread
+        membership = self.get_membership(user, thread)
+        seen = membership.last_seen_date >= message.sent_date
+        return seen
+
+    @property
+    def active_memberships(self):
+        return self.filter(active=True)
+
+    def get_membership(self, user, thread):
+        try:
+            return self.active_memberships.get(user=user, thread=thread)
+        except ObjectDoesNotExist as doesNotExist:
+            raise UnexistentMembership("No membership of user %s to thread %s" % (user, thread), doesNotExist)
+
+    def belongs(self, user, thread):
+        return self.filter(user=user, thread=thread, active=True).exists()
+
+    def list_unchecked_messages(self, user, thread, membership=None):
+        membership = self.get_membership(user, thread)
+        last_seen_date = membership.last_seen_date
+        return thread.messages.filter(sent_date__gt=last_seen_date)
 
 class MembershipManager(Manager):
     def create_membership(self, user, thread, **kwargs):
@@ -95,11 +141,11 @@ class TuneManager(object):
 
         user.save()
 
-    def update_tuning_date(self, user, thread, listening_date):
+    def update_tuning_state(self, user, thread, listening_date):
 #        if listening_date is None:
 #            listening_date = datetime.now()
 
-        if not isinstance(listening_date, datetime.datetime):
+        if not isinstance(listening_date, datetime):
             raise ValueError("Listening date should be an instance of datetime. Got : %s" % listening_date)
 
         self.tune(user, thread, listening_date=listening_date)
@@ -107,7 +153,9 @@ class TuneManager(object):
     def is_tuned(self, user, thread):
         if user.listening_thread is None:
             return False
+
         return user.listening_thread.pk == thread.pk
+
 
 class ThreadManager(Manager):
     def is_channel(self, thread):
@@ -210,7 +258,7 @@ class ThreadManager(Manager):
         return channel
 
     def create(self, **kwargs):
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def __create(self, **kwargs):
         if "slug" not in kwargs:
@@ -258,7 +306,14 @@ class ThreadManager(Manager):
         return self.channels(participant_user=participant_user, channel_type=Thread.PUBLIC_CHANNEL, order_by=order_by)
 
     def _annotate_unseen_mentions(self, threads_query, user, unseen_mention_keyword):
-        threads_query = threads_query.extra(select ={unseen_mention_keyword: 'SELECT COUNT(*) FROM messaging_message INNER JOIN messaging_thread ON messaging_message.thread_id = messaging_thread.id INNER JOIN messaging_membership ON messaging_membership.thread_id = messaging_thread.id  WHERE messaging_membership.user_id = %i AND (messaging_message.sent_date > messaging_membership.last_seen_date OR messaging_membership.last_seen_date is null)' % user.id})
+        threads_query = threads_query.extra(
+            select={
+                unseen_mention_keyword: \
+                    'SELECT COUNT(*) FROM messaging_message INNER JOIN messaging_thread ON messaging_message.thread_id = messaging_thread.id ' \
+                    + 'INNER JOIN messaging_membership ON messaging_membership.thread_id = messaging_thread.id WHERE messaging_membership.user_id = %i ' \
+                    + ' AND (messaging_message.sent_date > messaging_membership.last_seen_date OR messaging_membership.last_seen_date is null)' % user.id
+            }
+        )
 #        else:
 #            annotations = {unseen_mention_keyword: Count('messages')}
 #            threads_query = threads_query.annotate(**annotations)
@@ -320,7 +375,7 @@ class MessageManager(ObservableManagerMixin, Manager):
         if len(tags) > 0:
             MessageTag.objects.verify_tags(tags, message.contents)
             for tag in tags:
-                Tag.objects.create(message=message, **tag)
+                MessageTag.objects.create(message=message, **tag)
 
         self._message_saved(message)
 
@@ -328,18 +383,6 @@ class MessageManager(ObservableManagerMixin, Manager):
 
     def _message_saved(self, message):
         self.__class__.notify_observers("on_message_saved", message)
-
-
-class MessageBroadcaster(object):
-    @classmethod
-    def on_message_saved(cls, message):
-        # broadcast the message
-        pass
-
-MessageManager.register_observer(MessageBroadcaster)
-
-class TagObserver(object):
-    pass
 
 class MessageTagManager(Manager):
     def verify_tags(self, tags, message_contents):
@@ -350,18 +393,10 @@ class MessageTagManager(Manager):
             if int(tag["placeholder_position"]) not in placeholder_positions:
                 raise IncorrectTags("Incorrect tags for message contents : \"%s\", tags : %s, placeholder positions : %s" % (message_contents, tags, placeholder_positions))
             placeholder_positions.pop(tag["placeholder_position"])
-        
+       
 
 class Thread(Model):
     objects = ThreadManager()
-
-    title = models.CharField(max_length=50, blank=False, null=False)
-    slug = models.CharField(max_length=60, blank=False, null=False, unique=True)
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, through="Membership")
-
-    @property
-    def active_memberships(self):
-        return Membership.objects.active_memberships.filter(thread=self)
 
     PRIVATE_DISCUSSION = "discussion"
     PUBLIC_CHANNEL = "public_channel"
@@ -373,6 +408,9 @@ class Thread(Model):
         (PRIVATE_CHANNEL, "Private Channel")
     )
 
+    title = models.CharField(max_length=50, blank=False, null=False)
+    slug = models.CharField(max_length=60, blank=False, null=False, unique=True)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, through="Membership")
     type = models.CharField(max_length=50, blank=False, null=False, choices=THREAD_TYPE_CHOICES)
     description = models.CharField(max_length=150, default="")
     manager_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name="managed_threads")
@@ -381,6 +419,10 @@ class Thread(Model):
 
     def __str__(self):
         return "<Thread %s>" % self.title
+
+    @property
+    def active_memberships(self):
+        return Membership.objects.active_memberships.filter(thread=self)
 
     def delete(self):
         self.active = False
@@ -404,13 +446,6 @@ class Thread(Model):
 class Message(Model):
     objects = MessageManager()
 
-    user_sender = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
-    thread = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="messages")
-    contents = models.CharField(max_length=250, blank=False, null=False)
-    sent_date = models.DateTimeField(default=datetime.now)
-    attachment = models.FileField(upload_to='uploads/', null=True, blank=True)
-#    active = models.BooleanField(default=True)
-
     SYSTEM_MESSAGE  = 'system'
     USER_MESSAGE = 'user'
     MESSAGE_TYPE_CHOICES = (
@@ -418,6 +453,12 @@ class Message(Model):
         (USER_MESSAGE, 'User message'),
     )
 
+    user_sender = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+    thread = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="messages")
+    contents = models.CharField(max_length=250, blank=False, null=False)
+    sent_date = models.DateTimeField(default=datetime.now)
+    attachment = models.FileField(upload_to='uploads/', null=True, blank=True)
+#    active = models.BooleanField(default=True)
     message_type = models.CharField(max_length=10, blank=False, null=False, choices=MESSAGE_TYPE_CHOICES)
 
     def is_user_message(self):
@@ -451,6 +492,8 @@ class Membership(Model):
     
     @property
     def unchecked_count(self):
+#        if hasttr(self.thread, "unseen_mention":
+#            return self.thread.unseen_mention
         if self.last_seen_date is not None:
             return self.thread.messages.filter(sent_date__gt=self.last_seen_date).count()
         else:
