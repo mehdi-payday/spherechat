@@ -41,17 +41,19 @@ class MembershipManager(Manager):
         membership.save()
         return membership
 
-    def seen_thread(self, user, thread):
+    def has_seen_thread(self, user, thread):
         membership = self.get_membership(user, thread)
-        seen = membership.last_seen_message.pk == thread.get_last_message().pk
+        seen = self.has_seen_message(membership, thread.get_last_message())
 
         return seen
 
-    def seen_message(self, user, message, thread=None):
+    def has_seen_message(self, user, message, thread=None):
         if thread is None:
             thread = message.thread
+
         membership = self.get_membership(user, thread)
         seen = membership.last_seen_date >= message.sent_date
+
         return seen
 
     @property
@@ -86,58 +88,22 @@ class MembershipManager(Manager):
 
         return last_seen_date
 
+    def see_thread(self, user_or_membership, thread, seen_date, last_seen_message=None):
+        assert isinstance(seen_date, datetime)
+
+        membership = self.get_membership(user_or_membership, thread) if isinstance(user_or_membership, User) else user_or_membership
+        membership.last_seen_date = seen_date
+
+        if last_seen_message is not None:
+            membership.last_seen_message = last_seen_message
+
+        membership.save()
+
 #    def set_last_seen_date(self, user, thread, last_seen_date):
 #        membership = Membership.objects.get_membership(user, thread)
 #        membership.last_seen_date = last_seen_date
 #        membership.save()
 
-
-class MembershipManager(Manager):
-    def create_membership(self, user, thread, **kwargs):
-        if self.belongs(user, thread):
-            raise ExistingMember("User %s is already a member of thread %s" % (user, thread))
-        return self.create(user=user, thread=thread)
-
-    def get_or_create_membership(self, user, thread, **kwargs):
-        try:
-            return self.get_membership(user, thread)
-        except UnexistentMembership:
-            return self.create(user=user, thread=thread)
- 
-    def cancel_membership(self, membership):
-        membership.is_participant = False
-        membership.save()
-        return membership
-
-    def seen_thread(self, user, thread):
-        membership = self.get_membership(user, thread)
-        seen = membership.last_seen_message.pk == thread.get_last_message().pk
-        return seen
-
-    def seen_message(self, user, message, thread=None):
-        if thread is None:
-            thread = message.thread
-        membership = self.get_membership(user, thread)
-        seen = membership.last_seen_date >= message.sent_date
-        return seen
-
-    @property
-    def active_memberships(self):
-        return self.filter(active=True)
-
-    def get_membership(self, user, thread):
-        try:
-            return self.active_memberships.get(user=user, thread=thread)
-        except ObjectDoesNotExist as doesNotExist:
-            raise UnexistentMembership("No membership of user %s to thread %s" % (user, thread), doesNotExist)
-
-    def belongs(self, user, thread):
-        return self.filter(user=user, thread=thread, active=True).exists()
-
-    def list_unchecked_messages(self, user, thread, membership=None):
-        membership = self.get_membership(user, thread)
-        last_seen_date = membership.last_seen_date
-        return thread.messages.filter(sent_date__gt=last_seen_date)
 
 class TuneManager(object):
     @classmethod
@@ -178,13 +144,13 @@ class TuneManager(object):
     def is_tuned(self, user, thread):
         if user.listening_thread is None:
             return False
-
-        return user.listening_thread.pk == thread.pk
-
-    def is_listening(self, user, thread):
         heartbeat_ancienty = datetime.now() - user.last_listening_date
 
-        return self.is_tuned(user, thread) and heartbeat_ancienty.seconds > LISTENING_RENEWAL_RATE
+        return user.listening_thread.pk == thread.pk and heartbeat_ancienty.seconds > LISTENING_RENEWAL_RATE
+
+    def get_last_heartbeat_date(self, user, thread):
+        assert self.is_tuned(user, thread), "User '%s' must be tuned to thread '%s' in order to know his tuning date" % (user, thread)
+        return user.last_listening_date 
 
 class ThreadManager(Manager):
     def is_channel(self, thread):
@@ -413,7 +379,7 @@ class MessageManager(ObservableManagerMixin, Manager):
     def _message_saved(self, message):
         self.__class__.notify_observers("on_message_saved", message)
 
-class MessageTagManager(Manager):
+class MessageTagManager(ObservableManagerMixin, Manager):
     def verify_tags(self, tags, message_contents):
         placeholder_positions = dict()
         for m in re.finditer('\@\{([0-9]+)\}', message_contents):
@@ -422,7 +388,6 @@ class MessageTagManager(Manager):
             if int(tag["placeholder_position"]) not in placeholder_positions:
                 raise IncorrectTags("Incorrect tags for message contents : \"%s\", tags : %s, placeholder positions : %s" % (message_contents, tags, placeholder_positions))
             placeholder_positions.pop(tag["placeholder_position"])
-       
 
 class Thread(Model):
     objects = ThreadManager()
@@ -488,7 +453,7 @@ class Message(Model):
     sent_date = models.DateTimeField(default=datetime.now)
     attachment = models.FileField(upload_to='uploads/', null=True, blank=True)
 #    active = models.BooleanField(default=True)
-    message_type = models.CharField(max_length=10, blank=False, null=False, choices=MESSAGE_TYPE_CHOICES)
+    message_type = models.CharField(max_length=10, blank=False, null=False, choices=MESSAGE_TYPE_CHOICES, default=USER_MESSAGE)
 
     def is_user_message(self):
         return self.message_type == self.__class__.USER_MESSAGE
@@ -502,6 +467,12 @@ class MessageTag(Model):
     tagged_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE)
     message =  models.ForeignKey(Message, blank=False, null=False, on_delete=models.CASCADE, related_name="tags")
     placeholder_position = models.PositiveIntegerField()
+
+    def is_bot_tagged(self):
+        return self.tagged_user.is_bot()
+
+    def is_human_tagged(self):
+        return self.tagged_user.is_human()
 
     class Meta:
         unique_together = ('tagged_user', 'message', 'placeholder_position',)

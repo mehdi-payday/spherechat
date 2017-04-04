@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from messaging.models import (Message, MessageTag, Membership, Thread)
+from messaging.models import (Message, MessageTag, Membership, Thread, TuneManager)
 from core.serializers import UserSerializer
 from rest_framework import serializers
 from datetime import datetime
@@ -23,6 +23,8 @@ class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Membership
         fields = ("id", "user", "thread", "last_seen_date", "last_seen_message", "active", "join_date", "user_details", "unchecked_count")
+        extra_kwargs = {
+        }
 
     user_details = UserSerializer(source="user", read_only=True)
     unchecked_count = serializers.IntegerField(read_only=True)
@@ -36,7 +38,7 @@ class UserMembershipSerializer(MembershipSerializer):
 class ThreadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Thread
-        fields = ("id", "slug", "title", "type", "description", "creator_user", "manager_user", "manager_details", "membership", "memberships")
+        fields = ("id", "slug", "title", "type", "description", "creator_user", "manager_user", "manager_details", "membership", "memberships", "is_tuned")
         extra_kwargs = {
             "creator_user": {"read_only": True},
             "manager_user": {"read_only": True},
@@ -45,6 +47,10 @@ class ThreadSerializer(serializers.ModelSerializer):
     manager_details = UserSerializer(source="manager_user", read_only=True)
     membership = serializers.SerializerMethodField()
     memberships = MembershipSerializer(many=True, read_only=True, source="active_memberships")
+    is_tuned = serializers.SerializerMethodField()
+
+    def get_is_tuned(self, thread):
+        return TuneManager.get().is_tuned(get_user_from_serializer(self), thread)
 
     def get_membership(self, thread):
         try:

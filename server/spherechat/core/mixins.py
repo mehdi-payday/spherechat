@@ -11,4 +11,9 @@ class ObservableManagerMixin(object):
         for observer in cls._observers:
             getattr(observer, method)(*args, **kwargs)  
 
+    def create(self, **kwargs):
+        instance = super(ObservableManagerMixin, self).create(**kwargs)
+        
+        self.__class__.notify_observers("on_create", instance)
 
+        return instance
