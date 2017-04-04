@@ -12,31 +12,38 @@
     text-align: center;
     padding-top: 10%;
     padding-bottom: 10%;
-    -webkit-box-shadow: 0px 10px 40px 30px #eef4fc;
-    -moz-box-shadow: 0px 10px 40px 30px #eef4fc;
-    box-shadow: 22px 55px 38px #eef4fc;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-}
-.download-main.body-wrapper {
-    overflow: hidden
-}
-.download-subtitle{
-	color: #748598 !important;
 }
 @media screen and (max-width: 659px) {
     .download-main{
         margin-top: 0;
         padding-top: 0
     }
+    .download-overlay{
+        margin-top: 20%;   
+    }
 }
+.download-main.body-wrapper {
+    overflow: hidden
+}
+
 .download-main .download-title {
     color: #47608B;
     font-size: 19.8px;
     line-height: 38px;
     letter-spacing: .83px
+}
+.download-subtitle {
+    font-size: 16.2px;
+    color: #748598;
+    line-height: 24px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px
 }
 .download-main .download-main-wrapper {
     text-align: center;
@@ -209,7 +216,7 @@
 }
 @media screen and (max-width: 659px) {
     .download-main .download-main-wrapper {
-        margin-top: 140px
+        margin-top: 90px
     }
     .download-main .download-main-list-wrapper .download-main-list-one,
     .download-main .download-main-notice {

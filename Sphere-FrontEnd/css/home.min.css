@@ -1543,3 +1543,221 @@
         width: 100%
     }
 }
+
+.signup {
+    text-align: center;
+    background: linear-gradient(to right, #3f9dec, #a637ca);
+    padding: 0 12px;
+    position: relative
+}
+.signup-icon {
+    background-image: url(https://crisp.im/static/images/home/entice/mail.svg?54f26f2);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 76px;
+    height: 73px;
+    margin-top: 108px;
+    margin-bottom: 32px
+}
+.signup-title {
+    color: #fff;
+    font-size: 23.4px;
+    letter-spacing: 1.2px;
+    line-height: 41px
+}
+.signup-title-bold {
+    color: #fff;
+    margin: 0 7px
+}
+.signup-hint {
+    margin-top: 4px;
+    color: #fff;
+    font-size: 13.5px;
+    line-height: 24px;
+    letter-spacing: .22px;
+    display: block
+}
+.signup-form {
+    width: 470px;
+    display: inline-block;
+    margin-bottom: 70px;
+}
+.signup-form .signup-form-input {
+    background: 0 0;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    max-width: 440px;
+    width: 100%;
+    font-size: 18px
+}
+.signup-form .signup-form-input:placeholder {
+    color: rgba(255, 255, 255, .8)
+}
+.signup-form .signup-form-input:-moz-placeholder {
+    color: rgba(255, 255, 255, .8)
+}
+.signup-form .signup-form-input::-moz-placeholder {
+    color: rgba(255, 255, 255, .8)
+}
+.signup-form .signup-form-input:-ms-input-placeholder {
+    color: rgba(255, 255, 255, .8)
+}
+.signup-form .signup-form-input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, .8)
+}
+.signup-form .signup-form-button {
+    margin-top: 0;
+    color: #3C82EA;
+    font-size: 12.6px;
+    background-color: #fff;
+    padding: 15px 40px;
+    -webkit-border-radius: 64px;
+    -moz-border-radius: 64px;
+    -ms-border-radius: 64px;
+    -o-border-radius: 64px;
+    border-radius: 64px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+    border: none;
+    -webkit-box-shadow: 22px 13px 38px 9px #eef4fc;
+    -moz-box-shadow: 22px 13px 38px 9px #eef4fc;
+    box-shadow: 22px 13px 38px 9px #eef4fc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.signup-form .signup-form-button:hover {
+    -webkit-transform: scale(1.06);
+    -moz-transform: scale(1.06);
+    -ms-transform: scale(1.06);
+    -o-transform: scale(1.06);
+    transform: scale(1.06)
+}
+.signup-form .signup-form-button:active {
+    -webkit-transform: scale(.98);
+    -moz-transform: scale(.98);
+    -ms-transform: scale(.98);
+    -o-transform: scale(.98);
+    transform: scale(.98)
+}
+.signup-disclaimer {
+    margin-top: 96px;
+    margin-bottom: 96px;
+    color: #fff;
+    font-size: 14.4px;
+    line-height: 32px;
+    letter-spacing: .22px;
+    max-width: 470px;
+    width: 100%;
+    display: inline-block
+}
+.signup-disclaimer p:first-of-type {
+    margin-bottom: 10px
+}
+.signup-shape-1 {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    z-index: 1;
+    width: 494px;
+    height: 651px;
+    background-image: url(https://crisp.im/static/images/home/entice/shape_1.svg?54f26f2);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block
+}
+.signup-shape-2 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 307px;
+    height: 514px;
+    background-image: url(https://crisp.im/static/images/home/entice/shape_2.svg?54f26f2);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block
+}
+.signup-shape-3 {
+    position: absolute;
+    background: rgba(255, 255, 255, .02);
+    height: 500px;
+    width: 120%;
+    -webkit-transform: rotate(60deg);
+    -moz-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    -o-transform: rotate(60deg);
+    transform: rotate(60deg);
+    top: 0;
+    left: -25%
+}
+@media screen and (max-width: 659px) {
+    .signup .signup-shape-1 {
+        display: none
+    }
+}
+@media screen and (max-width: 519px) {
+    .signup .signup-shape-2 {
+        display: none
+    }
+    .signup .signup-form {
+        width: 100%
+    }
+}
+.testimony {
+    position: relative;
+    text-align: center;
+    margin-top: 28px;
+
+}
+.testimony{
+    -webkit-box-shadow: 0px 10px 40px 30px #eef4fc;
+    -moz-box-shadow: 0px 10px 40px 30px #eef4fc;
+    box-shadow: 22px 55px 38px #eef4fc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.testimony .body-wrapper {
+    overflow: hidden
+}
+.testimony .testimony-title {
+    color: #47608B;
+    font-size: 19.8px;
+    line-height: 38px;
+    letter-spacing: 0.09px
+}
+.testimony .testimony-subtitle {
+    font-size: 16.2px;
+    color: #748598;
+    line-height: 24px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px;
+    letter-spacing: 0.09px;
+}
+.testimony-overlay{
+    margin-top: 15%;
+}
+@media screen and (max-width: 659px) {
+    .testimony {
+        margin-top: 0;
+        padding-top: 0
+    }
+    .testimony-overlay{
+        margin-top: 20%;
+    }
+}
