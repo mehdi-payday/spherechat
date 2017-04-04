@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C18EAEC-BD37-4261-9AD3-8515838B407E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SphereClient</RootNamespace>
+    <AssemblyName>SphereClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Auth.cs" />
+    <Compile Include="Entities\Channel.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Events\ChannelChange.cs" />
+    <Compile Include="Entities\Events\ClientMessage.cs" />
+    <Compile Include="Entities\Events\DiscussionChange.cs" />
+    <Compile Include="Entities\Events\FriendshipAddressed.cs" />
+    <Compile Include="Entities\Events\NewFriendRequest.cs" />
+    <Compile Include="Entities\Events\ServerMessage.cs" />
+    <Compile Include="Entities\FriendRequest.cs" />
+    <Compile Include="Entities\Friendship.cs" />
+    <Compile Include="Entities\Membership.cs" />
+    <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\MessageTag.cs" />
+    <Compile Include="Entities\PrivateDiscussion.cs" />
+    <Compile Include="Entities\Thread.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="FeedBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JSON.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="REST\Auth\Login\Login.cs" />
+    <Compile Include="REST\Me\Me.cs" />
+    <Compile Include="REST\Messaging\Channel\Channel.cs" />
+    <Compile Include="REST\Messaging\Channel\Message\Message.cs" />
+    <Compile Include="REST\Parser.cs" />
+    <Compile Include="REST\Request.cs" />
+    <Compile Include="REST\Session.cs" />
+    <Compile Include="REST\Users\Users.cs" />
+    <Compile Include="Sockets\Buffers\Buffers.cs" />
+    <Compile Include="Sockets\Buffers\HTTP\Read.cs" />
+    <Compile Include="Sockets\Buffers\HTTP\Write.cs" />
+    <Compile Include="Sockets\Buffers\WebSocket\Read.cs" />
+    <Compile Include="Sockets\Buffers\WebSocket\Write.cs" />
+    <Compile Include="Sockets\Configuration.cs" />
+    <Compile Include="Sockets\Connection.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dummypofpic.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\main_900.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10-dithering-opt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image-slider2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\searchicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path4287.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path4352.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgres.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pexels-photo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\url.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g4167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text-file-3-xxl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path4173.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Sockets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gradLR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paper_plane_document_send_sent_mail-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path4149.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

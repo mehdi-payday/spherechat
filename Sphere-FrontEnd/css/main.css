@@ -833,8 +833,6 @@ p.spacing-bottom
     -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
             transform: rotate(45deg);
-
-    background: #a347b7 !important;
 }
 
 .nav-active .nav-opener:after
@@ -1305,7 +1303,7 @@ html.nav-active
     -webkit-transition: -webkit-transform .3s, top .3s .3s;
     transition: transform .3s, top .3s .3s;
     border-radius: 6px;
-    background: #a347b7
+    background: linear-gradient(to right, #3f9dec, #a637ca);
 }
 .nav-opener span {
     top: 35px
@@ -1417,7 +1415,7 @@ html.nav-active
 .banner-features .white-text,
 .btn {
     background: transparent !important;
-    -webkit-text-fill-color: purple;
+    -webkit-text-fill-color: #3f9dec;
     color: #fff;    
     font-weight: 600;
     letter-spacing: 0.05em;

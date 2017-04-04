@@ -1,107 +1,189 @@
-.spinning_circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin-top: -20px;
-    margin-left: -20px;
-    border-radius: 50%;
-    border: 2.5px solid #b0c8d9;
-    border-bottom-color: #3097d1;
-    -webkit-animation: rotateSpinner 700ms linear infinite;
-    animation: rotateSpinner 700ms linear infinite;
+#preloader,
+body,
+html {
+    height: 100%
 }
-@-webkit-keyframes rotateSpinner {
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
+/* ------------------------------------------------------------------- 
+ * pace.js styles - minimal  - (_document-setup.scss)
+ * ------------------------------------------------------------------- */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
-@keyframes rotateSpinner {
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
+
+.pace-inactive {
+  display: none;
 }
-* {
-  box-sizing: border-box;
+
+.pace .pace-progress {
+  -webkit-animation: color_change 1s infinite alternate;
+  -moz-animation: color_change 1s infinite alternate;
+  -ms-animation: color_change 1s infinite alternate;
+  -o-animation: color_change 1s infinite alternate;
+  animation: color_change 1s infinite alternate;
+  position: fixed;
+  z-index: 90000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 6px;
 }
-/* Preloader */
+
+/* ===================================================================
+ *  04. Preloader
+ *
+ * ------------------------------------------------------------------- */
+ @-webkit-keyframes color_change {
+  from { background: #3f9dec; }
+  to { background: #a637ca; }
+}
+@-moz-keyframes color_change {
+  from { background: #3f9dec; }
+  to { background: #a637ca; }
+}
+@-ms-keyframes color_change {
+  from { background: #3f9dec; }
+  to { background: #a637ca; }
+}
+@-o-keyframes color_change {
+  from { background: #3f9dec; }
+  to { background: #a637ca; }
+}
+@keyframes color_change {
+  from { background: #3f9dec; }
+  to { background: #a637ca; }
+}
 #preloader {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #f5f8fa;
-  /* change if the mask should have another color then white */
-  z-index: 500;
-  /* makes sure it stays on top */
+  background: #fff;
+  z-index: 80000;
+  height: 100%;
+  width: 100%;
 }
 
-#status {
-  width: 200px;
-  height: 200px;
+.no-js #preloader, .oldie #preloader {
+  display: none;
+}
+
+#loader {
   position: absolute;
   left: 50%;
-  /* centers the loading animation horizontally one the screen */
   top: 50%;
-  /* centers the loading animation vertically one the screen */
-  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
-  /* path to your loading animation */
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: -100px 0 0 -100px;
-  /* is width and height divided by two */
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  margin-top: -30px;
+  padding: 0;
+  background:linear-gradient(256deg, #3f9dec, #a637ca);
+  border-radius: 100%;
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
 }
 
-
-
-
-
-
-.spinner2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin-top: -20px;
-    margin-left: -20px;
-    border-radius: 50%;
-    border: 2.5px solid rgba(178,124,57, .6);
-    border-bottom-color: #B27C39;
-    -webkit-animation: rotateSpinner 700ms linear infinite;
-    animation: rotateSpinner 700ms linear infinite;
+@-webkit-keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+}
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
-.spinner3 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin-top: 0px;
-    margin-left: -50px;
-    border-radius: 50%;
-    border: 2.5px solid rgba(178,124,57, .6);
-    border-bottom-color: #B27C39;
-    -webkit-animation: rotateSpinner 700ms linear infinite;
-    animation: rotateSpinner 700ms linear infinite;
-}
-#status2 {
-  width: 200px;
-  height: 200px;
+/* home social-list */
+.home-social-list {
   position: absolute;
-  left: 50%;
-  /* centers the loading animation horizontally one the screen */
-  top: 50%;
-  /* centers the loading animation vertically one the screen */
-  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
-  /* path to your loading animation */
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: -100px 0 0 -100px;
-  /* is width and height divided by two */
+  left: 48px;
+  bottom: 54px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 2.4rem;
+  line-height: 1.75;
+  text-align: center;
 }
+.home-social-list::before {
+  display: block;
+  content: "";
+  width: 2px;
+  height: 42px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 12px;
+}
+.home-social-list li {
+  padding-left: 0;
+}
+.home-social-list li a, .home-social-list li a:visited {
+  color: rgba(0,0,255,.5);
+}
+.home-social-list li a:hover, 
+.home-social-list li a:focus, 
+.home-social-list li a:active {
+  color: #151515;
+}
+
+/* vertical animation */
+@-webkit-keyframes animate-it {
+  0%, 60%, 80%, 100% {
+    -webkit-transform: translateX(0);
+  }
+  20% {
+    -webkit-transform: translateX(-5px);
+  }
+  40% {
+    -webkit-transform: translateX(20px);
+  }
+}
+@keyframes animate-it {
+  0%, 60%, 80%, 100% {
+    -webkit-transform: translateX(0);
+  }
+  20% {
+    -webkit-transform: translateX(-5px);
+  }
+  40% {
+    -webkit-transform: translateX(20px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .home-social-list {
+    left: 36px;
+    bottom: 30px;
+    font-size: 2.1rem;
+  }
+  .home-social-list::before {
+    height: 30px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .home-social-list {
+    left: 30px;
+    bottom: 15px;
+    font-size: 1.8rem;
+  }
+  .home-social-list::before {
+    height: 24px;
+  }
+}
+

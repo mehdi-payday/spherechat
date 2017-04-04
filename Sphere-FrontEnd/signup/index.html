@@ -11,13 +11,14 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../css/confetti.css">
     <link href="../css/signup.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/checkbox.css">
     <script src="../js/jquery-2.1.4.min.js"></script>
     <body>
     <canvas id="confetti"></canvas>
         <div class="gb ut">
           <div class="uv">
             <form role="form" method="" action="" class="alq dj j" autocomplete="off">
-              <a href="" class="l amb">
+              <a href="../index/index.html" class="l amb">
                 <img src="../img/register.png" alt="brand">
               </a>
               <h1>Create an Account</h1>
@@ -66,7 +67,10 @@
                 </select>
               </div>
               <div class="et">
-                <input id="terms" type="checkbox" name="terms"> By signing up, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, including <a href="#">Cookie Use</a>.
+            <div class="input-checkbox">
+              <div class="inner"></div>
+              <input id="terms" type="checkbox" name="terms">
+            </div> By signing up, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, including <a href="#">Cookie Use</a>.
               </div>
               <div class="amb">
                 <button type="button" class="btn fp" id="login" onclick="log()">Create Account</button>
@@ -77,8 +81,11 @@
             </form>
           </div>
         </div>
-
+        <script type="text/javascript">
+              $('.input-checkbox').on('click', function(){
+                $(this).toggleClass('checked');
+            });
+        </script>
         <script type="text/javascript" src="../js/conffeti.js"></script>
-        <script src="../js/index.js"></script>
     </body>
     </html>
