@@ -26,8 +26,7 @@
      position: absolute;
      top: 0;
      left: 0;
-     width: 100%;
-     height: 100%;
+     padding: 192px 0 334px;
      z-index: 0;
      background: red;
      /* For browsers that do not support gradients */
@@ -44,6 +43,24 @@
      background: linear-gradient(to bottom right, rgba(101,176,239,0.2), rgba(63,157,236,0.4), rgba(184,95,213,0.5), rgba(166,55,202,0.8));
      /* Standard syntax */
  }
+@media all and (max-width: 500px){
+    .overlay{
+        padding: 15% 1% 25% 0%;
+    }
+}
+@media all and (max-width: 767px) {
+    .overlay {
+        padding: 361px;
+    }
+}
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .overlay{
+        padding: 355px;
+    }
+}
  .overlay2 {
      position: absolute;
      top: 0;

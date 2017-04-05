@@ -1329,7 +1329,38 @@ header .menu .menu-icon.on span {
     top: 45vh !important;
     left: 64vw !important;
 }
+@media screen and (max-width: 660px) {
 
+.version_04 .scene {
+    z-index: 0;
+    width: 100vw;
+}
+.version_04 .scene li {
+}
+.version_04 .scene li:nth-child(2) {
+    display: none;
+}
+.version_04 .scene li:nth-child(5) {
+display: none !important; 
+}
+.version_04 .scene li:nth-child(7) {
+display: none !important;
+}
+.version_04 .scene li:nth-child(8) {
+display: none !important;
+}
+.version_04 .scene li:nth-child(9) {
+display: none !important;
+}
+.version_04 .scene li:nth-child(11) {
+
+}
+.version_04 .scene li:nth-child(14) {
+display: none !important; 
+
+}
+
+}
 /* Scene 2 */
 .intro_04 .scene2 {
     z-index: 0;
