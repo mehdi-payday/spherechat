@@ -18,6 +18,7 @@ namespace SphereClient {
 
 
         public Session session;
+        public IList<Channel> fetchedChannels;
 
         /// <summary>
         /// Constructor for the Form1 class. Initializes the object
@@ -27,7 +28,6 @@ namespace SphereClient {
         /// <param name="password">password for the username's account</param>
         protected Form1(string username, string password) {
             InitializeComponent();
-
             try {
                 this.session = new REST.Session( username, password );
                 
@@ -35,33 +35,32 @@ namespace SphereClient {
                 MessageBox.Show( string.Format("An exception occured while creating a session: {0}", ex.Message ));
                 Application.Exit();
             }
-           
-            MessageBoxLogger.Instance.Log(this, "Successfully connected!" );
-
             System.Threading.Thread t = new System.Threading.Thread(delegate() {
-                //while (System.Threading.Thread.CurrentThread.IsAlive) {
-
-                    FetchChannels();
-                    //System.Threading.Thread.Sleep(5000);
-                //}
-                
+                FetchChannels();
             } );
             t.Start();
                
         }
 
+        /// <summary>
+        /// Gets the Channels from the server and updates both
+        /// the Direct and Group message panels.
+        /// </summary>
         private void FetchChannels() {
             if (InvokeRequired) {
                 Invoke( new Action( FetchChannels) );
+                return;
             }
-            if (!this.panel7.TryCreateComponents()) {
+            this.fetchedChannels = this.session.GetChannels().ToList();
+
+            if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                 Application.Exit();
             }
         }
 
 
         /// <summary>
-        /// Returns the main form window instance singleton
+        /// Returns the main form window instance singleton.
         /// </summary>
         public static Form1 Instance {
             get {

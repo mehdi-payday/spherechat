@@ -29,7 +29,7 @@ namespace SphereClient.Components {
 
     };
 
-    public partial class ImageAndTitleListPane : Panel{
+    public abstract partial class ImageAndTitleListPane : Panel{
 
         public Panel title_pane;
         public Panel contents;
@@ -51,13 +51,9 @@ namespace SphereClient.Components {
             InitializeComponent();
             this.list = list;
             this.title_pane = titlepane;
-            
-
-            /*if (!TryCreateComponents()) {
-                //MessageBoxLogger.Instance.Log(this, "ImageAndTitleListPane component creation failed");
-                Application.Exit();
-            }*/
-
+            this.contents = new Panel();
+            this.Controls.Add( this.title_pane );
+            this.Controls.Add( this.contents );
 
         }
 
@@ -67,24 +63,31 @@ namespace SphereClient.Components {
         /// </summary>
         /// <returns>whether the creation and placement succeeded</returns>
         public bool TryCreateComponents() {
-            
             bool status = false;
+            if (InvokeRequired) {
+                Invoke( new Action( delegate (){ status = TryCreateComponents(); } ) );
+                return status;
+            }
+            
             try {
-                this.list = Form1.Instance.session.GetChannels().Where( c => Thread.Types.DISCUSSION == c.Type ).ToList<Entity>() ;
-                
-                if (null == this.contents || this.contents.IsDisposed) {
+                this.list = Form1.Instance.fetchedChannels.ToList<Entity>() ;
+                this.filter();
+                this.BackColor = Color.Red;
+                if(null == this.contents || this.contents.IsDisposed) {
                     this.contents = new Panel();
+                    this.Controls.Add( this.contents );
                 }
                 this.contents.Controls.Clear();
                 this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                 this.MinimumSize = new Size( this.Width, title_pane.Size.Height );
                 this.title_pane.Left = 0;
                 this.title_pane.Top = 0;
+                this.title_pane.Width = this.Width;
                 this.contents.Left = 0;
-                this.contents.Top = this.title_pane.Top + this.title_pane.Size.Height;
+                this.contents.Top =  this.title_pane.Top + this.title_pane.Size.Height;
                 this.contents.Width = this.Width;
                 this.contents.Height = this.Height - this.title_pane.Height - this.title_pane.Top;
-                this.contents.BackColor = Color.AliceBlue;
+                this.contents.BackColor = Color.FromArgb( 93, 6, 61 );
                 this.contents.AutoScroll = true;
 
                 int entityIndex = 0;
@@ -92,13 +95,14 @@ namespace SphereClient.Components {
                     Panel pane = new Panel();
                     PictureBox picbox = new PictureBox();
                     Label text = new Label();
-                    MessageBoxLogger.Instance.Log( this, "creating " + entity.ToText());
                     pane.Top = this.rowTopMargin + (this.rowHeight + this.rowTopMargin) * entityIndex + (this.rowBottomMargin * entityIndex);
                     pane.Left = 0;
                     pane.Size = new Size(this.Width, this.rowHeight);
                     text.Text = entity.ToText();
                     text.Left = this.picBox_left + this.picBox_width + this.rowlabel_left_margin;
                     text.Top = (pane.Height - text.Height) / 2;
+                    text.Font = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold, GraphicsUnit.Point );
+                    text.ForeColor = Color.FromArgb( 165, 97, 149 );
                     picbox.Size = new Size(this.picBox_width, this.picBox_height);
                     picbox.Left = this.picBox_left;
                     picbox.BackColor = Color.Aquamarine;
@@ -109,25 +113,33 @@ namespace SphereClient.Components {
 
                     entityIndex++;
                 }
-
-
-
+                
                 status = true;
+
             } catch (Exception exception) {
                 MessageBoxLogger.Instance.Log(this, "from TryCreateComponents:\n" + exception.Message + "\n" + exception.StackTrace);
             }
             return status;
         }
 
+        /// <summary>
+        /// This method should filter off all the unwanted entities in 
+        /// this.list.
+        /// </summary>
+        public abstract void filter();
 
 
     }
 
-
+    /// <summary>
+    /// "Direct messages" Panel class.
+    /// </summary>
     public class DiscussionListPanel: ImageAndTitleListPane {
         protected static Panel header;
-        private static readonly int leftTitleOffset = 8;
-        private static readonly int leftIconOffset = 0;
+        private Panel _head;
+        private static int leftTitleOffset = 8;
+        private static int topMargin = 5;
+        private static int leftIconOffset = 210;
 
         /// <summary>
         /// Static initializer.
@@ -135,15 +147,20 @@ namespace SphereClient.Components {
         static DiscussionListPanel() {
             DiscussionListPanel.header = new Panel();
             Label title = new Label();
-            title.Text = "Direct messages";
-            DiscussionListPanel.header.Controls.Add( title );
-            title.Left = DiscussionListPanel.leftTitleOffset;
-            title.Top = (DiscussionListPanel.header.Height - title.Height) / 2;
             Label plus = new Label();
+            title.Text = "Direct messages";
+            title.Left = DiscussionListPanel.leftTitleOffset;
+            title.Top = DiscussionListPanel.topMargin;
+            title.AutoSize = true;
             plus.Text = "+";
-            DiscussionListPanel.header.Controls.Add(plus);
             plus.Left = DiscussionListPanel.leftIconOffset;
-            plus.Top = (DiscussionListPanel.header.Height - plus.Height) / 2;
+            plus.Top = DiscussionListPanel.topMargin;
+            DiscussionListPanel.header.Height = 37;
+            DiscussionListPanel.header.Controls.Add( title );
+            DiscussionListPanel.header.Controls.Add( plus );
+            DiscussionListPanel.header.BackColor = Color.FromArgb( 165, 97, 149 );
+            DiscussionListPanel.header.ForeColor = Color.FromArgb( 62, 1, 56 );
+            DiscussionListPanel.header.Font = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold,GraphicsUnit.Point );
         }
 
         /// <summary>
@@ -151,7 +168,8 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
         public DiscussionListPanel(IList<Entity> list): base( DiscussionListPanel.header, list){
-
+            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this._head = DiscussionListPanel.header;
         }
         /// <summary>
         /// Constructor for the DiscussionListPanel class.
@@ -159,11 +177,78 @@ namespace SphereClient.Components {
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
         public DiscussionListPanel() : base(DiscussionListPanel.header, new List<Entity>()) {//
-
+            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this._head = DiscussionListPanel.header;   
         }
 
+        /// <summary>
+        /// Filters off all entities that are not of type Thread.Types.DISCUSSION
+        /// </summary>
+        public override void filter() {
+            this.list = this.list.Where( c => Thread.Types.DISCUSSION == ((Channel)c).Type ).ToList<Entity>();
+        }
 
     }
+
+    /// <summary>
+    /// "Group message" Panel class.
+    /// </summary>
+    public class GroupListPanel : ImageAndTitleListPane {
+        protected static Panel header;
+        private Panel _head;
+        private static int leftTitleOffset = 8;
+        private static int topMargin = 5;
+        private static int leftIconOffset = 210;
+
+        /// <summary>
+        /// Static initializer.
+        /// </summary>
+        static GroupListPanel() {
+            GroupListPanel.header = new Panel();
+            Label title = new Label();
+            Label plus = new Label();
+            title.Text = "Group messages";
+            title.Left = GroupListPanel.leftTitleOffset;
+            title.Top = GroupListPanel.topMargin;
+            title.AutoSize = true;
+            plus.Text = "+";
+            plus.Left = GroupListPanel.leftIconOffset;
+            plus.Top = GroupListPanel.topMargin;
+            GroupListPanel.header.Height = 37;
+            GroupListPanel.header.Controls.Add( title );
+            GroupListPanel.header.Controls.Add( plus );
+            GroupListPanel.header.BackColor = Color.FromArgb( 165, 97, 149 );
+            GroupListPanel.header.ForeColor = Color.FromArgb( 62, 1, 56 );
+            GroupListPanel.header.Font = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold, GraphicsUnit.Point );
+        }
+
+        /// <summary>
+        /// Constructor for the DiscussionListPanel class.
+        /// </summary>
+        /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
+        public GroupListPanel( IList<Entity> list ) : base( GroupListPanel.header, list ) {
+            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this._head = GroupListPanel.header;
+        }
+        /// <summary>
+        /// Constructor for the DiscussionListPanel class.
+        /// will fetch the Channel list from <see cref="Form1.Instance.session"/>'s GetChannels
+        /// method and filter them to only take those being Thread.Types.DISCUSSION 
+        /// </summary>
+        public GroupListPanel() : base( GroupListPanel.header, new List<Entity>() ) {//
+            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this._head = GroupListPanel.header;
+        }
+
+        /// <summary>
+        /// Filters off all entities that are of type Thread.Types.DISCUSSION
+        /// </summary>
+        public override void filter() {
+            this.list = this.list.Where( c => Thread.Types.DISCUSSION != ((Channel)c).Type ).ToList<Entity>();
+        }
+
+    }
+
 
 
 
