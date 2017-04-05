@@ -38,9 +38,12 @@ namespace SphereClient.Components {
         public int picBox_height = 40;
         public int picBox_left = 8;
         public int rowHeight = 56;
-        public int rowlabel_left_margin = 10;
+        public int rowlabel_left_margin = 5;
         public int rowBottomMargin = 0;
         public int rowTopMargin = 0;
+        public Font HoverFont = new Font( "Microsoft Sans Serif", 11.5f, FontStyle.Bold, GraphicsUnit.Point );
+        public Font RegularFont = new Font( "Microsoft Sans Serif", 12.0f, FontStyle.Regular, GraphicsUnit.Point );
+
 
         /// <summary>
         /// Constructor for the ImageAndTitleListPane class.
@@ -91,17 +94,23 @@ namespace SphereClient.Components {
                 this.contents.AutoScroll = true;
 
                 int entityIndex = 0;
+                //TODO turn rows into objects. (and move events to objects)
                 foreach (Entity entity in this.list) {
                     Panel pane = new Panel();
                     PictureBox picbox = new PictureBox();
                     Label text = new Label();
+                    pane.Cursor = Cursors.Hand;
                     pane.Top = this.rowTopMargin + (this.rowHeight + this.rowTopMargin) * entityIndex + (this.rowBottomMargin * entityIndex);
                     pane.Left = 0;
                     pane.Size = new Size(this.Width, this.rowHeight);
+                    text.MouseEnter += this.OnRowLabelEnter;
+                    text.MouseLeave += this.OnRowLabelLeave;
                     text.Text = entity.ToText();
+                    text.AutoEllipsis = true;
                     text.Left = this.picBox_left + this.picBox_width + this.rowlabel_left_margin;
-                    text.Top = (pane.Height - text.Height) / 2;
-                    text.Font = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold, GraphicsUnit.Point );
+                    text.Top = (pane.Height - (text.Font.Height-1) *2) / 2 ;
+                    text.Width = pane.Width - text.Left;
+                    text.Font = this.RegularFont;
                     text.ForeColor = Color.FromArgb( 165, 97, 149 );
                     picbox.Size = new Size(this.picBox_width, this.picBox_height);
                     picbox.Left = this.picBox_left;
@@ -109,7 +118,7 @@ namespace SphereClient.Components {
                     picbox.Top = (pane.Height - picBox_height) / 2;
                     pane.Controls.Add( picbox );
                     pane.Controls.Add( text );
-                    this.contents.Controls.Add( pane);
+                    this.contents.Controls.Add(pane);
 
                     entityIndex++;
                 }
@@ -120,6 +129,32 @@ namespace SphereClient.Components {
                 MessageBoxLogger.Instance.Log(this, "from TryCreateComponents:\n" + exception.Message + "\n" + exception.StackTrace);
             }
             return status;
+        }
+
+        /// <summary>
+        /// Triggered when the mouse enters a row.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        public void OnRowLabelEnter(object s, EventArgs e) {
+            if (InvokeRequired) {
+                Invoke( new Action( delegate() { OnRowLabelEnter( s, e ); } ) );
+                return;
+            }
+            ((Label)s).Font = this.HoverFont;
+
+        }
+        /// <summary>
+        /// Triggered when the mouse leaves a row.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        public void OnRowLabelLeave( object s, EventArgs e ) {
+            if (InvokeRequired) {
+                Invoke( new Action( delegate () { OnRowLabelLeave( s, e ); } ) );
+                return;
+            }
+            ((Label)s).Font = this.RegularFont;
         }
 
         /// <summary>

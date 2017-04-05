@@ -28,18 +28,44 @@ namespace SphereClient {
         /// <param name="password">password for the username's account</param>
         protected Form1(string username, string password) {
             InitializeComponent();
-            try {
-                this.session = new REST.Session( username, password );
-                
-            } catch (Exception ex) {
-                MessageBox.Show( string.Format("An exception occured while creating a session: {0}", ex.Message ));
-                Application.Exit();
-            }
-            System.Threading.Thread t = new System.Threading.Thread(delegate() {
+            Connect( username, password );
+        }
+        /// <summary>
+        /// Default contructor for the Form1 class.
+        /// </summary>
+        protected Form1( ) {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Attempts to connect as a user and starts the main application loop.
+        /// </summary>
+        /// <param name="username">the username to use</param>
+        /// <param name="password">the password to use</param>
+        public void ConnectAndStart(string username, string password) {
+            Connect( username, password );
+            Start();
+        }
+
+        /// <summary>
+        /// Attempts to connect to the server. This method throws
+        /// upon failure.
+        /// </summary>
+        /// <param name="username">the username to use</param>
+        /// <param name="password">the password to use</param>
+        public void Connect( string username, string password ) {
+            this.session = new REST.Session( username, password );
+        }
+
+        /// <summary>
+        /// Starts the main application logic loop.
+        /// </summary>
+        public void Start() {            
+            System.Threading.Thread t = new System.Threading.Thread( delegate () {
                 FetchChannels();
             } );
             t.Start();
-               
+            
         }
 
         /// <summary>
@@ -65,7 +91,7 @@ namespace SphereClient {
         public static Form1 Instance {
             get {
                 if(null == Form1._instance) {
-                    Form1._instance = new Form1("sphereman","spherique");
+                    Form1.Create();
                 }
                 return Form1._instance;
             }
@@ -74,6 +100,25 @@ namespace SphereClient {
             }
         }
 
-        
+        /// <summary>
+        /// Creates the singleton instance of Form1 and connects using a username and password.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        public static void Create(string username, string password) {
+            Form1.Instance = new Form1(username, password);
+        }
+        /// <summary>
+        /// Creates the singleton instance of Form1.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        public static void Create() {
+            Form1.Instance = new Form1();
+        }
+
+        private void Form1_FormClosed( object sender, FormClosedEventArgs e ) {
+            Application.Exit();
+        }
     }
 }
