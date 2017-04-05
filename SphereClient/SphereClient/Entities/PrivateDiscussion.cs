@@ -2,7 +2,7 @@
 
 namespace SphereClient.Entities {
     [Serializable]
-    class PrivateDiscussion : Thread {
+    public class PrivateDiscussion : Thread {
         public Membership InterlocutorMembership { get; set; }
     }
 }

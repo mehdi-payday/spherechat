@@ -1,4 +1,4 @@
 ﻿namespace SphereClient.Entities.Events {
-    class NewFriendRequest : FriendRequest {
+    public class NewFriendRequest : FriendRequest {
     }
 }

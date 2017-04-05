@@ -38,7 +38,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel7 = new SphereClient.Components.DiscussionListPanel();//new System.Windows.Forms.Panel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label14 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -560,7 +560,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(666, 531);
             this.panel4.TabIndex = 2;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            
             // 
             // panel20
             // 
@@ -599,7 +599,6 @@
             this.label5.Size = new System.Drawing.Size(115, 13);
             this.label5.TabIndex = 27;
             this.label5.Text = "3 Mar. 2017, 15:36";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label19
             // 
@@ -666,7 +665,6 @@
             this.label6.Size = new System.Drawing.Size(55, 15);
             this.label6.TabIndex = 14;
             this.label6.Text = "15:03:53";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -822,7 +820,6 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(285, 50);
             this.panel11.TabIndex = 6;
-            this.panel11.Paint += new System.Windows.Forms.PaintEventHandler(this.panel11_Paint);
             // 
             // label46
             // 
@@ -871,7 +868,6 @@
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.TabIndex = 4;
             this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
             // pictureBox3
             // 
@@ -1031,7 +1027,6 @@
             this.label38.Size = new System.Drawing.Size(41, 20);
             this.label38.TabIndex = 1;
             this.label38.Text = "You";
-            this.label38.Click += new System.EventHandler(this.label38_Click);
             // 
             // panel6
             // 
@@ -1075,7 +1070,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Messages";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // label29
             // 
@@ -1088,7 +1082,6 @@
             this.label29.Size = new System.Drawing.Size(30, 15);
             this.label29.TabIndex = 54;
             this.label29.Text = "Her:";
-            this.label29.Click += new System.EventHandler(this.label29_Click);
             // 
             // label30
             // 
@@ -1100,7 +1093,6 @@
             this.label30.Size = new System.Drawing.Size(33, 15);
             this.label30.TabIndex = 53;
             this.label30.Text = "Hola";
-            this.label30.Click += new System.EventHandler(this.label30_Click);
             // 
             // label28
             // 
@@ -1138,7 +1130,6 @@
             this.pictureBox14.Size = new System.Drawing.Size(40, 40);
             this.pictureBox14.TabIndex = 49;
             this.pictureBox14.TabStop = false;
-            this.pictureBox14.Click += new System.EventHandler(this.pictureBox14_Click);
             // 
             // label26
             // 
@@ -1150,7 +1141,6 @@
             this.label26.Size = new System.Drawing.Size(62, 16);
             this.label26.TabIndex = 48;
             this.label26.Text = "Dudette";
-            this.label26.Click += new System.EventHandler(this.label26_Click);
             // 
             // label23
             // 
@@ -1162,7 +1152,6 @@
             this.label23.Size = new System.Drawing.Size(38, 15);
             this.label23.TabIndex = 47;
             this.label23.Text = "Heyyy";
-            this.label23.Click += new System.EventHandler(this.label23_Click);
             // 
             // pictureBox13
             // 
@@ -1176,7 +1165,6 @@
             this.pictureBox13.Size = new System.Drawing.Size(40, 40);
             this.pictureBox13.TabIndex = 46;
             this.pictureBox13.TabStop = false;
-            this.pictureBox13.Click += new System.EventHandler(this.pictureBox13_Click);
             // 
             // label24
             // 
@@ -1188,7 +1176,6 @@
             this.label24.Size = new System.Drawing.Size(66, 16);
             this.label24.TabIndex = 45;
             this.label24.Text = "Random";
-            this.label24.Click += new System.EventHandler(this.label24_Click);
             // 
             // label22
             // 
@@ -1500,7 +1487,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel7;
+        private SphereClient.Components.DiscussionListPanel panel7;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;

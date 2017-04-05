@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace SphereClient {
     static class Program {
@@ -7,10 +8,10 @@ namespace SphereClient {
         /// </summary>
         [STAThread]
         static void Main() {
-            /*Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
-            Application.Run( new Form1() );*/
-
+            Application.Run( Form1.Instance );
+/*
             using (var rest = new REST.Session("sphereman", "spherique")) {
                 foreach (var a in rest.GetChannels()) {
                     Console.WriteLine(a.ToJSON());
@@ -20,7 +21,7 @@ namespace SphereClient {
                     }
                 }
             }
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
     }
 }

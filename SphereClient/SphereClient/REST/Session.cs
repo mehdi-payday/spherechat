@@ -2,7 +2,7 @@
 using System.Net;
 
 namespace SphereClient.REST {
-    class Session : IDisposable {
+    public class Session : IDisposable {
         public Session(string username, string password) {
             Token = Login(username, password).Token;
         }

@@ -2,7 +2,7 @@
 
 namespace SphereClient.Entities {
     [Serializable]
-    class Membership : Entity {
+    public class Membership : Entity {
         public int UserId { get; set; }
         public int ThreadId { get; set; }
         public DateTime LastSeenDate { get; set; }

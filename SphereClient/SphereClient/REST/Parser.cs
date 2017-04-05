@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 namespace SphereClient.REST {
-    class Parser {
+    public class Parser {
         public static dynamic Parse(dynamic json, Type type) {
             if (type == typeof(Entities.Auth)) {
                 if (json == null || json.ToString() == "") {

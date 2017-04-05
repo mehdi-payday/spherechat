@@ -2,7 +2,7 @@
 
 namespace SphereClient.Entities {
     [Serializable]
-    class FriendRequest {
+    public class FriendRequest {
         public int Requester { get; set; }
         public User RequesterDetails { get; set; }
         public Statuses Status { get; set; }

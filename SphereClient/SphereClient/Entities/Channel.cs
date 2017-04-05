@@ -2,7 +2,11 @@
 
 namespace SphereClient.Entities {
     [Serializable]
-    class Channel : Thread {
+    public class Channel : Thread {
         public Membership[] Memberships { get; set; }
+
+        public override string ToText() {
+            return this.Title;
+        }
     }
 }

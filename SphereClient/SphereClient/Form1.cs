@@ -5,69 +5,76 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using SphereClient.REST;
+using SphereClient.Logger;
+using SphereClient.Components;
+using SphereClient.Entities;
 
 namespace SphereClient {
     public partial class Form1 : Form {
-        public Form1() {
+        private static Form1 _instance = null;
+
+
+        public Session session;
+
+        /// <summary>
+        /// Constructor for the Form1 class. Initializes the object
+        /// and creates a session.
+        /// </summary>
+        /// <param name="username">username to use to create a session</param>
+        /// <param name="password">password for the username's account</param>
+        protected Form1(string username, string password) {
             InitializeComponent();
+
+            try {
+                this.session = new REST.Session( username, password );
+                
+            } catch (Exception ex) {
+                MessageBox.Show( string.Format("An exception occured while creating a session: {0}", ex.Message ));
+                Application.Exit();
+            }
+           
+            MessageBoxLogger.Instance.Log(this, "Successfully connected!" );
+
+            System.Threading.Thread t = new System.Threading.Thread(delegate() {
+                //while (System.Threading.Thread.CurrentThread.IsAlive) {
+
+                    FetchChannels();
+                    //System.Threading.Thread.Sleep(5000);
+                //}
+                
+            } );
+            t.Start();
+               
         }
 
-        private void pictureBox4_Click( object sender, EventArgs e ) {
-
+        private void FetchChannels() {
+            if (InvokeRequired) {
+                Invoke( new Action( FetchChannels) );
+            }
+            if (!this.panel7.TryCreateComponents()) {
+                Application.Exit();
+            }
         }
 
-        private void panel11_Paint( object sender, PaintEventArgs e ) {
 
+        /// <summary>
+        /// Returns the main form window instance singleton
+        /// </summary>
+        public static Form1 Instance {
+            get {
+                if(null == Form1._instance) {
+                    Form1._instance = new Form1("sphereman","spherique");
+                }
+                return Form1._instance;
+            }
+            set {
+                Form1._instance = value;
+            }
         }
 
-        private void label6_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void panel4_Paint( object sender, PaintEventArgs e ) {
-
-        }
-
-        private void label24_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void pictureBox13_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void label23_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void tabPage1_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void label29_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void label30_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void pictureBox14_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void label26_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void label38_Click( object sender, EventArgs e ) {
-
-        }
-
-        private void label5_Click( object sender, EventArgs e ) {
-
-        }
+        
     }
 }
