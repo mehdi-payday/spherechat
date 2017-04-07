@@ -13,12 +13,21 @@ using SphereClient.Components;
 using SphereClient.Entities;
 
 namespace SphereClient {
+    /// <summary>
+    /// Main form class
+    /// </summary>
     public partial class Form1 : Form {
         private static Form1 _instance = null;
 
-
         public Session session;
         public IList<Channel> fetchedChannels;
+        public Channel currentChannel;
+        /// <summary>
+        /// Static initializer
+        /// </summary>
+        static Form1(){
+
+        }
 
         /// <summary>
         /// Constructor for the Form1 class. Initializes the object
@@ -78,6 +87,8 @@ namespace SphereClient {
                 return;
             }
             this.fetchedChannels = this.session.GetChannels().ToList();
+            this.session.CurrentChannel = fetchedChannels[0];
+            panel4.FetchMessages( this.session.GetChannels()[0] );
 
             if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                 Application.Exit();

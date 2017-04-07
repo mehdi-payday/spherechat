@@ -43,7 +43,7 @@ namespace SphereClient.Components {
         public int rowTopMargin = 0;
         public Font HoverFont = new Font( "Microsoft Sans Serif", 11.5f, FontStyle.Bold, GraphicsUnit.Point );
         public Font RegularFont = new Font( "Microsoft Sans Serif", 12.0f, FontStyle.Regular, GraphicsUnit.Point );
-
+        private int selected = 0;
 
         /// <summary>
         /// Constructor for the ImageAndTitleListPane class.
@@ -90,35 +90,15 @@ namespace SphereClient.Components {
                 this.contents.Top =  this.title_pane.Top + this.title_pane.Size.Height;
                 this.contents.Width = this.Width;
                 this.contents.Height = this.Height - this.title_pane.Height - this.title_pane.Top;
-                this.contents.BackColor = Color.FromArgb( 93, 6, 61 );
+                this.contents.BackColor = Constants.PURPLE;
                 this.contents.AutoScroll = true;
 
                 int entityIndex = 0;
-                //TODO turn rows into objects. (and move events to objects)
+                //TODO and move events to objects
                 foreach (Entity entity in this.list) {
-                    Panel pane = new Panel();
-                    PictureBox picbox = new PictureBox();
-                    Label text = new Label();
-                    pane.Cursor = Cursors.Hand;
-                    pane.Top = this.rowTopMargin + (this.rowHeight + this.rowTopMargin) * entityIndex + (this.rowBottomMargin * entityIndex);
-                    pane.Left = 0;
-                    pane.Size = new Size(this.Width, this.rowHeight);
-                    text.MouseEnter += this.OnRowLabelEnter;
-                    text.MouseLeave += this.OnRowLabelLeave;
-                    text.Text = entity.ToText();
-                    text.AutoEllipsis = true;
-                    text.Left = this.picBox_left + this.picBox_width + this.rowlabel_left_margin;
-                    text.Top = (pane.Height - (text.Font.Height-1) *2) / 2 ;
-                    text.Width = pane.Width - text.Left;
-                    text.Font = this.RegularFont;
-                    text.ForeColor = Color.FromArgb( 165, 97, 149 );
-                    picbox.Size = new Size(this.picBox_width, this.picBox_height);
-                    picbox.Left = this.picBox_left;
-                    picbox.BackColor = Color.Aquamarine;
-                    picbox.Top = (pane.Height - picBox_height) / 2;
-                    pane.Controls.Add( picbox );
-                    pane.Controls.Add( text );
-                    this.contents.Controls.Add(pane);
+                    ImageAndTitleRow row = new ImageAndTitleRow( entity.ToText(), "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this );
+                   
+                    this.contents.Controls.Add(row);
 
                     entityIndex++;
                 }
@@ -157,6 +137,11 @@ namespace SphereClient.Components {
             ((Label)s).Font = this.RegularFont;
         }
 
+        public void OnRowLabelClick(object s, EventArgs e ) {
+            this.contents.Controls.IndexOf( (Label)s );
+            
+        }
+
         /// <summary>
         /// This method should filter off all the unwanted entities in 
         /// this.list.
@@ -172,8 +157,6 @@ namespace SphereClient.Components {
     public class DiscussionListPanel: ImageAndTitleListPane {
         protected static Panel header;
         private Panel _head;
-        private static int leftTitleOffset = 8;
-        private static int topMargin = 5;
         private static int leftIconOffset = 210;
 
         /// <summary>
@@ -184,18 +167,18 @@ namespace SphereClient.Components {
             Label title = new Label();
             Label plus = new Label();
             title.Text = "Direct messages";
-            title.Left = DiscussionListPanel.leftTitleOffset;
-            title.Top = DiscussionListPanel.topMargin;
+            title.Left = Constants.MARGIN_SMALL.Left;
+            title.Top = Constants.MARGIN_SMALL.Top;
             title.AutoSize = true;
             plus.Text = "+";
             plus.Left = DiscussionListPanel.leftIconOffset;
-            plus.Top = DiscussionListPanel.topMargin;
+            plus.Top = Constants.MARGIN_SMALL.Top;
             DiscussionListPanel.header.Height = 37;
             DiscussionListPanel.header.Controls.Add( title );
             DiscussionListPanel.header.Controls.Add( plus );
-            DiscussionListPanel.header.BackColor = Color.FromArgb( 165, 97, 149 );
-            DiscussionListPanel.header.ForeColor = Color.FromArgb( 62, 1, 56 );
-            DiscussionListPanel.header.Font = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold,GraphicsUnit.Point );
+            DiscussionListPanel.header.BackColor = Constants.LIGHT_PURPLE;
+            DiscussionListPanel.header.ForeColor = Constants.DARK_PURPLE;
+            DiscussionListPanel.header.Font = Constants.SECTION_TITLE_FONT ;
         }
 
         /// <summary>
@@ -203,7 +186,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
         public DiscussionListPanel(IList<Entity> list): base( DiscussionListPanel.header, list){
-            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this.BackColor = Constants.PURPLE;
             this._head = DiscussionListPanel.header;
         }
         /// <summary>
@@ -212,7 +195,7 @@ namespace SphereClient.Components {
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
         public DiscussionListPanel() : base(DiscussionListPanel.header, new List<Entity>()) {//
-            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this.BackColor = Constants.PURPLE;
             this._head = DiscussionListPanel.header;   
         }
 
@@ -231,9 +214,8 @@ namespace SphereClient.Components {
     public class GroupListPanel : ImageAndTitleListPane {
         protected static Panel header;
         private Panel _head;
-        private static int leftTitleOffset = 8;
-        private static int topMargin = 5;
         private static int leftIconOffset = 210;
+        
 
         /// <summary>
         /// Static initializer.
@@ -243,18 +225,18 @@ namespace SphereClient.Components {
             Label title = new Label();
             Label plus = new Label();
             title.Text = "Group messages";
-            title.Left = GroupListPanel.leftTitleOffset;
-            title.Top = GroupListPanel.topMargin;
+            title.Left = Constants.MARGIN_SMALL.Left;
+            title.Top = Constants.MARGIN_SMALL.Top;
             title.AutoSize = true;
             plus.Text = "+";
             plus.Left = GroupListPanel.leftIconOffset;
-            plus.Top = GroupListPanel.topMargin;
+            plus.Top = Constants.MARGIN_SMALL.Top;
             GroupListPanel.header.Height = 37;
             GroupListPanel.header.Controls.Add( title );
             GroupListPanel.header.Controls.Add( plus );
-            GroupListPanel.header.BackColor = Color.FromArgb( 165, 97, 149 );
-            GroupListPanel.header.ForeColor = Color.FromArgb( 62, 1, 56 );
-            GroupListPanel.header.Font = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold, GraphicsUnit.Point );
+            GroupListPanel.header.BackColor = Constants.LIGHT_PURPLE;
+            GroupListPanel.header.ForeColor = Constants.DARK_PURPLE;
+            GroupListPanel.header.Font = Constants.SECTION_TITLE_FONT;
         }
 
         /// <summary>
@@ -262,7 +244,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
         public GroupListPanel( IList<Entity> list ) : base( GroupListPanel.header, list ) {
-            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this.BackColor = Constants.PURPLE;
             this._head = GroupListPanel.header;
         }
         /// <summary>
@@ -271,7 +253,7 @@ namespace SphereClient.Components {
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
         public GroupListPanel() : base( GroupListPanel.header, new List<Entity>() ) {//
-            this.BackColor = Color.FromArgb( 93, 6, 61 );
+            this.BackColor = Constants.PURPLE;
             this._head = GroupListPanel.header;
         }
 
@@ -281,7 +263,7 @@ namespace SphereClient.Components {
         public override void filter() {
             this.list = this.list.Where( c => Thread.Types.DISCUSSION != ((Channel)c).Type ).ToList<Entity>();
         }
-
+        
     }
 
 

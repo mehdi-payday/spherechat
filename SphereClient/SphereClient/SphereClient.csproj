@@ -57,6 +57,16 @@
     <Compile Include="Components\ImageAndTitleListPane.Designer.cs">
       <DependentUpon>ImageAndTitleListPane.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ImageAndTitleRow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\MessageListPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\MessageRow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="Entities\Auth.cs" />
     <Compile Include="Entities\Channel.cs" />
     <Compile Include="Entities\Entity.cs" />

@@ -3,6 +3,8 @@ using System.Net;
 
 namespace SphereClient.REST {
     public class Session : IDisposable {
+        public Entities.Channel CurrentChannel;
+
         public Session(string username, string password) {
             Token = Login(username, password).Token;
         }

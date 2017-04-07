@@ -32,7 +32,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel8 = new SphereClient.Components.GroupListPanel();
             this.panel7 = new SphereClient.Components.DiscussionListPanel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel4 = new SphereClient.Components.MessageListPanel();
             this.panel20 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel18 = new System.Windows.Forms.Panel();
@@ -1163,7 +1163,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
+        private SphereClient.Components.MessageListPanel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private SphereClient.Components.DiscussionListPanel panel7;
