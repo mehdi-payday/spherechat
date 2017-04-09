@@ -4347,8 +4347,8 @@ html.retina.chrome #sidebar .tabBar {
 }
 #panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1));
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2));
     left: 0;
     bottom: 0;
     background: #fff;
@@ -5682,8 +5682,8 @@ body:not(.mode-reader-fullscreen):not(.mode-reader-modal).mode-reader #sidebar {
 }
 body:not(.mode-reader-fullscreen):not(.mode-reader-modal).mode-reader #panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1))
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2))
 }
 .button-toggle-sidebar {
     overflow: hidden;

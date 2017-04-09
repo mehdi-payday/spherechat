@@ -264,8 +264,8 @@ html.retina.chrome .themeDark #sidebar .selectButton {
 }
 #settings-panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1));
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2));
     left: 0;
     bottom: 0;
     background: #fff;
@@ -407,8 +407,8 @@ html.electron.mac:not(.electron-full-screen) body.mode-reader:not(.mode-force-si
 }
 body:not(.mode-reader-fullscreen):not(.mode-reader-modal).mode-reader #settings-panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1))
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2))
 }
 body.mode-settings-panel #settings-panel {
     box-shadow: 1px 0 0 rgba(0, 0, 0, .1), 15px 0 25px -10px rgba(0, 0, 0, .05)
@@ -628,8 +628,8 @@ html.retina.chrome .themeDark #sidebar .selectButton {
 }
 #files-panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1));
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2));
     left: 0;
     bottom: 0;
     background: #fff;
@@ -771,8 +771,8 @@ html.electron.mac:not(.electron-full-screen) body.mode-reader:not(.mode-force-si
 }
 body:not(.mode-reader-fullscreen):not(.mode-reader-modal).mode-reader #files-panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1))
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2))
 }
 body.mode-files-panel #files-panel {
     box-shadow: 1px 0 0 rgba(0, 0, 0, .1), 15px 0 25px -10px rgba(0, 0, 0, .05)
@@ -992,8 +992,8 @@ html.retina.chrome .themeDark #sidebar .selectButton {
 }
 #user-panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1));
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2));
     left: 0;
     bottom: 0;
     background: #fff;
@@ -1134,8 +1134,8 @@ html.electron.mac:not(.electron-full-screen) body.mode-reader:not(.mode-force-si
 }
 body:not(.mode-reader-fullscreen):not(.mode-reader-modal).mode-reader #user-panel {
     transform: translateX(-300px);
-    transform: translateX(calc(panelWidth * -1));
-    transform: translateX(calc(var(--panelWidth, panelWidth) * -1))
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2))
 }
 body.mode-user-panel #user-panel {
     box-shadow: 1px 0 0 rgba(0, 0, 0, .1), 15px 0 25px -10px rgba(0, 0, 0, .05)
