@@ -7604,7 +7604,7 @@ html.mobile #pop-body .pop-sticky-header header {
 .urlPanel .promo {
     text-align: center;
     overflow: hidden;
-    margin-top: -96px;
+    margin-top: 60px;
     margin-bottom: -10px;
     pointer-events: none
 }

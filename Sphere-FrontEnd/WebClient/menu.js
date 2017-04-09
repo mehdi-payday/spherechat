@@ -96,7 +96,8 @@ $('.themePreview.theme-sidebar-dark.themeDark').on('click', function(){
 // user
 
 $('.Sidebar-nav-list-item.ion-person-stalker').on('click', function(){
-  $('body').toggleClass('mode-user-panel');
+   // $(this).toggleClass('Sidebar-nav-list-item-active');
+    $('body').toggleClass('mode-user-panel');
 });
 
 $('#closeuser').on('click', function(){
