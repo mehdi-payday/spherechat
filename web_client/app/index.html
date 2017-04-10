@@ -42,12 +42,52 @@
     <link rel="stylesheet" type="text/css" href="css/social.css">
     <link rel="stylesheet" type="text/css" href="css/steps.css">
     <link rel="stylesheet" type="text/css" href="css/integrations.css">    
-    <!-- include jQuery library --> 
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+  	<script src="app.js"></script>
+    
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> 
+    <script type="text/javascript"> $ = jQuery; </script>
+    <script type="text/javascript" src="js/preloader.js"></script>
+    <script type="text/javascript" src="js/jquery.main.js"></script> 
+    <script type='text/javascript' src="js/isMobile.min.js"></script> 
+    <script type='text/javascript' src="js/before-after.js"></script>
+    <script> $('.ba-slider').beforeAfter(); </script> 
+    <script type='text/javascript' src="js/jquery.themepunch.plugins.min.js"></script>
+    <script type='text/javascript' src="js/jquery.themepunch.revolution.min.js"></script>
+    <script type='text/javascript' src="js/slick.js"></script>
+    <script type='text/javascript' src="js/bootstrap.min.js"></script>
+    <script type='text/javascript' src="js/smooth-scroll.min.js"></script>
+    <script type='text/javascript' src="js/wow.min.js"></script>
+    <script type='text/javascript' src="js/jquery.magnific-popup.min.js"></script>
+    <script type='text/javascript' src="js/main.js"></script> 
+    <script type='text/javascript' src='js/plugins.js'></script> 
+    <script type='text/javascript' src="js/parallaxIndex_04.js"></script>
+    <script type='text/javascript' src='js/caroufredsel.min.js'></script>
+    <script type='text/javascript' src='js/superfish.js'></script>
+    <script type='text/javascript' src='js/init-testimonies.js'></script>
+    <script type='text/javascript' src='js/flickity.min.js'></script>  
+    <script type="text/javascript" src="js/scroll.js"></script>
+    <script type="text/javascript" src="js/startNowAnimation.js"></script>
+    <script type="text/javascript" src="js/integrations.js"></script>
+    
+    <script type="text/javascript" src="website/main/main.js"></script>
+    <script type="text/javascript" src="website/404/404.js"></script>
+    <script type="text/javascript" src="website/502/502.js"></script>
+    <script type="text/javascript" src="website/about/about.js"></script>
+    <script type="text/javascript" src="website/comingsoon/comingsoon.js"></script>
+    <script type="text/javascript" src="website/downloads/downloads.js"></script>
+    <script type="text/javascript" src="website/faq/faq.js"></script>
+    <script type="text/javascript" src="website/login/login.js"></script>
+    <script type="text/javascript" src="website/resetpassword/resetpassword.js"></script>
+    <script type="text/javascript" src="website/signup/signup.js"></script>
+    
     <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="js/pace.min.js"></script>
   </head>
-  <body class="_body _body_responsive" id="body" data-ext-responsive="true">
+  <body class="_body _body_responsive" id="body" data-ext-responsive="true" ng-app="myApp">
     <div id="preloader">
       <div id="loader"></div>
     </div>
@@ -55,46 +95,47 @@
     
     
     <div class="page-wrap" data-parent="true" data-label="Intro" data-name="Intro" data-section="1">
+    
       <header id="header" class="white-text" >
         <div class="header-holder">
           <div class="wrap">
             <div class="logo"> 
-              <a href="/main"> 
+              <a href="#!/"> 
               <img class="desktop-image svg" src="../img/logo.png" width="145px" alt="ShereChat.io">
               </a> 
             </div>
             <div class="right-nav .mobi-hide">
-              <a href="/signup">Sign up</a> 
-              <a href="/login">Login</a> 
+              <a href="#!/signup">Sign up</a> 
+              <a href="#!/login">Login</a> 
             </div>
-            <a href="#" class="nav-opener">
+            <a href="#!/" class="nav-opener">
             <span></span>
             </a> 
             <nav class="main-nav">
               <ul>
                 <div class="nav-wrapper">
                   <li class="sub-trigger">
-                    <a href="/downloads">Downloads</a> 
+                    <a>Downloads</a> 
                     <ul class="sub-menu">
                       <div class="sub-menu-arrow"></div>
                       <div class="container">
                         <li> 
-                          <a href=""> 
+                          <a href="#!/downloads"> 
                           <span class="title"> Windows </span> 
                           </a> 
                         </li>
                         <li> 
-                          <a href=""> 
+                          <a href="#!/comingsoon"> 
                           <span class="title"> Mac </span> 
                           </a> 
                         </li>
                         <li> 
-                          <a href=""> 
+                          <a href="#!/comingsoon"> 
                           <span class="title"> iOS </span> 
                           </a> 
                         </li>
                         <li> 
-                          <a href=""> 
+                          <a href="#!/comingsoon"> 
                           <span class="title"> Android </span> 
                           </a> 
                         </li>
@@ -107,23 +148,33 @@
                       <div class="sub-menu-arrow"></div>
                       <div class="container">
                         <li> 
-                          <a href=""> 
+                          <a href="#!/comingsoon"> 
                           <span class="title"> Platform </span> 
                           </a> 
                         </li>
                         <li> 
-                          <a href=""> 
+                          <a href="#!/comingsoon"> 
                           <span class="title"> Messaging channels </span> 
                           </a> 
                         </li>
                         <li> 
-                          <a href=""> 
+                          <a href="#!/comingsoon"> 
                           <span class="title"> Pricing </span> 
                           </a> 
                         </li>
                         <li> 
-                          <a href=""> 
-                          <span class="title"> Integrations directory </span> 
+                          <a href="#!/comingsoon"> 
+                          <span class="title"> Integrations </span> 
+                          </a> 
+                        </li>
+                        <li> 
+                          <a href="#!/about"> 
+                          <span class="title"> About </span> 
+                          </a> 
+                        </li>
+                        <li> 
+                          <a href="#!/faq"> 
+                          <span class="title"> FAQ </span> 
                           </a> 
                         </li>
                       </div>
@@ -135,9 +186,8 @@
                       <div class="sub-menu-arrow"></div>
                       <div class="container">
                         <div class="li-wrapper">
-                          <li> <a href="/"> <span class="title"> Documentation </span> </a> </li>
-                          <li> <a href=""> <span class="title"> Full API reference </span> </a> </li>                          <li> <a href=""> <span class="title"> Status </span> </a> </li>
-
+                          <li> <a href="#!/comingsoon"> <span class="title"> Documentation </span> </a> </li>                      
+                          <li> <a href="#!/comingsoon"> <span class="title"> Status </span> </a> </li>
                         </div>
                       </div>
                     </ul>
@@ -147,10 +197,10 @@
                     <ul class="sub-menu products">
                       <div class="sub-menu-arrow"></div>
                       <div class="container">
-                        <li> <a href=""> <span class="title"> Customers </span> </a> </li>
-                        <li> <a href=""> <span class="title"> About ShereChat </span> </a> </li>
-                        <li> <a href=""> <span class="title"> Jobs </span> </a> </li>
-                        <li> <a href=""> <span class="title"> Blog </span> </a> </li>
+                        <li> <a href="#!/comingsoon"> <span class="title"> Customers </span> </a> </li>
+                        <li> <a href="#!/about"> <span class="title"> About ShereChat </span> </a> </li>
+                        <li> <a href="#!/comingsoon"> <span class="title"> Jobs </span> </a> </li>
+                        <li> <a href="#!/comingsoon"> <span class="title"> Blog </span> </a> </li>
                       </div>
                     </ul>
                   </li>
@@ -162,6 +212,7 @@
           <div class="bg"></div>
         </div>
       </header>
+      
       <div class="overlayMenu">
         <div class="background-nav"></div>
         <div class="nav-content">
@@ -169,39 +220,38 @@
           <nav>
             <ul class="col2">
               <h3>Downloads</h3>
-              <li><a href="/downloads">Windows</a></li>
-              <li><a href="/comingsoon">Mac</a></li>
-              <li><a href="/comingsoon">iOS</a></li>
-              <li><a href="/comingsoon">Android</a></li>
+              <li><a href="#!/downloads">Windows</a></li>
+              <li><a href="#!/comingsoon">Mac</a></li>
+              <li><a href="#!/comingsoon">iOS</a></li>
+              <li><a href="#!/comingsoon">Android</a></li>
             </ul>
             <ul class="col2">
               <h3>Messaging</h3>
-              <li><a href="/comingsoon">ShereChat platform</a></li>
-              <li><a href="/comingsoon">Pricing</a></li>
-              <li><a href="/comingsoon">Integrations</a></li>
+              <li><a href="#!/comingsoon">ShereChat platform</a></li>
+              <li><a href="#!/comingsoon">Pricing</a></li>
+              <li><a href="#!/comingsoon">Integrations</a></li>
             </ul>
             <ul class="col2 bordered">
               <h3>Info</h3>
-              <li><a href="/comingsoon">Documentation</a></li>
-              <li><a href="/faq">FAQ</a></li>              
-              <li><a href="/comingsoon">Status</a></li>
+              <li><a href="#!/comingsoon">Documentation</a></li>
+              <li><a href="#!/faq">FAQ</a></li>              
+              <li><a href="#!/comingsoon">Status</a></li>
 
             </ul>
             <ul class="col2 bordered">
               <h3>More</h3>
-              <li><a href="/comingsoon">Customers</a></li>
-              <li><a href="/about">About ShereChat</a></li>
-              <li><a href="/comingsoon">Jobs</a></li>
+              <li><a href="#!/comingsoonn">Customers</a></li>
+              <li><a href="#!/about">About ShereChat</a></li>
+              <li><a href="#!/comingsoon">Jobs</a></li>
             </ul>
             <ul class="col2 bordered">
               <h3>Resources</h3>
-              <li><a href="/signup">Sign up</a></li>
-              <li><a href="/login">Login</a></li>
+              <li><a href="#!/signup">Sign up</a></li>
+              <li><a href="#!/login">Login</a></li>
             </ul>
           </nav>
         </div>
       </div>
-      
       
       <div ng-view></div>
       
@@ -227,10 +277,10 @@
                 <li>
                   <p class="title">Learn More</p>
                 </li>
-                <li><a href="/comingsoon">Working process</a> </li>
-                <li><a href="/comingsoon">System Management</a> </li>
-                <li><a href="/comingsoon">Online Meeting</a> </li>
-                <li><a href="/comingsoon">Customer Support</a> </li>
+                <li><a href="#comingsoon">Working process</a> </li>
+                <li><a href="#comingsoon">System Management</a> </li>
+                <li><a href="#comingsoon">Online Meeting</a> </li>
+                <li><a href="#comingsoon">Customer Support</a> </li>
               </ul>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 footer-links">
@@ -238,10 +288,10 @@
                 <li>
                   <p class="title">Our Company</p>
                 </li>
-                <li><a href="/comingsoon">About us</a> </li>
-                <li><a href="/faq">FAQ</a> </li>
-                <li><a href="/comingsoon">Privacy police</a> </li>
-                <li><a href="/comingsoon">Terms of use</a> </li>
+                <li><a href="#comingsoon">About us</a> </li>
+                <li><a href="#faq">FAQ</a> </li>
+                <li><a href="#comingsoon">Privacy police</a> </li>
+                <li><a href="#comingsoon">Terms of use</a> </li>
               </ul>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 footer-links">
@@ -249,10 +299,10 @@
                 <li>
                   <p class="title">Reach to us</p>
                 </li>
-                <li><a href="/comingsoon">Contact us</a> </li>
-                <li><a href="/comingsoon">Live chat</a> </li>
-                <li><a href="/comingsoon">Phone call</a> </li>
-                <li><a href="/comingsoon">E-mail system</a> </li>
+                <li><a href="#comingsoon">Contact us</a> </li>
+                <li><a href="#comingsoon">Live chat</a> </li>
+                <li><a href="#comingsoon">Phone call</a> </li>
+                <li><a href="#comingsoon">E-mail system</a> </li>
               </ul>
             </div>
           </div>
@@ -268,47 +318,12 @@
           </div>
         </div>
       </footer>
+      </div>
     
     
     <a class="back-to-top inner-link" href="#body" data-scroll-class="100vh:active">
     	<i class="fa fa-angle-up"></i>
     </a>    
-    
-    <script type="text/javascript"> $ = jQuery; </script>
-    <script type="text/javascript" src="js/preloader.js"></script>
-    <script type="text/javascript" src="js/jquery.main.js"></script> 
-    <script type='text/javascript' src="js/isMobile.min.js"></script> 
-    <script type='text/javascript' src="js/before-after.js"></script>
-    <script> $('.ba-slider').beforeAfter(); </script> 
-    <script type='text/javascript' src="js/jquery.themepunch.plugins.min.js"></script>
-    <script type='text/javascript' src="js/jquery.themepunch.revolution.min.js"></script>
-    <script type='text/javascript' src="js/slick.js"></script>
-    <script type='text/javascript' src="js/bootstrap.min.js"></script>
-    <script type='text/javascript' src="js/smooth-scroll.min.js"></script>
-    <script type='text/javascript' src="js/wow.min.js"></script>
-    <script type='text/javascript' src="js/jquery.magnific-popup.min.js"></script>
-    <script type='text/javascript' src="js/main.js"></script> 
-    <script type='text/javascript' src='js/plugins.js'></script> 
-    <script type='text/javascript' src='js/app.js'></script> 
-    <script type='text/javascript' src="js/parallaxIndex_04.js"></script>
-    <script type='text/javascript' src='js/caroufredsel.min.js'></script>
-    <script type='text/javascript' src='js/superfish.js'></script>
-    <script type='text/javascript' src='js/init-testimonies.js'></script>
-    <script type='text/javascript' src='js/flickity.min.js'></script>  
-    <script type="text/javascript" src="js/scroll.js"></script>
-    <script type="text/javascript" src="js/startNowAnimation.js"></script>
-    <script type="text/javascript" src="js/integrations.js"></script>
-    
-    <script type="text/javascript" src="website/main/main.js"></script>
-    <script type="text/javascript" src="website/404/404.js"></script>
-    <script type="text/javascript" src="website/502/502.js"></script>
-    <script type="text/javascript" src="website/about/about.js"></script>
-    <script type="text/javascript" src="website/comingsoon/comingsoon.js"></script>
-    <script type="text/javascript" src="website/downloads/downloads.js"></script>
-    <script type="text/javascript" src="website/faq/faq.js"></script>
-    <script type="text/javascript" src="website/login/login.js"></script>
-    <script type="text/javascript" src="website/resetpassword/resetpassword.js"></script>
-    <script type="text/javascript" src="website/signup/signup.js"></script>
     
   </body>
 </html>
