@@ -1223,21 +1223,21 @@ body.mode-user-panel #sidebar-black-overlay {
     width: 43%;
     position: relative;
     margin-left: -76px;
-    height: 23%;
+    height: 18%;
     margin-top: -33px;
 }
 .img-second-row * {
     width: 43%;
     position: relative;
     margin-left: -71px;
-    height: 23%;
+    height: 18%;
     margin-top: -60px;
 }
 .img-last-row * {
     width: 43%;
     position: relative;
     margin-left: -40px;
-    height: 23%;
+    height: 18%;
     margin-top: -95px;
 }
 .urlPanel .promo-file {
@@ -1460,7 +1460,7 @@ body.mode-user-panel #sidebar-black-overlay {
   position: absolute;
   top: 10px;
   right: 0;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.27);
+  box-shadow: 1px 1px 5px rgba(244,67,54,.6);
   -webkit-animation: bullet 500ms;
           animation: bullet 500ms;
   -webkit-animation-fill-mode: both;
@@ -1754,9 +1754,9 @@ body.mode-user-panel #sidebar-black-overlay {
     background: linear-gradient(to right, rgb(63, 157, 236), rgb(166, 55, 202));
     color: #fff;
     border-top: 1px solid #ebedf1;
-    -webkit-box-shadow: 22px 25px 28px rgba(166, 55, 202,.4);
-    -moz-box-shadow: 22px 25px 28px rgba(166, 55, 202,.4);
-    box-shadow: 22px 25px 28px rgba(166, 55, 202,.4);
+    -webkit-box-shadow: 22px 20px 28px rgba(166, 55, 202,.4);
+    -moz-box-shadow: 22px 20px 28px rgba(166, 55, 202,.4);
+    box-shadow: 22px 20px 28px rgba(166, 55, 202,.4);
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -2181,7 +2181,7 @@ section {
     top: 15%;
     text-align: center;
     opacity: 0;
-    margin-top: 120px;
+    margin-top: 40px;
 }
 .info li {
     width: 100%;

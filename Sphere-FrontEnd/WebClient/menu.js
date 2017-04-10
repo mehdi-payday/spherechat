@@ -45,7 +45,7 @@ $('#sidebar-black-overlay').on('click', function() {
 });
 $('#closeConvo').on('click', function() {
     $('body').removeClass('mode-force-sidebar');
-    $('.Sidebar-nav-list-item.Sidebar-nav-list-item-active.ion-chatbubbles').removeClass('Sidebar-nav-list-item-active');
+    $('.Sidebar-nav-list-item.Sidebar-nav-list-item-active.ion-chatboxes').removeClass('Sidebar-nav-list-item-active');
     $('body').addClass('mode-force-sidebars');
 });
 $('.conversation-summary').on('click', function() {
@@ -56,8 +56,8 @@ $('.conversation-summary').on('click', function() {
 $('#sidemenumain').on('click', function() {
     $('body').removeClass('mode-force-sidebars');
 });
-$('.Sidebar-nav-list-item.ion-chatbubbles').on('click', function() {
-    $('.Sidebar-nav-list-item.ion-chatbubbles').addClass('Sidebar-nav-list-item-active');
+$('.Sidebar-nav-list-item.ion-chatboxes').on('click', function() {
+    $('.Sidebar-nav-list-item.ion-chatboxes').addClass('Sidebar-nav-list-item-active');
     $('body').addClass('mode-force-sidebar');
 });
 var isMobile = /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) ||
@@ -73,6 +73,40 @@ if ($(window).width() < 667 || isMobile) {
     $('#desktop-menu').show();
 }
 $(document).ready(function() {
+    $(window).bind("orientationchange", function(){
+    var orientation = window.orientation;
+    var new_orientation = (orientation) ? 0 : 180 + orientation;
+    $('body').css({
+        "-webkit-transform": "rotate(" + new_orientation + "deg)"
+    });
+});
+    $(window).bind('orientationchange resize', function(event){
+  if (event.orientation) {
+    if (event.orientation == 'landscape') {
+      if (window.rotation == 90) {
+        rotate(this, -90);
+      } else {
+        rotate(this, 90);
+      }
+    }
+  }
+});
+
+function rotate(el, degs) {
+  iedegs = degs/90;
+  if (iedegs < 0) iedegs += 4;
+  transform = 'rotate('+degs+'deg)';
+  iefilter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation='+iedegs+')';
+  styles = {
+    transform: transform,
+    '-webkit-transform': transform,
+    '-moz-transform': transform,
+    '-o-transform': transform,
+    filter: iefilter,
+    '-ms-filter': iefilter
+  };
+  $(el).css(styles);
+}
     $(window).resize(function() {
 if ($(window).width() < 667 || isMobile) {
     $('#desktop-menu').hide();
@@ -95,7 +129,7 @@ $('.themePreview.theme-sidebar-dark.themeDark').on('click', function(){
 
 // user
 
-$('.Sidebar-nav-list-item.ion-person-stalker').on('click', function(){
+$('.Sidebar-nav-list-item.ion-person-add').on('click', function(){
    // $(this).toggleClass('Sidebar-nav-list-item-active');
     $('body').toggleClass('mode-user-panel');
 });
@@ -137,4 +171,9 @@ $('#closefiles').on('click', function(){
 
 $('#buttonfiles').on('click', function(){
   $('body').addClass('mode-files-panel');
+});
+
+$('.conversation-summary.conversation-summary-0').on('click', function(){
+    $('#intercom-container').addClass("wow fadeInUp");
+    $('#intercom-container').fadeIn('slow');
 });
