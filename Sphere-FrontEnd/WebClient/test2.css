@@ -2252,3 +2252,7 @@ body:hover .info,
 body:hover .designer {
     opacity: 1;
 }
+
+.verified-color{
+    color: #00aced;
+}
