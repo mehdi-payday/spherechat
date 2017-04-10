@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <link rel="icon" href="../img/xLogo.png" type="image/x-icon"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="../css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/particules.css">
+    <link rel="stylesheet" type="text/css" href="../css/checkbox.css">
+
+    <style>
+      /* note: this is a hack for ios iframe for bootstrap themes shopify page */
+      /* this chunk of css is not part of the toolkit :) */
+      body {
+      width: 1px;
+      min-width: 100%;
+      *width: 100%;
+      }
+      .amb {
+        margin-bottom: 35px!important;
+      }
+      .overlay{
+        position: fixed;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+  <div id="particles-js-15"></div>
+  <div class="overlay"></div>
+    <div class="gb ut">
+      <div class="uv">
+        <form role="form" class="alq dj j" action="post">
+          <a href="../index/index.html" class="l amb">
+          <img src="../img/login.png" alt="brand">
+          </a>
+          <p>Login in to ShereChat</p>
+          <div class="et">
+            <input class="form-control" placeholder="Username" id="username">
+          </div>
+          <div class="et alu">
+            <input type="password" class="form-control" placeholder="Password" id="password"><br>
+            <div class="input-checkbox">
+              <div class="inner"></div>
+              <input type="checkbox" name="remember" value="">
+            </div><span>Remember me</span>
+          </div>
+          <div class="amb">
+            <button type="button" class="btn fp" id="login" onclick="log()">Log In</button>
+            <button class="btn fm" id="sign" data-href="../signUp/index.html">Sign up</button>
+          </div>
+          <p id="verification"></p>
+          <footer class="apd">
+            <a href="../ResetPassword/index.html" class="dp">Forgot your password? Reset it here</a>
+          </footer>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript" src="../js/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="http://laaris.com/coming-soon-5/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../js/particles.min.js"></script>
+    <script type="text/javascript" src="../js/particleConfigIndex15.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+  </body>
+</html>
