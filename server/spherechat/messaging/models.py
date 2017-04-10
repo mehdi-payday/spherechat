@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 from django.template.defaultfilters import slugify
 from django.db import models
+from django.utils import timezone
 from django.db.models import Count, Avg
 from datetime import datetime
 from django.conf import settings
@@ -18,13 +19,15 @@ from messaging.exceptions import (UnmanagedThread,
     UntitledThread, 
     ImmutableMembersList,
     UnexistentMembership,
-    IncorrectTags)
+    IncorrectTags,
+    MessageAlreadySent)
 import re
+
 
 # Every 60 seconds, a ``listening to Thread` signal should be sent by the client in order for him to be considered as connected to thread
 LISTENING_RENEWAL_RATE = 60
 
-class MembershipManager(Manager):
+class MembershipManager(ObservableManagerMixin, Manager):
     def create_membership(self, user, thread, **kwargs):
         if self.belongs(user, thread):
             raise ExistingMember("User %s is already a member of thread %s" % (user, thread))
@@ -60,6 +63,9 @@ class MembershipManager(Manager):
     def active_memberships(self):
         return self.filter(active=True)
 
+    def active_members(self, thread):
+        return User.objects.filter(memberships__active=True, memberships__thread=thread)
+
     def get_membership(self, user, thread):
         try:
             return self.active_memberships.get(user=user, thread=thread)
@@ -88,7 +94,13 @@ class MembershipManager(Manager):
 
         return last_seen_date
 
-    def see_thread(self, user_or_membership, thread, seen_date, last_seen_message=None):
+    def see_thread(
+        self, 
+        user_or_membership, 
+        thread, 
+        seen_date, 
+        last_seen_message=None):
+
         assert isinstance(seen_date, datetime)
 
         membership = self.get_membership(user_or_membership, thread) if isinstance(user_or_membership, User) else user_or_membership
@@ -98,6 +110,9 @@ class MembershipManager(Manager):
             membership.last_seen_message = last_seen_message
 
         membership.save()
+
+        self.notify_observers("on_thread_seen", membership)
+
 
 #    def set_last_seen_date(self, user, thread, last_seen_date):
 #        membership = Membership.objects.get_membership(user, thread)
@@ -125,10 +140,17 @@ class TuneManager(object):
         if not self.can_tune(user, thread):
             raise UnauthorizedAction("User %s can't tune to thread %s" % (user, thread))
 
-        user.listening_thread = thread
+        already_tuned = True
 
-        if "listening_date" in kwargs:
-            user.last_listening_date = kwargs["listening_date"]
+        if user.listening_thread is None \
+            or (user.listening_thread.pk != thread.pk):
+            user.listening_thread = thread
+            already_tuned = False
+
+        if "listening_date" not in kwargs:
+            kwargs["listening_date"] = timezone.now()
+        
+        user.last_listening_date = kwargs["listening_date"]
 
         user.save()
 
@@ -144,7 +166,7 @@ class TuneManager(object):
     def is_tuned(self, user, thread):
         if user.listening_thread is None:
             return False
-        heartbeat_ancienty = datetime.now() - user.last_listening_date
+        heartbeat_ancienty = timezone.now() - user.last_listening_date
 
         return user.listening_thread.pk == thread.pk and heartbeat_ancienty.seconds > LISTENING_RENEWAL_RATE
 
@@ -357,7 +379,7 @@ class MessageManager(ObservableManagerMixin, Manager):
         message.thread = thread
 
         if message.pk is not None:
-            raise RuntimeError("Message already existent")
+            raise MessageAlreadySent("Message already existent")
 
         if message.is_system_message() and sender is not None:
             raise ValueError("A system message can't have a sender. Sender was : %s" % sender)
@@ -368,6 +390,7 @@ class MessageManager(ObservableManagerMixin, Manager):
         message.save()
         
         if len(tags) > 0:
+            # throws IncorrectTags
             MessageTag.objects.verify_tags(tags, message.contents)
             for tag in tags:
                 MessageTag.objects.create(message=message, **tag)
@@ -377,13 +400,14 @@ class MessageManager(ObservableManagerMixin, Manager):
         return message
 
     def _message_saved(self, message):
-        self.__class__.notify_observers("on_message_saved", message)
+        self.notify_observers("on_message_saved", message)
 
 class MessageTagManager(ObservableManagerMixin, Manager):
     def verify_tags(self, tags, message_contents):
         placeholder_positions = dict()
         for m in re.finditer('\@\{([0-9]+)\}', message_contents):
             placeholder_positions[int(m.group(1))] = True
+
         for tag in tags:
             if int(tag["placeholder_position"]) not in placeholder_positions:
                 raise IncorrectTags("Incorrect tags for message contents : \"%s\", tags : %s, placeholder positions : %s" % (message_contents, tags, placeholder_positions))
@@ -418,6 +442,10 @@ class Thread(Model):
     def active_memberships(self):
         return Membership.objects.active_memberships.filter(thread=self)
 
+    @property
+    def active_members(self):
+        return Membership.objects.active_members(self)
+
     def delete(self):
         self.active = False
         self.save()
@@ -436,6 +464,14 @@ class Thread(Model):
 
     def get_last_message(self):
         return self.__class__.objects.get_last_message(self)
+
+    def send(self, message, sender=None, tags=[]):
+        return Message.objects.send(
+            message, 
+            thread=self, 
+            sender=sender, 
+            tags=tags)
+
 
 class Message(Model):
     objects = MessageManager()
@@ -464,8 +500,17 @@ class Message(Model):
 class MessageTag(Model):
     objects = MessageTagManager()
 
-    tagged_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE)
-    message =  models.ForeignKey(Message, blank=False, null=False, on_delete=models.CASCADE, related_name="tags")
+    tagged_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        blank=False, 
+        null=False, 
+        on_delete=models.CASCADE)
+    message = models.ForeignKey(
+        Message, 
+        blank=False, 
+        null=False, 
+        on_delete=models.CASCADE, 
+        related_name="tags")
     placeholder_position = models.PositiveIntegerField()
 
     def is_bot_tagged(self):
@@ -483,7 +528,7 @@ class Membership(Model):
     class Meta:
         unique_together = ("user", "thread")
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, related_name="memberships")
     thread  = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="memberships")
     last_seen_date = models.DateTimeField(null=True)
     last_seen_message = models.ForeignKey(Message, blank=True, null=True)
@@ -505,3 +550,4 @@ class Membership(Model):
     def cancel(self):
         self.objects.cancel_membership(self)
 
+from messaging.observers import *
