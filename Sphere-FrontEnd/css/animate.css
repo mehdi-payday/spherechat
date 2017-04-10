@@ -2680,7 +2680,7 @@ transform:translateY(-100%)
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   border-radius: 10px;
-  background-color: #fbfbfb;
+  background-color: transparent;
 }
 
 
@@ -2689,10 +2689,10 @@ transform:translateY(-100%)
 {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #000;
+  background: linear-gradient(to bottom, rgb(166, 55, 202), rgb(63, 157, 236));
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: #000; 
+  background: linear-gradient(to bottom, rgb(166, 55, 202), rgb(63, 157, 236));
 }
 * {
     box-sizing: border-box;

@@ -1,4 +1,4 @@
 ﻿namespace SphereClient.Entities.Events {
-    class DiscussionChange : PrivateDiscussion {
+    public class DiscussionChange : PrivateDiscussion {
     }
 }

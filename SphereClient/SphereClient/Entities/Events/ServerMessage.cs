@@ -1,4 +1,4 @@
 ﻿namespace SphereClient.Entities.Events {
-    class ServerMessage : Message {
+    public class ServerMessage : Message {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SphereClient.Entities {
     [Serializable]
-    class Thread : Entity {
+    public class Thread : Entity {
         public int ThreadId { get; set; }
         public string Slug { get; set; }
         public string Title { get; set; }
