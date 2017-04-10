@@ -176,4 +176,10 @@ $('#buttonfiles').on('click', function(){
 $('.conversation-summary.conversation-summary-0').on('click', function(){
     $('#intercom-container').addClass("wow fadeInUp");
     $('#intercom-container').fadeIn('slow');
+    $('#no-message').fadeOut('slow');
+    $(this).find(".card-face__bullet").fadeOut('slow');
+    $('.conversation-summary.conversation-summary-0.conversation-summary-selected').removeClass('conversation-summary-selected');
+    $(this).addClass('conversation-summary-selected');
 });
+
+
