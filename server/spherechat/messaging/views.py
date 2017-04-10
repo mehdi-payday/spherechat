@@ -28,6 +28,7 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 import django_filters
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 def get_user_from_request(request):
@@ -76,10 +77,15 @@ class TuneMixin(object):
         thread = self.get_object()
         user = get_user_from_view(self)
 
+        if thread is None:
+            raise Exception("thread not found")
+
         try:
             TuneManager.get().tune(user, thread, listening_date=timezone.now())
+
             return Response({
-                "listening_thread": user.listening_thread,
+                "listening_thread": user.listening_thread.pk \
+                    if user.listening_thread is not None else None,
                 "last_listening_date": user.last_listening_date
             })
         except UnexistentMembership as unexistentMembership:
@@ -99,12 +105,16 @@ class TuneMixin(object):
         serializer = SeeThreadSerializer(data=data, context={'request': request})
 
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)
 
         try:
             serializer.save()
         except UnexistentMembership as unexistentMembership:
-            return Response(str(unexistentMembership), status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                dict(errors=str(unexistentMembership)),
+                status=status.HTTP_401_UNAUTHORIZED)
 
         return self.retrieve(request, pk)
 
@@ -187,7 +197,7 @@ class MessageViewSet(NestedViewSetMixin,
             'user': sender,
         }
 
-        data = request.data
+        data = dict(request.data)
 
         if thread is not None:
             data['thread'] = thread.pk

@@ -15,6 +15,7 @@ class ChannelHandler(object):
         # package = __package__
         package = cls.__module__
         idx = package.rindex(".")
+
         if idx:
             package = package[0:idx]
 
@@ -49,6 +50,7 @@ class ChannelHandler(object):
             payload=data,
             sender=self.connection.authenticator.get_identifier()
         )
+
     @classmethod
     def server_publish(self, channel, payload_type, data, sender='server'):
         publish(

@@ -128,13 +128,22 @@ class MessageTagSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ("id", "user_sender", "sender_details", "thread", "contents", "sent_date", "message_type", "tags", "attachment")
+        fields = ("id", 
+                  "user_sender", 
+                  "sender_details", 
+                  "thread", 
+                  "contents", 
+                  "sent_date", 
+                  "message_type", 
+                  "tags", 
+                   "attachment")
         extra_kwargs = {
             "message_type": {"read_only": True},
             "user_sender": {"read_only": True},
             "sent_date": {"read_only": True},
 #            "thread": {"read_only": True},
         }
+
     sender_details = UserSerializer(source="sender", read_only=True)
     tags = MessageTagSerializer(many=True)
 
@@ -157,4 +166,3 @@ class MessageSerializer(serializers.ModelSerializer):
         message = Message.objects.send(message, thread, tags=tags)
 
         return message
-
