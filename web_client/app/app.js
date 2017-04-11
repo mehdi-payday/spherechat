@@ -13,6 +13,7 @@ angular
 		'myApp.resetpassword',
 		'myApp.signup',
 		'myApp.main',
+		'myApp.webclient',
 		'api',
 		'routeStyles'
 	])
@@ -100,6 +101,29 @@ angular
 			          'css/confetti.css',
 			          'css/signup.css',
 			          'css/checkbox.css']
+			})
+			
+			.when('/webclient', {
+			    templateUrl: 'webclient/webclient.html',
+			    controller: 'WebclientCtrl',
+			    css: ['https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css',
+			          'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+			          'webclient/preloader.css',
+			          'webclient/front-prof.css',
+			          'webclient/sidemenu.css',
+			          'webclient/intercom.css',
+			          'webclient/chat.css',
+			          'webclient/main.css',
+			          'webclient/test2.css',
+			          'webclient/gear.css',
+			          'webclient/anime.css',
+			          'webclient/style2.css',
+			          'webclient/image.css',
+			          'lib/font-awesome-4.6.3/css/font-awesome.css',
+			          'lib/octicons/octicons.min.css',
+			          'css/animate.css',
+			          'css/confetti.css',
+			          ]
 			})
 			.otherwise({redirectTo: '/'});
 	}])
