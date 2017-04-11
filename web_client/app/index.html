@@ -96,7 +96,7 @@
     
     <div class="page-wrap" data-parent="true" data-label="Intro" data-name="Intro" data-section="1">
     
-      <header id="header" class="white-text" >
+      <header id="header" class="white-text" ng-hide="hideNavbar">
         <div class="header-holder">
           <div class="wrap">
             <div class="logo"> 
@@ -256,7 +256,7 @@
       <div ng-view></div>
       
       
-      <footer id="footer">
+      <footer id="footer" ng-hide="hideFooter">
         <div class="container footer-container">
           <div class="row">
             <div class="col-md-3">

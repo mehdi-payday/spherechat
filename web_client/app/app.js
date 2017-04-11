@@ -94,4 +94,10 @@ angular
     		}
     	});};
     	return api;
-    }]);
+    }])
+    .run(function($rootScope) {
+	    $rootScope.$on("$routeChangeStart", function(next, current) { 
+	    	$rootScope.hideNavbar = false;
+	    	$rootScope.hideFooter = false;
+	    });
+	});
