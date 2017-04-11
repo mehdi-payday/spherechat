@@ -13,7 +13,8 @@ angular
 		'myApp.resetpassword',
 		'myApp.signup',
 		'myApp.main',
-		'api'
+		'api',
+		'routeStyles'
 	])
 
 	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
@@ -38,27 +39,67 @@ angular
 			})
 			.when('/comingsoon', {
 			    templateUrl: 'website/comingsoon/comingsoon.html',
-			    controller: 'ComingsoonCtrl'
+			    controller: 'ComingsoonCtrl',
+			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300',
+			          'http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,700,700italic,600,600italic',
+			          'http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600',
+			          'css/normalize.css',
+			          'css/component.css',
+			          'css/bg-slider.css',
+					  'clock/css/clock.css',
+					  'css/main.css',
+					  'css/responsive.css']
 			})
 			.when('/downloads', {
 			    templateUrl: 'website/downloads/downloads.html',
-			    controller: 'DownloadsCtrl'
+			    controller: 'DownloadsCtrl',
+			    css: ['css/downloads.css']
 			})
 			.when('/faq', {
 			    templateUrl: 'website/faq/faq.html',
-			    controller: 'FaqCtrl'
+			    controller: 'FaqCtrl',
+			    css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
+			          'http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800',
+			          'https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext',
+			          'http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751',
+			          'lib/font-awesome-4.6.3/css/font-awesome.css',
+			          'css/animate.css',
+			          'css/preloader.css',
+			          'css/init.css',
+			          'css/uncss.css',
+			          'css/bootstrap.min.css',
+			          'css/main.css',
+			          'css/style.css',
+			          'css/style2.css',
+			          'css/testimony.css',
+			          'css/common.min.css',
+			          'css/home.min.css',
+			          'css/apps.min.css',
+			          'css/intro.css',
+			          'css/social.css']
 			})
 			.when('/login', {
 			    templateUrl: 'website/login/login.html',
-			    controller: 'LoginCtrl'
+			    controller: 'LoginCtrl',
+			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
+			          'css/login.css',
+			          'css/particules.css',
+			          'css/checkbox.css']
 			})
 			.when('/resetpassword', {
 			    templateUrl: 'website/resetpassword/resetpassword.html',
-			    controller: 'ResetpasswordCtrl'
+			    controller: 'ResetpasswordCtrl',
+			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
+			          'css/resetpassword.css',
+			          'css/particules.css']
 			})
 			.when('/signup', {
 			    templateUrl: 'website/signup/signup.html',
-			    controller: 'SignupCtrl'
+			    controller: 'SignupCtrl',
+			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
+			          'css/confetti.css',
+			          'css/signup.css',
+			          'css/checkbox.css']
 			})
 			.otherwise({redirectTo: '/'});
 	}])
