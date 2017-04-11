@@ -4,8 +4,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>ShereChat - Inbox</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
-    <link rel="stylesheet" href="../octicons/octicons.min.css">    
+    <link rel="stylesheet" type="text/css" href="update.css">
+    <link rel="stylesheet" type="text/css" href="checkbox.css">
+    <link rel="stylesheet" type="text/css" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
+    <link rel="stylesheet" type="text/css" href="../octicons/octicons.min.css">    
     <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="preloader.css">
     <link rel="stylesheet" type="text/css" href="front-prof.css">
@@ -23,7 +26,6 @@
     <link rel="stylesheet" type="text/css" href="style2.css">
     <link rel="stylesheet" type="text/css" href="image.css">
     <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
   </head>
 <body>
     <div id="preloader">
@@ -622,44 +624,43 @@
                       </label>
                       </span>
                     </div>
-                    <figure class="fieldWrap no-border" style="margin-bottom: 12px !important;"><label class="fieldName">Account Preview</label></figure>
+                    <figure class="fieldWrap no-border"><label class="fieldName">Account Preview</label></figure>
                     <div class="profile-main profile-main-left">
-                      <div class="profile-card module">
-                        <div class="profile-card-bg u-block">
-                        </div>
-                        <div class="profile-card-content">
-                          <div class="profile-card-avatarLink u-inlineBlock profile-animation">
-                            <img class="profile-card-avatarImage profile" src="https://pbs.twimg.com/profile_images/711251132912373760/NpQPP0A5_bigger.jpg">
-                          </div>
-                          <div class="profile-card-userFields account-group">
-                            <div class="profile-card-name u-textTruncate">
-                              <a class="u-textInheritColor">Admin</a>
-                            </div>
-                            <span class="profile-card-screenname u-inlineBlock">
-                            <a class="profile-card-screennameLink u-linkComplex">
-                            <span class="username u-dir">@<b>admin</b></span>
+                      <div class="gb ut" style="margin-top: -180px;">
+                        <div class="uv">
+                          <form role="form" method="" action="" class="alq dj j" autocomplete="off">
+                            <a class="l amb">
+                              <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" alt="brand" style="border-radius: 10px;">
                             </a>
-                            </span>
-                          </div>
-                          <div class="profile-card-stats">
-                            <ul class="Arrange align-bottom layout-equal">
-                              <li class="size-fit">
-                                <a class="u-block">
-                                <span class="u-block">Groups</span>
-                                <span>2,981</span>
-                                </a>
-                              </li>
-                              <li class="size-fit">
-                                <a class="u-block">
-                                <span class=" u-block">Friends</span>
-                                <span>437</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
+                            <p style="margin-top: 20px; margin-bottom: 20px;">Change your account settings here</p>
+                            <div class="et">
+                              <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                            </div>
+                             <div class="et">
+                                <div class="input-group">
+                                  <label class="input-group-btn">
+                                      <span class="btn btn-primary">
+                                          Browse &hellip; <input id="profilePicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
+                                      </span>
+                                  </label>
+                                  <input type="text" id="file" placeholder="New Profile Picture" class="form-control" style="background-color: #fff;" readonly>
+                              </div>
+                            </div>
+                            <div class="et">
+                              <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="et">
+                              <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="et">
+                              <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" placeholder="Repeat Password">
+                            </div>
+                            <div class="amb">
+                              <button type="button" class="btn fp" id="login" onclick="log()">Save Changes</button>
+                            </div>
+                          </form>
                         </div>
                       </div>
-                    </div>
                     <div>
                       <figure class="fieldWrap no-border margin-0"><label class="fieldName">Theme</label></figure>
                       <div class="themeList">
@@ -796,21 +797,6 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <figure class="fieldWrap no-border"><label class="fieldName">Font size</label></figure>
-                    <div class="fieldLink fieldColumns"><input type="radio" name="fontSize" readonly="" value="on"><span>XS</span></div>
-                    <div class="fieldLink fieldColumns"><input type="radio" name="fontSize" readonly="" value="on"><span>S</span></div>
-                    <div class="fieldLink fieldColumns"><input type="radio" name="fontSize" readonly="" value="on"><span>M</span></div>
-                    <div class="fieldLink fieldColumns"><input type="radio" name="fontSize" readonly="" value="on"><span>L</span></div>
-                  </div>
-                  <div class="hide-on-clipper">
-                    <div class="superForm">
-                      <figure class="fieldWrap no-border">
-                        <label class="fieldName">Preview <b>Beta</b>
-                        </label>
-                      </figure>
-                      <div class="fieldLink fieldColumns"><span class="extra-checkbox active"></span><span>Open bookmarks in preview panel</span></div>
-                      <div class="fieldLink fieldColumns hidden"><span class="extra-checkbox active"></span><span>Open bookmarks in new tab</span></div>
                     </div>
                   </div>
                 </div>
@@ -963,37 +949,42 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
     <script type="text/javascript">
-  $("#profile-img").click(function() {
-  $("#status-options").toggleClass("active");
-});
+      $('.input-checkbox').on('click', function(){
+        $(this).toggleClass('checked');
+      });
+    </script>
+    <script type="text/javascript">
+      $("#profile-img").click(function() {
+      $("#status-options").toggleClass("active");
+    });
 
-$(".expand-button").click(function() {
-  $("#profile").toggleClass("expanded");
-  $("#contacts").toggleClass("expanded");
-});
+    $(".expand-button").click(function() {
+      $("#profile").toggleClass("expanded");
+      $("#contacts").toggleClass("expanded");
+    });
 
-$("#status-options ul li").click(function() {
-  $("#profile-img").removeClass();
-  $("#status-online").removeClass("active");
-  $("#status-away").removeClass("active");
-  $("#status-busy").removeClass("active");
-  $("#status-offline").removeClass("active");
-  $(this).addClass("active");
-  
-  if($("#status-online").hasClass("active")) {
-    $("#profile-img").addClass("online");
-  } else if ($("#status-away").hasClass("active")) {
-    $("#profile-img").addClass("away");
-  } else if ($("#status-busy").hasClass("active")) {
-    $("#profile-img").addClass("busy");
-  } else if ($("#status-offline").hasClass("active")) {
-    $("#profile-img").addClass("offline");
-  } else {
-    $("#profile-img").removeClass();
-  };
-  
-  $("#status-options").removeClass("active");
-});
+    $("#status-options ul li").click(function() {
+      $("#profile-img").removeClass();
+      $("#status-online").removeClass("active");
+      $("#status-away").removeClass("active");
+      $("#status-busy").removeClass("active");
+      $("#status-offline").removeClass("active");
+      $(this).addClass("active");
+      
+      if($("#status-online").hasClass("active")) {
+        $("#profile-img").addClass("online");
+      } else if ($("#status-away").hasClass("active")) {
+        $("#profile-img").addClass("away");
+      } else if ($("#status-busy").hasClass("active")) {
+        $("#profile-img").addClass("busy");
+      } else if ($("#status-offline").hasClass("active")) {
+        $("#profile-img").addClass("offline");
+      } else {
+        $("#profile-img").removeClass();
+      };
+      
+      $("#status-options").removeClass("active");
+    });
 
 /*(function(){
   
