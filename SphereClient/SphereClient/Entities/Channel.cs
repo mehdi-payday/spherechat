@@ -1,4 +1,4 @@
-﻿namespace SphereClient.Entities {
+namespace SphereClient.Entities {
     public struct Channel : Entity {
         public int ChannelId { get; set; }
         public int ThreadId { get; set; }
@@ -11,6 +11,10 @@
         public Membership Membership { get; set; }
         public Membership[] Memberships { get; set; }
         public bool IsNull { get; set; }
+
+        public string ToText() {
+            return JSON.Stringify(this);
+        }
 
         public enum Types {
             DISCUSSION = 0,

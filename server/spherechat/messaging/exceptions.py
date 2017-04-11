@@ -22,3 +22,6 @@ class UnexistentMembership(Exception):
 
 class UnauthorizedAction(Exception):
     pass
+
+class MessageAlreadySent(Exception):
+    pass

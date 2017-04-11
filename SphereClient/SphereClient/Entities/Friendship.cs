@@ -10,5 +10,9 @@ namespace SphereClient.Entities {
         public DateTime FriendshipEndDate { get; set; }
         public bool Active { get; set; }
         public bool IsNull { get; set; }
+
+        public string ToText() {
+            return JSON.Stringify(this);
+        }
     }
 }

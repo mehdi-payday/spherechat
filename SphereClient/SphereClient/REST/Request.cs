@@ -2,7 +2,7 @@
 using System.Net;
 
 namespace SphereClient.REST {
-    class Request : IDisposable {
+    public class Request : IDisposable {
         public string API = "http://spherechat.tk:8000/api";
 
         public Request(string method) {

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <title>Sign Up</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/confetti.css">
+    <link href="../css/signup.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/checkbox.css">
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <body>
+    <canvas id="confetti"></canvas>
+        <div class="gb ut">
+          <div class="uv">
+            <form role="form" method="" action="" class="alq dj j" autocomplete="off">
+              <a href="../index/index.html" class="l amb">
+                <img src="../img/register.png" alt="brand">
+              </a>
+              <h1>Create an Account</h1>
+              <p>Join ShereChat Today <br> All fields with <span style="color: red;">*</span> are required</p>
+              <div class="et">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+              </div>
+              <div class="et">
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+              </div>
+               <div class="et">
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                            Browse &hellip; <input id="profilePicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
+                        </span>
+                    </label>
+                    <input type="text" id="file" placeholder="Profile Picture" class="form-control" style="background-color: #fff;" readonly>
+                </div>
+              </div>
+              <div class="et">
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                            Browse &hellip; <input id="bannerPicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
+                        </span>
+                    </label>
+                    <input type="text" id="file2" placeholder="Banner Background Picture" class="form-control" style="background-color: #fff;" readonly>
+                </div>
+              </div>
+              <div class="et">
+                <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="et">
+                <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+              </div>
+              <div class="et">
+                <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" placeholder="Repeat Password">
+              </div>
+              <div class="et">
+                <select name="gender" id="gender" class="form-control">
+                  <option value="">I Am...</option>
+                  <option value="AF">Male</option>
+                  <option value="AX">Female</option>
+                  <option value="AL">Other</option>
+                </select>
+              </div>
+              <div class="et">
+            <div class="input-checkbox">
+              <div class="inner"></div>
+              <input id="terms" type="checkbox" name="terms">
+            </div> By signing up, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, including <a href="#">Cookie Use</a>.
+              </div>
+              <div class="amb">
+                <button type="button" class="btn fp" id="login" onclick="log()">Create Account</button>
+              </div>
+              <footer class="apd" style="margin-top: 15%;">
+                <a href="../login/index.html" class="dp">Have an account? Login</a>
+              </footer>
+            </form>
+          </div>
+        </div>
+        <script type="text/javascript">
+              $('.input-checkbox').on('click', function(){
+                $(this).toggleClass('checked');
+            });
+        </script>
+        <script type="text/javascript" src="../js/conffeti.js"></script>
+    </body>
+    </html>

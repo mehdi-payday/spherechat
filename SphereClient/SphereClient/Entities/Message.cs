@@ -11,6 +11,10 @@ namespace SphereClient.Entities {
         public MessageTag[] Tags { get; set; }
         public bool IsNull { get; set; }
 
+        public string ToText() {
+            return Contents;
+        }
+
         public enum Types {
             SYSTEM = 0,
             USER = 1

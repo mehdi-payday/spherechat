@@ -1,12 +1,14 @@
-from omnibus.factories import websocket_connection_factory, sockjs_connection_factory
-
+from omnibus.factories import (
+    websocket_connection_factory, 
+    sockjs_connection_factory)
 import simplejson
 from importlib import import_module
 
+
 def connection_factory(auth_class, pubsub):
-    class BasicConnection(sockjs_connection_factory(auth_class, pubsub)):
+    class BasicConnection(websocket_connection_factory(auth_class, pubsub)):
         def on_message(self, msg):
-            super(GeneratedConnection, self).on_message(msg)
+            super(BasicConnection, self).on_message(msg)
 
         """
         @return {boolean} publish : publish the message
@@ -48,10 +50,10 @@ def connection_factory(auth_class, pubsub):
             print "Parts"
             print parts
 
-            connection.schema_name = schema_name
+#            connection.schema_name = schema_name
             twodots_index = payload.index(":")
 
-            data = simplejson.loads( payload[twodots_index+1:] )
+            data = simplejson.loads(payload[twodots_index+1:])
             mod = import_module(module + ".channels")
 
             handler_class = getattr(mod, handler)
@@ -80,3 +82,4 @@ def connection_factory(auth_class, pubsub):
                 if publish_it == True:
                     self.publish(payload)
 
+    return BasicConnection

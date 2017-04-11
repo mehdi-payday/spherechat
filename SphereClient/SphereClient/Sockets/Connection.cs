@@ -87,7 +87,6 @@ namespace SphereClient.Sockets {
 
             int read = Socket.EndReceive(result);
             if (read == 0) {
-                //Socket.Disconnect(true);
                 OnDisconnect?.Invoke();
             }
             else {

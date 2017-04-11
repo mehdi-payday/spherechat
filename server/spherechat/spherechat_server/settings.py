@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
     'rest_auth',
     'django_filters',
     'rest_auth.registration',
-    
     'allauth',
     'allauth.account'
 ]
@@ -95,6 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'omnibus.context_processors.omnibus',
             ],
         },
     },
@@ -108,11 +107,11 @@ WSGI_APPLICATION = 'spherechat_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spherechat',
         'USER': 'spherechat',
         'PASSWORD': 'payday',
-        'HOST': 'localhost',  
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
@@ -166,11 +165,15 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-OMNIBUS_ENDPOINT_SCHEME = 'http'  # 'ws' is used for websocket connections
-OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.sockjs_webapp_factory'
+OMNIBUS_ENDPOINT_SCHEME = 'ws'  # 'ws' is used for websocket connections
+OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.websocket_webapp_factory'
+# sockjs_webapp_factory'
+
 # OMNIBUS_CONNECTION_FACTORY = 'omnibus.factories.sockjs_connection_factory'
-# OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
-OMNIBUS_CONNECTION_FACTORY = "omnibus.factories.sockjs_connection_factory"
+OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
+# OMNIBUS_CONNECTION_FACTORY = 'omnibus.factories.websocket_connection_factory'
+# sockjs_connection_factory"
+
 # OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.userauthenticator_factory'
 OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
-
+# OMNIBUS_AUTHENTICATOR_FACTORY = 'core.factories.usertokenauthenticator_factor

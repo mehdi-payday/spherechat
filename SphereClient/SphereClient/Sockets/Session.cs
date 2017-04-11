@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SphereClient.REST;
+using System;
 using System.Text;
 
 namespace SphereClient.Sockets {
@@ -28,35 +29,45 @@ namespace SphereClient.Sockets {
             conn.Connect();
         }
 
+        public void Send(Entities.Entity entity) {
+            conn.Send(
+                new Buffers.WebSocket.Write(
+                    Encoding.UTF8.GetBytes(
+                        JSON.Stringify(
+                            Parser.EntitytoJSON(entity, entity.GetType())))));
+        }
+
         private void Conn_OnSent() {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Sent !");
         }
 
         private void Conn_OnSending() {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Sending..");
         }
 
         private void Conn_OnReceive(string data) {
-            throw new System.NotImplementedException();
+            Console.WriteLine(data);
         }
 
         private void Conn_OnReady() {
-            throw new System.NotImplementedException();
-        }
-
-        private void Conn_OnDisconnect() {
             conn.Send(new Buffers.WebSocket.Write(Encoding.UTF8.GetBytes("!authenticate:" + Guid.NewGuid().ToString() + ":" + auth.Token)));
         }
 
+        private void Conn_OnDisconnect() {
+            Console.WriteLine("Disconnected !");
+        }
+
         private void Conn_OnConnecting() {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Connecting..");
         }
 
         private void Conn_OnConnected() {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Connected !");
         }
 
-        public void Dispose() { }
+        public void Dispose() {
+            conn.Dispose();
+        }
         ~Session() { Dispose(); }
     }
 }

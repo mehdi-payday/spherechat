@@ -64,7 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     picture = models.ImageField(
         'profile_picture',
-        upload_to='/uploads',
+        upload_to='uploads',
         null=True,
         blank=True
     )
@@ -80,6 +80,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
+
+    def is_human(self):
+        return self.type == self.__class__.HUMAN
+
+    def is_bot(self):
+        return self.type == self.__class__.BOT
 
     def get_author(self):
         return self

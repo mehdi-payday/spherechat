@@ -14,6 +14,10 @@ namespace SphereClient.Entities {
         public bool IsFriend { get; set; }
         public bool IsNull { get; set; }
 
+        public string ToText() {
+            return JSON.Stringify(this);
+        }
+
         public enum Types {
             HUM = 0,
             BOT = 1

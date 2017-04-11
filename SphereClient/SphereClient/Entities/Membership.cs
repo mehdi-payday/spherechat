@@ -12,5 +12,9 @@ namespace SphereClient.Entities {
         public User UserDetails { get; set; }
         public int UncheckedCount { get; set; }
         public bool IsNull { get; set; }
+
+        public string ToText() {
+            return JSON.Stringify(this);
+        }
     }
 }
