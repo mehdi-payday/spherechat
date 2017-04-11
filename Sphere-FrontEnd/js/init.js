@@ -463,36 +463,11 @@ function whichTransitionEvent() {
 			logoel = document.querySelectorAll('.menu-shrink .logo-container');
 			mainmenu = (wwidth > mediaQuery) ? document.querySelectorAll('.menu-primary .menu-container') : document.querySelectorAll('.menu-primary .menu-container, .vmenu-container .logo-container');
 			secmenu = document.querySelectorAll('.menu-secondary');
-			calculateMenuHeight(true);
 			for (var k = 0; k < menuItemsButton.length; k++) {
 				var a_item = menuItemsButton[k].parentNode,
 					buttonHeight = outerHeight(menuItemsButton[k]);
 				a_item.style.height = buttonHeight + 'px';
 			}
-		},
-		calculateMenuHeight = function(first) {
-			menuHeight = transmenuHeight = secmenuHeight = 0;
-			for (var i = 0; i < mainmenu.length; i++) {
-				menuHeight = menuHeight + outerHeight(mainmenu[i]);
-				if (isIE && first) {
-					getDivChildren(mainmenu[i], '.menu-horizontal-inner', function(innerMenu, i) {
-						innerMenu.style.height = menuHeight + 'px';
-					});
-				}
-
-				if (classie.hasClass(mainmenu[i].parentNode, 'menu-transparent')) {
-					transmenuHeight += menuHeight;
-				}
-			}
-			for (var j = 0; j < secmenu.length; j++) {
-				secmenuHeight = outerHeight(secmenu[j]);
-			}
-			menuHeight += secmenuHeight;
-			if (masthead != undefined && first) {
-				if (wwidth > mediaQuery) masthead.parentNode.style.height = menuHeight + 'px';
-			}
-			if (classie.hasClass(document.documentElement, 'admin-mode')) menuHeight += 32;
-			UNCODE.menuHeight = menuHeight;
 		},
 		initHeader = function() {
 			UNCODE.adaptive();
@@ -1427,7 +1402,6 @@ function whichTransitionEvent() {
 			}, 2000);
 		}
 		showHideScrollup(bodyTop);
-		calculateMenuHeight(false);
 		jQuery(window).trigger('resize');
 	}, false);
 
