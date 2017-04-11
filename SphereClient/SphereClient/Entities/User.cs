@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace SphereClient.Entities {
-    [Serializable]
-    class User : Entity {
+    public struct User : Entity {
         public int UserId { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
@@ -13,6 +12,7 @@ namespace SphereClient.Entities {
         public DateTime LastListeningDate { get; set; }
         public string ProfilePicture { get; set; }
         public bool IsFriend { get; set; }
+        public bool IsNull { get; set; }
 
         public enum Types {
             HUM = 0,

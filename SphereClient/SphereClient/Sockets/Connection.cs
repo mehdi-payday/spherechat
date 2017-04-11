@@ -9,6 +9,7 @@ namespace SphereClient.Sockets {
     public delegate void Connecting();
     public delegate void Connected();
     public delegate void Disconnect();
+    public delegate void Ready();
 
     public delegate void Sending();
     public delegate void Sent();
@@ -16,15 +17,15 @@ namespace SphereClient.Sockets {
     public delegate void Receive(string data);
     #endregion Delegates
 
-    class Connection {
+    class Connection : IDisposable {
         #region Constructors
-        public Connection(Configuration config) {
+        public Connection(Configuration config, bool connect = true) {
             Configuration = config;
 
             Socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-            OnConnecting?.Invoke();
-            Socket.BeginConnect(Configuration.EP, beginConnect, new Buffers.HTTP.Read(new byte[4096]));
+            if (connect)
+                Connect();
         }
         #endregion Constructors
 
@@ -32,6 +33,7 @@ namespace SphereClient.Sockets {
         public event Connecting OnConnecting;
         public event Connected OnConnected;
         public event Disconnect OnDisconnect;
+        public event Ready OnReady;
 
         public event Sending OnSending;
         public event Sent OnSent;
@@ -43,6 +45,11 @@ namespace SphereClient.Sockets {
         private Socket Socket { get; set; }
         public Configuration Configuration { get; set; }
         #endregion Get/Set
+
+        public void Connect() {
+            OnConnecting?.Invoke();
+            Socket.BeginConnect(Configuration.EP, beginConnect, new Buffers.HTTP.Read(new byte[4096]));
+        }
 
         public void Send(Buffers.WebSocket.Write buffer) {
             var parsed = buffer.Parsed;
@@ -63,8 +70,8 @@ namespace SphereClient.Sockets {
             Socket.EndConnect(result);
             OnConnected?.Invoke();
 
-            var hello = Encoding.UTF8.GetBytes(Configuration.HelloServer.Header());
-            Socket.Send(hello, hello.Length, 0); // Handshake
+            var hello = Encoding.UTF8.GetBytes(Configuration.HelloServer.Header("GET", Configuration.Path));
+            Socket.Send(hello, hello.Length, 0);
 
             Buffers.HTTP.Read buffer = new Buffers.HTTP.Read(new byte[4096]);
             Socket.BeginReceive(buffer.Buffer, 0, buffer.Size, 0, beginReceive, buffer);
@@ -80,6 +87,7 @@ namespace SphereClient.Sockets {
 
             int read = Socket.EndReceive(result);
             if (read == 0) {
+                //Socket.Disconnect(true);
                 OnDisconnect?.Invoke();
             }
             else {
@@ -97,10 +105,13 @@ namespace SphereClient.Sockets {
 
                         // Upgrade to websocket on server request
                         if (current.HTTP_STATUS == 101 && current.Headers.Contains(new KeyValuePair<string, string>("Upgrade", "websocket"))) {
+                            OnReady?.Invoke();
                             next = new Buffers.WebSocket.Read(new byte[4096]);
                         }
                         else {
-                            Console.WriteLine("HTTP " + current.HTTP_STATUS);
+                            var hello = Encoding.UTF8.GetBytes(Configuration.HelloServer.Header("GET", Configuration.Path));
+                            Socket.Send(hello, hello.Length, 0);
+
                             next = new Buffers.HTTP.Read(new byte[4096]);
                         }
 
@@ -136,6 +147,10 @@ namespace SphereClient.Sockets {
                 }
             }
         }
+
+        public void Dispose() { }
+
+        ~Connection() { Dispose(); }
     }
 
 }

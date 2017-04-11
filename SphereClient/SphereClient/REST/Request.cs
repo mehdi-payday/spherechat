@@ -10,11 +10,14 @@ namespace SphereClient.REST {
             Method = method;
         }
 
-        public Request POST(string json = null, WebHeaderCollection additionalHeaders = null) {
+        public Request POST(dynamic json = null, WebHeaderCollection additionalHeaders = null) {
             using (var wc = new WebClient()) {
                 if (additionalHeaders != null)
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
+
+                if (json.GetType() != typeof(String))
+                    json = JSON.Stringify(json);
 
                 Payload = JSON.Parse(wc.UploadString(API + Method, "POST", json ?? "{}"));
             }
@@ -38,6 +41,9 @@ namespace SphereClient.REST {
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
+                if (json.GetType() != typeof(String))
+                    json = JSON.Stringify(json);
+
                 Payload = JSON.Parse(wc.UploadString(API + Method, "PUT", json ?? "{}"));
             }
             return this;
@@ -60,6 +66,9 @@ namespace SphereClient.REST {
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
+                if (json.GetType() != typeof(String))
+                    json = JSON.Stringify(json);
+
                 Payload = JSON.Parse(wc.UploadString(API + Method, "PATCH", json ?? "{}"));
             }
             return this;
@@ -71,6 +80,9 @@ namespace SphereClient.REST {
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
+                if (json.GetType() != typeof(String))
+                    json = JSON.Stringify(json);
+
                 Payload = JSON.Parse(wc.UploadString(API + Method, "OPTONS", json ?? "{}"));
             }
             return this;
@@ -81,10 +93,7 @@ namespace SphereClient.REST {
         public dynamic Payload { get; set; }
         public Entities.Entity Entity { get; set; }
 
-        public void Dispose() {
-
-        }
-
+        public void Dispose() { }
         ~Request() {
             Dispose();
         }

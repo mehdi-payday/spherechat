@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace SphereClient.Entities {
-    [Serializable]
-    class Membership : Entity {
+    public struct Membership : Entity {
+        public int MembershipId { get; set; }
         public int UserId { get; set; }
         public int ThreadId { get; set; }
         public DateTime LastSeenDate { get; set; }
@@ -11,5 +11,6 @@ namespace SphereClient.Entities {
         public DateTime JoinDate { get; set; }
         public User UserDetails { get; set; }
         public int UncheckedCount { get; set; }
+        public bool IsNull { get; set; }
     }
 }
