@@ -274,9 +274,9 @@ body {
     box-shadow: none
 }
 .ut {
+    position: relative;
     display: table;
     width: 100%;
-    height: 100vh
 }
 .ut .uv {
     display: table-cell

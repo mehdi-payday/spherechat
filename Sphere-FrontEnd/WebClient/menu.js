@@ -126,6 +126,7 @@ if ($(window).width() < 667 || isMobile) {
 // Theme switcher
 $('.themePreview.theme-sidebar-dark.themeDark').on('click', function(){
   $('#markup').toggleClass('themeDark');
+  alert('asajhvcsajcb');
 });
 
 // user
@@ -182,7 +183,8 @@ $('#buttonfiles').on('click', function(){
 $('.conversation-summary.conversation-summary-0').on('click', function(){
     $('#intercom-container').addClass("wow fadeInUp");
     $('#intercom-container').fadeIn('slow');
-    $('#no-message').fadeOut('slow');
+    $('#no-message').fadeOut('fast');
+    $('#has-message').fadeIn('slow');
     $(this).find(".card-face__bullet").fadeOut('slow');
     $('.conversation-summary.conversation-summary-0.conversation-summary-selected').removeClass('conversation-summary-selected');
     $(this).addClass('conversation-summary-selected');
