@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace SphereClient {
     static class Program {
@@ -7,10 +8,10 @@ namespace SphereClient {
         /// </summary>
         //[STAThread]
         static void Main() {
-            /* Application.EnableVisualStyles();
+             Application.EnableVisualStyles();
              Application.SetCompatibleTextRenderingDefault( false );
-             Application.Run( new Form1() );*/
-
+             Application.Run( new LoginForm() );
+             /*
             using (var rest = new REST.Session("sphereman", "spherique")) {
                 using (var ws = new Sockets.Session(new Sockets.Configuration("spherechat.tk", 4242, "/ec", "123456789"), rest.Auth)) {
                     string line = null;
@@ -18,7 +19,7 @@ namespace SphereClient {
                         //ws.Send();
                     }
                 }
-            }
+            }*/
         }
     }
 }

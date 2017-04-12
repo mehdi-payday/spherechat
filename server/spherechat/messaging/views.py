@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.db import models
 from rest_framework import serializers
 from rest_framework import mixins
 from rest_framework import viewsets
@@ -147,12 +148,25 @@ class PrivateDiscussionViewSet(TuneMixin,
 class MessageFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Message
-        fields = ('user_sender', 'contents', 'attachment_name', 'sent_date')
+        fields = {
+            'user_sender': ['exact'],
+            'contents': ['icontains'],
+            'attachment': ['icontains'],
+            'sent_date': ['gt', 'lt'],
+        }
+        filter_overrides = {
+            models.FileField: {
+                'filter_class': django_filters.CharFilter,
+                'extra': lambda f: {
+                    'lookup_expr': 'icontains'
+                }
+            }
+        }
 
-    attachment_name = django_filters.CharFilter(method='filter_by_attachment_name')
+    attachment = django_filters.CharFilter(method='filter_by_attachment_name')
 
-    def filter_by_attachment_name(self, queryset, value):
-        return queryset.filter(attachment__name__icontains=value)
+    def filter_by_attachment_name(self, queryset, name, value):
+        return queryset.filter(attachment__icontains=value)
 
 class MessagePagination(CursorPagination):
     page_size = 20

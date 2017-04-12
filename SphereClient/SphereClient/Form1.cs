@@ -11,6 +11,7 @@ using SphereClient.REST;
 using SphereClient.Logger;
 using SphereClient.Components;
 using SphereClient.Entities;
+using System.Net;
 
 namespace SphereClient {
     /// <summary>
@@ -20,15 +21,17 @@ namespace SphereClient {
         private static Form1 _instance = null;
 
         public Session session;
-        public IList<Channel> fetchedChannels;
+        public User? user;
+        public IList<Entity> fetchedChannels;
         public Channel currentChannel;
+        public Panel preloader;
         /// <summary>
         /// Static initializer
         /// </summary>
         static Form1(){
 
         }
-
+        
         /// <summary>
         /// Constructor for the Form1 class. Initializes the object
         /// and creates a session.
@@ -37,6 +40,7 @@ namespace SphereClient {
         /// <param name="password">password for the username's account</param>
         protected Form1(string username, string password) {
             InitializeComponent();
+            MakePreloader();
             Connect( username, password );
         }
         /// <summary>
@@ -44,6 +48,27 @@ namespace SphereClient {
         /// </summary>
         protected Form1( ) {
             InitializeComponent();
+            MakePreloader();
+        }
+
+        /// <summary>
+        /// Generates the preloader object.
+        /// </summary>
+        private void MakePreloader() {
+            preloader = new Panel();
+            preloader.Size = this.Size;
+            preloader.Left = 0;
+            preloader.Top = 0;
+            preloader.BackColor = Color.White;
+            PictureBox pb = new PictureBox();
+            pb.Image = Properties.Resources._25;
+            pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            pb.Size = new Size( 200, 200 );
+            pb.Parent = preloader;
+            pb.Left = (int)(preloader.Width - pb.Width) / 2;
+            pb.Top = (int)(preloader.Height - pb.Height) / 2;
+            preloader.Controls.Add( pb );
+            this.Controls.Add( preloader );
         }
 
         /// <summary>
@@ -64,12 +89,14 @@ namespace SphereClient {
         /// <param name="password">the password to use</param>
         public void Connect( string username, string password ) {
             this.session = new REST.Session( username, password );
+            this.user = this.session.GetProfile();
+            
         }
 
         /// <summary>
         /// Starts the main application logic loop.
         /// </summary>
-        public void Start() {            
+        public void Start() {      
             System.Threading.Thread t = new System.Threading.Thread( delegate () {
                 FetchChannels();
             } );
@@ -81,20 +108,42 @@ namespace SphereClient {
         /// Gets the Channels from the server and updates both
         /// the Direct and Group message panels.
         /// </summary>
-        private void FetchChannels() {
+        public void FetchChannels() {
             if (InvokeRequired) {
                 Invoke( new Action( FetchChannels) );
                 return;
             }
-            this.fetchedChannels = this.session.GetChannels().ToList();
-            this.session.CurrentChannel = fetchedChannels[0];
-            panel4.FetchMessages( this.session.GetChannels()[0] );
+            this.fetchedChannels = new List<Entity>();
+            foreach (var c in this.session.GetChannels()) {
+                this.fetchedChannels.Add( c );
+            }
+            this.currentChannel = (Channel)fetchedChannels[0];
+            panel4.FetchMessages( this.currentChannel);
 
             if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                 Application.Exit();
             }
+
+            
+            
         }
 
+        /// <summary>
+        /// Sets the currently viewed channel and updates the message box pane.
+        /// </summary>
+        /// <param name="index">the id of the channel</param>
+        public void SetCurrentViewedChannel(int id) {
+            if (InvokeRequired) {
+                Invoke(new Action(()=> { SetCurrentViewedChannel( id); } ));
+                return;
+            }
+            if(id == this.currentChannel.ChannelId) {
+                return;
+            }
+            IEnumerable<Entity> list = this.fetchedChannels.Where( c => ((Channel)c).ChannelId == id );
+            this.currentChannel = (Channel)(list.Any() ? list.First() : null);
+            this.panel4.FetchMessages( this.currentChannel );
+        }
 
         /// <summary>
         /// Returns the main form window instance singleton.
@@ -128,8 +177,48 @@ namespace SphereClient {
             Form1.Instance = new Form1();
         }
 
+        /// <summary>
+        /// Triggered once the form just closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_FormClosed( object sender, FormClosedEventArgs e ) {
             Application.Exit();
+        }
+
+        /// <summary>
+        /// Triggered when the user clicks on the "Send" button (the paper plane arrow icon) 
+        /// from the message input section.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click( object sender, EventArgs e ) {
+            Entities.Message msg = new Entities.Message();
+            msg.Contents = this.richTextBox1.Text;
+            this.session.PostMessageToChannel( msg, this.currentChannel );
+            
+        }
+
+        /// <summary>
+        /// Shows the preloader.
+        /// </summary>
+        public void ShowPreloader() {
+            if (InvokeRequired) {
+                Invoke( new Action( ShowPreloader ) );
+                return;
+            }
+            this.preloader.BringToFront();
+        }
+
+        /// <summary>
+        /// Hides the preloader.
+        /// </summary>
+        public void HidePreloader() {
+            if (InvokeRequired) {
+                Invoke( new Action( HidePreloader ) );
+                return;
+            }
+            this.preloader.SendToBack();
         }
     }
 }
