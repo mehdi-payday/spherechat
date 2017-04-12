@@ -147,7 +147,7 @@ class PrivateDiscussionViewSet(TuneMixin,
 class MessageFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Message
-        fields = ('user_sender', 'contents', 'attachment_name', 'sent_date')
+        fields = ('user_sender', 'contents', 'attachment_name', 'sent_date__gt', 'sent_date__lt')
 
     attachment_name = django_filters.CharFilter(method='filter_by_attachment_name')
 
