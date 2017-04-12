@@ -24,6 +24,9 @@ class ChannelHandler(object):
 #            + "," + cls.name
         channel_full_name = package + "," + cls.name
 
+        if isinstance(channel, long) or isinstance(channel, int):
+            channel = str(channel)
+
         if channel:
             channel_full_name = channel_full_name + "." + channel
 
