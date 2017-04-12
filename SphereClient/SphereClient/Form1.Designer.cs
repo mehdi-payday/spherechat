@@ -32,40 +32,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel8 = new SphereClient.Components.GroupListPanel();
             this.panel7 = new SphereClient.Components.DiscussionListPanel();
-            this.panel4 = new SphereClient.Components.MessageListPanel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.label51 = new System.Windows.Forms.Label();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label50 = new System.Windows.Forms.Label();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.label49 = new System.Windows.Forms.Label();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.label48 = new System.Windows.Forms.Label();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label44 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label47 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label46 = new System.Windows.Forms.Label();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label45 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.sendMessage = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -106,23 +74,11 @@
             this.label43 = new System.Windows.Forms.Label();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.label42 = new System.Windows.Forms.Label();
+            this.panel4 = new SphereClient.Components.MessageListPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel9.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
@@ -143,7 +99,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(153)))), ((int)(((byte)(231)))));
             this.panel1.Controls.Add(this.pictureBox21);
             this.panel1.Controls.Add(this.label40);
             this.panel1.Controls.Add(this.pictureBox20);
@@ -200,7 +156,9 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(97)))), ((int)(((byte)(149)))));
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.BackgroundImage = global::SphereClient.Properties.Resources.Capture;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.panel8);
             this.panel2.Controls.Add(this.panel7);
             this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(128)))), ((int)(((byte)(159)))));
@@ -211,7 +169,7 @@
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
+            this.panel8.BackColor = System.Drawing.Color.Transparent;
             this.panel8.Location = new System.Drawing.Point(0, 275);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(235, 308);
@@ -219,394 +177,16 @@
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
-            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.BackColor = System.Drawing.Color.Transparent;
+            this.panel7.Location = new System.Drawing.Point(0, 1);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(235, 276);
             this.panel7.TabIndex = 4;
             // 
-            // panel4
-            // 
-            this.panel4.AutoScroll = true;
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.panel4.Controls.Add(this.panel20);
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Controls.Add(this.panel18);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.panel17);
-            this.panel4.Controls.Add(this.panel16);
-            this.panel4.Controls.Add(this.panel15);
-            this.panel4.Controls.Add(this.panel14);
-            this.panel4.Controls.Add(this.panel13);
-            this.panel4.Controls.Add(this.panel12);
-            this.panel4.Controls.Add(this.panel11);
-            this.panel4.Controls.Add(this.panel10);
-            this.panel4.Controls.Add(this.pictureBox4);
-            this.panel4.Controls.Add(this.pictureBox3);
-            this.panel4.Controls.Add(this.pictureBox2);
-            this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Location = new System.Drawing.Point(235, 115);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(666, 531);
-            this.panel4.TabIndex = 2;
-            // 
-            // panel20
-            // 
-            this.panel20.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel20.Location = new System.Drawing.Point(127, 182);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(150, 1);
-            this.panel20.TabIndex = 31;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label8.Location = new System.Drawing.Point(606, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 15);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "15:03:17";
-            // 
-            // panel18
-            // 
-            this.panel18.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel18.Location = new System.Drawing.Point(399, 182);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(150, 1);
-            this.panel18.TabIndex = 30;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label5.Location = new System.Drawing.Point(281, 177);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 13);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "3 Mar. 2017, 15:36";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label19.Location = new System.Drawing.Point(605, 497);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(55, 15);
-            this.label19.TabIndex = 26;
-            this.label19.Text = "15:03:17";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label17.Location = new System.Drawing.Point(605, 423);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(55, 15);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "15:03:17";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label15.Location = new System.Drawing.Point(605, 138);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 15);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "15:03:17";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label11.Location = new System.Drawing.Point(605, 82);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(55, 15);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "15:03:17";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label9.Location = new System.Drawing.Point(605, 355);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 15);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "15:03:17";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label6.Location = new System.Drawing.Point(605, 299);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 15);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "15:03:53";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.Location = new System.Drawing.Point(605, 243);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 15);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "15:03:17";
-            // 
-            // panel17
-            // 
-            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
-            this.panel17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel17.BackgroundImage")));
-            this.panel17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel17.Controls.Add(this.label51);
-            this.panel17.Location = new System.Drawing.Point(377, -2);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(223, 43);
-            this.panel17.TabIndex = 9;
-            // 
-            // label51
-            // 
-            this.label51.BackColor = System.Drawing.Color.Transparent;
-            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.ForeColor = System.Drawing.SystemColors.Control;
-            this.label51.Location = new System.Drawing.Point(4, -5);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(214, 41);
-            this.label51.TabIndex = 4;
-            this.label51.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            this.label51.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // panel16
-            // 
-            this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
-            this.panel16.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
-            this.panel16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel16.Controls.Add(this.label50);
-            this.panel16.Location = new System.Drawing.Point(435, 47);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(165, 50);
-            this.panel16.TabIndex = 9;
-            // 
-            // label50
-            // 
-            this.label50.BackColor = System.Drawing.Color.Transparent;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.ForeColor = System.Drawing.SystemColors.Control;
-            this.label50.Location = new System.Drawing.Point(4, 9);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(156, 38);
-            this.label50.TabIndex = 3;
-            this.label50.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            this.label50.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // panel15
-            // 
-            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
-            this.panel15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel15.BackgroundImage")));
-            this.panel15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel15.Controls.Add(this.label49);
-            this.panel15.Location = new System.Drawing.Point(352, 103);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(248, 50);
-            this.panel15.TabIndex = 9;
-            // 
-            // label49
-            // 
-            this.label49.BackColor = System.Drawing.Color.Transparent;
-            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.ForeColor = System.Drawing.SystemColors.Control;
-            this.label49.Location = new System.Drawing.Point(10, 6);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(234, 41);
-            this.label49.TabIndex = 2;
-            this.label49.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            this.label49.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // panel14
-            // 
-            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(6)))), ((int)(((byte)(61)))));
-            this.panel14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel14.BackgroundImage")));
-            this.panel14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel14.Controls.Add(this.label48);
-            this.panel14.Location = new System.Drawing.Point(309, 388);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(285, 50);
-            this.panel14.TabIndex = 8;
-            // 
-            // label48
-            // 
-            this.label48.BackColor = System.Drawing.Color.Transparent;
-            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.ForeColor = System.Drawing.SystemColors.Control;
-            this.label48.Location = new System.Drawing.Point(3, 9);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(278, 41);
-            this.label48.TabIndex = 1;
-            this.label48.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            this.label48.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(242)))));
-            this.panel13.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
-            this.panel13.Controls.Add(this.label44);
-            this.panel13.Location = new System.Drawing.Point(86, 462);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(285, 50);
-            this.panel13.TabIndex = 8;
-            // 
-            // label44
-            // 
-            this.label44.BackColor = System.Drawing.Color.Transparent;
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label44.Location = new System.Drawing.Point(4, 17);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(256, 41);
-            this.label44.TabIndex = 0;
-            this.label44.Text = "yo wtf dude why u do this???";
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(242)))));
-            this.panel12.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
-            this.panel12.Controls.Add(this.label47);
-            this.panel12.Location = new System.Drawing.Point(86, 320);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(227, 50);
-            this.panel12.TabIndex = 7;
-            // 
-            // label47
-            // 
-            this.label47.BackColor = System.Drawing.Color.Transparent;
-            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label47.Location = new System.Drawing.Point(4, 10);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(210, 41);
-            this.label47.TabIndex = 0;
-            this.label47.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.";
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(242)))));
-            this.panel11.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
-            this.panel11.Controls.Add(this.label46);
-            this.panel11.Location = new System.Drawing.Point(86, 264);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(285, 50);
-            this.panel11.TabIndex = 6;
-            // 
-            // label46
-            // 
-            this.label46.BackColor = System.Drawing.Color.Transparent;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label46.Location = new System.Drawing.Point(4, 5);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(278, 41);
-            this.label46.TabIndex = 1;
-            this.label46.Text = "Audiam nominavi sit ea. Has meliore facilis evertitur te, te pericula mediocritat" +
-    "em sit.  Set latine inermiss ei, aperiri accusamus similique no sit.  His doctus" +
-    " ";
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(242)))));
-            this.panel10.BackgroundImage = global::SphereClient.Properties.Resources.Untitled;
-            this.panel10.Controls.Add(this.label45);
-            this.panel10.Location = new System.Drawing.Point(86, 199);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(285, 59);
-            this.panel10.TabIndex = 5;
-            // 
-            // label45
-            // 
-            this.label45.BackColor = System.Drawing.Color.Transparent;
-            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label45.Location = new System.Drawing.Point(4, 9);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(278, 41);
-            this.label45.TabIndex = 1;
-            this.label45.Text = "lorem ipsum dolor sit amet, an cum amet movet moderatius.  Ad utroque suavitate s" +
-    "uscipiantur est.   Ad conguef conssulatu com, volumus elaboraret eu sea.";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox4.Location = new System.Drawing.Point(19, 199);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox4.TabIndex = 4;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox3.Location = new System.Drawing.Point(19, 264);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox2.Location = new System.Drawing.Point(19, 320);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 462);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
-            this.panel9.Controls.Add(this.button1);
+            this.panel9.Controls.Add(this.sendMessage);
             this.panel9.Controls.Add(this.button3);
             this.panel9.Controls.Add(this.button2);
             this.panel9.Controls.Add(this.richTextBox1);
@@ -615,18 +195,19 @@
             this.panel9.Size = new System.Drawing.Size(665, 56);
             this.panel9.TabIndex = 0;
             // 
-            // button1
+            // sendMessage
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.BackgroundImage = global::SphereClient.Properties.Resources.paper_plane_document_send_sent_mail_512;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(576, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 34);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = false;
+            this.sendMessage.BackColor = System.Drawing.Color.White;
+            this.sendMessage.BackgroundImage = global::SphereClient.Properties.Resources.paper_plane_document_send_sent_mail_512;
+            this.sendMessage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.sendMessage.FlatAppearance.BorderSize = 0;
+            this.sendMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sendMessage.Location = new System.Drawing.Point(576, 12);
+            this.sendMessage.Name = "sendMessage";
+            this.sendMessage.Size = new System.Drawing.Size(23, 34);
+            this.sendMessage.TabIndex = 1;
+            this.sendMessage.UseVisualStyleBackColor = false;
+            this.sendMessage.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -1056,7 +637,9 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(97)))), ((int)(((byte)(149)))));
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.BackgroundImage = global::SphereClient.Properties.Resources.Capture1;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel3.Controls.Add(this.label43);
             this.panel3.Controls.Add(this.pictureBox22);
             this.panel3.Controls.Add(this.label42);
@@ -1099,10 +682,20 @@
             this.label42.TabIndex = 36;
             this.label42.Text = "RandomDude";
             // 
+            // panel4
+            // 
+            this.panel4.AutoScroll = true;
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Location = new System.Drawing.Point(235, 115);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(666, 531);
+            this.panel4.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::SphereClient.Properties.Resources.chatting_bg;
             this.ClientSize = new System.Drawing.Size(1101, 700);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -1120,20 +713,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel16.ResumeLayout(false);
-            this.panel15.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -1168,32 +747,10 @@
         private System.Windows.Forms.Panel panel6;
         private SphereClient.Components.DiscussionListPanel panel7;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button sendMessage;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label23;
@@ -1230,17 +787,8 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.PictureBox pictureBox22;
         private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label45;
         private System.Windows.Forms.PictureBox pictureBox21;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Panel panel20;
         private Components.GroupListPanel panel8;
     }
 }

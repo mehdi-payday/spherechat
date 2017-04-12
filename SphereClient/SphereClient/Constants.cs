@@ -11,12 +11,13 @@ namespace SphereClient {
         //COLORS
         public static readonly Color DARK_PURPLE = Color.FromArgb( 62, 1, 56 );
         public static readonly Color PURPLE = Color.FromArgb( 93, 6, 61 );
-        public static readonly Color LIGHT_PURPLE = Color.FromArgb( 165, 97, 149 );
+        public static readonly Color LIGHT_PURPLE = Color.FromArgb( 165, 56, 202 );//165, 97, 149 );
         public static readonly Color LIGHT_GRAY = Color.FromArgb( 243, 249, 242 );
         public static readonly Color DARK_GRAY = Color.FromKnownColor( KnownColor.Desktop );
         public static readonly Color GRAY = Color.Gray;
         public static readonly Color BASE_WHITE = Color.FromArgb(245,245,245);
-
+        public static readonly Color BLUE = Color.FromArgb( 63, 153, 231 );
+        
         //IMAGES
         public static readonly Image TRANSPARENT_GRADIENT_VERTICAL = Properties.Resources.Untitled;
         public static readonly Image LOGO = Properties.Resources.path4149;

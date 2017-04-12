@@ -15,18 +15,19 @@ namespace SphereClient.Components {
         private Label usernameLabel;
         private Entities.Message message;
         private Panel parent;
-
+        public bool ismine;
 
 
 
         public MessageRow(Entities.Message message, Panel parent) {
             this.message = message;
             this.parent = parent;
+            this.ismine = (Form1.Instance.user != null && message.UserId == Form1.Instance.user?.UserId);
 
-            Color message_bg_color = Constants.LIGHT_GRAY;
+            Color message_bg_color = Constants.BLUE;
             Color message_text_color = Constants.DARK_GRAY;
-            if(Form1.Instance.session.GetProfile().UserId == this.message.UserId) {
-                message_bg_color = Constants.PURPLE;
+            if (this.ismine) {
+                message_bg_color = Constants.LIGHT_PURPLE;
                 message_text_color = Constants.LIGHT_GRAY;
             }
 
@@ -41,8 +42,13 @@ namespace SphereClient.Components {
             this.image.Left = Constants.MARGIN_SMALL.Left;
             this.image.Top = Constants.MARGIN_SMALL.Top;
             this.image.BackColor = Color.Crimson;
-            //this.image.LoadAsync( Form1.Instance.fetchedChannels[0].Memberships.Where( u => u.UserDetails.UserId != Form1.Instance.session.Me.UserId ).First().UserDetails.ProfilePicture);
-
+            this.image.SizeMode = PictureBoxSizeMode.Zoom;
+            //this.image.LoadAsync();
+            if (this.ismine) {
+                this.image.LoadAsync( Form1.Instance.user?.ProfilePicture ?? "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
+            }else {
+                this.image.LoadAsync( "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
+            }
             this.textPane.Left = this.image.Left + this.image.Width + Constants.MARGIN_SMALL.Right;
             this.textPane.Top = Constants.MARGIN_SMALL.Top;
             this.textPane.MaximumSize = new Size((int)(0.8f * this.Width), int.MaxValue);
@@ -53,7 +59,7 @@ namespace SphereClient.Components {
             this.text.Left = Constants.MARGIN_SMALL.Left;
             this.text.Top = Constants.MARGIN_SMALL.Top;
             this.text.MaximumSize = new Size( Constants.MAX_MESSAGE_PANE_WIDTH - Constants.MARGIN_SMALL.Left - Constants.MARGIN_SMALL.Right, int.MaxValue );
-            this.text.Text = this.message.UserId +" " + Form1.Instance.session.GetProfile().UserId +"\n"+ this.message.Contents;
+            this.text.Text = this.message.UserId +" " + Form1.Instance.user?.UserId +"\n"+ this.message.Contents;
             this.text.AutoSize = true;
             this.text.ForeColor = message_text_color;
             
@@ -69,18 +75,21 @@ namespace SphereClient.Components {
                 this.Height = this.textPane.Height + Constants.MARGIN_SMALL.Top + Constants.MARGIN_SMALL.Bottom;
                 this.image.Top = this.textPane.Top + this.textPane.Height - this.image.Height;
             }
-            
 
             this.timestampLabel.Text = this.message.SentDate.ToString() + "   " + this.message.UserId;
             this.timestampLabel.Left = this.Width - this.timestampLabel.Width - Constants.MARGIN_SMALL.Right;
             this.timestampLabel.Top = this.Height - this.timestampLabel.Height;
             this.timestampLabel.ForeColor = Constants.DARK_GRAY;
 
+            if (this.ismine) {
+                this.image.Left = this.timestampLabel.Left - Constants.MARGIN_SMALL.Left - this.image.Width - Constants.MARGIN_SMALL.Right;
+                this.textPane.Left = this.image.Left - this.textPane.Width - Constants.MARGIN_SMALL.Left;
+
+            }
 
             this.Controls.Add(this.image);
             this.Controls.Add( this.textPane );
             this.Controls.Add( this.timestampLabel );
-            this.BackColor = Constants.BASE_WHITE;
             
         }
 

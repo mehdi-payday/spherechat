@@ -1,5 +1,5 @@
 namespace SphereClient.Entities {
-    public struct PrivateDiscussion : Entity {
+    public struct PrivateDiscussion : Entity{
         public int ChannelId { get; set; }
         public int ThreadId { get; set; }
         public string Slug { get; set; }

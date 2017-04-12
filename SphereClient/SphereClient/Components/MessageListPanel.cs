@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +17,7 @@ namespace SphereClient.Components {
         /// </summary>
         public MessageListPanel() :base(){
             this.messages = new List<MessageRow>();
+            this.BackColor = Color.Transparent;
         }
 
         /// <summary>
@@ -45,7 +48,19 @@ namespace SphereClient.Components {
                 this.Controls.Add( mr );
                 hoffset += mr.Height;
             }
+            
+        }
 
+        /// <summary>
+        /// Retrieves the messages since last time they were fetched and adds them to
+        /// the list. Unlike FetchMessages, this method is non-destructive
+        /// </summary>
+        /// <param name="channel"> the channel to fetch the messages from</param>
+        public void FetchMessagesSinceLastTime(Entities.Channel channel) {
+            Entities.Message[] fetchedMessages = Form1.Instance.session.GetMessages( channel );
+            foreach (Entities.Message msg in fetchedMessages.OrderBy( m => m.SentDate )) {
+                OnNewMessage( msg );
+            }
         }
 
         /// <summary>
