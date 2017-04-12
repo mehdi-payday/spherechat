@@ -1,7 +1,7 @@
 from omnibus.authenticators import UserAuthenticator
 from rest_framework import authentication
 from rest_framework import exceptions
-
+from core.models import User
 
 class UserTokenAuthenticator(UserAuthenticator):
     def __init__(self, identifier, user):
@@ -18,7 +18,6 @@ class UserTokenAuthenticator(UserAuthenticator):
             # auth token available, try to validate
             identifier = ''
             token = ''
-
             try:
                 identifier, token = args.split(':')
             except ValueError:
@@ -28,6 +27,7 @@ class UserTokenAuthenticator(UserAuthenticator):
             except exceptions.AuthenticationFailed:
                 return None
         else:
+            raise Exception("Bad format %s" % args)
             identifier = args
             user = None
 

@@ -551,3 +551,4 @@ class Membership(Model):
         self.objects.cancel_membership(self)
 
 from messaging.observers import *
+from messaging.instant.observers import *
