@@ -3392,3 +3392,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+
+
+

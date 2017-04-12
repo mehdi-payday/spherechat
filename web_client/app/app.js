@@ -2,7 +2,6 @@
 
 angular
 	.module('myApp', [
-		'ngRoute',
 		'myApp.404',
 		'myApp.502',
 		'myApp.about',
@@ -14,8 +13,11 @@ angular
 		'myApp.signup',
 		'myApp.main',
 		'myApp.webclient',
+		'ngRoute',
+		'routeStyles',
 		'api',
-		'routeStyles'
+		'auth',
+		'session'
 	])
 
 	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
@@ -164,15 +166,57 @@ angular
 	    });
 	});
 
+angular
+	.module('auth', ['session'])
+	.service('auth',  [function(){
+		this.isLoggedIn = function(){
+			return session.getCurrentUser !== null;
+		}
+		
+		this.login = function(){
+			
+		}
+		
+		this.logout = function(){
+			
+		}
+		
+		this.register = function(){
+			
+		}
+	}]);
+
+angular
+	.module('session', [])
+	.service('session',  [function(){
+		this._authToken = null;
+		this._currentUser = null;
+		
+		this.setAuthToken = function(token){
+			this._authToken = token;
+		}
+		
+		this.getAuthToken = function(){
+			return this._authToken;
+		}
+		
+		this.setCurrentUser = function(user){
+			this._currentUser = user;
+		}
+		
+		this.getCurrentUser = function(){
+			return this._currentUser;
+		}
+	}]);
 
 angular
 	.module('api', ['ngResource'])
-    .factory('Api', ['$resource', function($resource){
+    .factory('api', ['$resource', function($resource){
     	var serverAddress = 'spherechat.tk:8080/api/';
     	var api = {};
     	
     	api.login = function() {return $resource(serverAddress + 'auth/login');};
-    	api.register = function() {return $resource(serverAddress + 'auth/registration');};
+    	api.register = function() {return $resource(serverAddress + 'auth/registration');}; 
     	
     	api.friendship = function() {return $resource(serverAddress + 'api/friendship/friendship');};
     	api.friendrequest = function() {return $resource(serverAddress + 'api/friendship/friendrequest');};
