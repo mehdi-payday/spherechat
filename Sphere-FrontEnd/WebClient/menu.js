@@ -181,7 +181,7 @@ $('#buttonfiles').on('click', function(){
 });
 
 $('.conversation-summary.conversation-summary-0').on('click', function(){
-    $('#intercom-container').addClass("wow fadeInUp");
+    $('#intercom-container').addClass("wow bounceInUp");
     $('#intercom-container').fadeIn('slow');
     $('#no-message').fadeOut('fast');
     $('#has-message').fadeIn('slow');

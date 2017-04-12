@@ -7,7 +7,7 @@
     <link href="update.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="checkbox.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
-    <link rel="stylesheet" href="../octicons/octicons.min.css">    
+    <link rel="stylesheet" href="../octicons/octicons.min.css">
     <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="preloader.css">
     <link rel="stylesheet" type="text/css" href="front-prof.css">
@@ -27,13 +27,176 @@
     <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="emoji/wdt-emoji-bundle.css"/>
+    <script type="text/javascript" src="emoji/emoji.min.js"></script>
+    <script type="text/javascript" src="emoji/wdt-emoji-bundle.js"></script>
     <style type="text/css">
-      #has-message{
-        display: none;
+      body {
+      font-family: 'Open Sans', sans-serif;
+      overflow-y: scroll;
+      }
+      #fullname-output,
+      #comment-output,
+      #contenteditable-output,
+      #contenteditable2-output {
+      min-height: 43px;
+      padding: 10px;
+      background-color: rgba(255, 255, 0, 0.14);
+      }
+      #head-title .emoji-outer {
+      width: 64px;
+      height: 64px;
+      }
+      .form-control {
+      padding-right: 27px;
+      }
+      div.form-control {
+      height: auto;
+      }
+      .todo-list li {
+      line-height: 26px;
+      }
+      .bottom-text .emoji-sizer {
+      width: 14px;
+      height: 14px;
+      }
+      .mobile-notice {
+      background: #ffff00;
+      padding: 10px;
+      border-radius: 20px
+      }
+      .set-changers {
+      margin: 20px 0;
       }
     </style>
+ <style type="text/css">
+    .chat-bubble-typing {
+  height: 72px;
+  width: 46px;
+  background: #e5e5e5;
+  position: relative;
+  margin: 0 auto;
+}
+.chat-bubble-typing:before {
+  content: '';
+  height: 72px;
+  width: 72px;
+  left: -36px;
+  position: absolute;
+  display: block;
+  background: #e5e5e5;
+  border-radius: 50%;
+  z-index: 1;
+}
+.chat-bubble-typing:after {
+  content: '';
+  height: 72px;
+  width: 72px;
+  right: -36px;
+  position: absolute;
+  display: block;
+  background: #e5e5e5;
+  border-radius: 50%;
+  z-index: 1;
+}
+.chat-bubble-typing .tail-typing {
+  height: 25px;
+  width: 25px;
+  background: #e5e5e5;
+  position: absolute;
+  left: -40px;
+  bottom: 2px;
+  border-radius: 50%;
+}
+.chat-bubble-typing .tail-typing:before {
+  height: 12px;
+  width: 12px;
+  background: #e5e5e5;
+  content: '';
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+  bottom: -8px;
+}
+.chat-bubble-typing .loading-typing {
+  position: absolute;
+  z-index: 10;
+  width: 67px;
+  left: -11px;
+  top: 27px;
+}
+.chat-bubble-typing .loading-typing .dot-typing {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  background: #c1c1c1;
+  display: block;
+  float: left;
+  margin: 0 0 0 8px;
+}
+.chat-bubble-typing .loading-typing .dot-typing:first-child {
+  margin: 0;
+}
+.chat-bubble-typing .loading-typing .dot-typing.one-typing {
+  -webkit-animation: cycleOne 1s ease-in-out infinite;
+  -webkit-animation-direction: normal;
+}
+.chat-bubble-typing .loading-typing .dot-typing.two-typing {
+  -webkit-animation: cycleTwo 1s ease-in-out infinite;
+  -webkit-animation-direction: normal;
+}
+.chat-bubble-typing .loading-typing .dot-typing.three-typing {
+  -webkit-animation: cycleThree 1s ease-in-out infinite;
+  -webkit-animation-direction: normal;
+}
+
+@-webkit-keyframes cycleOne {
+  0% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  33.333% {
+    background: #969696;
+  }
+  66.6667% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  100% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+}
+@-webkit-keyframes cycleTwo {
+  0% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  33.333% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  66.6667% {
+    background: #969696;
+  }
+  100% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+}
+@-webkit-keyframes cycleThree {
+  0% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  33.333% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  66.6667% {
+    background: rgba(150, 150, 150, 0.4);
+  }
+  100% {
+    background: #969696;
+  }
+}
+
+  </style>
   </head>
-<body>
+  <body>
     <div id="preloader">
       <div class="loader-center">
         <div class="chat-bubble-container">
@@ -310,7 +473,7 @@
                             </div>
                           </div>
                         </div>
-                                                <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.2s">
+                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.2s">
                           <div class="conversation-summary-avatar">
                             <div class="team-avatar-container">
                               <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
@@ -330,7 +493,7 @@
                             </div>
                           </div>
                         </div>
-                                                <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.4s">
+                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.4s">
                           <div class="conversation-summary-avatar">
                             <div class="team-avatar-container">
                               <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
@@ -350,7 +513,7 @@
                             </div>
                           </div>
                         </div>
-                                                <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.6s">
+                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.6s">
                           <div class="conversation-summary-avatar">
                             <div class="team-avatar-container">
                               <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
@@ -633,38 +796,38 @@
                     </div>
                     <figure class="fieldWrap no-border" style="margin-bottom: 12px !important;"><label class="fieldName">Account Preview</label></figure>
                     <div class="profile-main profile-main-left">
-                        <div class="gb ut" style="margin-top: 40px; margin-bottom: 80px;">
-                          <div class="uv">
-                            <form role="form" method="" action="" class="alq dj j" autocomplete="off">
-                              <a class="l amb">
-                                <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" alt="brand" style="border-radius: 10px;">
-                              </a>
-                              <p>Change your account settings here</p>
-                              <div class="et">
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                      <div class="gb ut" style="margin-top: 40px; margin-bottom: 80px;">
+                        <div class="uv">
+                          <form role="form" method="" action="" class="alq dj j" autocomplete="off">
+                            <a class="l amb">
+                            <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" alt="brand" style="border-radius: 10px;">
+                            </a>
+                            <p>Change your account settings here</p>
+                            <div class="et">
+                              <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="et">
+                              <div class="input-group">
+                                <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                Browse &hellip; <input id="profilePicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
+                                </span>
+                                </label>
+                                <input type="text" id="file" placeholder="New Profile Picture" class="form-control" style="background-color: #fff;" readonly>
                               </div>
-                               <div class="et">
-                                  <div class="input-group">
-                                    <label class="input-group-btn">
-                                        <span class="btn btn-primary">
-                                            Browse &hellip; <input id="profilePicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
-                                        </span>
-                                    </label>
-                                    <input type="text" id="file" placeholder="New Profile Picture" class="form-control" style="background-color: #fff;" readonly>
-                                </div>
-                              </div>
-                              <div class="et">
-                                <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-                              </div>
-                              <div class="et">
-                                <input name="password" id="password" type="password" class="form-control" placeholder="Password">
-                              </div>
-                              <div class="et">
-                                <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" placeholder="Repeat Password">
-                              </div>
-                            </form>
-                          </div>
+                            </div>
+                            <div class="et">
+                              <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="et">
+                              <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="et">
+                              <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" placeholder="Repeat Password">
+                            </div>
+                          </form>
                         </div>
+                      </div>
                     </div>
                     <div>
                       <figure class="fieldWrap no-border margin-0"><label class="fieldName">Theme</label></figure>
@@ -677,11 +840,11 @@
                         </div>
                         <div class="themePreview theme-sidebar-dark themeDark">
                           <span class="themePreviewMain">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                          </div>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
                       </div>
                       <div class="themeList small">
                         <div class="themePreviewSmall themePreview theme-sidebar-sunset">
@@ -893,9 +1056,9 @@
             <header class="no-border">
               <div class="headerWrap">
                 <span class="button-toggle-sidebar">
-                  <a tabindex="-1" class="button active">
-                    <i class="ion-grid" style="font-size: 30px;"></i>
-                  </a>
+                <a tabindex="-1" class="button active">
+                <i class="ion-grid" style="font-size: 30px;"></i>
+                </a>
                 </span>
               </div>
             </header>
@@ -903,18 +1066,18 @@
               <div class="centerContentWrap desktop-behavior content-wrap chat-bg">
                 <div class="centerContent">
                   <div id="no-message" class="centerContentBlock">
-                  <div>
-                    <img srcset="content.png 1x, content.png 2x" src="content.png" height="154">
-                    <h2 class="headLabel">No Messages selected</h2>
-                    <p class="subHeadLabel">Talk to a friend or add one <a href="">here</a></p>
-                    <a class="button active" href="#" id="buttonSettings">
+                    <div>
+                      <img srcset="content.png 1x, content.png 2x" src="content.png" height="154">
+                      <h2 class="headLabel">No Messages selected</h2>
+                      <p class="subHeadLabel">Talk to a friend or add one <a href="">here</a></p>
+                      <a class="button active" href="#" id="buttonSettings">
                       <span>Settings</span>
-                    </a>
+                      </a>
                     </div>
                   </div>
                   <div id="has-message" class="comments-wrapper">
                     <ul class="medias py-md-5 my-md-5 px-sm-0">
-                    <!-- Template for the incoming messages -->
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -929,8 +1092,8 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End -->  
-                    <!-- Template for the mesages you're sending -->
+                      <!-- End -->  
+                      <!-- Template for the mesages you're sending -->
                       <div class="">
                         <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -962,8 +1125,8 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End -->  
-                    <!-- Template for the mesages you're sending -->
+                      <!-- End -->  
+                      <!-- Template for the mesages you're sending -->
                       <div class="">
                         <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -980,7 +1143,7 @@
                         </li>
                       </div>
                       <!-- End -->
-                                          <!-- Template for the incoming messages -->
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -995,8 +1158,8 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End --> 
-                                        <!-- Template for the incoming messages -->
+                      <!-- End --> 
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -1011,8 +1174,8 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End --> 
-                                        <!-- Template for the incoming messages -->
+                      <!-- End --> 
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -1027,8 +1190,8 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End --> 
-                                        <!-- Template for the incoming messages -->
+                      <!-- End --> 
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -1043,8 +1206,8 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End --> 
-                                        <!-- Template for the incoming messages -->
+                      <!-- End --> 
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -1059,20 +1222,50 @@
                           </div>
                         </li>
                       </div>
-                    <!-- End --> 
+                      <!-- End -->
+                                            <!-- Template for the incoming messages -->
+                      <div class="parent">
+                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
+                          <div class="wrapper">
+                            <div class="avatar">
+                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
+                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
+                              </a>
+                            </div>
+                            <div id="div-comment-15" class="comment-self left">
+                                <div class="chat-bubble-typing">
+  <div class="loading-typing">
+    <div class="dot-typing one-typing"></div>
+    <div class="dot-typing two-typing"></div>
+    <div class="dot-typing three-typing"></div>
+  </div>
+  <div class="tail-typing"></div>
+</div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                      <!-- End -->  
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
+            <form>
+              <div class="form-group">
+                <label>textarea - output</label>
+                <div id="comment-output"></div>
+              </div>
+              <hr>
+            </form>
             <div id="intercom-container" style="z-index: 8;">
               <div class="intercom-messenger">
                 <div class="intercom-messenger-background"></div>
                 <span>
                   <div class="intercom-conversation">
-                    <div class="intercom-conversation-footer">
+                    <div class="intercom-conversation-footer" style="margin-top: -400px;">
                       <div class="intercom-composer">
-                        <textarea onkeyup="textAreaAdjust(this)" placeholder="Write a reply..." id="text2" style="overflow-y: hidden; border-radius: 10px;"></textarea>
+                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" onkeyup="textAreaAdjust(this)" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
                         <div class="intercom-composer-buttons">
                           <button class="intercom-composer-gif-button"></button>
                           <button class="intercom-composer-emoji-button"></button>
@@ -1083,6 +1276,43 @@
                     </div>
                   </div>
                 </span>
+              </div>
+              <div class="wdt-emoji-popup">
+                <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
+                <div class="wdt-emoji-menu-content">
+                  <div id="wdt-emoji-menu-header">
+                    <a class="wdt-emoji-tab active" data-group-name="Recent"></a>
+                    <a class="wdt-emoji-tab" data-group-name="People"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Nature"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Foods"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Activity"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Places"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Objects"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Symbols"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Flags"></a>
+                    <a class="wdt-emoji-tab" data-group-name="Custom"></a>
+                  </div>
+                  <div class="wdt-emoji-scroll-wrapper">
+                    <div id="wdt-emoji-menu-items">
+                      <input id="wdt-emoji-search" type="text" placeholder="Search">
+                      <h3 id="wdt-emoji-search-result-title">Search Results</h3>
+                      <div class="wdt-emoji-sections"></div>
+                      <div id="wdt-emoji-no-result">No emoji found</div>
+                    </div>
+                  </div>
+                  <div id="wdt-emoji-footer">
+                    <div id="wdt-emoji-preview">
+                      <span id="wdt-emoji-preview-img"></span>
+                      <div id="wdt-emoji-preview-text">
+                        <span id="wdt-emoji-preview-name"></span><br>
+                        <span id="wdt-emoji-preview-aliases"></span>
+                      </div>
+                    </div>
+                    <div id="wdt-emoji-preview-bundle">
+                      <span>WDT Emoji Bundle</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -1100,6 +1330,36 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      (function () {
+      
+        wdtEmojiBundle.defaults.emojiSheets = {
+          'apple'   : 'emoji/sheets/sheet_apple_64_indexed_128.png',
+          'google'  : 'emoji/sheets/sheet_google_64_indexed_128.png',
+          'twitter' : 'emoji/sheets/sheet_twitter_64_indexed_128.png',
+          'emojione': 'emoji/sheets/sheet_emojione_64_indexed_128.png'
+        };
+      
+        wdtEmojiBundle.init('.wdt-emoji-bundle-enabled');
+      
+        var typeChangers = document.querySelectorAll('.change-emoji-type');
+        for (var i = 0; i < typeChangers.length; i++) {
+          typeChangers[i].addEventListener('click', function () {
+            wdtEmojiBundle.changeType(this.dataset.emojiType);
+            return false;
+          });
+        }
+        var ev = new Event('input');
+      
+        // ------------------------------------------------------
+        document.getElementById('comment').addEventListener('input', function () {
+          document.getElementById('comment-output').innerHTML = wdtEmojiBundle.render(this.value);
+        });
+        document.getElementById('comment').dispatchEvent(ev);
+        // ------------------------------------------------------
+      
+      })();
+    </script>
     <script src="update.js"></script>
     <script src="jquery-ui.min.js"></script>
     <script src="preloader.js"></script>
@@ -1128,14 +1388,14 @@
     <script type="text/javascript">
       $("#profile-img").click(function() {
       $("#status-options").toggleClass("active");
-    });
-
-    $(".expand-button").click(function() {
+      });
+      
+      $(".expand-button").click(function() {
       $("#profile").toggleClass("expanded");
       $("#contacts").toggleClass("expanded");
-    });
-
-    $("#status-options ul li").click(function() {
+      });
+      
+      $("#status-options ul li").click(function() {
       $("#profile-img").removeClass();
       $("#status-online").removeClass("active");
       $("#status-away").removeClass("active");
@@ -1156,13 +1416,13 @@
       };
       
       $("#status-options").removeClass("active");
-    });
-
-/*(function(){
-  
-  var searchFilter = {
-    options: { valueNames: ['name'] },
-    init: function() {
+      });
+      
+      /*(function(){
+      
+      var searchFilter = {
+      options: { valueNames: ['name'] },
+      init: function() {
       var userList = new List('people-list', this.options);
       var noItems = $('<li id="no-items-found">No items found</li>');
       
@@ -1173,12 +1433,12 @@
           noItems.detach();
         }
       });
-    }
-  };
-  
-  searchFilter.init();
-  
-})(); */
+      }
+      };
+      
+      searchFilter.init();
+      
+      })(); */
     </script>
   </body>
 </html>
