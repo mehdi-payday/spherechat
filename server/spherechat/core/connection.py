@@ -19,7 +19,6 @@ def connection_factory(auth_class, pubsub):
             subchannel = ''
 
             comma_index = channel.index(",")
-
             first = channel[0:comma_index]
             last = channel[comma_index+1:]
 
@@ -69,6 +68,8 @@ def connection_factory(auth_class, pubsub):
             return action
 
         def on_channel_message(self, channel, payload):
+            print "On channel message on %s" % channel
+
             if (channel in self.subscriber.channels
                     and self.authenticator.can_publish(channel)):
                 print "channel"

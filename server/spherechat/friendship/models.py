@@ -9,7 +9,20 @@ from django.db.models import (Manager, Model, ObjectDoesNotExist)
 
 
 class FriendshipManager(Manager):
-    pass
+    def send_friend_request(self, requester, addresser):
+        pass
+
+    def accept_friend_request(self, pending_friendship):
+        pass
+
+    def get_friendships(self, user):
+        pass
+
+    def get_friend_requests(self, user):
+        pass
+
+    def get_friends(self, user):
+        pass
 
 class Friendship(Model):
     objects = FriendshipManager()

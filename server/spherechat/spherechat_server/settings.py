@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+DEBUG = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -167,7 +169,7 @@ MEDIA_URL = '/media/'
 
 OMNIBUS_ENDPOINT_SCHEME = 'ws'  # 'ws' is used for websocket connections
 OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.websocket_webapp_factory'
-# sockjs_webapp_factory'
+# OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.sockjs_webapp_factory'
 
 # OMNIBUS_CONNECTION_FACTORY = 'omnibus.factories.sockjs_connection_factory'
 OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
@@ -175,5 +177,6 @@ OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
 # sockjs_connection_factory"
 
 # OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.userauthenticator_factory'
-OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
-# OMNIBUS_AUTHENTICATOR_FACTORY = 'core.factories.usertokenauthenticator_factor
+# OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
+OMNIBUS_AUTHENTICATOR_FACTORY = 'core.factories.usertokenauthenticator_factory'
+

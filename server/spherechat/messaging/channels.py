@@ -99,17 +99,20 @@ class ThreadHandler(ChannelHandler):
                 last_seen_message=checked_message)
 
 
-class DiscussionChannelHandler(ThreadHandler):
-    name = 'discussion_channels'
+# class DiscussionChannelHandler(ThreadHandler):
+#    name = 'discussion_channels'
 
-class PrivateDiscussionHandler(ThreadHandler):
-    name = 'private_discussions'
+# class PrivateDiscussionHandler(ThreadHandler):
+#    name = 'private_discussions'
 
 class PersonalUserHandler(ChannelHandler):
+    name = 'users'
+
     @classmethod
     def user_channel_name(self, user):
         return user.pk
 
 users = PersonalUserHandler
-discussion_channels = DiscussionChannelHandler
-private_discussions = PrivateDiscussionHandler
+threads = ThreadHandler
+# discussion_channels = DiscussionChannelHandler
+# private_discussions = PrivateDiscussionHandler

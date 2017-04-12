@@ -1,7 +1,6 @@
 from messaging.models import Message, TuneManager, Membership
 from messaging.instant.communication import ThreadCommunicationService
 
-
 class MessageBroadcaster(object):
     @classmethod
     def on_message_saved(cls, message):

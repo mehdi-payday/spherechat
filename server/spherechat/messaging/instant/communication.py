@@ -1,6 +1,7 @@
 from messaging.channels import (
-    discussion_channels as discussion_channels_comm,
-    private_discussions as private_discussions_comm,
+#    discussion_channels as discussion_channels_comm,
+#    private_discussions as private_discussions_comm,
+    threads as threads_comm,
     users as users_comm)
 from messaging.serializers import (
     ChannelSerializer, 
@@ -71,8 +72,8 @@ class ThreadCommunicationService(CommunicationService):
         event = cls.MESSAGE
         data = MessageSerializer(message).data
 
-        private_discussions_comm.server_publish(
-            private_discussions_comm.thread_channel_name(thread),
+        threads_comm.server_publish(
+            threads_comm.thread_channel_name(thread),
             event,
             data
         )

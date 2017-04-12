@@ -1,0 +1,894 @@
+.intercom-scrollable {
+    -webkit-overflow-scrolling: touch
+}
+@font-face {
+    font-family: intercom-font;
+    src: url(https://js.intercomcdn.com/fonts/proximanova-regular.a7942249.woff) format("woff")
+}
+@font-face {
+    font-family: intercom-font;
+    src: url(https://js.intercomcdn.com/fonts/proximanova-semibold.46e3f047.woff) format("woff");
+    font-weight: 700
+}
+@font-face {
+    font-family: intercom-font;
+    src: url(https://js.intercomcdn.com/fonts/proximanova-regular-italic.053a1112.woff) format("woff");
+    font-style: italic
+}
+@font-face {
+    font-family: intercom-font;
+    src: url(https://js.intercomcdn.com/fonts/proximanova-semibold-italic.660bf63e.woff) format("woff");
+    font-weight: 700;
+    font-style: italic
+}
+body{
+    font-family: intercom-font !important;
+}
+#intercom-container button,
+#intercom-container div,
+#intercom-container img,
+#intercom-container input,
+#intercom-container input[type],
+#intercom-container pre,
+#intercom-container span,
+#intercom-container textarea {
+    font-size-adjust: none;
+    letter-spacing: normal;
+    font-stretch: normal;
+    font: normal normal 100% intercom-font, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align-last: auto;
+    text-decoration: none;
+    -webkit-text-emphasis: none;
+    text-emphasis: none;
+    text-height: auto;
+    text-indent: 0;
+    text-justify: auto;
+    text-outline: none;
+    text-shadow: none;
+    text-transform: none;
+    text-wrap: normal;
+    alignment-adjust: auto;
+    alignment-baseline: baseline;
+    -webkit-animation: none 0 ease 0 1 normal;
+    animation: none 0 ease 0 1 normal;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+    -webkit-appearance: normal;
+    -moz-appearance: normal;
+    appearance: normal;
+    azimuth: center;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    background: padding-box;
+    baseline-shift: baseline;
+    binding: none;
+    bleed: 6pt;
+    bookmark-label: content();
+    bookmark-level: none;
+    bookmark-state: open;
+    bookmark-target: none;
+    border: 0 transparent;
+    border-radius: 0;
+    bottom: auto;
+    box-align: stretch;
+    -webkit-box-decoration-break: slice;
+    box-decoration-break: slice;
+    box-direction: normal;
+    box-flex: 0;
+    box-flex-group: 1;
+    box-lines: single;
+    box-ordinal-group: 1;
+    box-orient: inline-axis;
+    box-pack: start;
+    box-shadow: none;
+    box-sizing: content-box;
+    -webkit-column-break-after: auto;
+    break-after: auto;
+    -webkit-column-break-before: auto;
+    break-before: auto;
+    -webkit-column-break-inside: auto;
+    break-inside: auto;
+    caption-side: top;
+    clear: none;
+    clip: auto;
+    color: inherit;
+    color-profile: auto;
+    -webkit-column-count: auto;
+    -moz-column-count: auto;
+    column-count: auto;
+    -webkit-column-fill: balance;
+    -moz-column-fill: balance;
+    column-fill: balance;
+    -webkit-column-gap: normal;
+    -moz-column-gap: normal;
+    column-gap: normal;
+    -webkit-column-rule: medium medium #1f1f1f;
+    -moz-column-rule: medium medium #1f1f1f;
+    column-rule: medium medium #1f1f1f;
+    -webkit-column-span: 1;
+    -moz-column-span: 1;
+    column-span: 1;
+    -webkit-column-width: auto;
+    -moz-column-width: auto;
+    column-width: auto;
+    -webkit-columns: auto auto;
+    -moz-columns: auto auto;
+    columns: auto auto;
+    content: normal;
+    counter-increment: none;
+    counter-reset: none;
+    crop: auto;
+    cursor: auto;
+    direction: ltr;
+    display: inline;
+    dominant-baseline: auto;
+    drop-initial-after-adjust: text-after-edge;
+    drop-initial-after-align: baseline;
+    drop-initial-before-adjust: text-before-edge;
+    drop-initial-before-align: caps-height;
+    drop-initial-size: auto;
+    drop-initial-value: initial;
+    elevation: level;
+    empty-cells: show;
+    fit: fill;
+    fit-position: 0 0;
+    float: none;
+    float-offset: 0 0;
+    grid-columns: none;
+    grid-rows: none;
+    hanging-punctuation: none;
+    height: auto;
+    hyphenate-after: auto;
+    hyphenate-before: auto;
+    hyphenate-character: auto;
+    hyphenate-lines: no-limit;
+    hyphenate-resource: none;
+    -webkit-hyphens: manual;
+    -ms-hyphens: manual;
+    hyphens: manual;
+    icon: auto;
+    image-orientation: auto;
+    image-rendering: auto;
+    image-resolution: normal;
+    inline-box-align: last;
+    left: auto;
+    line-height: inherit;
+    line-stacking: inline-line-height exclude-ruby consider-shifts;
+    list-style: disc;
+    margin: 0;
+    marks: none;
+    marquee-direction: forward;
+    marquee-loop: 1;
+    marquee-play-count: 1;
+    marquee-speed: normal;
+    marquee-style: scroll;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    min-width: 0;
+    move-to: normal;
+    nav-down: auto;
+    nav-index: auto;
+    nav-left: auto;
+    nav-right: auto;
+    nav-up: auto;
+    opacity: 1;
+    orphans: 2;
+    outline: 0;
+    outline-offset: 0;
+    overflow: visible;
+    overflow-style: auto;
+    padding: 0;
+    page: auto;
+    page-break-after: auto;
+    page-break-before: auto;
+    page-break-inside: auto;
+    page-policy: start;
+    -webkit-perspective: none;
+    perspective: none;
+    -webkit-perspective-origin: 50% 50%;
+    perspective-origin: 50% 50%;
+    pointer-events: auto;
+    position: static;
+    presentation-level: 0;
+    punctuation-trim: none;
+    quotes: none;
+    rendering-intent: auto;
+    resize: none;
+    right: auto;
+    rotation: 0;
+    rotation-point: 50% 50%;
+    ruby-align: auto;
+    ruby-overhang: none;
+    ruby-position: before;
+    ruby-span: none;
+    size: auto;
+    string-set: none;
+    table-layout: auto;
+    top: auto;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    -webkit-transform-origin: 50% 50% 0;
+    -ms-transform-origin: 50% 50% 0;
+    transform-origin: 50% 50% 0;
+    -webkit-transform-style: flat;
+    transform-style: flat;
+    transition: all 0 ease 0;
+    unicode-bidi: normal;
+    vertical-align: baseline;
+    white-space: normal;
+    white-space-collapse: collapse;
+    widows: 2;
+    width: auto;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    z-index: auto;
+    text-align: start;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+#intercom-container .intercom-author-summary span,
+#intercom-container .intercom-conversation-part-metadata-save-state {
+    white-space: nowrap
+}
+#intercom-container div,
+#intercom-container pre {
+    display: block
+}
+#intercom-container input {
+    display: inline-block
+}
+#intercom-container input,
+#intercom-container textarea {
+    cursor: text
+}
+#intercom-container input::-moz-selection,
+#intercom-container textarea::-moz-selection {
+    background-color: #b3d4fc
+}
+#intercom-container input::selection,
+#intercom-container textarea::selection {
+    background-color: #b3d4fc
+}
+#intercom-container input::-webkit-input-placeholder,
+#intercom-container textarea::-webkit-input-placeholder {
+    font-size-adjust: none;
+    letter-spacing: normal;
+    font-stretch: normal;
+    font: normal normal 100% intercom-font, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    text-align-last: auto;
+    text-decoration: none;
+    -webkit-text-emphasis: none;
+    text-emphasis: none;
+    text-height: auto;
+    text-indent: 0;
+    text-justify: auto;
+    text-outline: none;
+    text-shadow: none;
+    text-transform: none;
+    text-wrap: normal;
+    background-color: inherit;
+    color: inherit
+}
+#intercom-container input::-moz-placeholder,
+#intercom-container textarea::-moz-placeholder {
+    font-size-adjust: none;
+    letter-spacing: normal;
+    font-stretch: normal;
+    font: normal normal 100% intercom-font, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    text-align-last: auto;
+    text-decoration: none;
+    text-emphasis: none;
+    text-height: auto;
+    text-indent: 0;
+    text-justify: auto;
+    text-outline: none;
+    text-shadow: none;
+    text-transform: none;
+    text-wrap: normal;
+    background-color: inherit;
+    color: inherit
+}
+#intercom-container input:-ms-input-placeholder,
+#intercom-container textarea:-ms-input-placeholder {
+    font-size-adjust: none;
+    letter-spacing: normal;
+    font-stretch: normal;
+    font: normal normal 100% intercom-font, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    text-align-last: auto;
+    text-decoration: none;
+    text-emphasis: none;
+    text-height: auto;
+    text-indent: 0;
+    text-justify: auto;
+    text-outline: none;
+    text-shadow: none;
+    text-transform: none;
+    text-wrap: normal;
+    background-color: inherit;
+    color: inherit
+}
+#intercom-container button {
+    cursor: pointer
+}
+#intercom-container:focus {
+    outline: 0
+}
+#intercom-container button::-moz-focus-inner {
+    border: 0;
+    padding: 0
+}
+#intercom-container-body {
+    overflow: hidden
+}
+@media print {
+    #intercom-container {
+        display: none
+    }
+}
+#intercom-container {
+    line-height: 1
+}
+#intercom-container .intercom-scrollable {
+    position: relative;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden
+}
+#intercom-container .intercom-avatar {
+    margin: 0 auto;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle
+}
+#intercom-container .intercom-avatar img {
+    border-radius: 50%
+}
+@-webkit-keyframes intercom-notification-body-animation {
+    0%, 50% {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+@keyframes intercom-notification-body-animation {
+    0%, 50% {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+#intercom-container .intercom-author-summary {
+    font-size: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    color: #fff;
+    line-height: 1.2;
+    padding-top: 2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: calc(100% - 32px - 16px)
+}
+#intercom-container .intercom-author-summary-name {
+    font-weight: 700;
+    color: #263238
+}
+#intercom-container .intercom-author-summary-name-from {
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+#intercom-container .intercom-chat-card {
+    position: relative;
+    border-radius: 6px;
+    box-sizing: border-box;
+    padding: 0 0 15px;
+    color: #fff;
+    text-align: right;
+    background: linear-gradient(to bottom, rgba(96,168,237,1) 0%, rgba(32,124,229,1) 100%);
+    box-shadow: 0 2px 8px 0 rgba(35, 47, 53, .09)
+}
+#intercom-container .intercom-chat-card-with-avatar {
+    border-bottom-left-radius: 0
+}
+#intercom-container .intercom-chat-card-avatar {
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    box-shadow: 0 2px 8px 0 rgba(35, 47, 53, .09);
+    border-radius: 100%
+}
+#intercom-container .intercom-chat-card-avatar .intercom-avatar {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px
+}
+#intercom-container .intercom-chat-card-avatar .intercom-avatar img {
+    width: 30px;
+    height: 30px
+}
+
+
+#intercom-container .intercom-chat-card-avatar-you {
+    position: absolute;
+    bottom: 0;
+    right: -40px;
+    box-shadow: 0 2px 8px 0 rgba(35, 47, 53, .09);
+    border-radius: 100%
+}
+#intercom-container .intercom-chat-card-avatar-you .intercom-avatar {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px
+}
+#intercom-container .intercom-chat-card-avatar-you .intercom-avatar img {
+    width: 30px;
+    height: 30px
+}
+
+
+#intercom-container .intercom-chat-card-author {
+    font-size: 10px;
+    color: rgba(73, 76, 93, .7);
+    padding: 15px 20px 10px
+}
+#intercom-container .intercom-chat-card-body>.intercom-scrollable {
+    padding: 0 20px;
+    max-height: 300px
+}
+#intercom-container .intercom-chat-card.intercom-chat-card-with-avatar:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 99%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 13px 7px;
+    border-color: transparent transparent rgba(32,124,229,1)
+
+}
+#intercom-container .intercom-chat-card.intercom-chat-card-with-avatar-you:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 99%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    margin-left: -3px;
+    border-width: 0 11px 13px 0;
+    border-color: transparent transparent rgba(32,124,229,1)
+}
+#intercom-container .intercom-conversation-part {
+    padding-bottom: 10px;
+    min-width: 190px !important;
+}
+#intercom-container .intercom-conversation-part:after,
+#intercom-container .intercom-conversation-part:before {
+    content: " ";
+    display: table
+}
+#intercom-container .intercom-conversation-part:after {
+    clear: both
+}
+#intercom-container .intercom-conversation-part-last {
+    padding-bottom: 3px
+}
+#intercom-container .intercom-conversation-part-metadata {
+    clear: both;
+    color: #b8c3ca;
+    font-size: 13px;
+    padding-top: 5px;
+    width: 75%
+}
+#intercom-container .intercom-conversation-part-admin .intercom-conversation-part-metadata {
+    padding-left: 45px
+}
+#intercom-container .intercom-conversation-parts {
+    padding: 30px 35px 40px
+}
+#intercom-container .intercom-composer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 55px;
+    max-height: 200px
+}
+#intercom-container .intercom-composer pre,
+#intercom-container .intercom-composer textarea {
+    box-sizing: border-box;
+    padding: 20px 153px 18px 30px;
+    width: 100%;
+    height: 100%;
+    font-family: intercom-font, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.33;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word
+}
+#intercom-container .intercom-composer textarea {
+    position: absolute;
+    height: 55px;
+    min-height: 100%;
+    bottom: 0;
+    left: 0;
+    color: #000;
+    background-color: #f4f7f9;
+    resize: none;
+    border: none;
+    transition: background-color .2s ease, box-shadow .2s ease
+}
+#intercom-container .intercom-composer textarea::-webkit-input-placeholder {
+    color: #b8c3ca;
+    font-style: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.33;
+    opacity: .7
+}
+#intercom-container .intercom-composer textarea::-moz-placeholder {
+    color: #b8c3ca;
+    font-style: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.33;
+    opacity: .7
+}
+#intercom-container .intercom-composer textarea:-ms-input-placeholder {
+    color: #b8c3ca;
+    font-style: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.33;
+    opacity: .7
+}
+#intercom-container .intercom-composer textarea:focus {
+    outline: 0;
+    background-color: #fff;
+    box-shadow: 0 0 100px 0 rgba(150, 165, 190, .24)
+}
+#intercom-container .intercom-composer pre {
+    visibility: hidden
+}
+#intercom-container .intercom-composer-borderless {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 45px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px 0 rgba(35, 47, 53, .09)
+}
+#intercom-container .intercom-composer-borderless pre,
+#intercom-container .intercom-composer-borderless textarea {
+    padding-left: 20px;
+    border-radius: 6px
+}
+#intercom-container .intercom-composer-borderless textarea:focus {
+    box-shadow: none
+}
+#intercom-container .intercom-composer-borderless .intercom-composer-buttons {
+    right: 10px
+}
+#intercom-container .intercom-composer-buttons {
+    position: absolute;
+    top: 2px;
+    right: 20px
+}
+#intercom-container .intercom-composer-send-button,
+#intercom-container .intercom-composer-emoji-button,
+#intercom-container .intercom-composer-gif-button,
+#intercom-container .intercom-composer-upload-button {
+    position: relative;
+    height: 55px;
+    float: left;
+    display: inline-block;
+    cursor: pointer;
+    opacity: .7
+}
+#intercom-container .intercom-composer-send-button:before,
+#intercom-container .intercom-composer-emoji-button:before,
+#intercom-container .intercom-composer-gif-button:before,
+#intercom-container .intercom-composer-upload-button:before {
+    background-repeat: no-repeat;
+    content: " ";
+    height: 18px;
+    left: 5px
+}
+#intercom-container .intercom-composer-send-button:before,
+#intercom-container .intercom-composer-emoji-button:hover,
+#intercom-container .intercom-composer-gif-button:hover,
+#intercom-container .intercom-composer-upload-button:hover {
+    opacity: 1
+}
+#intercom-container .intercom-composer-send-button:before,
+#intercom-container .intercom-composer-emoji-button:before,
+#intercom-container .intercom-composer-gif-button:before,
+#intercom-container .intercom-composer-upload-button:before {
+    position: absolute;
+    top: 20px;
+    background-position: 50%
+}
+#intercom-container .intercom-composer-upload-button {
+    width: 30px
+}
+#intercom-container .intercom-composer-upload-button:before {
+    background-image: url(https://js.intercomcdn.com/images/upload-button.a152384b.png);
+    background-size: 16px 18px;
+    width: 16px
+}
+@media (-webkit-min-device-pixel-ratio: 1.3),
+(min--moz-device-pixel-ratio: 1.3),
+(min-device-pixel-ratio: 1.3),
+(min-resolution: 1.3dppx) {
+    #intercom-container .intercom-composer-upload-button:before {
+        background-image: url(https://js.intercomcdn.com/images/upload-button@2x.e98aedcc.png)
+    }
+}
+#intercom-container .intercom-composer-emoji-button {
+    width: 30px
+}
+#intercom-container .intercom-composer-emoji-button:before {
+    background-image: url(https://js.intercomcdn.com/images/emoji-button.9a0a2659.png);
+    background-size: 18px 18px;
+    width: 18px;
+    border-radius: 50%
+}
+@media (-webkit-min-device-pixel-ratio: 1.3),
+(min--moz-device-pixel-ratio: 1.3),
+(min-device-pixel-ratio: 1.3),
+(min-resolution: 1.3dppx) {
+    #intercom-container .intercom-composer-emoji-button:before {
+        background-image: url(https://js.intercomcdn.com/images/emoji-button@2x.6788c906.png)
+    }
+}
+#intercom-container .intercom-composer-gif-button {
+    width: 40px
+}
+#intercom-container .intercom-composer-gif-button:before {
+    background-image: url(https://js.intercomcdn.com/images/gif-button.0eaa0461.png);
+    background-size: 30px 18px;
+    width: 30px;
+    border-radius: 10px
+}
+@media (-webkit-min-device-pixel-ratio: 1.3),
+(min--moz-device-pixel-ratio: 1.3),
+(min-device-pixel-ratio: 1.3),
+(min-resolution: 1.3dppx) {
+    #intercom-container .intercom-composer-gif-button:before {
+        background-image: url(https://js.intercomcdn.com/images/gif-button@2x.289ba0c9.png)
+    }
+}
+#intercom-container .intercom-composer-send-button {
+    width: 30px
+}
+#intercom-container .intercom-composer-send-button:before {
+    content: "Send";
+    /*content: "\f2c3";
+      font-family:"Ionicons";
+    */
+    background-size: 18px 18px;
+    width: 18px;
+    border-radius: 50%
+}
+.intercom-composer-send-button{
+        font-size: initial !important;
+    margin-top: 2% !important;
+    color: blue !important;
+}
+@media (-webkit-min-device-pixel-ratio: 1.3),
+(min--moz-device-pixel-ratio: 1.3),
+(min-device-pixel-ratio: 1.3),
+(min-resolution: 1.3dppx) {
+    #intercom-container .intercom-composer-send-button:before {
+        content: "Send";
+        /*content: "\f2c3";
+          font-family:"Ionicons";
+        */
+    }
+}
+#intercom-container .intercom-borderless {
+    z-index: 2147483000;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 360px;
+    max-height: 100%;
+    -webkit-animation: intercom-borderless-animation .75s ease;
+    animation: intercom-borderless-animation .75s ease
+}
+#intercom-container .intercom-borderless-body {
+    bottom: 0;
+    width: 50%;
+    min-width: 150px;
+    padding: 50px 10px 10px
+}
+#intercom-container .intercom-borderless .intercom-conversation-part-last,
+#intercom-container .intercom-borderless .intercom-conversation-parts {
+    padding: 0
+}
+#intercom-container .intercom-borderless .intercom-conversation-part-admin .intercom-chat-card-borderless .intercom-conversation-part-metadata {
+    padding: 5px 20px
+}
+#intercom-container .intercom-borderless .intercom-chat-card-borderless {
+    margin-left: 45px
+}
+#intercom-container .intercom-chat-card .intercom-block {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word
+}
+#intercom-container .intercom-chat-card .intercom-block:last-child {
+    margin-bottom: 0
+}
+#intercom-container .intercom-chat-card .intercom-block-paragraph {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0 0 10px
+}
+#intercom-container .intercom-conversation-parts {
+    transition: -webkit-transform .2s;
+    transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s
+}
+@-webkit-keyframes intercom-borderless-animation {
+    0% {
+        -webkit-transform: translateY(102px);
+        transform: translateY(102px);
+        opacity: 0
+    }
+    20% {
+        -webkit-transform: translateY(52px);
+        transform: translateY(52px)
+    }
+    70% {
+        -webkit-transform: translateY(52px);
+        transform: translateY(52px);
+        opacity: 1
+    }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes intercom-borderless-animation {
+    0% {
+        -webkit-transform: translateY(102px);
+        transform: translateY(102px);
+        opacity: 0
+    }
+    20% {
+        -webkit-transform: translateY(52px);
+        transform: translateY(52px)
+    }
+    70% {
+        -webkit-transform: translateY(52px);
+        transform: translateY(52px);
+        opacity: 1
+    }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@-webkit-keyframes intercom-borderless-composer-animation {
+    0% {
+        opacity: 0
+    }
+    70% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes intercom-borderless-composer-animation {
+    0% {
+        opacity: 0
+    }
+    70% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@-webkit-keyframes intercom-composer-slide-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(15px);
+        transform: translateY(15px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes intercom-composer-slide-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(15px);
+        transform: translateY(15px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+#intercom-container .intercom-conversation .intercom-conversation-footer {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-animation-name: intercom-composer-slide-in;
+    animation-name: intercom-composer-slide-in;
+    -webkit-animation-duration: .32s;
+    animation-duration: .32s;
+    -webkit-animation-timing-function: cubic-bezier(.23, 1, .32, 1);
+    animation-timing-function: cubic-bezier(.23, 1, .32, 1);
+    -webkit-animation-delay: 80ms;
+    animation-delay: 80ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
+@media only screen and (max-device-width: 667px),
+screen and (max-width: 369px),
+screen and (min-height: 591px),
+screen and (min-width: 371px) {
+    .intercom-messenger {
+        -webkit-text-size-adjust: 100%
+    }
+    .intercom-composer textarea {
+        background-color: #f4f7f9
+    }
+}
+#intercom-container .intercom-borderless .intercom-borderless-body {
+    -webkit-animation: intercom-notification-body-animation .5s ease;
+    animation: intercom-notification-body-animation .5s ease
+}
+#intercom-container .intercom-borderless .intercom-composer {
+    -webkit-animation: intercom-borderless-composer-animation .75s ease;
+    animation: intercom-borderless-composer-animation .75s ease
+}
+#intercom-container-body {
+    overflow: hidden
+}
+
+/*#intercom-container .intercom-messenger-background {
+    position: absolute;
+    top: 75px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff
+}*/
+#intercom-container .intercom-conversation-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 6px 6px
+}

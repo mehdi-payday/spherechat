@@ -2,13 +2,7 @@
 
 angular.module('myApp.login', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/login', {
-    templateUrl: 'login/login.html',
-    controller: 'LoginCtrl'
-  });
-}])
-
-.controller('LoginCtrl', [function() {
-
+.controller('LoginCtrl', ['$rootScope', function($rootScope) {
+	$rootScope.hideNavbar = true;
+	$rootScope.hideFooter = true;
 }]);

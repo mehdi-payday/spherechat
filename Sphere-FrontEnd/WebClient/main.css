@@ -2733,28 +2733,6 @@ body.mode-disable-title .element.element-grid .cover-wrap {
     text-transform: uppercase;
     font-size: 10px
 }
-.avatar {
-    opacity: 1!important;
-    position: relative
-}
-.avatar:before {
-    border-radius: 100%;
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1)
-}
-.avatar img {
-    border-radius: 100%;
-    width: 20px;
-    height: 20px
-}
-html.chrome.retina .avatar:before {
-    box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .1)
-}
 .flip-horizontal {
     transform: scaleX(-1)
 }
@@ -3362,7 +3340,7 @@ body.mode-reader .element .actions {
     -ms-flex: 1;
     flex: 1
 }
-.element-list .info.right {
+.element-list .info {
     text-align: right;
     width: 76px;
     padding-left: 16px

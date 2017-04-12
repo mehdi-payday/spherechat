@@ -57,6 +57,7 @@ $('#sidemenumain').on('click', function() {
     $('body').removeClass('mode-force-sidebars');
 });
 $('.Sidebar-nav-list-item.ion-chatboxes').on('click', function() {
+    $(this).find(".Sidebar-nav-list-item").removeClass('Sidebar-nav-list-item-active');
     $('.Sidebar-nav-list-item.ion-chatboxes').addClass('Sidebar-nav-list-item-active');
     $('body').addClass('mode-force-sidebar');
 });
@@ -125,12 +126,14 @@ if ($(window).width() < 667 || isMobile) {
 // Theme switcher
 $('.themePreview.theme-sidebar-dark.themeDark').on('click', function(){
   $('#markup').toggleClass('themeDark');
+  alert('asajhvcsajcb');
 });
 
 // user
 
 $('.Sidebar-nav-list-item.ion-person-add').on('click', function(){
-   // $(this).toggleClass('Sidebar-nav-list-item-active');
+    $('body').find(".Sidebar-nav-list-item-active").removeClass('Sidebar-nav-list-item-active');
+    $(this).addClass('Sidebar-nav-list-item-active');
     $('body').toggleClass('mode-user-panel');
 });
 
@@ -146,7 +149,9 @@ $('#buttonuser').on('click', function(){
 // Settings
 
 $('.Sidebar-nav-list-item.ion-levels').on('click', function(){
-  $('body').toggleClass('mode-settings-panel');
+    $('body').find(".Sidebar-nav-list-item-active").removeClass('Sidebar-nav-list-item-active');
+    $(this).addClass('Sidebar-nav-list-item-active');
+    $('body').toggleClass('mode-settings-panel');
 });
 
 $('#closeSettings').on('click', function(){
@@ -161,7 +166,9 @@ $('#buttonSettings').on('click', function(){
 // files
 
 $('.Sidebar-nav-list-item.ion-document').on('click', function(){
-  $('body').toggleClass('mode-files-panel');
+    $('body').find(".Sidebar-nav-list-item-active").removeClass('Sidebar-nav-list-item-active');
+    $(this).addClass('Sidebar-nav-list-item-active');  
+    $('body').toggleClass('mode-files-panel');
 });
 
 $('#closefiles').on('click', function(){
@@ -176,10 +183,13 @@ $('#buttonfiles').on('click', function(){
 $('.conversation-summary.conversation-summary-0').on('click', function(){
     $('#intercom-container').addClass("wow fadeInUp");
     $('#intercom-container').fadeIn('slow');
-    $('#no-message').fadeOut('slow');
+    $('#no-message').fadeOut('fast');
+    $('#has-message').fadeIn('slow');
     $(this).find(".card-face__bullet").fadeOut('slow');
     $('.conversation-summary.conversation-summary-0.conversation-summary-selected').removeClass('conversation-summary-selected');
     $(this).addClass('conversation-summary-selected');
 });
+
+
 
 

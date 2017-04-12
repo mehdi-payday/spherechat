@@ -1,5 +1,10 @@
 ﻿namespace SphereClient.Entities {
-    public class Auth : Entity {
+    public struct Auth : Entity {
         public string Token { get; set; }
+        public bool IsNull { get; set; }
+
+        public string ToText() {
+            return JSON.Stringify(this);
+        }
     }
 }

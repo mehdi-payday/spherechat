@@ -19,11 +19,14 @@ class ChannelHandler(object):
         if idx:
             package = package[0:idx]
 
-        channel_full_name = connection.schema_name \
-            + "." + package \
-            + "," + cls.name
+#        channel_full_name = connection.schema_name \
+#            + "." + package \
+#            + "," + cls.name
+        channel_full_name = package + "," + cls.name
+
         if channel:
             channel_full_name = channel_full_name + "." + channel
+
         return channel_full_name
 
     def handle_channel_message(self, channel, data):
