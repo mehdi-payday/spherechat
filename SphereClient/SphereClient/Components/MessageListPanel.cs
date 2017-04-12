@@ -37,6 +37,9 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="channel">The channel to fetch the messages from</param>
         public void FetchMessages(Entities.Channel channel) {
+
+            Form1.Instance.ShowPreloader();
+
             this.messages.Clear();
             this.Controls.Clear();
             this.channel = channel;
@@ -50,7 +53,11 @@ namespace SphereClient.Components {
                 this.Controls.Add( mr );
                 hoffset += mr.Height;
             }
-            
+            System.Threading.Thread t = new System.Threading.Thread( () => {
+                System.Threading.Thread.Sleep( 1000 );
+                Form1.Instance.HidePreloader();
+            } );
+            t.Start();
         }
 
         /// <summary>

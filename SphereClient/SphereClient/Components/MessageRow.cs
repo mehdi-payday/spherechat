@@ -57,7 +57,7 @@ namespace SphereClient.Components {
             this.text.Left = Constants.MARGIN_SMALL.Left;
             this.text.Top = Constants.MARGIN_SMALL.Top;
             this.text.MaximumSize = new Size( Constants.MAX_MESSAGE_PANE_WIDTH - Constants.MARGIN_SMALL.Left - Constants.MARGIN_SMALL.Right, int.MaxValue );
-            this.text.Text = this.message.UserId +" " + Form1.Instance.user?.UserId +"\n"+ this.message.Contents;
+            this.text.Text = this.message.Contents;
             this.text.AutoSize = true;
             this.text.ForeColor = message_text_color;
             

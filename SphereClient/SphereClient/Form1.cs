@@ -90,13 +90,13 @@ namespace SphereClient {
         public void Connect( string username, string password ) {
             this.session = new REST.Session( username, password );
             this.user = this.session.GetProfile();
+            
         }
 
         /// <summary>
         /// Starts the main application logic loop.
         /// </summary>
-        public void Start() {
-            ShowPreloader();         
+        public void Start() {      
             System.Threading.Thread t = new System.Threading.Thread( delegate () {
                 FetchChannels();
             } );
@@ -124,11 +124,7 @@ namespace SphereClient {
                 Application.Exit();
             }
 
-            System.Threading.Thread t = new System.Threading.Thread(()=> {
-                System.Threading.Thread.Sleep(2000);
-                Form1.Instance.HidePreloader();
-            } );
-            t.Start();
+            
             
         }
 
