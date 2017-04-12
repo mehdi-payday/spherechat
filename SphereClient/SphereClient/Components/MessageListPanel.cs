@@ -39,10 +39,12 @@ namespace SphereClient.Components {
         public void FetchMessages(Entities.Channel channel) {
             this.messages.Clear();
             this.Controls.Clear();
+            this.channel = channel;
             Entities.Message[] fetchedMessages = Form1.Instance.session.GetMessages( channel );
             int hoffset = 0;
             foreach (Entities.Message msg in fetchedMessages.OrderBy(m=>m.SentDate)) {
-                MessageRow mr = new MessageRow( msg, this );
+                MessageRow mr = new MessageRow( msg, this.channel, this );
+                
                 mr.Top = hoffset;
                 this.messages.Add( mr );
                 this.Controls.Add( mr );
@@ -69,7 +71,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="message">the new message to add</param>
         public void OnNewMessage(Entities.Message message) {
-            MessageRow mr = new MessageRow( message, this );
+            MessageRow mr = new MessageRow( message, this.channel, this );
             if (this.messages.Any()) {
                 mr.Top = this.messages.Last().Top + this.messages.Last().Height;
             } else {

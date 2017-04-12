@@ -149,8 +149,6 @@ namespace SphereClient {
             this.panel4.FetchMessages( this.currentChannel );
         }
 
-
-
         /// <summary>
         /// Returns the main form window instance singleton.
         /// </summary>

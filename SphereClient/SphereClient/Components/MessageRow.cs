@@ -19,7 +19,7 @@ namespace SphereClient.Components {
 
 
 
-        public MessageRow(Entities.Message message, Panel parent) {
+        public MessageRow(Entities.Message message, Entities.Channel channel, Panel parent) {
             this.message = message;
             this.parent = parent;
             this.ismine = (Form1.Instance.user != null && message.UserId == Form1.Instance.user?.UserId);
@@ -43,12 +43,10 @@ namespace SphereClient.Components {
             this.image.Top = Constants.MARGIN_SMALL.Top;
             this.image.BackColor = Color.Crimson;
             this.image.SizeMode = PictureBoxSizeMode.Zoom;
-            //this.image.LoadAsync();
-            if (this.ismine) {
-                this.image.LoadAsync( Form1.Instance.user?.ProfilePicture ?? "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
-            }else {
-                this.image.LoadAsync( "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
-            }
+            
+            Entities.User usr = channel.Memberships.Where( m => m.UserDetails.UserId == message.UserId ).First().UserDetails;
+            this.image.LoadAsync( usr.ProfilePicture ?? "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
+            
             this.textPane.Left = this.image.Left + this.image.Width + Constants.MARGIN_SMALL.Right;
             this.textPane.Top = Constants.MARGIN_SMALL.Top;
             this.textPane.MaximumSize = new Size((int)(0.8f * this.Width), int.MaxValue);
