@@ -2,6 +2,8 @@ from django.utils import timezone
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.db import models
+from messaging.exceptions import ExistingMember
 from rest_framework import serializers
 from rest_framework import mixins
 from rest_framework import viewsets
@@ -48,9 +50,9 @@ def get_user_from_view(view):
 
 class SeeThreadSerializer(serializers.Serializer):
     last_seen_message = serializers.PrimaryKeyRelatedField(queryset=Message.objects.all(), required=False)
-    seen_date = serializers.DateTimeField(default=timezone.now)
-    thread = serializers.PrimaryKeyRelatedField(queryset=Thread.objects.all())
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    seen_date = serializers.DateTimeField(default=timezone.now, required=False)
+    thread = serializers.PrimaryKeyRelatedField(queryset=Thread.objects.all(), required=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=True)
     
     def validate(self, data):
         thread = data["thread"]
@@ -69,7 +71,7 @@ class SeeThreadSerializer(serializers.Serializer):
         seen_date = validated_data["seen_date"]
         last_seen_message = validated_data["last_seen_message"]
 
-        Thread.objects.see_thread(user, thread, seen_date, last_seen_message)
+        Membership.objects.see_thread(user, thread, seen_date, last_seen_message)
 
 class TuneMixin(object):
     @detail_route(methods=['post'])
@@ -95,12 +97,17 @@ class TuneMixin(object):
     def see(self, request, pk):
         thread = self.get_object()
         user = get_user_from_view(self)
-        seen_date = request.data.pop("seen_date", timezone.now())
-        last_seen_message = request.data.pop("last_seen_message", None)
+#        seen_date = request.data.pop("seen_date", timezone.now())
+
+        try:
+            last_seen_message = request.data.pop("last_seen_message")
+        except KeyError:
+            last_seen_message = Thread.objects.get_last_message(thread)
         
         data = request.data
-        data['thread'] = thread
-        data['user'] = user
+        data['thread'] = thread.pk
+        data['user'] = user.pk
+        data["last_seen_message"] = last_seen_message
         
         serializer = SeeThreadSerializer(data=data, context={'request': request})
 
@@ -118,6 +125,31 @@ class TuneMixin(object):
 
         return self.retrieve(request, pk)
 
+class ThreadFilter(django_filters.rest_framework.FilterSet):
+    class Meta:
+        model = Thread
+        fields = {
+            'title': ['icontains'],
+#            'contents': ['icontains'],
+#            'attachment': ['icontains'],
+#            'sent_date': ['gt', 'lt'],
+            'type': ['exact']
+        }
+
+class ThreadAddMembers(serializers.Serializer):
+    members = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True, required=True)
+    thread = serializers.PrimaryKeyRelatedField(queryset=Thread.objects.all(), required=True)
+
+    def save(self):
+        data = self.validated_data
+        thread = data["thread"]
+
+        for new_member in data["members"]:
+            try:
+                thread.add_member(new_member)
+            except ExistingMember:
+                pass
+
 class ChannelViewSet(TuneMixin,
                      mixins.CreateModelMixin,
                      mixins.ListModelMixin,
@@ -128,11 +160,38 @@ class ChannelViewSet(TuneMixin,
     """
     serializer_class = ChannelSerializer
 
-    filter_backends = (filters.SearchFilter, )
+#    filter_class = ThreadFilter
+    filter_backends = (filters.SearchFilter,)
+#                       django_filters.rest_framework.DjangoFilterBackend)
     search_fields = ('title', )
 
     def get_queryset(self):
         return Thread.objects.channels(get_user_from_view(self))
+
+    @detail_route(methods=['POST'])
+    def add_members(self, request, pk):
+        thread = self.get_object()
+        user = get_user_from_view(self)
+
+        if not Thread.objects.can_manage(user, thread):
+            return Response(
+                dict(errors=[
+                    "You don't have the authorization to manage this thread"
+                ]),
+                status=401) # status.401_UNAUTHORIZED)
+
+        data = dict(request.data)
+        data["thread"] = thread.pk
+        add_members_serializer = ThreadAddMembers(data=data, context={'user': user})
+
+        if not add_members_serializer.is_valid():
+            return Response(
+                add_members_serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST)
+
+        add_members_serializer.save()
+        
+        return self.retrieve(request, pk)
 
 class PrivateDiscussionViewSet(TuneMixin,
                                mixins.CreateModelMixin,
@@ -147,12 +206,25 @@ class PrivateDiscussionViewSet(TuneMixin,
 class MessageFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Message
-        fields = ('user_sender', 'contents', 'attachment_name', 'sent_date')
+        fields = {
+            'user_sender': ['exact'],
+            'contents': ['icontains'],
+            'attachment': ['icontains'],
+            'sent_date': ['gt', 'lt'],
+        }
+        filter_overrides = {
+            models.FileField: {
+                'filter_class': django_filters.CharFilter,
+                'extra': lambda f: {
+                    'lookup_expr': 'icontains'
+                }
+            }
+        }
 
-    attachment_name = django_filters.CharFilter(method='filter_by_attachment_name')
+    attachment = django_filters.CharFilter(method='filter_by_attachment_name')
 
-    def filter_by_attachment_name(self, queryset, value):
-        return queryset.filter(attachment__name__icontains=value)
+    def filter_by_attachment_name(self, queryset, name, value):
+        return queryset.filter(attachment__icontains=value)
 
 class MessagePagination(CursorPagination):
     page_size = 20

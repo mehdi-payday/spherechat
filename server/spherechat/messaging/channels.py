@@ -28,7 +28,7 @@ class ThreadHandler(ChannelHandler):
 
     @classmethod
     def thread_channel_name(cls, thread):
-        return cls.form_channel_full_name(thread.pk)
+        return thread.pk
 
     def _get_thread(self, channel_name):
         return Thread.objects.get(pk=channel_name)
@@ -81,7 +81,7 @@ class ThreadHandler(ChannelHandler):
             print "Message data"
             print message_data
 
-            self.publish(channel, "message", message_data)
+#            self.publish(channel, "message", message_data)
 
         elif payload_type == 'message_checked':
             payload = data["payload"]
@@ -99,17 +99,20 @@ class ThreadHandler(ChannelHandler):
                 last_seen_message=checked_message)
 
 
-class DiscussionChannelHandler(ThreadHandler):
-    name = 'discussion_channels'
+# class DiscussionChannelHandler(ThreadHandler):
+#    name = 'discussion_channels'
 
-class PrivateDiscussionHandler(ThreadHandler):
-    name = 'private_discussions'
+# class PrivateDiscussionHandler(ThreadHandler):
+#    name = 'private_discussions'
 
 class PersonalUserHandler(ChannelHandler):
+    name = 'users'
+
     @classmethod
     def user_channel_name(self, user):
         return user.pk
 
 users = PersonalUserHandler
-discussion_channels = DiscussionChannelHandler
-private_discussions = PrivateDiscussionHandler
+threads = ThreadHandler
+# discussion_channels = DiscussionChannelHandler
+# private_discussions = PrivateDiscussionHandler

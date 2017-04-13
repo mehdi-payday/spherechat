@@ -27,7 +27,6 @@ namespace SphereClient.Components {
     };
 
     public abstract partial class ImageAndTitleListPane : Panel {
-
         public Panel title_pane;
         public Panel contents;
         public IList<Entity> list;
@@ -38,8 +37,6 @@ namespace SphereClient.Components {
         public int rowlabel_left_margin = 5;
         public int rowBottomMargin = 0;
         public int rowTopMargin = 0;
-        public Font HoverFont = new Font("Microsoft Sans Serif", 11.5f, FontStyle.Bold, GraphicsUnit.Point);
-        public Font RegularFont = new Font("Microsoft Sans Serif", 12.0f, FontStyle.Regular, GraphicsUnit.Point);
         private int selected = 0;
 
         /// <summary>
@@ -70,9 +67,9 @@ namespace SphereClient.Components {
             }
 
             try {
-                //this.list = ((List<Channel>)Form1.Instance.fetchedChannels).ToList<Entity>();
+                this.list = Form1.Instance.fetchedChannels;
                 this.filter();
-                this.BackColor = Color.Red;
+                
                 if (null == this.contents || this.contents.IsDisposed) {
                     this.contents = new Panel();
                     this.Controls.Add(this.contents);
@@ -87,14 +84,18 @@ namespace SphereClient.Components {
                 this.contents.Top = this.title_pane.Top + this.title_pane.Size.Height;
                 this.contents.Width = this.Width;
                 this.contents.Height = this.Height - this.title_pane.Height - this.title_pane.Top;
-                this.contents.BackColor = Constants.PURPLE;
+                this.contents.BackColor = Color.Transparent;//Constants.PURPLE;
                 this.contents.AutoScroll = true;
 
                 int entityIndex = 0;
                 //TODO and move events to objects
                 foreach (Entity entity in this.list) {
-                    ImageAndTitleRow row = new ImageAndTitleRow(entity.ToText(), "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
-
+                    ImageAndTitleRow row = new ImageAndTitleRow(((Channel)entity).Title, "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
+                    row.entity = entity;
+                    row.Click += OnRowLabelClick;
+                    //row.MouseEnter += OnRowLabelEnter;
+                    //row.MouseLeave += OnRowLabelLeave;
+                
                     this.contents.Controls.Add(row);
 
                     entityIndex++;
@@ -108,7 +109,7 @@ namespace SphereClient.Components {
             }
             return status;
         }
-
+/*
         /// <summary>
         /// Triggered when the mouse enters a row.
         /// </summary>
@@ -119,7 +120,8 @@ namespace SphereClient.Components {
                 Invoke(new Action(delegate () { OnRowLabelEnter(s, e); }));
                 return;
             }
-            ((Label)s).Font = this.HoverFont;
+
+            ((Panel)s).Font = this.HoverFont;
 
         }
         /// <summary>
@@ -132,12 +134,25 @@ namespace SphereClient.Components {
                 Invoke(new Action(delegate () { OnRowLabelLeave(s, e); }));
                 return;
             }
-            ((Label)s).Font = this.RegularFont;
+            ((Panel)s).Font = this.RegularFont;
         }
 
+        */
+        /// <summary>
+        /// Triggered when the user clicks on a row.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
         public void OnRowLabelClick(object s, EventArgs e) {
-            this.contents.Controls.IndexOf((Label)s);
-
+            System.Threading.Thread t = new System.Threading.Thread( delegate () {
+                if (null != ((ImageAndTitleRow)s).entity) {
+                    Form1.Instance.SetCurrentViewedChannel( ((Channel)((ImageAndTitleRow)s).entity).ChannelId );
+                }else {
+                    MessageBox.Show( "an entity was null in the group imageandtitlelistpane" );
+                }
+                
+            } );
+            t.Start();
         }
 
         /// <summary>
@@ -186,6 +201,11 @@ namespace SphereClient.Components {
         public DiscussionListPanel(IList<Entity> list) : base(DiscussionListPanel.header, list) {
             this.BackColor = Constants.PURPLE;
             this._head = DiscussionListPanel.header;
+            this.ForeColor = Constants.DARK_PURPLE;
+
+            //plus sign on click
+            this._head.Controls[1].Click += ( object s, EventArgs e ) => { /*create channel */};
+
         }
         /// <summary>
         /// Constructor for the DiscussionListPanel class.
@@ -195,13 +215,14 @@ namespace SphereClient.Components {
         public DiscussionListPanel() : base(DiscussionListPanel.header, new List<Entity>()) {//
             this.BackColor = Constants.PURPLE;
             this._head = DiscussionListPanel.header;
+            this.ForeColor = Constants.DARK_PURPLE;
         }
 
         /// <summary>
         /// Filters off all entities that are not of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.DISCUSSION == ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c => Channel.Types.DISCUSSION == ((Channel)c).Type ).ToList<Entity>();
         }
 
     }
@@ -244,6 +265,7 @@ namespace SphereClient.Components {
         public GroupListPanel(IList<Entity> list) : base(GroupListPanel.header, list) {
             this.BackColor = Constants.PURPLE;
             this._head = GroupListPanel.header;
+            this.ForeColor = Constants.DARK_PURPLE;
         }
         /// <summary>
         /// Constructor for the DiscussionListPanel class.
@@ -253,6 +275,7 @@ namespace SphereClient.Components {
         public GroupListPanel() : base(GroupListPanel.header, new List<Entity>()) {//
             this.BackColor = Constants.PURPLE;
             this._head = GroupListPanel.header;
+            this.ForeColor = Constants.DARK_PURPLE;
         }
 
         /// <summary>

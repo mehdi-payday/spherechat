@@ -9,7 +9,10 @@ class ObservableManagerMixin(object):
 
     def notify_observers(self, method, *args, **kwargs):
         for observer in self._observers:
-            getattr(observer, method)(*args, **kwargs)  
+            if hasattr(observer, method):
+                getattr(observer, method)(*args, **kwargs)  
+            else:
+                print "WARNING : Observer %s has not method named %s" % (observer ,method)
 
     def create(self, **kwargs):
         instance = super(ObservableManagerMixin, self).create(**kwargs)

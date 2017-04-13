@@ -25,3 +25,6 @@ class UnauthorizedAction(Exception):
 
 class MessageAlreadySent(Exception):
     pass
+
+class ExistingDiscussion(Exception):
+    pass

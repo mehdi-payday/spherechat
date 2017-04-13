@@ -4,6 +4,8 @@ from messaging.models import Message, TuneManager, Membership, MessageTag
 
 
 class MembershipSeenUpdater(object):
+    pass
+"""
     @classmethod
     def on_message_saved(cls, message):
         tune_manager = TuneManager.get()
@@ -18,7 +20,7 @@ class MembershipSeenUpdater(object):
                     user, 
                     thread)
                 Membership.objects.see_thread(user, thread, last_seen_date)
-
+"""
 
 class MessageTagObserver(object):
     @classmethod

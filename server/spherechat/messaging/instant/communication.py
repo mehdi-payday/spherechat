@@ -1,6 +1,7 @@
 from messaging.channels import (
-    discussion_channels as discussion_channels_comm,
-    private_discussions as private_discussions_comm,
+#    discussion_channels as discussion_channels_comm,
+#    private_discussions as private_discussions_comm,
+    threads as threads_comm,
     users as users_comm)
 from messaging.serializers import (
     ChannelSerializer, 
@@ -37,6 +38,8 @@ class ThreadCommunicationService(CommunicationService):
 
         for user in channel.active_members:
             data = ChannelSerializer(channel, context={'user': user}).data
+            print "Publish in %s " % users_comm.user_channel_name(user)
+            print data
             users_comm.server_publish(
                 users_comm.user_channel_name(user),
                 cls.CHANNEL_CHANGE,
@@ -70,9 +73,10 @@ class ThreadCommunicationService(CommunicationService):
         thread = message.thread
         event = cls.MESSAGE
         data = MessageSerializer(message).data
+        print "Publish message %s to thread %s " % (message, thread)
 
-        private_discussions_comm.server_publish(
-            private_discussions_comm.thread_channel_name(thread),
+        threads_comm.server_publish(
+            threads_comm.thread_channel_name(thread),
             event,
             data
         )

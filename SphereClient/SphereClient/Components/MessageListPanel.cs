@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,6 +14,7 @@ namespace SphereClient.Components {
         /// </summary>
         public MessageListPanel() : base() {
             this.messages = new List<MessageRow>();
+            this.BackColor = Color.Transparent;
         }
 
         /// <summary>
@@ -31,18 +34,39 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="channel">The channel to fetch the messages from</param>
         public void FetchMessages(Entities.Channel channel) {
+
+            Form1.Instance.ShowPreloader();
+
             this.messages.Clear();
             this.Controls.Clear();
+            this.channel = channel;
             Entities.Message[] fetchedMessages = Form1.Instance.session.GetAllMessages(channel);
             int hoffset = 0;
             foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
-                MessageRow mr = new MessageRow(msg, this);
+                MessageRow mr = new MessageRow(msg, this.channel, this);
+
                 mr.Top = hoffset;
                 this.messages.Add(mr);
                 this.Controls.Add(mr);
                 hoffset += mr.Height;
             }
+            System.Threading.Thread t = new System.Threading.Thread(() => {
+                System.Threading.Thread.Sleep(1000);
+                Form1.Instance.HidePreloader();
+            });
+            t.Start();
+        }
 
+        /// <summary>
+        /// Retrieves the messages since last time they were fetched and adds them to
+        /// the list. Unlike FetchMessages, this method is non-destructive
+        /// </summary>
+        /// <param name="channel"> the channel to fetch the messages from</param>
+        public void FetchMessagesSinceLastTime(Entities.Channel channel) {
+            Entities.Message[] fetchedMessages = Form1.Instance.session.GetAllMessages(channel);
+            foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
+                OnNewMessage(msg);
+            }
         }
 
         /// <summary>
@@ -51,7 +75,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="message">the new message to add</param>
         public void OnNewMessage(Entities.Message message) {
-            MessageRow mr = new MessageRow(message, this);
+            MessageRow mr = new MessageRow(message, this.channel, this);
             if (this.messages.Any()) {
                 mr.Top = this.messages.Last().Top + this.messages.Last().Height;
             }

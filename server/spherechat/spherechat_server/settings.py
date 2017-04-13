@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+DEBUG = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -30,6 +32,8 @@ ALLOWED_HOSTS = [
     'spherechat.ga'
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.sites',
@@ -76,6 +81,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 AUTH_USER_MODEL = "core.User"
@@ -167,7 +174,7 @@ MEDIA_URL = '/media/'
 
 OMNIBUS_ENDPOINT_SCHEME = 'ws'  # 'ws' is used for websocket connections
 OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.websocket_webapp_factory'
-# sockjs_webapp_factory'
+# OMNIBUS_WEBAPP_FACTORY = 'omnibus.factories.sockjs_webapp_factory'
 
 # OMNIBUS_CONNECTION_FACTORY = 'omnibus.factories.sockjs_connection_factory'
 OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
@@ -175,5 +182,6 @@ OMNIBUS_CONNECTION_FACTORY = 'core.connection.connection_factory'
 # sockjs_connection_factory"
 
 # OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.userauthenticator_factory'
-OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
-# OMNIBUS_AUTHENTICATOR_FACTORY = 'core.factories.usertokenauthenticator_factor
+# OMNIBUS_AUTHENTICATOR_FACTORY = 'omnibus.factories.noopauthenticator_factory'
+OMNIBUS_AUTHENTICATOR_FACTORY = 'core.factories.usertokenauthenticator_factory'
+
