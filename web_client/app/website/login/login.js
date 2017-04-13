@@ -9,13 +9,13 @@ angular.module('myApp.login', ['auth', 'api'])
 	$scope.login = function(){
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-		if(username == null || username == "" || password == null || password == ""){
+		if(username === "" || password === ""){
 			$('#verification').text("username or password is incorrect");
 			document.getElementById("verification").style.color = "#FF3838";
 		}else{
 			api.login.save({}, {username: username, password: password}, 
 			function(successResponse){
-				
+
 			}, function(errorResponse){
 				$('#verification').text("username or password is incorrect");
 				document.getElementById("verification").style.color = "#FF3838";

@@ -194,19 +194,13 @@ angular
 			return session.getCurrentUser !== null;
 		}
 		
-		this.login = function(username, password, callback){
-			api.login({username: username, password: password}, function(){
-				
-			});
+		this.login = function(token, user, callback){
+			
 		}
 		
 		this.logout = function(){
 			session.setAuthToken(null);
 			session.setCurrentUser(null);
-		}
-		
-		this.register = function(){
-			
 		}
 	}]);
 
@@ -241,12 +235,12 @@ angular
     	var api = {};
     	
     	api.login = $resource(serverAddress + 'api/auth/login/');
-    	api.register = function() {return $resource(serverAddress + 'api/auth/registration/');}; 
+    	api.register = $resource(serverAddress + 'api/auth/registration/');
     	
-    	api.friendship = function() {return $resource(serverAddress + 'api/friendship/friendship/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});};
-    	api.friendrequest = function() {return $resource(serverAddress + 'api/friendship/friendrequest/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});};
+    	api.friendship = $resource(serverAddress + 'api/friendship/friendship/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});
+    	api.friendrequest = $resource(serverAddress + 'api/friendship/friendrequest/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});
     	
-    	api.user = function() {return $resource(serverAddress + 'api/users/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
+    	api.user = $resource(serverAddress + 'api/users/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getCurrent': {
     			method: 'GET',
     			url: serverAddress + 'api/me/',
@@ -258,9 +252,9 @@ angular
     			params: {id: '@id'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		}
-    	});};
+    	});
     	
-    	api.channel = function() {return $resource(serverAddress + 'api/messaging/channel/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
+    	api.channel = $resource(serverAddress + 'api/messaging/channel/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getOne': {
     			method: 'GET',
     			url: serverAddress + 'api/messaging/channel/:id/',
@@ -303,9 +297,9 @@ angular
     			params: {id: '@id'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		}
-    	});};
+    	});
     	
-    	api.privateDiscussion = function() {return $resource(serverAddress + 'api/messaging/privatediscussion/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
+    	api.privateDiscussion = $resource(serverAddress + 'api/messaging/privatediscussion/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getOne': {
     			method: 'GET',
     			url: serverAddress + 'api/messaging/privatediscussion/:id/',
@@ -348,6 +342,6 @@ angular
     			params: {id: '@id'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		}
-    	});};
+    	});
     	return api;
     }]);

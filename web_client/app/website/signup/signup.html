@@ -28,49 +28,50 @@
               </a>
               <h1>Create an Account</h1>
               <p>Join ShereChat Today <br> All fields with <span style="color: red;">*</span> are required</p>
+              <p id="verification"></p>
+<!--               <div class="et"> -->
+<!--                 <input type="text" name="name" id="name" class="form-control" placeholder="Name"> -->
+<!--               </div> -->
               <div class="et">
-                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username*">
               </div>
+<!--               <div class="et"> -->
+<!--                   <div class="input-group"> -->
+<!--                     <label class="input-group-btn"> -->
+<!--                         <span class="btn btn-primary"> -->
+<!--                             Browse &hellip; <input id="profilePicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg"> -->
+<!--                         </span> -->
+<!--                     </label> -->
+<!--                     <input type="text" id="file" placeholder="Profile Picture" class="form-control" style="background-color: #fff;" readonly> -->
+<!--                 </div> -->
+<!--               </div> -->
+<!--               <div class="et"> -->
+<!--                   <div class="input-group"> -->
+<!--                     <label class="input-group-btn"> -->
+<!--                         <span class="btn btn-primary"> -->
+<!--                             Browse &hellip; <input id="bannerPicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg"> -->
+<!--                         </span> -->
+<!--                     </label> -->
+<!--                     <input type="text" id="file2" placeholder="Banner Background Picture" class="form-control" style="background-color: #fff;" readonly> -->
+<!--                 </div> -->
+<!--               </div> -->
               <div class="et">
-                <input type="text" name="username" id="username" class="form-control" placeholder="Username">
-              </div>
-               <div class="et">
-                  <div class="input-group">
-                    <label class="input-group-btn">
-                        <span class="btn btn-primary">
-                            Browse &hellip; <input id="profilePicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
-                        </span>
-                    </label>
-                    <input type="text" id="file" placeholder="Profile Picture" class="form-control" style="background-color: #fff;" readonly>
-                </div>
-              </div>
-              <div class="et">
-                  <div class="input-group">
-                    <label class="input-group-btn">
-                        <span class="btn btn-primary">
-                            Browse &hellip; <input id="bannerPicture" type="file" name="profilePicture" style="display: none;" accept="image/x-png,image/gif,image/jpeg">
-                        </span>
-                    </label>
-                    <input type="text" id="file2" placeholder="Banner Background Picture" class="form-control" style="background-color: #fff;" readonly>
-                </div>
-              </div>
-              <div class="et">
-                <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-              </div>
-              <div class="et">
-                <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+                <input type="text" name="email" id="email" class="form-control" placeholder="Email*">
               </div>
               <div class="et">
-                <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" placeholder="Repeat Password">
+                <input name="password" id="password" type="password" class="form-control" placeholder="Password*">
               </div>
               <div class="et">
-                <select name="gender" id="gender" class="form-control">
-                  <option value="">I Am...</option>
-                  <option value="AF">Male</option>
-                  <option value="AX">Female</option>
-                  <option value="AL">Other</option>
-                </select>
+                <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" placeholder="Repeat Password*">
               </div>
+<!--               <div class="et"> -->
+<!--                 <select name="gender" id="gender" class="form-control"> -->
+<!--                   <option value="" disabled selected>I Am...</option> -->
+<!--                   <option value="AF">Male</option> -->
+<!--                   <option value="AX">Female</option> -->
+<!--                   <option value="AL">Other</option> -->
+<!--                 </select> -->
+<!--               </div> -->
               <div class="et">
             <div class="input-checkbox">
               <div class="inner"></div>
@@ -78,7 +79,7 @@
             </div> By signing up, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, including <a href="#">Cookie Use</a>.
               </div>
               <div class="amb">
-                <button type="button" class="btn fp" id="login" onclick="register()">Create Account</button>
+                <button type="button" class="btn fp" id="login" ng-click="register()">Create Account</button>
               </div>
               <footer class="apd" style="margin-top: 15%;">
                 <a href="#!/login" class="dp">Have an account? Login</a>
