@@ -73,6 +73,7 @@ class ThreadCommunicationService(CommunicationService):
         thread = message.thread
         event = cls.MESSAGE
         data = MessageSerializer(message).data
+        print "Publish message %s to thread %s " % (message, thread)
 
         threads_comm.server_publish(
             threads_comm.thread_channel_name(thread),

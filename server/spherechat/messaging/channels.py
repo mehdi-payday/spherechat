@@ -28,7 +28,7 @@ class ThreadHandler(ChannelHandler):
 
     @classmethod
     def thread_channel_name(cls, thread):
-        return cls.form_channel_full_name(thread.pk)
+        return thread.pk
 
     def _get_thread(self, channel_name):
         return Thread.objects.get(pk=channel_name)
