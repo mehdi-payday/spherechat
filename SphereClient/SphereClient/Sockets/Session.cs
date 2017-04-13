@@ -1,35 +1,39 @@
-﻿using SphereClient.REST;
+﻿using SphereClient.Entities;
+using SphereClient.REST;
 using System;
 using System.Text;
 
 namespace SphereClient.Sockets {
 
-    public delegate void MessageReceived();
-    public delegate void DiscussionChange();
-    public delegate void ChannelChange();
-    public delegate void NewFriendRequest();
-    public delegate void FriendRequestAdressed();
+    public delegate void MessageReceived(Message message);
+    public delegate void DiscussionChange(Thread thread);
+    public delegate void ChannelChange(Channel channel);
+    public delegate void NewFriendRequest(FriendRequest friendrequest);
+    public delegate void FriendRequestAdressed(FriendRequest friendrequest);
 
     class Session : IDisposable {
         private Connection conn { get; set; }
-        private Entities.Auth auth { get; set; }
+        private REST.Session session { get; set; }
 
-        public Session(Configuration config, Entities.Auth auth) {
+        public event MessageReceived OnMessageReceived;
+        public event DiscussionChange OnDiscussionChange;
+        public event ChannelChange OnChannelChange;
+        public event NewFriendRequest OnNewFriendshipRequest;
+        public event FriendRequestAdressed OnFriendRequestAdressed;
+
+        public Session(Configuration config, REST.Session session) {
             conn = new Connection(config, false);
-            this.auth = auth;
+            this.session = session;
 
             conn.OnConnected += Conn_OnConnected;
             conn.OnConnecting += Conn_OnConnecting;
             conn.OnDisconnect += Conn_OnDisconnect;
-            conn.OnReady += Conn_OnReady;
             conn.OnReceive += Conn_OnReceive;
-            conn.OnSending += Conn_OnSending;
-            conn.OnSent += Conn_OnSent;
 
             conn.Connect();
         }
 
-        public void Send(Entities.Entity entity) {
+        public void Send(Entity entity) {
             conn.Send(
                 new Buffers.WebSocket.Write(
                     Encoding.UTF8.GetBytes(
@@ -37,24 +41,59 @@ namespace SphereClient.Sockets {
                             Parser.EntitytoJSON(entity, entity.GetType())))));
         }
 
-        private void Conn_OnSent() {
-            Console.WriteLine("Sent !");
-        }
-
-        private void Conn_OnSending() {
-            Console.WriteLine("Sending..");
+        public void Send(string data) {
+            conn.Send(
+                new Buffers.WebSocket.Write(
+                    Encoding.UTF8.GetBytes(data)));
         }
 
         private void Conn_OnReceive(string data) {
-            Console.WriteLine(data);
-        }
+            string command = data.Split(':')[0];
+            dynamic json = JSON.Parse(data.Substring(data.IndexOf(':') + 1));
+            switch (json.type.ToString()) {
+                case "authenticate":
+                    if (json.success == true) {
+                        foreach (var channel in session.GetAllChannels()) {
+                            Send("!subscribe:messaging,threads." + channel.ChannelId);
+                        }
 
-        private void Conn_OnReady() {
-            conn.Send(new Buffers.WebSocket.Write(Encoding.UTF8.GetBytes("!authenticate:" + Guid.NewGuid().ToString() + ":" + auth.Token)));
+                        foreach (var friendship in session.GetAllFriendships()) {
+                            if (friendship.Active)
+                                Send("!subscribe:messaging,users." + friendship.Addresser);
+                        }
+
+                        Console.WriteLine("Authenticated !");
+                    }
+                    else {
+                        Console.WriteLine("Oops.. check your credentitals..");
+                    }
+                    break;
+                case "subscribe":
+                    if (json.success == true) {
+                        Console.WriteLine("Subscribed to " + json.payload.channel);
+                    }
+                    else {
+                        Console.WriteLine("Unable to subscribe to " + json.payload.channel);
+                    }
+                    break;
+                case "channel_change":
+                    OnChannelChange?.Invoke(Parser.JSONtoEntity(json.payload, typeof(Channel)));
+                    break;
+                case "message":
+                    OnMessageReceived?.Invoke(Parser.JSONtoEntity(json.payload, typeof(Message)));
+                    break;
+                default:
+                    Console.WriteLine("Unhandled event " + json.type);
+                    break;
+            }
         }
 
         private void Conn_OnDisconnect() {
-            Console.WriteLine("Disconnected !");
+            Console.WriteLine("WebSocket disconnected.. Reconnecting in 5 seconds");
+            new System.Threading.Thread(() => {
+                System.Threading.Thread.Sleep(5000);
+                conn.Connect();
+            }).Start();
         }
 
         private void Conn_OnConnecting() {
@@ -62,7 +101,9 @@ namespace SphereClient.Sockets {
         }
 
         private void Conn_OnConnected() {
-            Console.WriteLine("Connected !");
+            conn.Send(
+                new Buffers.WebSocket.Write(
+                    Encoding.UTF8.GetBytes("!authenticate:" + Guid.NewGuid().ToString() + ":" + session.Auth.Token)));
         }
 
         public void Dispose() {

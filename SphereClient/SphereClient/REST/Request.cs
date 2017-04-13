@@ -24,13 +24,13 @@ namespace SphereClient.REST {
             return this;
         }
 
-        public Request GET(WebHeaderCollection additionalHeaders = null) {
+        public Request GET(string qs = null, WebHeaderCollection additionalHeaders = null) {
             using (var wc = new WebClient()) {
                 if (additionalHeaders != null)
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
-                Payload = JSON.Parse(wc.DownloadString(API + Method));
+                Payload = JSON.Parse(wc.DownloadString(API + Method + (qs != null ? "?" + qs : "")));
             }
             return this;
         }
@@ -49,13 +49,13 @@ namespace SphereClient.REST {
             return this;
         }
 
-        public Request DELETE(WebHeaderCollection additionalHeaders = null) {
+        public Request DELETE(string qs = null, WebHeaderCollection additionalHeaders = null) {
             using (var wc = new WebClient()) {
                 if (additionalHeaders != null)
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
-                Payload = JSON.Parse(wc.UploadString(API + Method, "DELETE", "{}"));
+                Payload = JSON.Parse(wc.UploadString(API + Method + (qs != null ? "?" + qs : ""), "DELETE", "{}"));
             }
             return this;
         }
