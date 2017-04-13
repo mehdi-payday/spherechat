@@ -17,7 +17,7 @@ namespace SphereClient.Components {
         Panel group_section_panel;
 
         public leftSection() {
-            Channel[] allchannels = Form1.Instance.session?.GetChannels();
+            Channel[] allchannels = Form1.Instance.session?.GetAllChannels();
             this.discussions = allchannels.Where(c => c.Type == Channel.Types.DISCUSSION).ToList();
             this.group_discussions = allchannels.Except(this.discussions).ToList();
         }

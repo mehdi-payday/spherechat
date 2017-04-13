@@ -12,7 +12,7 @@ namespace SphereClient.REST {
                     username = user.Username,
                     first_name = user.FirstName,
                     last_name = user.LastName,
-                    type = Enum.GetName(typeof(User.Types), user.Type)
+                    type = EnumToString(user.Type, typeof(User.Types)),
                 };
             }
             else if (type == typeof(User[])) {
@@ -28,7 +28,7 @@ namespace SphereClient.REST {
                     id = channel.ChannelId,
                     slug = channel.Slug,
                     title = channel.Title,
-                    type = Enum.GetName(typeof(Channel.Types), channel.Type),
+                    type = EnumToString(channel.Type, typeof(Channel.Types)),
                     description = channel.Description,
                     membership = EntitytoJSON(channel.Membership, typeof(Membership)),
                     memberships = EntitytoJSON(channel.Memberships ?? new Membership[] { }, typeof(Membership[])),
@@ -72,7 +72,7 @@ namespace SphereClient.REST {
                     user_sender = message.UserId,
                     contents = message.Contents,
                     sent_date = message.SentDate.ToUniversalTime(),
-                    type = Enum.GetName(typeof(Message.Types), message.Type),
+                    type = EnumToString(message.Type, typeof(Message.Types)),
                     tags = EntitytoJSON(message.Tags ?? new MessageTag[] { }, typeof(MessageTag[]))
                 };
             }
@@ -131,7 +131,7 @@ namespace SphereClient.REST {
                         Username = json.username.ToString(),
                         FirstName = json.first_name.ToString(),
                         LastName = json.last_name.ToString(),
-                        Type = (User.Types)Enum.Parse(typeof(User.Types), json.type.ToString().ToUpper()),
+                        Type = ParseEnum<User.Types>((json.type ?? "").ToString(), typeof(User.Types)),
 
                         IsNull = false
                     };
@@ -146,6 +146,28 @@ namespace SphereClient.REST {
                 }
                 return users.ToArray();
             }
+            else if (type == typeof(Entities.Friendship)) {
+                return new Entities.Friendship() {
+                    FriendshipId = ParseInt(json.id.ToString()),
+                    Requester = ParseInt(json.requester_user.ToString()),
+                    Addresser = ParseInt(json.addresser_user.ToString()),
+                    RequestDate = ParseDate(json.request_date.ToString()),
+                    ApprovalDate = ParseDate(json.approval_date.ToString()),
+                    FriendshipEndDate = ParseDate(json.friendship_end_date.ToString()),
+                    Active = ParseBool(json.active.ToString()),
+
+                    IsNull = false
+                };
+            }
+            else if (type == typeof(Entities.Friendship[])) {
+                List<Entities.Friendship> friendships = new List<Entities.Friendship>();
+                if (json == null || json.ToString() != "") {
+                    foreach (var a in json.results) {
+                        friendships.Add(JSONtoEntity(a, typeof(Entities.Friendship)));
+                    }
+                }
+                return friendships.ToArray();
+            }
             else if (type == typeof(Channel)) {
                 if (json == null || json.ToString() == "") {
                     return new Channel() {
@@ -157,7 +179,7 @@ namespace SphereClient.REST {
                         ChannelId = ParseInt(json.id.ToString()),
                         Slug = json.slug.ToString(),
                         Title = json.title.ToString(),
-                        Type = (Channel.Types)Enum.Parse(typeof(Thread.Types), json.type.ToString().ToUpper()),
+                        Type = ParseEnum<Channel.Types>((json.type ?? "").ToString(), typeof(Channel.Types)),
                         Description = json.description.ToString(),
                         Membership = JSONtoEntity(json.membership, typeof(Membership)),
                         Memberships = JSONtoEntity(json.memberships, typeof(Membership[])),
@@ -221,7 +243,7 @@ namespace SphereClient.REST {
                         UserId = ParseInt(json.user_sender.ToString()),
                         Contents = json.contents.ToString(),
                         SentDate = ParseDate(json.sent_date.ToString()),
-                        Type = (Message.Types)Enum.Parse(typeof(Message.Types), (json.message_type.ToString() == "" ? "user" : json.message_type.ToString()).ToUpper()),
+                        Type = ParseEnum<Message.Types>((json.message_type ?? "").ToString() == "" ? "user" : json.message_type.ToString(), typeof(Message.Types)),
                         Tags = JSONtoEntity(json.tags, typeof(MessageTag[])),
 
                         IsNull = false
@@ -281,6 +303,29 @@ namespace SphereClient.REST {
         private static int ParseInt(string value) {
             int result;
             return int.TryParse(value, out result) ? result : -1;
+        }
+
+        private static bool ParseBool(string value) {
+            bool result;
+            return bool.TryParse(value, out result) ? result : false;
+        }
+
+        private static T ParseEnum<T>(string data, Type type) {
+            try {
+                return (T)Convert.ChangeType(Enum.Parse(type, data.ToString().ToUpper()), type);
+            }
+            catch {
+                return default(T);
+            }
+        }
+
+        private static string EnumToString(Enum data, Type type) {
+            try {
+                return Enum.GetName(type, data);
+            }
+            catch {
+                return null;
+            }
         }
     }
 }

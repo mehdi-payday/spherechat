@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SphereClient.Entities;
+using System;
 using System.Net;
 
 namespace SphereClient.REST {
@@ -23,7 +24,7 @@ namespace SphereClient.REST {
             }
         }
 
-        public Entities.User GetProfile() {
+        public User GetProfile() {
             using (var request = new Me.Base() {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
@@ -31,44 +32,168 @@ namespace SphereClient.REST {
                     { HttpRequestHeader.Authorization, "Token " + Auth.Token }
                 }
             }.GET()) {
-                return (Entities.User)Parser.JSONtoEntity(request.Payload, typeof(Entities.User));
+                return (User)Parser.JSONtoEntity(request.Payload, typeof(Entities.User));
             }
         }
 
-        public Entities.Channel[] GetChannels() {
+        public Entities.Friendship[] GetAllFriendships() {
+            Cursor<Entities.Friendship> cursor = new Cursor<Entities.Friendship>();
+            do {
+                using (var request = new Friendship.Friendship.Base() {
+                    DefaultHeaders = new WebHeaderCollection() {
+                        { HttpRequestHeader.Accept, "application/json" },
+                        { HttpRequestHeader.ContentType, "application/json" },
+                        { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                    }
+                }.GET(string.IsNullOrEmpty(cursor.Next) ? null : cursor.Next.Split('?')[1])) {
+                    cursor.AddRange((Entities.Friendship[])Parser.JSONtoEntity(request.Payload, typeof(Entities.Friendship[])));
+                    cursor.Next = request.Payload.next.ToString();
+                    cursor.Previous = request.Payload.previous.ToString();
+                }
+            } while (!string.IsNullOrEmpty(cursor.Next));
+            return cursor.ToArray();
+        }
+
+        public Cursor<Entities.Friendship> GetFriendships(string pageUrl = null) {
+            Cursor<Entities.Friendship> cursor = new Cursor<Entities.Friendship>();
+            using (var request = new Friendship.Friendship.Base() {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.GET(pageUrl == null ? null : pageUrl.Split('?')[1])) {
+                cursor.AddRange((Entities.Friendship[])Parser.JSONtoEntity(request.Payload, typeof(Entities.Friendship[])));
+                cursor.Next = request.Payload.next.ToString();
+                cursor.Previous = request.Payload.previous.ToString();
+
+                return cursor;
+            }
+        }
+
+        public Cursor<Channel> GetChannels(string pageUrl = null) {
+            Cursor<Channel> cursor = new Cursor<Channel>();
             using (var request = new Messaging.Channel.Base() {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
                     { HttpRequestHeader.Authorization, "Token " + Auth.Token }
                 }
-            }.GET()) {
-                return (Entities.Channel[])Parser.JSONtoEntity(request.Payload, typeof(Entities.Channel[]));
+            }.GET(pageUrl == null ? null : pageUrl.Split('?')[1])) {
+                cursor.AddRange((Channel[])Parser.JSONtoEntity(request.Payload, typeof(Channel[])));
+                cursor.Next = request.Payload.next.ToString();
+                cursor.Previous = request.Payload.previous.ToString();
+
+                return cursor;
             }
         }
 
-        public Entities.Message[] GetMessages(Entities.Channel channel) {
+        public Channel[] GetAllChannels() {
+            Cursor<Channel> cursor = new Cursor<Channel>();
+            do {
+                using (var request = new Messaging.Channel.Base() {
+                    DefaultHeaders = new WebHeaderCollection() {
+                        { HttpRequestHeader.Accept, "application/json" },
+                        { HttpRequestHeader.ContentType, "application/json" },
+                        { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                    }
+                }.GET(string.IsNullOrEmpty(cursor.Next) ? null : cursor.Next.Split('?')[1])) {
+                    cursor.AddRange((Channel[])Parser.JSONtoEntity(request.Payload, typeof(Channel[])));
+                    cursor.Next = request.Payload.next.ToString();
+                    cursor.Previous = request.Payload.previous.ToString();
+                }
+            } while (!string.IsNullOrEmpty(cursor.Next));
+            return cursor.ToArray();
+        }
+
+        public Cursor<Message> GetMessages(Channel channel, string pageUrl = null) {
+            Cursor<Message> cursor = new Cursor<Message>();
             using (var request = new Messaging.Channel.Message.Base(channel.ChannelId) {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
                     { HttpRequestHeader.Authorization, "Token " + Auth.Token }
                 }
-            }.GET()) {
-                return (Entities.Message[])Parser.JSONtoEntity(request.Payload, typeof(Entities.Message[]));
+            }.GET(pageUrl == null ? null : pageUrl.Split('?')[1])) {
+                cursor.AddRange((Message[])Parser.JSONtoEntity(request.Payload, typeof(Message[])));
+                cursor.Next = request.Payload.next.ToString();
+                cursor.Previous = request.Payload.previous.ToString();
+
+                return cursor;
             }
         }
 
-        public void PostMessageToChannel(Entities.Message message, Entities.Channel channel) {
+        public Cursor<Message> GetMessages(int channelId, string pageUrl = null) {
+            Cursor<Message> cursor = new Cursor<Message>();
+            using (var request = new Messaging.Channel.Message.Base(channelId) {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.GET(pageUrl == null ? null : pageUrl.Split('?')[1])) {
+                cursor.AddRange((Message[])Parser.JSONtoEntity(request.Payload, typeof(Message[])));
+                cursor.Next = request.Payload.next.ToString();
+                cursor.Previous = request.Payload.previous.ToString();
+
+                return cursor;
+            }
+        }
+
+        public Message[] GetAllMessages(Channel channel) {
+            Cursor<Message> cursor = new Cursor<Message>();
+            do {
+                using (var request = new Messaging.Channel.Message.Base(channel.ChannelId) {
+                    DefaultHeaders = new WebHeaderCollection() {
+                        { HttpRequestHeader.Accept, "application/json" },
+                        { HttpRequestHeader.ContentType, "application/json" },
+                        { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                    }
+                }.GET(string.IsNullOrEmpty(cursor.Next) ? null : cursor.Next.Split('?')[1])) {
+                    cursor.AddRange((Message[])Parser.JSONtoEntity(request.Payload, typeof(Message[])));
+                    cursor.Next = request.Payload.next.ToString();
+                    cursor.Previous = request.Payload.previous.ToString();
+                }
+            } while (!string.IsNullOrEmpty(cursor.Next));
+            return cursor.ToArray();
+        }
+
+        public Message[] GetAllMessages(int channelId) {
+            Cursor<Message> cursor = new Cursor<Message>();
+            do {
+                using (var request = new Messaging.Channel.Message.Base(channelId) {
+                    DefaultHeaders = new WebHeaderCollection() {
+                        { HttpRequestHeader.Accept, "application/json" },
+                        { HttpRequestHeader.ContentType, "application/json" },
+                        { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                    }
+                }.GET(string.IsNullOrEmpty(cursor.Next) ? null : cursor.Next.Split('?')[1])) {
+                    cursor.AddRange((Message[])Parser.JSONtoEntity(request.Payload, typeof(Message[])));
+                    cursor.Next = request.Payload.next.ToString();
+                    cursor.Previous = request.Payload.previous.ToString();
+                }
+            } while (!string.IsNullOrEmpty(cursor.Next));
+            return cursor.ToArray();
+        }
+
+        public void PostMessageToChannel(Message message, Channel channel) {
             using (var request = new Messaging.Channel.Message.Base(channel.ChannelId) {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
                     { HttpRequestHeader.Authorization, "Token " + Auth.Token }
                 }
-            }.POST(Parser.EntitytoJSON(message, message.GetType()))) {
-                Console.WriteLine(request.Payload);
-            }
+            }.POST(Parser.EntitytoJSON(message, message.GetType()))) { }
+        }
+
+        public void PostMessageToChannel(Message message, int channelId) {
+            using (var request = new Messaging.Channel.Message.Base(channelId) {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(Parser.EntitytoJSON(message, message.GetType()))) { }
         }
 
         public void PostMessageToPrivateDiscussion(Entities.Message message, Entities.PrivateDiscussion PrivateDiscussion) {
@@ -78,10 +203,20 @@ namespace SphereClient.REST {
                     { HttpRequestHeader.ContentType, "application/json" },
                     { HttpRequestHeader.Authorization, "Token " + Auth.Token }
                 }
-            }.POST(Parser.EntitytoJSON(message, message.GetType()))) {
-                Console.WriteLine(request.Payload);
-            }
+            }.POST(Parser.EntitytoJSON(message, message.GetType()))) { }
         }
+
+        public void PostMessageToPrivateDiscussion(Entities.Message message, int channelId) {
+            using (var request = new Messaging.PrivateDiscussion.Message.Base(channelId) {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(Parser.EntitytoJSON(message, message.GetType()))) { }
+        }
+
+
 
         public Entities.Auth Auth { get; private set; }
 
