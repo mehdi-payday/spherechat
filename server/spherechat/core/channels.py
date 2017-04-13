@@ -58,9 +58,11 @@ class ChannelHandler(object):
         )
 
     @classmethod
-    def server_publish(self, channel, payload_type, data, sender='server'):
+    def server_publish(cls, channel, payload_type, data, sender='server'):
+        print "Server publish in %s " % cls.form_channel_full_name(channel)
+
         publish(
-            self.__class__.form_channel_full_name(channel),
+            cls.form_channel_full_name(channel),
             # Send to the root
             payload_type,
             data,

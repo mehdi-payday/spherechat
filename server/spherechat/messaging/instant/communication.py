@@ -38,6 +38,8 @@ class ThreadCommunicationService(CommunicationService):
 
         for user in channel.active_members:
             data = ChannelSerializer(channel, context={'user': user}).data
+            print "Publish in %s " % users_comm.user_channel_name(user)
+            print data
             users_comm.server_publish(
                 users_comm.user_channel_name(user),
                 cls.CHANNEL_CHANGE,

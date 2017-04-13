@@ -11,13 +11,13 @@ from messaging.exceptions import UnexistentMembership
 def get_user_from_serializer(serializer):
     request = serializer.context.get('request', None)
 
-    if 'member' in serializer.context:
-        return serializer.context.get('member')
+    if 'user' in serializer.context:
+        return serializer.context.get('user')
     elif request:
         return request.user
 
     raise Exception("Cannot get member from serializer"
-                    + " if request is not in the context")
+                    + " if `request` or `user` is not in the context")
 
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:

@@ -4,6 +4,24 @@ from rest_framework import viewsets, views
 from core.serializers import UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import filters
+from django.db.models import Q
+import django_filters
+
+
+class UserFilter(django_filters.rest_framework.FilterSet):
+    class Meta:
+        model = get_user_model()
+        fields = []
+
+    belongs_to = django_filters.CharFilter(method='filter_by_belonging_to_thread')
+    does_not_belong_to = django_filters.CharFilter(method='filter_by_not_belonging_to_thread')
+
+    def filter_by_belonging_to_thread(self, queryset, name, value):
+        return queryset.filter(memberships__thread=value)
+
+    def filter_by_non_belonging_to_thread(self, queryset, name, value):
+        return queryset.filter(~Q(memberships__thread=value))
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -11,6 +29,11 @@ class UserViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = get_user_model().objects.filter(is_active=True).order_by('-date_joined')
+    filter_class = UserFilter
+    filter_backends = (filters.SearchFilter,
+                       django_filters.rest_framework.DjangoFilterBackend)
+    search_fields = ('first_name', 'last_name', 'username', 'email')
+
     serializer_class = UserSerializer
 
 

@@ -20,6 +20,7 @@ from messaging.exceptions import (UnmanagedThread,
     ImmutableMembersList,
     UnexistentMembership,
     IncorrectTags,
+    ExistingDiscussion,
     MessageAlreadySent)
 import re
 
@@ -50,10 +51,10 @@ class MembershipManager(ObservableManagerMixin, Manager):
 
         return seen
 
-    def has_seen_message(self, user, message, thread=None):
-        if thread is None:
-            thread = message.thread
+    def has_seen_message(self, user, message):
+        assert message.thread != None
 
+        thread = message.thread
         membership = self.get_membership(user, thread)
         seen = membership.last_seen_date >= message.sent_date
 
@@ -107,7 +108,9 @@ class MembershipManager(ObservableManagerMixin, Manager):
         membership.last_seen_date = seen_date
 
         if last_seen_message is not None:
-            membership.last_seen_message = last_seen_message
+            if membership.last_seen_message is None \
+                or membership.last_seen_message.pk < last_seen_message.pk:
+                membership.last_seen_message = last_seen_message
 
         membership.save()
 
@@ -166,15 +169,39 @@ class TuneManager(object):
     def is_tuned(self, user, thread):
         if user.listening_thread is None:
             return False
-        heartbeat_ancienty = timezone.now() - user.last_listening_date
 
-        return user.listening_thread.pk == thread.pk and heartbeat_ancienty.seconds > LISTENING_RENEWAL_RATE
+        heartbeat_ancienty = timezone.now() - user.last_listening_date
+        print "Here is heartbeat anciert %s "% heartbeat_ancienty
+
+        is_tuned = user.listening_thread.pk == thread.pk \
+            and heartbeat_ancienty.seconds <= LISTENING_RENEWAL_RATE
+
+        print "Is user %s tuned to %s ? %s" % (
+                user, 
+                thread, 
+                is_tuned)
+
+        return is_tuned
 
     def get_last_heartbeat_date(self, user, thread):
         assert self.is_tuned(user, thread), "User '%s' must be tuned to thread '%s' in order to know his tuning date" % (user, thread)
         return user.last_listening_date 
 
 class ThreadManager(Manager):
+    def can_manage(self, user, thread):
+        assert isinstance(user, User) and isinstance(thread, Thread)
+
+        if not thread.is_channel():
+            return False
+        
+        assert thread.manager_user is not None, "Thread should have a manager"
+        
+        if thread.manager_user != None \
+            and thread.manager_user.pk == user.pk:
+            return True
+
+        return False
+        
     def is_channel(self, thread):
         return thread.type in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL)
 
@@ -205,16 +232,20 @@ class ThreadManager(Manager):
 
         return True
 
-    def join(self, user, thread):
+    def add_member(self, user, thread):
+        assert thread.is_channel(), "Thread must be a channel in order to add members"
+        Membership.objects.create_membership(user, thread)
+
+    def _join(self, user, thread):
         Membership.objects.create_membership(user, thread)
 #       TODO : Send system message "X joined the channel"
 
-    def leave(self, user, thread):
+    def _leave(self, user, thread):
         Membership.objects.get_membership(user, thread).cancel()
 #       TODO : Send system message "X left the channel"
 
     def is_manager(self, user, thread):
-	try:
+        try:
             return self.get_manager(thread).pk is user.pk
         except UnmanagedThread:
             return False
@@ -230,7 +261,8 @@ class ThreadManager(Manager):
         return thread.manager_user
 
     def create_discussion(self, initiator, target):
-        assert not self.private_discussion_exists(initiator, target), "Private discussion already existent between %s and %s" % (initiator, target)
+        if self.private_discussion_exists(initiator, target):
+            raise ExistingDiscussion("Private discussion already existent between %s and %s" % (initiator, target))
 
         title = "Private discussion between %s and%s" % (initiator, target)
         description = "Private discussion between %s and%s" % (initiator, target)
@@ -243,8 +275,8 @@ class ThreadManager(Manager):
         )
         private_discussion = self.__create(**private_discussion)
         try:
-            self.join(initiator, private_discussion)
-            self.join(target, private_discussion)
+            self._join(initiator, private_discussion)
+            self._join(target, private_discussion)
         except:
             private_discussion.delete()
 
@@ -337,14 +369,21 @@ class ThreadManager(Manager):
 
         return threads_query
 
-    def channels(self, participant_user=None, channel_type=None, order_by='-unseen_mention'):
+    def channels(self, 
+                 participant_user=None, 
+                 channel_type=None,
+                 order_by='-unseen_mention'):
         thread_types = None
 
         if channel_type:
             assert channel_type in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL)
             thread_types = (channel_type, )
+        else:
+            thread_types = (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL)
 
-        return self.threads(participant_user, types=thread_types, order_by=order_by)
+        return self.threads(participant_user, 
+                            types=thread_types, 
+                            order_by=order_by)
 
     def threads(self, participant_user=None, types=None, order_by='-unseen_mention'):
         filters = dict()
@@ -392,8 +431,24 @@ class MessageManager(ObservableManagerMixin, Manager):
         if len(tags) > 0:
             # throws IncorrectTags
             MessageTag.objects.verify_tags(tags, message.contents)
+
             for tag in tags:
                 MessageTag.objects.create(message=message, **tag)
+
+        # Update seen mentions
+        tune_manager = TuneManager.get()
+
+        for membership in message.thread.active_memberships:
+            user = message.user_sender
+            thread = message.thread
+            is_tuned = tune_manager.is_tuned(user, message.thread)
+
+            if is_tuned:
+#                last_seen_date = tune_manager.get_last_heartbeat_date(
+#                    user, 
+#                    thread)
+                Membership.objects.see_thread(user, thread, timezone.now())
+
 
         self._message_saved(message)
 
@@ -460,7 +515,7 @@ class Thread(Model):
         return self.__class__.objects.is_public_channel(self)
 
     def is_private_discussion(self):
-        return self.__class__.objects.is_private_discusssion(self)
+        return self.__class__.objects.is_private_discussion(self)
 
     def get_last_message(self):
         return self.__class__.objects.get_last_message(self)
@@ -472,6 +527,8 @@ class Thread(Model):
             sender=sender, 
             tags=tags)
 
+    def add_member(self, user):
+        Thread.objects.add_member(user, self)
 
 class Message(Model):
     objects = MessageManager()
