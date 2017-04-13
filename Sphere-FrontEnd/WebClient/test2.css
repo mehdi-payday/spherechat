@@ -2484,3 +2484,6 @@ body:hover .designer {
     line-height: 25px;
     font-size: 0.8em;
 }
+#has-message{
+    display: none;
+}

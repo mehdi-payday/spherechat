@@ -8,8 +8,10 @@ using System.Drawing;
 
 namespace SphereClient.Components {
     class ImageAndTitleRow : Panel{
-        private PictureBox image;
-        private Label title;
+        
+        public PictureBox image;
+        public Label title;
+        public object entity;
         
         /// <summary>
         /// Constructor for the ImageAndTitleRow class.
@@ -29,10 +31,16 @@ namespace SphereClient.Components {
             this.image.Top = Constants.MARGIN_SMALL.Top;
             this.image.Load( imageURL );
             this.image.SizeMode = PictureBoxSizeMode.Zoom;
+            this.image.Click += ( object s, EventArgs e ) => { this.OnClick( e ); };
+            this.image.MouseEnter += ( object s, EventArgs e ) => { this.OnMouseEnter( e ); };
+            this.image.MouseLeave += ( object s, EventArgs e ) => { this.OnMouseLeave( e ); };
             this.Height = this.image.Height + Constants.MARGIN_SMALL.Bottom + Constants.MARGIN_SMALL.Top;
             this.title.Text = title;
             this.title.AutoSize = true;
-            this.title.Font = titleFont ?? Constants.BIG_BOLD_FONT;
+            //this.title.Font = titleFont ?? Constants.BIG_BOLD_FONT;
+            this.title.Click += (object s, EventArgs e) =>{ this.OnClick(e); };
+            this.title.MouseEnter += (object s, EventArgs e) =>{ this.OnMouseEnter(e); };
+            this.title.MouseLeave += ( object s, EventArgs e ) => { this.OnMouseLeave( e ); };
             this.title.AutoEllipsis = true;
             this.title.Top = this.Height / 2 - this.title.Height / 2;
             this.title.Left = this.image.Left + this.image.Width + Constants.MARGIN_SMALL.Right;
@@ -44,7 +52,10 @@ namespace SphereClient.Components {
                 this.Width = this.Parent.Width;
             }
             this.title.MaximumSize= new Size(this.Width - this.title.Left - Constants.MARGIN_SMALL.Right, 30);
+            
         }
+
+        
 
         /// <summary>
         /// Gets or set the title of the row
