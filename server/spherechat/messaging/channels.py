@@ -81,7 +81,7 @@ class ThreadHandler(ChannelHandler):
             print "Message data"
             print message_data
 
-            self.publish(channel, "message", message_data)
+#            self.publish(channel, "message", message_data)
 
         elif payload_type == 'message_checked':
             payload = data["payload"]
