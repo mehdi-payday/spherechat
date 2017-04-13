@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SphereClient.Components {
-    class MessageListPanel: Panel {
+    class MessageListPanel : Panel {
         private IList<MessageRow> messages;
         public Entities.Channel channel;
 
         /// <summary>
         /// Default constructor for the MessageListPanel class.
         /// </summary>
-        public MessageListPanel() :base(){
+        public MessageListPanel() : base() {
             this.messages = new List<MessageRow>();
         }
 
@@ -22,12 +19,12 @@ namespace SphereClient.Components {
         /// from the given channel.
         /// </summary>
         /// <param name="channel">The channel to fetch the messages from</param>
-        public MessageListPanel(Entities.Channel channel) : base(){
+        public MessageListPanel(Entities.Channel channel) : base() {
             this.channel = channel;
             this.messages = new List<MessageRow>();
             FetchMessages(channel);
         }
-        
+
         /// <summary>
         /// Removes all contained messages, fetches those of the specified channel and
         /// displays them.
@@ -36,13 +33,13 @@ namespace SphereClient.Components {
         public void FetchMessages(Entities.Channel channel) {
             this.messages.Clear();
             this.Controls.Clear();
-            Entities.Message[] fetchedMessages = Form1.Instance.session.GetMessages( channel );
+            Entities.Message[] fetchedMessages = Form1.Instance.session.GetAllMessages(channel);
             int hoffset = 0;
-            foreach (Entities.Message msg in fetchedMessages.OrderBy(m=>m.SentDate)) {
-                MessageRow mr = new MessageRow( msg, this );
+            foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
+                MessageRow mr = new MessageRow(msg, this);
                 mr.Top = hoffset;
-                this.messages.Add( mr );
-                this.Controls.Add( mr );
+                this.messages.Add(mr);
+                this.Controls.Add(mr);
                 hoffset += mr.Height;
             }
 
@@ -54,14 +51,15 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="message">the new message to add</param>
         public void OnNewMessage(Entities.Message message) {
-            MessageRow mr = new MessageRow( message, this );
+            MessageRow mr = new MessageRow(message, this);
             if (this.messages.Any()) {
                 mr.Top = this.messages.Last().Top + this.messages.Last().Height;
-            } else {
+            }
+            else {
                 mr.Top = 0;
             }
-            this.messages.Add( mr );
-            this.Controls.Add( mr );
+            this.messages.Add(mr);
+            this.Controls.Add(mr);
         }
 
     }

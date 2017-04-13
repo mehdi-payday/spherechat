@@ -9,7 +9,6 @@ namespace SphereClient.Sockets {
     public delegate void Connecting();
     public delegate void Connected();
     public delegate void Disconnect();
-    public delegate void Ready();
 
     public delegate void Sending();
     public delegate void Sent();
@@ -33,7 +32,6 @@ namespace SphereClient.Sockets {
         public event Connecting OnConnecting;
         public event Connected OnConnected;
         public event Disconnect OnDisconnect;
-        public event Ready OnReady;
 
         public event Sending OnSending;
         public event Sent OnSent;
@@ -45,6 +43,7 @@ namespace SphereClient.Sockets {
         private Socket Socket { get; set; }
         public Configuration Configuration { get; set; }
         #endregion Get/Set
+
 
         public void Connect() {
             OnConnecting?.Invoke();
@@ -68,7 +67,6 @@ namespace SphereClient.Sockets {
 
         private void beginConnect(IAsyncResult result) {
             Socket.EndConnect(result);
-            OnConnected?.Invoke();
 
             var hello = Encoding.UTF8.GetBytes(Configuration.HelloServer.Header("GET", Configuration.Path));
             Socket.Send(hello, hello.Length, 0);
@@ -87,6 +85,7 @@ namespace SphereClient.Sockets {
 
             int read = Socket.EndReceive(result);
             if (read == 0) {
+                Socket.Disconnect(true);
                 OnDisconnect?.Invoke();
             }
             else {
@@ -104,19 +103,18 @@ namespace SphereClient.Sockets {
 
                         // Upgrade to websocket on server request
                         if (current.HTTP_STATUS == 101 && current.Headers.Contains(new KeyValuePair<string, string>("Upgrade", "websocket"))) {
-                            OnReady?.Invoke();
+                            OnConnected?.Invoke();
                             next = new Buffers.WebSocket.Read(new byte[4096]);
                         }
                         else {
-                            var hello = Encoding.UTF8.GetBytes(Configuration.HelloServer.Header("GET", Configuration.Path));
-                            Socket.Send(hello, hello.Length, 0);
+                            string payload = current.Payload.Replace("\0", "").Trim();
+                            if (!string.IsNullOrEmpty(payload)) {
+                                OnReceive?.Invoke(payload);
+                            }
 
-                            next = new Buffers.HTTP.Read(new byte[4096]);
-                        }
-
-                        string payload = current.Payload.Replace("\0", "").Trim();
-                        if (!string.IsNullOrEmpty(payload)) {
-                            OnReceive?.Invoke(payload);
+                            Console.WriteLine("Unable to upgrade connection");
+                            OnDisconnect?.Invoke();
+                            return;
                         }
 
                         Socket.BeginReceive(next.Buffer, 0, next.Size, 0, beginReceive, next);
@@ -147,7 +145,10 @@ namespace SphereClient.Sockets {
             }
         }
 
-        public void Dispose() { }
+        public void Dispose() {
+            if (Socket.Connected)
+                Socket.Disconnect(false);
+        }
 
         ~Connection() { Dispose(); }
     }

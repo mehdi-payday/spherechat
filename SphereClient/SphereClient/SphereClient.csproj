@@ -69,6 +69,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\Auth.cs" />
     <Compile Include="Entities\Channel.cs" />
+    <Compile Include="Entities\Cursor.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\FriendRequest.cs" />
     <Compile Include="Entities\Friendship.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="REST\Auth\Login\Login.cs" />
+    <Compile Include="REST\Friendship\Friendship\Friendship.cs" />
     <Compile Include="REST\Messaging\PrivateDiscussion\Message\Message.cs" />
     <Compile Include="REST\Messaging\PrivateDiscussion\PrivateDiscussion.cs" />
     <Compile Include="REST\Me\Me.cs" />

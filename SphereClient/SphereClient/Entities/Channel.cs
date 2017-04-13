@@ -13,7 +13,7 @@ namespace SphereClient.Entities {
         public bool IsNull { get; set; }
 
         public string ToText() {
-            return JSON.Stringify(this);
+            return Title;//JSON.Stringify(this);
         }
 
         public enum Types {
