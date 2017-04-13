@@ -20,9 +20,9 @@ angular
 		'session'
 	])
 
-	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+	.config(['$locationProvider', '$routeProvider', '$resourceProvider', function($locationProvider, $routeProvider, $resourceProvider) {
 		$locationProvider.hashPrefix('!');
-		
+		$resourceProvider.defaults.stripTrailingSlashes = false;
 		$routeProvider
 			.when('/', {
 			    templateUrl: 'website/main/main.html',
@@ -188,18 +188,21 @@ angular
 	});
 
 angular
-	.module('auth', ['session'])
-	.service('auth',  [function(){
+	.module('auth', ['api', 'session'])
+	.service('auth',  ['api', 'session', function(api, session){
 		this.isLoggedIn = function(){
 			return session.getCurrentUser !== null;
 		}
 		
-		this.login = function(){
-			
+		this.login = function(username, password, callback){
+			api.login({username: username, password: password}, function(){
+				
+			});
 		}
 		
 		this.logout = function(){
-			
+			session.setAuthToken(null);
+			session.setCurrentUser(null);
 		}
 		
 		this.register = function(){
@@ -231,72 +234,119 @@ angular
 	}]);
 
 angular
-	.module('api', ['ngResource'])
-    .factory('api', ['$resource', function($resource){
-    	var serverAddress = 'spherechat.tk:8080/api/';
+	.module('api', ['ngResource', 'session'])
+    .factory('api', ['$resource', 'session', function($resource, session){
+    	var serverAddress = 'http://spherechat.tk:8000/';
+    	
     	var api = {};
     	
-    	api.login = function() {return $resource(serverAddress + 'auth/login');};
-    	api.register = function() {return $resource(serverAddress + 'auth/registration');}; 
+    	api.login = $resource(serverAddress + 'api/auth/login/');
+    	api.register = function() {return $resource(serverAddress + 'api/auth/registration/');}; 
     	
-    	api.friendship = function() {return $resource(serverAddress + 'api/friendship/friendship');};
-    	api.friendrequest = function() {return $resource(serverAddress + 'api/friendship/friendrequest');};
+    	api.friendship = function() {return $resource(serverAddress + 'api/friendship/friendship/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});};
+    	api.friendrequest = function() {return $resource(serverAddress + 'api/friendship/friendrequest/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});};
     	
-    	api.user = function() {return $resource(serverAddress + 'user', {}, {
+    	api.user = function() {return $resource(serverAddress + 'api/users/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getCurrent': {
     			method: 'GET',
-    			url: serverAddress + 'me'
+    			url: serverAddress + 'api/me/',
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'getOne': {
     			method: 'GET',
-    			url: serverAddress + 'user/:id',
-    			params: {id: '@id'}
+    			url: serverAddress + 'api/users/:id/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		}
     	});};
     	
-    	api.channel = function() {return $resource(serverAddress + 'api/messaging/channel', {}, {
+    	api.channel = function() {return $resource(serverAddress + 'api/messaging/channel/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getOne': {
     			method: 'GET',
-    			url: serverAddress + 'api/messaging/channel/:id',
-    			params: {id: '@id'}
+    			url: serverAddress + 'api/messaging/channel/:id/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
 	    	'getMessages': {
 				method: 'GET',
-				url: serverAddress + 'api/messaging/channel/:id/message',
-				params: {id: '@id'}
+				url: serverAddress + 'api/messaging/channel/:id/message/',
+				params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
 			},
     		'getOneMessage': {
     			method: 'GET',
-    			url: serverAddress + 'api/messaging/channel/:channelId/message/:messageId',
-    			params: {discussionId: '@channelId', messageId: '@messageId'}
+    			url: serverAddress + 'api/messaging/channel/:channelId/message/:messageId/',
+    			params: {discussionId: '@channelId', messageId: '@messageId'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
 			'postMessage': {
     			method: 'POST',
     			url: serverAddress + 'api/messaging/channel/:channelId/message/',
-    			params: {discussionId: '@channelId'}
+    			params: {discussionId: '@channelId'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'postHeartbeat': {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/channel/:id/tune/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'postAllRead': {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/channel/:id/see/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'postAddMembers': {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/channel/:id/add_members/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		}
     	});};
     	
-    	api.privateDiscussion = function() {return $resource(serverAddress + 'api/messaging/privatediscussion', {}, {
+    	api.privateDiscussion = function() {return $resource(serverAddress + 'api/messaging/privatediscussion/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getOne': {
     			method: 'GET',
-    			url: serverAddress + 'api/messaging/privatediscussion/:id',
-    			params: {id: '@id'}
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'getMessages': {
     			method: 'GET',
-    			url: serverAddress + 'api/messaging/privatediscussion/:id/message',
-    			params: {id: '@id'}
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/message/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'getOneMessage': {
     			method: 'GET',
-    			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/:messageId',
-    			params: {discussionId: '@discussionId', messageId: '@messageId'}
+    			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/:messageId/',
+    			params: {discussionId: '@discussionId', messageId: '@messageId'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'postMessage': {
     			method: 'POST',
     			url: serverAddress + 'api/messaging/privatediscussion/:discussionId/message/',
-    			params: {discussionId: '@discussionId'}
+    			params: {discussionId: '@discussionId'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'postHeartbeat': {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/tune/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'postAllRead': {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/see/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'postAddMembers': {
+    			method: 'POST',
+    			url: serverAddress + 'api/messaging/privatediscussion/:id/add_members/',
+    			params: {id: '@id'},
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		}
     	});};
     	return api;
