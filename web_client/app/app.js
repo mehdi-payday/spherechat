@@ -105,6 +105,7 @@ angular
 			.when('/login', {
 			    templateUrl: 'website/login/login.html',
 			    controller: 'LoginCtrl',
+			    redirectIfLoggedIn: true,
 			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/login.css',
 			          'css/particules.css',
@@ -120,6 +121,7 @@ angular
 			.when('/signup', {
 			    templateUrl: 'website/signup/signup.html',
 			    controller: 'SignupCtrl',
+			    redirectIfLoggedIn: true,
 			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/confetti.css',
 			          'css/signup.css',
@@ -180,10 +182,22 @@ angular
 		};
 	}])
 	
-    .run(function($rootScope) {
-	    $rootScope.$on("$routeChangeStart", function(next, current) { 
+    .run(function($rootScope, $location, session, auth) {
+    	$rootScope.session = session;
+    	$rootScope.auth = auth;
+    	
+    	$rootScope.logout = function(){
+    		auth.logout();
+    		$location.path('/');
+    	}
+    	
+	    $rootScope.$on("$routeChangeStart", function(event, next, current) {
 	    	$rootScope.hideNavbar = false;
 	    	$rootScope.hideFooter = false;
+	    	
+	    	if(auth.isLoggedIn() && next.redirectIfLoggedIn){
+	    		$location.path('/');
+	    	}
 	    });
 	});
 
@@ -191,7 +205,7 @@ angular
 	.module('auth', ['api', 'session'])
 	.service('auth',  ['api', 'session', function(api, session){
 		this.isLoggedIn = function(){
-			return session.getCurrentUser !== null;
+			return session.getCurrentUser() !== null;
 		}
 		
 		this.login = function(token, user, callback){

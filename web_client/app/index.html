@@ -8,29 +8,6 @@
     <link rel="icon" href="img/xLogo.png" type="image/x-icon"/>
     <!-- End icons -->
     <title>ShereChat</title>
-<!--     fonts & icons -->
-<!--     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900"> -->
-<!--     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"> -->
-<!--     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext"> -->
-<!--     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751"> -->
-<!--     <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.6.3/css/font-awesome.css"  media='all' /> -->
-<!--     <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.6.3/css/font-awesome.min.css" media='all'/> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/animate.css"> -->
-<!--     css -->
-<!--     <link rel="stylesheet" type="text/css" href="css/preloader.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/uncss.css"/> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/main.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/style.css"/> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/style2.css"/> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/testimony.css"/> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/common.min.css" /> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/home.min.css" /> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/apps.min.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/intro.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/social.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/steps.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="css/integrations.css">     -->
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
@@ -57,9 +34,7 @@
     <div id="preloader">
       <div id="loader"></div>
     </div>
-    
-    
-    
+
     <div class="page-wrap" data-parent="true" data-label="Intro" data-name="Intro" data-section="1" ng-hide="hideNavbar">
     
       <header id="header" class="white-text">
@@ -71,9 +46,15 @@
               </a> 
             </div>
             <div class="right-nav .mobi-hide">
-              <a href="#!/signup">Sign up</a> 
-              <a href="#!/login">Login</a> 
-              <a href="#!/webclient">(TEST) Webclient</a> 
+            <div ng-hide="auth.isLoggedIn()">
+            	<a href="#!/signup">Sign up</a> 
+              	<a href="#!/login">Login</a> 
+            </div>
+			<div ng-show="auth.isLoggedIn()">
+				<span>Welcome {{session.getCurrentUser().username}}</span>
+				<a href="#!/webclient">Webclient</a>
+				<a href="" ng-click="logout()">Logout</a>
+			</div>
             </div>
             <a href="#!/" class="nav-opener">
             <span></span>
@@ -220,7 +201,9 @@
         </div>
       </div>
     </div>
-      <div ng-view></div>
+    
+    
+    <div ng-view></div>
       
       
       <footer id="footer" ng-hide="hideFooter">
