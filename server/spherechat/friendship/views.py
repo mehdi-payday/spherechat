@@ -76,6 +76,12 @@ class FriendshipViewSet(mixins.CreateModelMixin,
         return Response(FriendshipSerializer(requests, many=False).data)
     
     @detail_route(methods=['GET'])
+    def end_friendship(self, request, pk):
+        friendship = Friendship.objects.get(pk=pk)
+        request = Friendship.objects.end_friendship(friendship)
+        return Response(FriendshipSerializer(request, many=False).data)
+    
+    @detail_route(methods=['GET'])
     def decline_friend_request(self, request, pk):
         pending_friendship = Friendship.objects.get(pk=pk)
         requests = Friendship.objects.decline_friend_request(pending_friendship)

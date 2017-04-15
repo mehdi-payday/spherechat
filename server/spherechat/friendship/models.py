@@ -33,11 +33,17 @@ class FriendshipManager(Manager):
     def decline_friend_request(self, pending_friendship):
         pending_friendship.status = "RJCT"
         pending_friendship.active = False
-        
         pending_friendship.save()
+
         return pending_friendship
 
-
+    def end_friendship(self, friendship):
+        friendship.active = False
+        friendship.friendship_end_date = datetime.now()
+        friendship.save()
+        
+        return friendship
+    
     def get_friendships(self, user):
         return self.filter(Q(addresser_user=user) | Q(requester_user=user) , status="ACPT", active=True)
     # Get pending friend requests
