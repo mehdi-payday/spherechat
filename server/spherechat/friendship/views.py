@@ -1,7 +1,6 @@
 from django.utils import timezone
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from rest_framework import mixins
 from rest_framework import viewsets
@@ -92,22 +91,3 @@ class FriendshipViewSet(mixins.CreateModelMixin,
         requests = Friendship.objects.get_friendships(user)
         return requests
 
-    def validate(self, data):
-        addresser_user = int(self.request.data['addresser_user'])
-        if self.request.user.id == addresser_user:
-            raise serializers.ValidationError("finish must occur after start")
-            #return Response(str(SameUserException), status=status.HTTP_400_BAD_REQUEST)
-        return data
-"""
-    def create(self, request):
-        serializer = FriendshipSerializer
-        addresser_user = User.objects.get(id=request.data['addresser_user'])
-        requester_user = request.user
-        friendship = Friendship.objects.create( addresser_user=addresser_user,
-                   requester_user=requester_user,
-                   status="PEND")
-        try:
-            Friendship.objects.send_friend_request(friendship)
-        except (FriendshipExists, SameUserException)  as expetion:
-             return Response(str(expetion), status=status.HTTP_400_BAD_REQUEST)
-"""
