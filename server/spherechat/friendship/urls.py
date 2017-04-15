@@ -5,7 +5,7 @@ from friendship import views
 
 router = ExtendedSimpleRouter()
 
-channel_router = router.register(r'friendship',
+channel_router = router.register(r'',
                                  views.FriendshipViewSet,
                                  base_name='friendship')
 
