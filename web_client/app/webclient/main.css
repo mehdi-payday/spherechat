@@ -2733,28 +2733,6 @@ body.mode-disable-title .element.element-grid .cover-wrap {
     text-transform: uppercase;
     font-size: 10px
 }
-.avatar {
-    opacity: 1!important;
-    position: relative
-}
-.avatar:before {
-    border-radius: 100%;
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1)
-}
-.avatar img {
-    border-radius: 100%;
-    width: 20px;
-    height: 20px
-}
-html.chrome.retina .avatar:before {
-    box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .1)
-}
 .flip-horizontal {
     transform: scaleX(-1)
 }
@@ -3362,7 +3340,7 @@ body.mode-reader .element .actions {
     -ms-flex: 1;
     flex: 1
 }
-.element-list .info.right {
+.element-list .info {
     text-align: right;
     width: 76px;
     padding-left: 16px
@@ -4679,7 +4657,7 @@ html.retina.chrome .themeDark #main footer {
     flex-direction: column
 }
 .chat-bg{
-    background-image: url(chatting-bg.png);
+    background-image: url(../img/chatting-bg.png);
 }
 .centerContentWrap .centerContent {
     -ms-flex: 1;
@@ -8131,9 +8109,23 @@ label input {
     background-color: #f6f7f9;
     border-radius: 5px;
     border-style: none;
-    font-size: 14px;
+    font-size: 16px;
     height: 30px;
     line-height: 30px;
-    padding: 0 28px
+    padding: 0 40px
 }
-/*# sourceMappingURL=main.9bd7b5dd0114b9a90d5ceeeccd0c27b5.css.map*/
+._5iwm .input-search::-webkit-input-placeholder {
+   text-align: center !important;
+}
+
+._5iwm .input-search:-moz-placeholder { /* Firefox 18- */
+   text-align: center !important;  
+}
+
+._5iwm .input-search::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center !important;  
+}
+
+._5iwm .input-search:-ms-input-placeholder {  
+   text-align: center !important; 
+}
