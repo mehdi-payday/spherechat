@@ -28,3 +28,6 @@ class MessageAlreadySent(Exception):
 
 class ExistingDiscussion(Exception):
     pass
+
+class UserNotTuned(Exception):
+    pass

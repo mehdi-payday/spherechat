@@ -49,7 +49,7 @@ def get_user_from_view(view):
     return member
 
 class SeeThreadSerializer(serializers.Serializer):
-    last_seen_message = serializers.PrimaryKeyRelatedField(queryset=Message.objects.all(), required=False)
+    last_seen_message = serializers.PrimaryKeyRelatedField(queryset=Message.objects.all(), required=True)
     seen_date = serializers.DateTimeField(default=timezone.now, required=False)
     thread = serializers.PrimaryKeyRelatedField(queryset=Thread.objects.all(), required=True)
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=True)

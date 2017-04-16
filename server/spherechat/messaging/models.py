@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from preconditions import preconditions
 from django.template.defaultfilters import slugify
 from django.db import models
 from django.utils import timezone
@@ -21,7 +22,8 @@ from messaging.exceptions import (UnmanagedThread,
     UnexistentMembership,
     IncorrectTags,
     ExistingDiscussion,
-    MessageAlreadySent)
+    MessageAlreadySent,
+    UserNotTuned)
 import re
 
 
@@ -41,22 +43,30 @@ class MembershipManager(ObservableManagerMixin, Manager):
             return self.create(user=user, thread=thread)
  
     def cancel_membership(self, membership):
-        membership.is_participant = False
+#        membership.is_participant = False
+        membership.active = False
         membership.save()
         return membership
 
+    @preconditions(lambda user, thread: isinstance(user, User) and isinstance(thread,Thread))
     def has_seen_thread(self, user, thread):
-        membership = self.get_membership(user, thread)
-        seen = self.has_seen_message(membership, thread.get_last_message())
+        seen = self.has_seen_message(user, thread.get_last_message())
 
         return seen
 
+    @preconditions(lambda user, message: isinstance(user, User) and isinstance(message, Message))
     def has_seen_message(self, user, message):
         assert message.thread != None
+        assert message.sent_date != None
 
         thread = message.thread
         membership = self.get_membership(user, thread)
-        seen = membership.last_seen_date >= message.sent_date
+
+        if membership.last_seen_date is None or membership.last_seen_message is None:
+            seen = False
+        else:
+            seen = membership.last_seen_date >= message.sent_date \
+                and membership.last_seen_message.pk >= message.pk
 
         return seen
 
@@ -64,7 +74,9 @@ class MembershipManager(ObservableManagerMixin, Manager):
     def active_memberships(self):
         return self.filter(active=True)
 
-    def active_members(self, thread):
+    def active_members(self, thread=None):
+        if thread is None:
+            return User.objects.filter(memberships__active=True)
         return User.objects.filter(memberships__active=True, memberships__thread=thread)
 
     def get_membership(self, user, thread):
@@ -102,16 +114,17 @@ class MembershipManager(ObservableManagerMixin, Manager):
         seen_date, 
         last_seen_message=None):
 
-        assert isinstance(seen_date, datetime)
+        assert isinstance(seen_date, datetime), ValueError("Argument `seen_date` must be an instance of datetime")
+        assert isinstance(user_or_membership, User) or isinstance(user_or_membership, Membership)
 
         membership = self.get_membership(user_or_membership, thread) if isinstance(user_or_membership, User) else user_or_membership
         membership.last_seen_date = seen_date
 
         if last_seen_message is not None:
-            if membership.last_seen_message is None \
-                or membership.last_seen_message.pk < last_seen_message.pk:
-                membership.last_seen_message = last_seen_message
-
+#            if membership.last_seen_message is None \
+#                or membership.last_seen_message.pk < last_seen_message.pk:
+            membership.last_seen_message = last_seen_message
+        
         membership.save()
 
         self.notify_observers("on_thread_seen", membership)
@@ -139,7 +152,10 @@ class TuneManager(object):
 
         return True
 
-    def tune(self, user, thread, **kwargs):
+    def tune(self, user, thread, listening_date=None, **kwargs):
+        assert isinstance(listening_date, datetime) or listening_date is None
+        assert isinstance(user, User) and isinstance(thread, Thread)
+
         if not self.can_tune(user, thread):
             raise UnauthorizedAction("User %s can't tune to thread %s" % (user, thread))
 
@@ -150,23 +166,26 @@ class TuneManager(object):
             user.listening_thread = thread
             already_tuned = False
 
-        if "listening_date" not in kwargs:
-            kwargs["listening_date"] = timezone.now()
+        if listening_date is None:
+            listening_date = timezone.now()
         
-        user.last_listening_date = kwargs["listening_date"]
+        user.last_listening_date = listening_date
 
         user.save()
 
-    def update_tuning_state(self, user, thread, listening_date):
+#    def update_tuning_state(self, user, thread, listening_date):
 #        if listening_date is None:
-#            listening_date = datetime.now()
-
-        if not isinstance(listening_date, datetime):
-            raise ValueError("Listening date should be an instance of datetime. Got : %s" % listening_date)
-
-        self.tune(user, thread, listening_date=listening_date)
+#            listening_date = timezone.now()
+#
+#        if not isinstance(listening_date, datetime):
+#            raise ValueError("Listening date should be an instance of datetime. Got : %s" % listening_date)
+#
+#        self.tune(user, thread, listening_date=listening_date)
   
     def is_tuned(self, user, thread):
+        if not self.can_tune(user, thread):
+            return False
+
         if user.listening_thread is None:
             return False
 
@@ -184,7 +203,8 @@ class TuneManager(object):
         return is_tuned
 
     def get_last_heartbeat_date(self, user, thread):
-        assert self.is_tuned(user, thread), "User '%s' must be tuned to thread '%s' in order to know his tuning date" % (user, thread)
+        if not self.is_tuned(user, thread):
+            raise UserNotTuned("User '%s' must be tuned to thread '%s' in order to know his tuning date" % (user, thread))
         return user.last_listening_date 
 
 class ThreadManager(Manager):
@@ -264,8 +284,8 @@ class ThreadManager(Manager):
         if self.private_discussion_exists(initiator, target):
             raise ExistingDiscussion("Private discussion already existent between %s and %s" % (initiator, target))
 
-        title = "Private discussion between %s and%s" % (initiator, target)
-        description = "Private discussion between %s and%s" % (initiator, target)
+        title = "Private discussion between %s and %s" % (initiator, target)
+        description = "Private discussion between %s and %s" % (initiator, target)
 
         private_discussion = dict(
             type=Thread.PRIVATE_DISCUSSION,
@@ -283,6 +303,10 @@ class ThreadManager(Manager):
         return private_discussion
 
     def create_channel(self, channel_dict, creator, initial_members=[]):
+        if "type" not in channel_dict:
+            raise ValueError("Channel `type` must be present in channel_dict")
+#            channel_dict["type"] = Thread.PUBLIC_CHANNEL
+        
         if not channel_dict["type"] in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL):
             raise ValueError("Incorrect channel type '%s'. Must be either '%s' or '%s'" \
                 % (channel_dict["type"], Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL))
@@ -292,12 +316,12 @@ class ThreadManager(Manager):
 
         channel = self.__create(**channel_dict)
         try:
-            self.join(creator, channel)
+            self._join(creator, channel)
     
             for member in initial_members:
                 try:
                     if creator.pk != member.pk:
-                        self.join(member, channel)
+                        self._join(member, channel)
                 except ExistingMember:
                     pass
         except:
@@ -337,7 +361,7 @@ class ThreadManager(Manager):
         Retrieves the discussion thread between `user1` and `user2`
         """
         return self.private_discussions().filter(memberships__user=user1) \
-            .get(memberships__user=user2)[0]
+            .get(memberships__user=user2)
 
     def private_discussion_exists(self, user1, user2):
         return self.private_discussions().filter(memberships__user=user1).filter(memberships__user=user2).exists()
@@ -404,7 +428,7 @@ class ThreadManager(Manager):
 
             return query
         else:
-            return self.filter(type__in=(Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL))
+            return self.filter(type__in=(Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL, Thread.PRIVATE_DISCUSSION))
 
 class MessageManager(ObservableManagerMixin, Manager):
     def send(self, message, thread, sender=None, tags=[]):
@@ -447,7 +471,7 @@ class MessageManager(ObservableManagerMixin, Manager):
 #                last_seen_date = tune_manager.get_last_heartbeat_date(
 #                    user, 
 #                    thread)
-                Membership.objects.see_thread(user, thread, timezone.now())
+                Membership.objects.see_thread(user, thread, timezone.now(), message)
 
 
         self._message_saved(message)
@@ -543,7 +567,7 @@ class Message(Model):
     user_sender = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
     thread = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="messages")
     contents = models.CharField(max_length=250, blank=False, null=False)
-    sent_date = models.DateTimeField(default=datetime.now)
+    sent_date = models.DateTimeField(default=timezone.now)
     attachment = models.FileField(upload_to='uploads/', null=True, blank=True)
 #    active = models.BooleanField(default=True)
     message_type = models.CharField(max_length=10, blank=False, null=False, choices=MESSAGE_TYPE_CHOICES, default=USER_MESSAGE)
@@ -586,18 +610,18 @@ class Membership(Model):
         unique_together = ("user", "thread")
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, related_name="memberships")
-    thread  = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="memberships")
+    thread = models.ForeignKey(Thread, blank=False, null=False, on_delete=models.CASCADE, related_name="memberships")
     last_seen_date = models.DateTimeField(null=True)
     last_seen_message = models.ForeignKey(Message, blank=True, null=True)
     active = models.BooleanField(default=True)
-    join_date = models.DateTimeField(default=datetime.now)
+    join_date = models.DateTimeField(default=timezone.now)
     
     @property
     def unchecked_count(self):
 #        if hasttr(self.thread, "unseen_mention":
 #            return self.thread.unseen_mention
         if self.last_seen_date is not None:
-            return self.thread.messages.filter(sent_date__gt=self.last_seen_date).count()
+            return self.thread.messages.filter(sent_date__gt=self.last_seen_date, pk__gt=self.last_seen_message.pk).count()
         else:
             return self.thread.messages.count()
 
