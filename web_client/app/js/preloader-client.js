@@ -66,13 +66,6 @@ $(window).on('load', function() {
     }
     disableScroll();
     console.log("Actual Delay", loadTime);
-    $('#desktop-menu').hide();
-    $('#intercom-container').hide();
-    $('#preloader').delay(loadTime).fadeOut('slow'); // will fade out the white DIV that covers the website.
-    $('#desktop-menu').css( "display", "flex !important" );
-    $('#sidebar').delay(loadTime).fadeIn('slow');
-    $('#mainBody2').delay(loadTime).fadeIn('slow');
-    $('#desktop-menu').delay(loadTime).fadeIn('slow');
 
     // Hide() overflow 
     setTimeout(enableScroll(), loadTime);
