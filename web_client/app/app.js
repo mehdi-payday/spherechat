@@ -164,7 +164,7 @@ angular
     	
     	$rootScope.logout = function(){
     		auth.logout();
-    		$location.path('/');
+    		$location.path('#!/');
     	}
     	
 	    $rootScope.$on("$routeChangeStart", function(event, next, current) {
@@ -172,7 +172,7 @@ angular
 	    	$rootScope.hideFooter = false;
 	    	
 	    	if(auth.isLoggedIn() && next.redirectIfLoggedIn){
-	    		$location.path('/');
+	    		$location.path('#!/');
 	    	}
 	    });
 	});
