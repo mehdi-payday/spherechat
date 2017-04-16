@@ -15,6 +15,7 @@ angular
 		'myApp.webclient',
 		'ngRoute',
 		'ngAnimate',
+		'ngStorage',
 		'routeStyles',
 		'api',
 		'auth',
@@ -164,7 +165,7 @@ angular
     	
     	$rootScope.logout = function(){
     		auth.logout();
-    		$location.path('/');
+    		$location.path('#!/');
     	}
     	
 	    $rootScope.$on("$routeChangeStart", function(event, next, current) {
@@ -172,7 +173,7 @@ angular
 	    	$rootScope.hideFooter = false;
 	    	
 	    	if(auth.isLoggedIn() && next.redirectIfLoggedIn){
-	    		$location.path('/');
+	    		$location.path('#!/');
 	    	}
 	    });
 	});
@@ -181,7 +182,7 @@ angular
 	.module('auth', ['api', 'session'])
 	.service('auth',  ['api', 'session', function(api, session){
 		this.isLoggedIn = function(){
-			return session.getCurrentUser() !== null;
+			return session.getCurrentUser() !== undefined && session.getCurrentUser() !== null;
 		}
 		
 		this.login = function(token, user, callback){
@@ -189,33 +190,46 @@ angular
 		}
 		
 		this.logout = function(){
-			session.setAuthToken(null);
-			session.setCurrentUser(null);
+			session.removeAuthToken();
+			session.removeCurrentUser();
 		}
 	}]);
 
 angular
-	.module('session', [])
-	.service('session',  [function(){
-		this._authToken = null;
-		this._currentUser = null;
-		
+	.module('session', ['ngStorage'])
+	.service('session',  ['$localStorage', '$sessionStorage', function($localStorage, $sessionStorage){	
 		this.setAuthToken = function(token){
-			this._authToken = token;
+			$localStorage.token = token;
+		}
+		
+		this.removeAuthToken = function(){
+			delete $localStorage.token;
 		}
 		
 		this.getAuthToken = function(){
-			return this._authToken;
+			return $localStorage.token;
 		}
 		
 		this.setCurrentUser = function(user){
-			this._currentUser = user;
+			$localStorage.user = user;
+		}
+		
+		this.removeCurrentUser = function(){
+			delete $localStorage.user;
 		}
 		
 		this.getCurrentUser = function(){
-			return this._currentUser;
+			console.log($localStorage.user);
+			return $localStorage.user;
 		}
 	}]);
+
+angular
+	.module('messagingService', ['api'])
+	.service('messaging', ['api', function(api){
+		
+	}])
+	
 
 angular
 	.module('api', ['ngResource', 'session'])

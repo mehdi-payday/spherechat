@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('myApp.webclient', ['ngRoute'])
+angular.module('myApp.webclient', ['session', 'auth'])
 
-.controller('WebclientCtrl', ['$rootScope', function($rootScope) {
+.controller('WebclientCtrl', ['$rootScope', 'session', 'auth', function($rootScope, session, auth) {
 	$rootScope.hideNavbar = true;
 	$rootScope.hideFooter = true;
+	
+	
 }]);
