@@ -18,23 +18,19 @@ angular.module('myApp.signup', ['ngRoute', 'api', 'auth', 'session'])
         }else{
         	api.register.save({}, {username: username, email: email, password1: password, password2: repeatPassword}, 
         	function(successResponse){
-        		
-        		console.log(successResponse);
-        		
         		var token = successResponse.key;
-        		console.log(token);
-        		
         		session.setAuthToken(token);
-        		console.log(session.getAuthToken());
         		
 				api.user.getCurrent({}, {}, 
-				function(successResponse){
-					var user = successResponse.data.user;
+				function(successResponse){					
+					var user = successResponse;
 					session.setCurrentUser(user);
 					
-					console.log(auth.isLoggedIn())
+					$location.path('/');
+					
 				}, function(errorResponse){
-					console.log(errorResponse);
+					$('#verification').text("An error occured while trying to login in to your account. Please try later.");
+					document.getElementById("verification").style.color = "#FF3838";
 				});
 			}, function(errorResponse){
 				var errors = "";

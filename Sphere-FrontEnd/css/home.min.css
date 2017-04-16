@@ -155,120 +155,6 @@
     -o-transform: scale(.98);
     transform: scale(.98)
 }
-.home-main .home-main-illustration {
-    position: relative;
-    float: right;
-    width: 585px;
-    height: 515px;
-    right: -120px;
-    margin-top: 144px
-}
-.home-main .home-main-illustration .home-main-illustration-device-1 {
-    position: absolute;
-    width: 377px;
-    height: 297px;
-    background-image: url(https://crisp.im/static/images/home/main/illustration_device_1.svg?54f26f2);
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    background-size: cover;
-    left: 12px;
-    bottom: 12px;
-    -webkit-animation-name: fadeInLeft;
-    -moz-animation-name: fadeInLeft;
-    -ms-animation-name: fadeInLeft;
-    -o-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
-    -webkit-animation-duration: .7s;
-    -moz-animation-duration: .7s;
-    -ms-animation-duration: .7s;
-    -o-animation-duration: .7s;
-    animation-duration: .7s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-delay: .3s;
-    -moz-animation-delay: .3s;
-    -ms-animation-delay: .3s;
-    -o-animation-delay: .3s;
-    animation-delay: .3s
-}
-.home-main .home-main-illustration .home-main-illustration-device-2 {
-    position: absolute;
-    width: 380px;
-    height: 265px;
-    background-image: url(https://crisp.im/static/images/home/main/illustration_device_2.svg?54f26f2);
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    background-size: cover;
-    right: 12px;
-    top: 130px;
-    -webkit-animation-name: fadeInRight;
-    -moz-animation-name: fadeInRight;
-    -ms-animation-name: fadeInRight;
-    -o-animation-name: fadeInRight;
-    animation-name: fadeInRight;
-    -webkit-animation-duration: .7s;
-    -moz-animation-duration: .7s;
-    -ms-animation-duration: .7s;
-    -o-animation-duration: .7s;
-    animation-duration: .7s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-delay: .3s;
-    -moz-animation-delay: .3s;
-    -ms-animation-delay: .3s;
-    -o-animation-delay: .3s;
-    animation-delay: .3s
-}
-.home-main .home-main-illustration .home-main-illustration-wire {
-    background-image: url(https://crisp.im/static/images/home/main/illustration_wire.svg?54f26f2);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    position: absolute;
-    width: 235px;
-    height: 217px;
-    left: 165px;
-    top: -3px
-}
-.home-main .home-main-illustration .home-main-illustration-logo {
-    background-image: url(https://crisp.im/static/images/home/main/illustration_logo.svg?54f26f2);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    position: absolute;
-    width: 102px;
-    height: 124px;
-    left: 205px;
-    top: 12px;
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out
-}
-.home-main .home-main-illustration .home-main-illustration-logo:hover {
-    -webkit-transform: scale(1.28);
-    -moz-transform: scale(1.28);
-    -ms-transform: scale(1.28);
-    -o-transform: scale(1.28);
-    transform: scale(1.28)
-}
-.home-main .home-main-illustration .home-main-illustration-logo:active {
-    -webkit-transform: scale(.98);
-    -moz-transform: scale(.98);
-    -ms-transform: scale(.98);
-    -o-transform: scale(.98);
-    transform: scale(.98)
-}
 @media screen and (max-width: 939px) {
     .home-main .body-wrapper {
         text-align: center
@@ -286,18 +172,6 @@
     .home-main .home-main-wrapper .home-main-subtitle {
         margin-top: 14px
     }
-    .home-main .home-main-illustration {
-        display: inline-block;
-        right: auto;
-        left: auto;
-        float: none;
-        margin-top: 18px;
-        -webkit-transform: scale(.85);
-        -moz-transform: scale(.85);
-        -ms-transform: scale(.85);
-        -o-transform: scale(.85);
-        transform: scale(.85)
-    }
 }
 @media screen and (max-width: 659px) {
     .home-main .home-main-wrapper {
@@ -311,20 +185,10 @@
         font-size: 16.2px;
         margin-top: 24px
     }
-    .home-main .home-main-illustration {
-        -webkit-transform: scale(.78);
-        -moz-transform: scale(.78);
-        -ms-transform: scale(.78);
-        -o-transform: scale(.78);
-        transform: scale(.78)
-    }
 }
 @media screen and (max-width: 519px) {
     .home-main {
         height: 640px
-    }
-    .home-main .home-main-illustration {
-        display: none
     }
 }
 .benefits {
@@ -618,8 +482,8 @@
     left: 0;
     z-index: 91;
     width: 262px;
-    height: 523px;
-    background: url(https://crisp.im/static/images/home/showcase/shape_2.svg?54f26f2) center no-repeat #fff;
+    height: 628px;
+    background: url(../img/shape2.png) center no-repeat transparent;
     background-size: contain;
     display: inline-block
 }

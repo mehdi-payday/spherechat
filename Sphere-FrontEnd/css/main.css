@@ -423,7 +423,6 @@ button {
 	}*/
 
     box-sizing: content-box;
-    height: 87px;
 }
 
 #header .header-holder .wrap
@@ -1497,7 +1496,6 @@ html {
 }
 #header {
     box-sizing: content-box;
-    height: 87px
 }
 #header.white-text .header-holder:not(.fixed-header) .logo path {
     fill: #fff

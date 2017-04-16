@@ -14,6 +14,7 @@ angular
 		'myApp.main',
 		'myApp.webclient',
 		'ngRoute',
+		'ngAnimate',
 		'routeStyles',
 		'api',
 		'auth',
@@ -105,6 +106,7 @@ angular
 			.when('/login', {
 			    templateUrl: 'website/login/login.html',
 			    controller: 'LoginCtrl',
+			    redirectIfLoggedIn: true,
 			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/login.css',
 			          'css/particules.css',
@@ -120,6 +122,7 @@ angular
 			.when('/signup', {
 			    templateUrl: 'website/signup/signup.html',
 			    controller: 'SignupCtrl',
+			    redirectIfLoggedIn: true,
 			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/confetti.css',
 			          'css/signup.css',
@@ -129,19 +132,23 @@ angular
 			.when('/webclient', {
 			    templateUrl: 'webclient/webclient.html',
 			    controller: 'WebclientCtrl',
-			    css: ['https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css',
+			    css: ['https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css',
+			    	  'css/update.css',
+			    	  'css/checkbox.css',
+			    	  'css/chatheader.css',
+			    	  'https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css',
 			          'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
-			          'webclient/preloader.css',
-			          'webclient/front-prof.css',
-			          'webclient/sidemenu.css',
-			          'webclient/intercom.css',
-			          'webclient/chat.css',
-			          'webclient/main.css',
-			          'webclient/test2.css',
-			          'webclient/gear.css',
-			          'webclient/anime.css',
-			          'webclient/style2.css',
-			          'webclient/image.css',
+			          'css/preloader-client.css',
+			          'css/front-prof.css',
+			          'css/sidemenu.css',
+			          'css/intercom.css',
+			          'css/chat.css',
+			          'css/main-client.css',
+			          'css/test2.css',
+			          'css/gear.css',
+			          'css/anime.css',
+			          'css/style2-client.css',
+			          'css/image.css',
 			          'lib/font-awesome-4.6.3/css/font-awesome.css',
 			          'lib/octicons/octicons.min.css',
 			          'css/animate.css',
@@ -150,40 +157,23 @@ angular
 			})
 			.otherwise({redirectTo: '/'});
 	}])
-
-	.directive('head', ['$rootScope','$compile', function($rootScope, $compile) {
-		return {
-		    restrict: 'E',
-		    link: function(scope, elem){
-		        var html = '<link rel="stylesheet" ng-repeat="(routeCtrl, cssUrl) in routeStyles" ng-href="{{cssUrl}}" />';
-		        elem.append($compile(html)(scope));
-		        scope.routeStyles = {};
-		        $rootScope.$on('$routeChangeStart', function (e, next, current) {
-		            if(current && current.$$route && current.$$route.css){
-		                if(!angular.isArray(current.$$route.css)){
-		                    current.$$route.css = [current.$$route.css];
-		                }
-		                angular.forEach(current.$$route.css, function(sheet){
-		                    delete scope.routeStyles[sheet];
-		                });
-		            }
-		            if(next && next.$$route && next.$$route.css){
-		                if(!angular.isArray(next.$$route.css)){
-		                    next.$$route.css = [next.$$route.css];
-		                }
-		                angular.forEach(next.$$route.css, function(sheet){
-		                    scope.routeStyles[sheet] = sheet;
-		                });
-		            }
-		        });
-		    }
-		};
-	}])
 	
-    .run(function($rootScope) {
-	    $rootScope.$on("$routeChangeStart", function(next, current) { 
+    .run(function($rootScope, $location, session, auth) {
+    	$rootScope.session = session;
+    	$rootScope.auth = auth;
+    	
+    	$rootScope.logout = function(){
+    		auth.logout();
+    		$location.path('/');
+    	}
+    	
+	    $rootScope.$on("$routeChangeStart", function(event, next, current) {
 	    	$rootScope.hideNavbar = false;
 	    	$rootScope.hideFooter = false;
+	    	
+	    	if(auth.isLoggedIn() && next.redirectIfLoggedIn){
+	    		$location.path('/');
+	    	}
 	    });
 	});
 
@@ -191,7 +181,7 @@ angular
 	.module('auth', ['api', 'session'])
 	.service('auth',  ['api', 'session', function(api, session){
 		this.isLoggedIn = function(){
-			return session.getCurrentUser !== null;
+			return session.getCurrentUser() !== null;
 		}
 		
 		this.login = function(token, user, callback){

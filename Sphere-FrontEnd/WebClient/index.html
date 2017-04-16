@@ -4,36 +4,41 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>ShereChat - Inbox</title>
-    <link href="update.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="checkbox.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
-    <link rel="stylesheet" href="../octicons/octicons.min.css">
-    <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" type="text/css" href="preloader.css">
-    <link rel="stylesheet" type="text/css" href="front-prof.css">
+
+    <link rel='stylesheet' type="text/css" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <link rel='stylesheet' type="text/css" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
+    <link rel="stylesheet" type="text/css" href="../octicons/octicons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">    
     <link rel="stylesheet" type="text/css" href="../font-awesome-4.6.3/css/font-awesome.css"  media='all' />
     <link rel="stylesheet" type="text/css" href="../font-awesome-4.6.3/css/font-awesome.min.css" media='all'/>
+    <link rel="stylesheet" type="text/css" href="emoji/wdt-emoji-bundle.css"/>
+
+    <link rel="stylesheet" type="text/css" href="css/update.css">
+    <link rel="stylesheet" type="text/css" href="css/checkbox.css">
+    <link rel="stylesheet" type="text/css" href="css/preloader.css">
+    <link rel="stylesheet" type="text/css" href="css/front-prof.css">
+
     <link rel="stylesheet" type="text/css" href="../css/animate.css">
-    <link rel="stylesheet" type="text/css" href="sidemenu.css">
-    <link rel="stylesheet" type="text/css" href="intercom.css">
-    <link rel="stylesheet" type="text/css" href="chat.css">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="css/sidemenu.css">
+    <link rel="stylesheet" type="text/css" href="css/intercom.css">
+    <link rel="stylesheet" type="text/css" href="css/chat.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/confetti.css">
-    <link rel="stylesheet" type="text/css" href="test2.css">
-    <link rel="stylesheet" type="text/css" href="gear.css">
-    <link rel="stylesheet" type="text/css" href="anime.css">
-    <link rel="stylesheet" type="text/css" href="style2.css">
-    <link rel="stylesheet" type="text/css" href="image.css">
+    <link rel="stylesheet" type="text/css" href="css/test2.css">
+    <link rel="stylesheet" type="text/css" href="css/gear.css">
+    <link rel="stylesheet" type="text/css" href="css/anime.css">
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+    <link rel="stylesheet" type="text/css" href="css/image.css">
+    <link rel="stylesheet" type="text/css" href="css/chatheader.css">
+
     <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="emoji/wdt-emoji-bundle.css"/>
-    <script type="text/javascript" src="emoji/emoji.min.js"></script>
-    <script type="text/javascript" src="emoji/wdt-emoji-bundle.js"></script>
+    <script src="emoji/emoji.min.js"></script>
+    <script src="emoji/wdt-emoji-bundle.js"></script>
+
     <style type="text/css">
       body {
-      font-family: 'Open Sans', sans-serif;
-      overflow-y: scroll;
+      overflow-y: hidden;
       }
       #fullname-output,
       #comment-output,
@@ -293,6 +298,15 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div class="contacts">
+                        <nav  class="contacts-nav">
+                          <ul>
+                            <li><a href="">Contacts</a></li>
+                            <li class="active"><a href="">Recent</a></li>
+                            <li>All <i class="ion-ios-arrow-down expand-button" aria-hidden="true"></i></li>
+                          </ul>
+                        </nav>
                       </div>
                       <div class="conversations-body-conversations">
                         <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="2.4s">
@@ -598,7 +612,7 @@
             <div class="drop-files">
               <div class="superForm urlPanel">
                 <br>
-                <div class="promo convo-promo"><img srcset="newConvo.png 1x, newConvo2.png 2x" src="newConvo2.png" width="510" height="230"></div>
+                <div class="promo convo-promo"><img srcset="img/newConvo.png 1x, img/newConvo2.png 2x" src="img/newConvo2.png" width="510" height="230"></div>
                 <form class="fieldWrap urlWrap">
                   <label class="fieldName urlLabel" for="publicLink"><span>Description</span></label>
                   <input type="text" id="publicLink" class="field title urlField" value="" autocomplete="off" placeholder="Channel Name" required="">
@@ -693,7 +707,7 @@
               <div class="superForm urlPanel">
                 <br>
                 <div class="promo">
-                  <img srcset="user.png 1x, user.png 2x" src="users1.png" style="margin-left: 0px;" width="100%">
+                  <img srcset="img/user.png 1x, img/user.png 2x" src="img/users1.png" style="margin-left: 0px;" width="100%">
                 </div>
                 <div id="mainBody" style="margin-top: 10px;">
                   <div>
@@ -750,7 +764,7 @@
               <div class="superForm urlPanel">
                 <br>
                 <div class="promo">
-                  <img srcset="settings1.png 1x, settings1.png 2x" src="settings1.png" width="510" height="230">
+                  <img srcset="img/settings1.png 1x, img/settings1.png 2x" src="img/settings1.png" width="510" height="230">
                   <div class="container-gear">
                     <div class="gear one">
                       <div class="gear-inner">
@@ -1017,28 +1031,28 @@
                 <br>
                 <div class="promo-file" style="margin-top: 15%;">
                   <div class="img-first-row">
-                    <img src="yellow-block1.png" class="yellow-block1 wow fadeInDown"  data-wow-delay="100ms">
-                    <img src="develop-block.png" class="develop-block wow fadeInDown"  data-wow-delay="1000ms">
-                    <img src="ux-block.png" class="ux-block wow fadeInDown"  data-wow-delay="800ms">
-                    <img src="circle-block.png" class="circle-block wow fadeInDown"  data-wow-delay="400ms">
+                    <img src="img/yellow-block1.png" class="yellow-block1 wow fadeInDown"  data-wow-delay="100ms">
+                    <img src="img/develop-block.png" class="develop-block wow fadeInDown"  data-wow-delay="1000ms">
+                    <img src="img/ux-block.png" class="ux-block wow fadeInDown"  data-wow-delay="800ms">
+                    <img src="img/circle-block.png" class="circle-block wow fadeInDown"  data-wow-delay="400ms">
                   </div>
                   <div class="img-second-row">
-                    <img src="square-block.png" class="square-block wow fadeInDown"  data-wow-delay="1100ms">
-                    <img src="triangle-block.png" class="triangle-block wow fadeInDown"  data-wow-delay="600ms">
-                    <img src="yellow-block2.png" class="yellow-block2 wow fadeInDown"  data-wow-delay="300ms">                       
-                    <img src="cloud-block.png" class="cloud-block wow fadeInDown"  data-wow-delay="700ms">
+                    <img src="img/square-block.png" class="square-block wow fadeInDown"  data-wow-delay="1100ms">
+                    <img src="img/triangle-block.png" class="triangle-block wow fadeInDown"  data-wow-delay="600ms">
+                    <img src="img/yellow-block2.png" class="yellow-block2 wow fadeInDown"  data-wow-delay="300ms">                       
+                    <img src="img/cloud-block.png" class="cloud-block wow fadeInDown"  data-wow-delay="700ms">
                   </div>
                   <div class="img-last-row">
-                    <img src="white-block1.png" class="white-block1 wow fadeInDown"  data-wow-delay="900ms">
-                    <img src="white-block2.png" class="white-block2 wow fadeInDown"  data-wow-delay="200ms">
-                    <img src="yellow-block3.png" class="yellow-block3 wow fadeInDown"  data-wow-delay="500ms">
+                    <img src="img/white-block1.png" class="white-block1 wow fadeInDown"  data-wow-delay="900ms">
+                    <img src="img/white-block2.png" class="white-block2 wow fadeInDown"  data-wow-delay="200ms">
+                    <img src="img/yellow-block3.png" class="yellow-block3 wow fadeInDown"  data-wow-delay="500ms">
                   </div>
                 </div>
                 <div class="status-no_items" data-super-overflow="true" data-scrolling="false">
                   <div class="centerContentWrap desktop-behavior content-wrap">
                     <div class="centerContent">
                       <div class="centerContentBlock">
-                        <img srcset="content.png 1x, content.png 2x" src="content.png" height="154">
+                        <img srcset="img/content.png 1x, img/content.png 2x" src="img/content.png" height="154">
                         <h2 class="headLabel">No Saved files</h2>
                         <p class="subHeadLabel">All your saved files will be displayed here.</p>
                       </div>
@@ -1067,7 +1081,7 @@
                 <div class="centerContent">
                   <div id="no-message" class="centerContentBlock">
                     <div>
-                      <img srcset="content.png 1x, content.png 2x" src="content.png" height="154">
+                      <img srcset="img/content.png 1x, img/content.png 2x" src="img/content.png" height="154">
                       <h2 class="headLabel">No Messages selected</h2>
                       <p class="subHeadLabel">Talk to a friend or add one <a href="">here</a></p>
                       <a class="button active" href="#" id="buttonSettings">
@@ -1360,11 +1374,11 @@
       
       })();
     </script>
-    <script src="update.js"></script>
-    <script src="jquery-ui.min.js"></script>
-    <script src="preloader.js"></script>
-    <script src="filereader.js"></script>
-    <script src="image.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/preloader-client.js"></script>
+    <script src="js/filereader.js"></script>
+    <script src="js/image.js"></script>
     <script src="../js/jquery.themepunch.plugins.min.js"></script>
     <script src="../js/jquery.themepunch.revolution.min.js"></script>
     <script src="../js/slick.js"></script>
@@ -1373,11 +1387,11 @@
     <script src="../js/wow.min.js"></script>
     <script src="../js/jquery.magnific-popup.min.js"></script>
     <script src="../js/main.js"></script> 
-    <script src="gear.js"></script>
-    <script src="clock.js"></script>
+    <script src="js/gear.js"></script>
+    <script src="js/clock.js"></script>
     <script src="../js/conffeti.js"></script>
-    <script src="menu.js"></script>
-    <script src="resize.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/resize.js"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
     <script type="text/javascript">

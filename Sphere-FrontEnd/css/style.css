@@ -414,53 +414,14 @@ ul > li {
 #main-nav .logo:hover {
     color:#267df4;
 }
+
+
 /*****************************************************
 *** Header ***
 *****************************************************/
 #header2 {
-    padding: 192px 0 334px;
+    padding: 334px 0 334px;
     overflow: hidden;
-}
-#header2.bg2 {
-    padding: 160px 0 480px;
-    background-image: url();
-}
-#header2.nobg {
-    padding: 0px;
-    background-image: none;
-}
-#header2 p {
-    font-size: 16px;
-    color: #8c8f94;
-}
-#header2 .header_iphone {
-    position: absolute;
-    bottom: -310px;
-    left: 50%;
-    margin-left: -185px;
-}
-#header2 .header_ipad {
-    position: absolute;
-    bottom: -100px;
-    left: 50%;
-    margin-left: -490px;
-    margin-top:60px;
-}
-#header2 .header_iphone_right {
-    position: absolute;
-    bottom: -620px;
-    left: 50%;
-    margin-left: -260px;
-}
-#header2 .video-btn {
-    margin-top: 48px;
-}
-#header2 .video-btn i {
-    margin-right: 15px;
-}
-#header2.landing {
-    padding: 160px 0 200px;
-    background: url() no-repeat center;
 }
 /*****************************************************
 *** Revolution Slider ***
@@ -1475,7 +1436,7 @@ Responsive Styles
 }
 @media all and (max-width: 500px){
     #header2{
-        padding: 15% 1% 25% 0%;
+        padding: 25% 1% 25% 0%;
     }
 }
 @media all and (max-width: 767px) {
@@ -1484,27 +1445,13 @@ input[type="text"], input[type="email"] {
 }
 /*** Header ***/
   #header2 {
-    padding: 25% 1% 42% 5%;
+    padding: 45% 1% 42% 5%;
 }
 #main-nav ul.left {
     display:none;
 }
 #main-nav ul.right {
     display:none;
-}
-#header2 .header_iphone {
-    bottom: -220px;
-    margin-left: -140px;
-    width: 280px;
-}
-#header2.bg2 {
-    padding: 160px 0 180px;
-    background-image: url("../images/banner_background02.jpg")!important;
-}
-#header2 .header_ipad {
-    bottom: 0px;
-    margin-left: -140px;
-    width: 280px;
 }
 .tp-caption.upper.black {
     margin-top:100px;
