@@ -1,0 +1,483 @@
+.wdt-emoji-popup,
+.wdt-emoji-popup * {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+/* hide unavailable fonts @todo - check fallbacks */
+body[data-wdt-emoji-bundle='google'] .wdt-emoji[data-has-img-google='false'],
+body[data-wdt-emoji-bundle='emojione'] .wdt-emoji[data-has-img-emojione='false'],
+body[data-wdt-emoji-bundle='google'] .wdt-emoji[data-has-img-google='false'],
+body[data-wdt-emoji-bundle='apple'] .wdt-emoji[data-has-img-apple='false'] {
+  display: none !important;
+}
+
+/* picker styles */
+.wdt-emoji-picker {
+  position: relative !important;
+  right: 5px !important;
+  bottom: 5px !important;
+
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.wdt-emoji-picker:hover {
+  cursor: pointer !important;
+}
+
+.wdt-emoji-picker-parent {
+  position: relative !important;
+}
+
+.wdt-emoji-picker span.emoji-outer.emoji-sizer {
+  width: 18px !important;
+  height: 18px !important;
+
+  pointer-events: none !important;
+}
+
+/* bundle popup styles */
+.wdt-emoji-popup {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+
+  visibility: hidden !important;
+
+  width: 357px !important;
+  max-width: 100% !important;
+  height: 357px !important;
+  max-height: 100% !important;
+
+  transition: opacity 50ms ease, bottom 1s ease-out !important;
+
+  opacity: 0 !important;
+  border: 1px solid #dedede !important;
+  -webkit-border-radius: 3px !important;
+  -moz-border-radius: 3px !important;
+  border-radius: 3px !important;
+  background-color: #fff !important;
+}
+
+.wdt-emoji-popup.open {
+  visibility: visible !important;
+
+  opacity: 1 !important;
+}
+
+#wdt-emoji-menu-header {
+  padding: 4px 0 0 7px !important;
+
+  border-bottom: 1px solid rgba(0, 0, 0, .15) !important;
+  background: #f7f7f7 !important;
+}
+
+.wdt-emoji-tab {
+  display: inline-block !important;
+
+  width: 28px !important;
+  margin-right: 2.5px !important;
+  padding: 4px !important;
+
+  transition: border-color 150ms ease-out !important;
+  text-align: center !important;
+
+  color: #9e9ea6 !important;
+  border-bottom: 3px solid transparent !important;
+}
+
+.wdt-emoji-tab:hover {
+  cursor: pointer !important;
+  text-decoration: none !important;
+}
+
+.wdt-emoji-tab.active {
+  padding-top: 3px !important;
+
+  color: #9e9ea6 !important;
+  border-bottom: 3px solid #e7543d !important;
+}
+
+#wdt-emoji-search,
+#wdt-emoji-search:focus {
+  font-size: 15px !important;
+  line-height: 20px !important;
+
+  width: 95% !important;
+  max-width: 100% !important;
+  height: 28px !important;
+  margin: .5rem 9px .6rem !important;
+  padding: 15px 2rem !important;
+
+  transition: border-color 150ms ease-out !important;
+
+  color: #444 !important;
+  border: 1px solid #c5c5c5 !important;
+  border-radius: 3px !important;
+  outline: none !important;
+}
+
+#wdt-emoji-search:focus {
+  border-color: #a0a0a0 !important;
+}
+
+.wdt-emoji-popup h3 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 15px !important;
+
+  position: relative !important;
+
+  margin: 0 !important;
+  padding: 8px !important;
+
+  color: #555 !important;
+  background: rgba(255, 255, 255, .95) !important;
+}
+
+.wdt-emoji-popup h3.sticky {
+  position: absolute !important;
+  z-index: 4 !important;
+
+  width: 330px !important;
+}
+
+.wdt-emoji-scroll-wrapper {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+
+  height: 257px !important;
+  padding-bottom: 30px !important;
+}
+
+.wdt-emoji-sections {
+  padding: 0 5px !important;
+}
+
+.wdt-emoji {
+  line-height: 1rem !important;
+
+  position: relative !important;
+
+  display: inline-block !important;
+
+  margin-right: 2.5px !important !important;
+  margin-bottom: 1px !important;
+  padding: 6px !important;
+
+  -webkit-transition: background 500ms ease-out !important;
+  -moz-transition: background 500ms ease-out !important;
+  -ms-transition: background 500ms ease-out !important;
+  -o-transition: background 500ms ease-out !important;
+  transition: background 500ms ease-out !important;
+  text-align: center !important;
+
+  -webkit-border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  border-radius: 6px !important;
+}
+
+.wdt-emoji.not-matched {
+  display: none !important;
+}
+
+.wdt-emoji:hover {
+  cursor: pointer !important;
+}
+
+.wdt-emoji.gray:hover {
+  background-color: rgba(175, 175, 175, .32) !important;
+}
+
+.wdt-emoji.green:hover {
+  background-color: #b7e887 !important;
+}
+
+.wdt-emoji.pink:hover {
+  background-color: #f3c1fd !important;
+}
+
+.wdt-emoji.yellow:hover {
+  background-color: #f9ef67 !important;
+}
+
+.wdt-emoji.blue:hover {
+  background-color: #b5e0fe !important;
+}
+
+.wdt-emoji-tab .emoji-outer {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+span.emoji {
+  display: -moz-inline-box !important;
+  display: inline-block !important;
+
+  width: 1em !important;
+  height: 1em !important;
+
+  vertical-align: baseline !important;
+  text-indent: -9999px !important;
+
+  background-repeat: no-repeat !important;
+  background-position: 50%, 50% !important;
+  background-size: 1em !important;
+  background-size: contain !important;
+
+  -moz-box-orient: vertical !important;
+  *vertical-align: auto !important;
+  *zoom: 1 !important;
+  *display: inline !important;
+}
+
+span.emoji-sizer {
+  font-size: 1em !important;
+  line-height: .81em !important;
+}
+
+span.emoji-outer {
+  display: -moz-inline-box !important;
+  display: inline-block !important;
+
+  width: 22px !important;
+  height: 22px !important;
+  margin-top: -2px !important;
+
+  vertical-align: middle !important;
+
+  *display: inline !important;
+}
+
+span.emoji-inner {
+  display: -moz-inline-box !important;
+  display: inline-block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  vertical-align: baseline !important;
+  text-indent: -9999px !important;
+
+  *vertical-align: auto !important;
+  *zoom: 1 !important;
+}
+
+img.emoji {
+  width: 1em !important;
+  height: 1em !important;
+}
+
+#wdt-emoji-footer {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+
+  width: 100% !important;
+  padding-bottom: .4rem !important;
+
+  border-top: 1px solid rgba(0, 0, 0, .15) !important;
+  background: #f7f7f7 !important;
+}
+
+#wdt-emoji-no-result {
+  font-size: 10px !important;
+  font-weight: 400 !important;
+
+  clear: both !important;
+
+  padding: 20px !important;
+
+  text-align: center !important;
+
+  color: #bababa !important;
+}
+
+#wdt-emoji-preview {
+  padding: .3rem 0 0 .7rem !important;
+
+  -webkit-transition: opacity .1s ease-in .1s !important;
+  -moz-transition: opacity .1s ease-in .1s !important;
+  transition: opacity .1s ease-in .1s !important;
+
+  opacity: 0 !important;
+}
+
+#wdt-emoji-preview-img {
+  font-size: 2rem !important;
+  line-height: 2rem !important;
+
+  float: left !important;
+
+  width: 46px !important;
+  height: 54px !important;
+  padding: .6rem .5rem 0 .1rem !important;
+
+  vertical-align: middle !important;
+}
+
+#wdt-emoji-preview-bundle {
+  font-size: 17px !important;
+  font-weight: bold !important;
+
+  position: absolute !important;
+  bottom: 19px !important;
+  left: 14px !important;
+
+  -webkit-transition: opacity .1s ease-in .1s !important;
+  -moz-transition: opacity .1s ease-in .1s !important;
+  transition: opacity .1s ease-in .1s !important;
+
+  opacity: 1 !important;
+  color: #989ba0 !important;
+}
+
+#wdt-emoji-search-result-title,
+#wdt-emoji-no-result {
+  display: none !important;
+}
+
+#wdt-emoji-search-result-title.wdt-show,
+#wdt-emoji-no-result.wdt-show {
+  display: block !important;
+
+  margin: 0 5px !important;
+}
+
+.wdt-inline {
+  display: inline !important;
+}
+
+.wdt-search-on {
+  display: none !important;
+}
+
+.wdt-emoji-popup.preview-mode #wdt-emoji-preview-bundle {
+  opacity: 0 !important;
+}
+
+.wdt-emoji-popup.preview-mode #wdt-emoji-preview {
+  opacity: 1 !important;
+}
+
+#wdt-emoji-preview-img span.emoji-outer.emoji-sizer {
+  position: relative !important;
+  top: 3px !important;
+  left: 4px !important;
+
+  width: 40px !important;
+  height: 40px !important;
+}
+
+#wdt-emoji-preview-text {
+  font-size: 13px !important;
+
+  position: relative !important;
+  top: 9px !important;
+  left: 10px !important !important;
+
+  color: #777 !important;
+}
+
+#wdt-emoji-preview-name {
+  font-weight: bold !important;
+
+  position: relative !important;
+  left: 3px !important;
+
+  color: #444 !important;
+}
+
+.wdt-emoji-popup-mobile-closer {
+  font-size: 25px !important !important;
+  font-weight: bold !important;
+  line-height: 35px !important;
+
+  position: absolute !important;
+  top: -35px !important;
+  left: 50% !important;
+
+  visibility: hidden !important;
+
+  width: 40px !important;
+  height: 35px !important;
+
+  transform: translateX(-50%) !important;
+  text-align: center !important;
+
+  opacity: 0 !important;
+  color: #444 !important;
+  border: 1px solid rgba(0, 0, 0, .1) !important;
+  border-bottom-color: #e7543d !important;
+  border-radius: 50% 50% 0 0 !important;
+  background-color: rgba(255, 255, 255, .8) !important;
+}
+
+/* iPhone 2G-4S-5-5S in portrait */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (orientation: portrait) {
+  .wdt-emoji-picker {
+    display: none !important;
+  }
+
+  .wdt-emoji-tab {
+    width: 24px !important;
+  }
+
+  .wdt-emoji {
+    margin-right: 0 !important !important;
+  }
+
+  #wdt-emoji-footer {
+    display: none !important;
+  }
+
+  .wdt-emoji-scroll-wrapper {
+    height: 170px !important;
+  }
+
+  .wdt-emoji-popup {
+    height: 206px !important;
+
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  #wdt-emoji-search {
+    display: none !important;
+  }
+
+  .wdt-emoji-popup-mobile-closer {
+    visibility: visible !important;
+
+    opacity: 1 !important;
+  }
+
+  .wdt-emoji-popup h3.sticky {
+    width: 300px !important;
+  }
+}
+
+/* iPhone 6 in portrait */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (orientation: portrait) {
+  .wdt-emoji {
+    margin-right: -1px !important !important;
+  }
+
+  .wdt-emoji-tab {
+    width: 30px !important;
+  }
+
+  .wdt-emoji-popup h3.sticky {
+    width: 359px !important;
+  }
+}

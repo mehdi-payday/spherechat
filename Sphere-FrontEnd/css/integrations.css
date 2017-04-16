@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
 section.integrations-grid {
   top: 150px;
   position: relative;
@@ -18,10 +17,11 @@ section.integrations-grid .icon-integration {
   transition-duration: 4s;
   transition-timing-function: ease-in-out;
   border-radius: 100%;
-  background-image: url("https://image.ibb.co/gS3oaa/integrations_logos_grid.png");
+  background-image: url("../img/integrations_logos_grid.png");
   background-size: 350px;
   color: #36393D;
   cursor: pointer;
+  box-shadow: 0 12px 14px 0 rgba(168, 231, 255, 0.23);
   animation: in 1.5s ease forwards;
 }
 section.integrations-grid .icon-integration.helpscout {
@@ -33,6 +33,7 @@ section.integrations-grid .icon-integration.helpscout {
   background-position: 150px 0px;
   background-size: 600px;
   color: #1F77C8;
+  box-shadow: 0 12px 14px 0 rgba(31, 119, 200, 0.23);
   animation-delay: .2s;
 }
 section.integrations-grid .icon-integration.zendesk {
@@ -45,6 +46,7 @@ section.integrations-grid .icon-integration.zendesk {
   background-position: 275px -2px;
   background-size: 560px;
   color: #073036;
+  box-shadow: 0 12px 14px 0 rgba(7, 48, 54, 0.23);
   animation-delay: .3s;
 }
 section.integrations-grid .icon-integration.front {
@@ -56,6 +58,7 @@ section.integrations-grid .icon-integration.front {
   background-position: 338px 0px;
   background-size: 450px;
   color: #FF4B4C;
+  box-shadow: 0 12px 14px 0 rgba(255, 75, 76, 0.23);
   animation-delay: .2s;
 }
 section.integrations-grid .icon-integration.intercom {
@@ -68,6 +71,7 @@ section.integrations-grid .icon-integration.intercom {
   background-position: 0 120px;
   background-size: 479px;
   color: #00B4FD;
+  box-shadow: 0 12px 14px 0 rgba(0, 180, 253, 0.23);
   animation-delay: .4s;
 }
 section.integrations-grid .icon-integration.zapier {
@@ -80,6 +84,7 @@ section.integrations-grid .icon-integration.zapier {
   background-position: 100px 100px;
   background-size: 400px;
   color: #FF4000;
+  box-shadow: 0 12px 14px 0 rgba(255, 64, 0, 0.23);
   animation-delay: .5s;
 }
 section.integrations-grid .icon-integration.zoho {
@@ -105,6 +110,7 @@ section.integrations-grid .icon-integration.desk {
   background-position: 446px 148px;
   background-size: 600px;
   color: #694637;
+  box-shadow: 0 12px 14px 0 rgba(105, 70, 55, 0.23);
   animation-delay: .7s;
 }
 section.integrations-grid .icon-integration.salesforce {
@@ -115,6 +121,7 @@ section.integrations-grid .icon-integration.salesforce {
   background-position: 0px 401px;
   background-size: 800px;
   color: #00B4FD;
+  box-shadow: 0 12px 14px 0 rgba(0, 180, 253, 0.23);
   animation-delay: .6s;
 }
 section.integrations-grid .icon-integration.hubspot {
@@ -127,6 +134,7 @@ section.integrations-grid .icon-integration.hubspot {
   background-position: 100px 202px;
   background-size: 405px;
   color: #F76A1D;
+  box-shadow: 0 12px 14px 0 rgba(247, 106, 29, 0.23);
   animation-delay: .4s;
 }
 section.integrations-grid .icon-integration.freshdesk {
@@ -138,6 +146,7 @@ section.integrations-grid .icon-integration.freshdesk {
   background-position: 225px 224px;
   background-size: 450px;
   color: #61B437;
+  box-shadow: 0 12px 14px 0 rgba(97, 180, 55, 0.23);
   animation-delay: .6s;
 }
 section.integrations-grid .icon-integration.slack {
@@ -245,7 +254,7 @@ section.integrations-list {
     height: 55px;
     margin-left: 30px;
     border-radius: 100%;
-    background-image: url("https://image.ibb.co/gS3oaa/integrations_logos_grid.png");
+    background-image: url("../img/integrations_logos_grid.png");
     background-size: 230px;
   }
   section.integrations-list li p {

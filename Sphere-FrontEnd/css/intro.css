@@ -21,15 +21,13 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+      top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
  }
  .overlay {
-     position: absolute;
-     top: 0;
-     left: 0;
-     padding: 192px 0 334px;
-     z-index: 0;
-     background: red;
-     /* For browsers that do not support gradients */
+       /* For browsers that do not support gradients */
      
      background: -webkit-linear-gradient(left top, transparent, rgba(255, 182, 193, 0.6), rgba(255, 182, 193, 0.8));
      /* For Safari 5.1 to 6.0 */
@@ -42,25 +40,14 @@
      
      background: linear-gradient(to bottom right, rgba(101,176,239,0.2), rgba(63,157,236,0.4), rgba(184,95,213,0.5), rgba(166,55,202,0.8));
      /* Standard syntax */
- }
-@media all and (max-width: 500px){
-    .overlay{
-        padding: 15% 1% 25% 0%;
-    }
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
-@media all and (max-width: 767px) {
-    .overlay {
-        padding: 361px;
-    }
-}
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
-    .overlay{
-        padding: 355px;
-    }
-}
+
  .overlay2 {
      position: absolute;
      top: 0;
