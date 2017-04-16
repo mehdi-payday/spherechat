@@ -7997,9 +7997,6 @@ textarea {
 .pull-right {
     float: right
 }
-      #sidebar, #mainBody2, #intercom-container{
-      display: none;
-      }
       .input-search,
 body {
     margin: 0;
