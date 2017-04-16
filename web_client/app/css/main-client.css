@@ -4133,7 +4133,7 @@ html:not(.blur) .collection-new-form::-webkit-input-placeholder {
     width: 100%;
     height: 100%;
     position: relative;
-    --sidebarWidth: 360px;
+    --sidebarWidth: 433px;
     --panelWidth: 300px;
     --mainCollapsedWidth: 400px
 }
@@ -4147,7 +4147,7 @@ html:not(.blur) .collection-new-form::-webkit-input-placeholder {
     transition: left .3s ease-in-out, right .3s ease-in-out, max-width .3s ease-in-out, width .3s ease-in-out, box-shadow .3s ease-in-out
 }
 #sidebar {
-    left: 0;
+    left: 85px;
     width: 360px;
     background-image: linear-gradient(180deg, #f8f5f2, #f7f5f4 18%, #f1f3f5 35%, #f7f5f0 68%, #f6f6f8);
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
