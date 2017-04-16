@@ -1,0 +1,16 @@
+@keyframes fadeOut {
+	0%{opacity: 1;}
+	100%{opacity: 0;}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.ng-enter {animation: fadeIn 0.5s 0.5s both ease-in; z-index: 8888;}
+.ng-leave {animation: fadeOut 0.5s both ease-in; z-index: 9999;}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
