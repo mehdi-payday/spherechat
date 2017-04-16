@@ -30,7 +30,6 @@ body {
 }
 #sidemenumain {
     left: 0;
-    width: 360px;
     z-index: 10;
     will-change: transform;
     transition: transform .3s ease-in-out, width .3s ease-in-out
