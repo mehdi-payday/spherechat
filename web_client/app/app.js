@@ -323,6 +323,10 @@ angular
 	.module('messagingService', ['api'])
 	.service('messaging', ['api', function(api){
 		// Channels
+		this.createChannel = function(){
+			return api.channel.save();
+		}
+		
 		this.getChannels = function(){
 			return api.channel.query();
 		}
@@ -335,7 +339,15 @@ angular
 			return api.channel.getMessages({id: id});
 		}
 		
+		this.sendChannelMessage = function(id, message){
+			api.channel.postMessage({id: id}, {contents: message});
+		}
+		
 		// Private Discussions 
+		this.createPrivateDiscussion = function(){
+			return api.privateDiscussion.save();
+		}
+		
 		this.getPrivateDiscussions = function(){
 			return api.privateDiscussion.query();
 		}
@@ -346,6 +358,10 @@ angular
 		
 		this.getPrivateDiscussionMessages = function(id){
 			return api.privateDiscussion.getMessages({id: id});
+		}
+		
+		this.sendPrivateDiscussionMessage = function(id, message){
+			api.privateDiscussion.postMessage({id: id}, {contents: message});
 		}
 	}])
 	
