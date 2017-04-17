@@ -96,15 +96,24 @@ namespace SphereClient {
         /// and assigns event handlers.
         /// </summary>
         public void Start() {
-            this.session.WS.OnMessageReceived += ( Entities.Message message ) => {
-                this.panel4.OnNewMessage( message );
-            };
+            this.session.WS.OnMessageReceived += OnMessage;
             this.session.WS.OnChannelChange += OnChannelChanged;
             this.session.WS.OnDiscussionChange += OnDiscussionChanged;
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
             });
             t.Start();
+        }
+
+        /// <summary>
+        /// Triggers when a message is received, will add the message
+        /// to the message pane if this the currently viewed pane
+        /// </summary>
+        /// <param name="m"></param>
+        private void OnMessage(Entities.Message m ) {
+            if (this.currentChannel?.ThreadId == m.ThreadId) {
+                this.panel4.OnNewMessage( m );
+            }
         }
 
         /// <summary>
