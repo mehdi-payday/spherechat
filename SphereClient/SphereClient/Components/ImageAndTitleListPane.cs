@@ -185,6 +185,7 @@ namespace SphereClient.Components {
             title.Top = Constants.MARGIN_SMALL.Top;
             title.AutoSize = true;
             plus.Text = "+";
+            
             plus.Left = DiscussionListPanel.leftIconOffset;
             plus.Top = Constants.MARGIN_SMALL.Top;
             DiscussionListPanel.header.Height = 37;
@@ -203,9 +204,8 @@ namespace SphereClient.Components {
             this.BackColor = Constants.PURPLE;
             this._head = DiscussionListPanel.header;
             this.ForeColor = Constants.DARK_PURPLE;
-
             //plus sign on click
-            this._head.Controls[1].Click += (object s, EventArgs e) => { /*create channel */};
+            this._head.Controls[1].Click += Form1.Instance.OnCreateDirectMessageThread;
 
         }
         /// <summary>
@@ -217,6 +217,8 @@ namespace SphereClient.Components {
             this.BackColor = Constants.PURPLE;
             this._head = DiscussionListPanel.header;
             this.ForeColor = Constants.DARK_PURPLE;
+            //plus sign on click
+            this._head.Controls[1].Click += Form1.Instance.OnCreateDirectMessageThread;
         }
 
         /// <summary>
@@ -267,6 +269,8 @@ namespace SphereClient.Components {
             this.BackColor = Constants.PURPLE;
             this._head = GroupListPanel.header;
             this.ForeColor = Constants.DARK_PURPLE;
+            //plus sign on click
+            this._head.Controls[1].Click += Form1.Instance.OnCreateGroupDiscussionThread;
         }
         /// <summary>
         /// Constructor for the DiscussionListPanel class.
@@ -277,6 +281,8 @@ namespace SphereClient.Components {
             this.BackColor = Constants.PURPLE;
             this._head = GroupListPanel.header;
             this.ForeColor = Constants.DARK_PURPLE;
+            //plus sign on click
+            this._head.Controls[1].Click += Form1.Instance.OnCreateGroupDiscussionThread;
         }
 
         /// <summary>

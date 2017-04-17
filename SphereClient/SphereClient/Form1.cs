@@ -36,6 +36,7 @@ namespace SphereClient {
             MakePreloader();
             Connect(username, password);
         }
+        
         /// <summary>
         /// Default contructor for the Form1 class.
         /// </summary>
@@ -99,7 +100,6 @@ namespace SphereClient {
                 FetchChannels();
             });
             t.Start();
-
         }
 
         /// <summary>
@@ -127,12 +127,6 @@ namespace SphereClient {
                 MessageBox.Show( ex.Message );
             }
             
-            
-
-            
-
-
-
         }
 
         /// <summary>
@@ -216,6 +210,27 @@ namespace SphereClient {
             }
             this.preloader.BringToFront();
         }
+
+        /// <summary>
+        /// Triggered when the user clicks on the "+" sign
+        /// besides the "Direct messages" label.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="e"></param>
+        public void OnCreateDirectMessageThread(object s, EventArgs e ) {
+            
+        }
+
+        /// <summary>
+        /// Triggered when the user clicks on the "+" sign
+        /// besides the "Group messages" label.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        public void OnCreateGroupDiscussionThread(object s, EventArgs e ) {
+
+        }
+
 
         /// <summary>
         /// Hides the preloader.
