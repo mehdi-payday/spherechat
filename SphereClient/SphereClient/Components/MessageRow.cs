@@ -94,7 +94,7 @@ namespace SphereClient.Components {
 
             this.usernameLabel.Left = this.textPane.Left;
             this.usernameLabel.Font = Constants.MESSAGE_USERNAME_FONT;
-            this.usernameLabel.Text = channel.Memberships.Where( m => m.UserId == message.UserId ).Select( m => m.UserDetails.Username ).FirstOrDefault();
+            this.usernameLabel.Text = channel.Memberships.Where( m => m.UserId == message.UserId ).Select( m => m.UserDetails.Username ).First() ?? string.Empty;
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.Top = this.textPane.Top - (this.usernameLabel.Height + Constants.MARGIN_SMALL.Bottom);
 
