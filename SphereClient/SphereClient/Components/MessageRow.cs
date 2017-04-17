@@ -45,7 +45,11 @@ namespace SphereClient.Components {
             this.image.SizeMode = PictureBoxSizeMode.Zoom;
             
             Entities.User usr = channel.Memberships.Where( m => m.UserDetails.UserId == message.UserId ).First().UserDetails;
-            this.image.LoadAsync( usr.ProfilePicture ?? "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
+            if(!string.IsNullOrEmpty( usr.ProfilePicture )) {
+                this.image.LoadAsync( usr.ProfilePicture);
+            } else {
+                this.image.Image = Properties.Resources.default_user_image;
+            }            
             
             this.textPane.Left = this.image.Left + this.image.Width + Constants.MARGIN_SMALL.Right;
             this.textPane.Top = Constants.MARGIN_SMALL.Top;
@@ -53,6 +57,7 @@ namespace SphereClient.Components {
             this.textPane.BackColor = message_bg_color;
             this.textPane.BackgroundImage = Constants.TRANSPARENT_GRADIENT_VERTICAL;
             this.textPane.BackgroundImageLayout = ImageLayout.Stretch;
+            this.textPane.AutoSize = true;
 
             this.text.Left = Constants.MARGIN_SMALL.Left;
             this.text.Top = Constants.MARGIN_SMALL.Top;
@@ -81,7 +86,8 @@ namespace SphereClient.Components {
 
             if (this.ismine) {
                 this.image.Left = this.timestampLabel.Left - Constants.MARGIN_SMALL.Left - this.image.Width - Constants.MARGIN_SMALL.Right;
-                this.textPane.Left = this.image.Left - this.textPane.Width - Constants.MARGIN_SMALL.Left;
+                this.textPane.Left = this.image.Left - (Constants.MARGIN_SMALL.Left +
+                    this.textPane.Controls[0].Width + this.textPane.Controls[0].Left + Constants.MARGIN_SMALL.Right);
 
             }
 

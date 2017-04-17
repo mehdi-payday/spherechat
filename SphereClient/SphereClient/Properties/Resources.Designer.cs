@@ -133,6 +133,16 @@ namespace SphereClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap default_user_image {
+            get {
+                object obj = ResourceManager.GetObject("default_user_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap g4167 {
             get {
                 object obj = ResourceManager.GetObject("g4167", resourceCulture);

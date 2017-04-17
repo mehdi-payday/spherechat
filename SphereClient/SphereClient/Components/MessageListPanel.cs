@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -34,17 +35,14 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="channel">The channel to fetch the messages from</param>
         public void FetchMessages(Entities.Channel channel) {
-
             Form1.Instance.ShowPreloader();
-
             this.messages.Clear();
             this.Controls.Clear();
             this.channel = channel;
-            Entities.Message[] fetchedMessages = Form1.Instance.session.REST.GetAllMessages(channel);
+            Entities.Message[] fetchedMessages = Form1.Instance.session.REST.GetMessages(channel).ToArray();
             int hoffset = 0;
             foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
                 MessageRow mr = new MessageRow(msg, this.channel, this);
-
                 mr.Top = hoffset;
                 this.messages.Add(mr);
                 this.Controls.Add(mr);
@@ -63,7 +61,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="channel"> the channel to fetch the messages from</param>
         public void FetchMessagesSinceLastTime(Entities.Channel channel) {
-            Entities.Message[] fetchedMessages = Form1.Instance.session.REST.GetAllMessages(channel);
+            Entities.Message[] fetchedMessages = Form1.Instance.session.REST.GetMessages(channel).ToArray();
             foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
                 OnNewMessage(msg);
             }
@@ -75,6 +73,10 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="message">the new message to add</param>
         public void OnNewMessage(Entities.Message message) {
+            if (InvokeRequired) {
+                Invoke(new Action(()=> { OnNewMessage( message ); } ));
+                return;
+            }
             MessageRow mr = new MessageRow(message, this.channel, this);
             if (this.messages.Any()) {
                 mr.Top = this.messages.Last().Top + this.messages.Last().Height;
