@@ -42,6 +42,12 @@ $('#sidebar-black-overlay').on('click', function() {
     if ($('body').hasClass('mode-files-panel')) {
         $('body').removeClass('mode-files-panel');
     }
+    if ($('body').hasClass('.mode-force-sidebar.mode-groups-panel')) {
+        $('body').removeClass('mode-groups-panel');
+    }
+    if ($('body').hasClass('mode-groups-panel')) {
+        $('body').removeClass('mode-groups-panel');
+    }
 });
 $('#closeConvo').on('click', function() {
     $('body').removeClass('mode-force-sidebar');
@@ -190,6 +196,19 @@ $('.conversation-summary.conversation-summary-0').on('click', function(){
     $(this).addClass('conversation-summary-selected');
 });
 
+// groups
 
+$('.Sidebar-nav-list-item.ion-person-stalker').on('click', function(){
+    $('body').find(".Sidebar-nav-list-item-active").removeClass('Sidebar-nav-list-item-active');
+    $(this).addClass('Sidebar-nav-list-item-active');  
+    $('body').toggleClass('mode-groups-panel');
+});
 
+$('#closegroups').on('click', function(){
+    $('body').removeClass('mode-groups-panel');
+    $('body').addClass('mode-force-sidebars');
+});
 
+$('#buttongroups').on('click', function(){
+  $('body').addClass('mode-groups-panel');
+});
