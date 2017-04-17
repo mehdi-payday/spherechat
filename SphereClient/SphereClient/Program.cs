@@ -8,7 +8,7 @@ namespace SphereClient {
         /// </summary>
         [STAThread]
         static void Main() {
-            string mode = "console";
+            string mode = "form";
 
             if (mode == "form") {
                 Application.EnableVisualStyles();

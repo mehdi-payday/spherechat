@@ -83,7 +83,8 @@ namespace SphereClient {
         public void Connect(string username, string password) {
             this.session = new Session(username, password);
             this.user = this.session.REST.GetProfile();
-
+            this.label1.Text = this.user.Value.FirstName + " "+this.user.Value.LastName;
+            this.pictureBox19.LoadAsync( this.user.Value.ProfilePicture );
         }
 
         /// <summary>
@@ -212,6 +213,10 @@ namespace SphereClient {
                 return;
             }
             this.preloader.SendToBack();
+        }
+
+        private void linkLabel3_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
+            EditProfile.Instance.ShowDialog();
         }
     }
 }
