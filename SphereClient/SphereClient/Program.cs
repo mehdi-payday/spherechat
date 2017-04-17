@@ -16,7 +16,6 @@ namespace SphereClient {
                 Application.Run(new LoginForm());
             }
             else if (mode == "console") {
-                Console.Title = "SphereChat";
                 using (var session = new Session("sphereman", "spherique")) {
                     var channels = session.REST.GetAllChannels();
 

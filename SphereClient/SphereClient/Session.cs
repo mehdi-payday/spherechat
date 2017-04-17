@@ -7,7 +7,7 @@ namespace SphereClient {
 
         public Session(string username, string password) {
             REST = new REST.Session(username, password);
-            WS = new Sockets.Session(new Sockets.Configuration("spherechat.tk", 4242, "/ec", DateTime.Now.Ticks.ToString()), REST);
+            WS = new Sockets.Session(new Sockets.Configuration("spherechat.tk", 8080, "/ec", DateTime.Now.Ticks.ToString()), REST);
         }
 
         public void Dispose() {

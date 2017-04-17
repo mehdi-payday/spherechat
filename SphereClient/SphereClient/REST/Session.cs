@@ -32,8 +32,28 @@ namespace SphereClient.REST {
                     { HttpRequestHeader.Authorization, "Token " + Auth.Token }
                 }
             }.GET()) {
-                return (User)Parser.JSONtoEntity(request.Payload, typeof(Entities.User));
+                return (User)Parser.JSONtoEntity(request.Payload, typeof(User));
             }
+        }
+
+        public void PostProfile(User user) {
+            using (var request = new Me.Base() {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(Parser.EntitytoJSON(user, typeof(User)))) { }
+        }
+
+        public void PostFriendship(FriendRequest friendrequest) {
+            using (var request = new Friendship.Base() {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(Parser.EntitytoJSON(friendrequest, typeof(FriendRequest)))) { }
         }
 
         public Entities.Friendship[] GetAllFriendships() {
@@ -69,6 +89,26 @@ namespace SphereClient.REST {
 
                 return cursor;
             }
+        }
+
+        public void PostPrivateDiscussion(PrivateDiscussion privatediscussion) {
+            using (var request = new Messaging.Channel.Base() {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(Parser.EntitytoJSON(privatediscussion, typeof(PrivateDiscussion)))) { }
+        }
+
+        public void PostChannel(Channel channel) {
+            using (var request = new Messaging.Channel.Base() {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(Parser.EntitytoJSON(channel, typeof(Channel)))) { }
         }
 
         public Cursor<Channel> GetChannels(string pageUrl = null) {

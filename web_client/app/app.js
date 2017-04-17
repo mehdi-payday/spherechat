@@ -282,7 +282,7 @@ angular
 		}
 		
 		this.sendChannelMessage = function(id, message){
-			api.channel.postMessage({id: id}, {contents: message});
+			api.channel.postMessage({channelId: id}, {contents: message});
 		}
 		
 		// Private Discussions 
@@ -303,7 +303,7 @@ angular
 		}
 		
 		this.sendPrivateDiscussionMessage = function(id, message){
-			api.privateDiscussion.postMessage({id: id}, {contents: message});
+			api.privateDiscussion.postMessage({discussionId: id}, {contents: message});
 		}
 	}])
 	
@@ -320,11 +320,11 @@ angular
     	api.register = $resource(api.serverAddress + 'api/auth/registration/');
     	
     	// Friends
-    	api.friendship = $resource(api.serverAddress + 'api/friendship/friendship/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});
-    	api.friendrequest = $resource(api.serverAddress + 'api/friendship/friendrequest/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});
+    	api.friendship = $resource(api.serverAddress + 'api/friendship/friendship/');
+    	api.friendrequest = $resource(api.serverAddress + 'api/friendship/friendrequest/');
     	
     	// Users
-    	api.user = $resource(api.serverAddress + 'api/users/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
+    	api.user = $resource(api.serverAddress + 'api/users/',{}, {
     		'getCurrent': {
     			method: 'GET',
     			url: api.serverAddress + 'api/me/',
@@ -339,7 +339,16 @@ angular
     	});
     	
     	// Channels
-    	api.channel = $resource(api.serverAddress + 'api/messaging/channel/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
+    	api.channel = $resource(api.serverAddress + 'api/messaging/channel/', {}, {
+    		'save': {
+    			method: 'POST',
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'query': {
+    			method: 'GET',
+    			isArray: true,
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
     		'getOne': {
     			method: 'GET',
     			url: api.serverAddress + 'api/messaging/channel/:id/',
@@ -356,13 +365,13 @@ angular
     		'getOneMessage': {
     			method: 'GET',
     			url: api.serverAddress + 'api/messaging/channel/:channelId/message/:messageId/',
-    			params: {discussionId: '@channelId', messageId: '@messageId'},
+    			params: {channelId: '@channelId', messageId: '@messageId'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
 			'postMessage': {
     			method: 'POST',
     			url: api.serverAddress + 'api/messaging/channel/:channelId/message/',
-    			params: {discussionId: '@channelId'},
+    			params: {channelId: '@channelId'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'postHeartbeat': {
@@ -386,7 +395,16 @@ angular
     	});
     	
     	// Private Disscussions
-    	api.privateDiscussion = $resource(api.serverAddress + 'api/messaging/privatediscussion/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
+    	api.privateDiscussion = $resource(api.serverAddress + 'api/messaging/privatediscussion/', {}, {
+    		'save': {
+    			method: 'POST',
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
+    		'query': {
+    			method: 'GET',
+    			isArray: true,
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    		},
     		'getOne': {
     			method: 'GET',
     			url: api.serverAddress + 'api/messaging/privatediscussion/:id/',
