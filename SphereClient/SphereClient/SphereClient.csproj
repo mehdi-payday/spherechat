@@ -53,7 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\ImageAndTitleListPane.cs" />
+    <Compile Include="Components\ImageAndTitleListPane.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\ImageAndTitleListPane.Designer.cs">
       <DependentUpon>ImageAndTitleListPane.cs</DependentUpon>
     </Compile>
@@ -67,6 +69,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="CreateDiscussion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateDiscussion.Designer.cs">
+      <DependentUpon>CreateDiscussion.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +91,7 @@
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\MessageTag.cs" />
     <Compile Include="Entities\PrivateDiscussion.cs" />
+    <Compile Include="Entities\Search.cs" />
     <Compile Include="Entities\Thread.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="FeedBox.cs">
@@ -127,6 +136,9 @@
     <Compile Include="Sockets\Session.cs" />
     <EmbeddedResource Include="Components\ImageAndTitleListPane.resx">
       <DependentUpon>ImageAndTitleListPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateDiscussion.resx">
+      <DependentUpon>CreateDiscussion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditProfile.resx">
       <DependentUpon>EditProfile.cs</DependentUpon>
@@ -244,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\25.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\default-user-image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,6 @@ namespace SphereClient {
         }
 
         public void Dispose() {
-            WS.Dispose();
             REST.Dispose();
         }
         ~Session() { Dispose(); }
