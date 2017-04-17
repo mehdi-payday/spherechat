@@ -1,1 +1,0 @@
-AngularJS Chat Web Client

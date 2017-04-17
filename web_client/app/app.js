@@ -199,9 +199,10 @@ angular
 			});
 	}])
 	
-    .run(function($rootScope, $location, session, auth) {
+    .run(function($rootScope, $location, session, auth, messaging) {
     	$rootScope.session = session;
     	$rootScope.auth = auth;
+    	$rootScope.messaging = messaging;
     	
     	$rootScope.logout = function(){
     		auth.logout();
@@ -265,8 +266,8 @@ angular
 	.module('messagingService', ['api'])
 	.service('messaging', ['api', function(api){
 		// Channels
-		this.createChannel = function(){
-			return api.channel.save();
+		this.createChannel = function(channelObject){
+			return api.channel.save(channelObject);
 		}
 		
 		this.getChannels = function(){
@@ -305,7 +306,7 @@ angular
 		this.sendPrivateDiscussionMessage = function(id, message){
 			api.privateDiscussion.postMessage({discussionId: id}, {contents: message});
 		}
-	}])
+	}]);
 	
 
 angular
@@ -346,7 +347,6 @@ angular
     		},
     		'query': {
     			method: 'GET',
-    			isArray: true,
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'getOne': {
