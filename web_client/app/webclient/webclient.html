@@ -681,6 +681,7 @@
                       <div class="conversations-body-conversations">
                       
                       	<div ng-repeat="channel in userChannels.results">
+                      	
 	                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="1s">
 	                          <div class="conversation-summary-avatar">
 	                            <div class="team-avatar-container">
@@ -691,22 +692,23 @@
 	                          </div>
 	                          <div class="conversation-summary-body">
 	                            <div class="conversation-summary-meta">
-	                              <div class="conversation-summary-body-author">Group : {{channel.title}}</div>
-	                              <div class="conversation-summary-timestamp">Xd ago</div>
+	                              <div class="conversation-summary-body-author">Channel: {{channel.title}}</div>
+	                              <div class="conversation-summary-timestamp" ng-show="getUnseenMessagesCount(channel.memberships) > 0">{{getLastSeenDateDelta(channel.memberships)}}d ago</div>
 	                            </div>
 	                            <div class="conversation-summary-content">
 	                              <div class="conversation-summary-content-container">
 	                                <div class="conversation-summary-content-text">{{channel.description}}</div>
-	                                <notif class="card-face__bullet">*X*</notif>
+	                                <notif class="card-face__bullet" ng-show="getUnseenMessagesCount(channel.memberships) > 0">{{getUnseenMessagesCount(channel.memberships)}}</notif>
 	                              </div>
 	                            </div>
 	                          </div>
 	                        </div>
+	                        
                         </div>
                         
                       </div>
                     </div>
-                    <div class="conversations-footer wow bounceIn" data-wow-delay="4.2s">
+                    <div class="conversations-footer wow bounceIn" data-wow-delay="1s">
                       <button class="conversations-new-conversation-button">
                       	<span>New Channel</span>
                       </button>

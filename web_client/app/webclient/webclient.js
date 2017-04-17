@@ -13,6 +13,22 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		$scope.userChannels = messaging.getChannels();
 	}
 	
+	$scope.getUnseenMessagesCount = function(membershipArray){
+		membershipArray.forEach(function(value){
+			if(value.user === session.getCurrentUser().id){
+				return value.unchecked_count;
+			}
+		});
+	}
+	
+	$scope.getLastSeenDateDelta = function(membershipArray){
+		membershipArray.forEach(function(value){
+			if(value.user === session.getCurrentUser().id){
+				return parseInt((new Date(value.last_seen_date).getTime() - new Date().getTime())/(24*3600*1000));
+			}
+		});
+	}
+	
 	$scope.createChannel = function(){
 		var title = document.getElementById('publicLink').value;
 		if(title === ''){
