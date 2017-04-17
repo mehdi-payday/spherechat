@@ -1,0 +1,41 @@
+{
+  "name": "betsol-ng-ui-router-styles",
+  "description": "Load custom CSS for different routes",
+  "version": "0.2.1",
+  "main": "dist/betsol-ng-ui-router-styles.js",
+  "ignore": [
+    "src",
+    "test",
+    ".*",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "~1",
+    "angular-mocks": "~1.4.6",
+    "angular-ui-router": "^0.2.18",
+    "betsol-load-stylesheet": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/betsol/ng-ui-router-styles.git"
+  },
+  "keywords": [
+    "betsol",
+    "angular",
+    "angular.js",
+    "router",
+    "ui-router",
+    "routes",
+    "states",
+    "css",
+    "styles",
+    "lazy",
+    "lazy-load",
+    "lazyload",
+    "lazy-loading",
+    "lazyloading"
+  ]
+}

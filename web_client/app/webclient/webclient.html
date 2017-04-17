@@ -1036,6 +1036,7 @@
             <div id="intercom-container" style="z-index: 8;">
               <div class="intercom-messenger">
                 <div class="intercom-messenger-background"></div>
+                
                 <span>
                   <div class="intercom-conversation">
                     <div class="intercom-conversation-footer" style="margin-top: -400px;">
@@ -1051,6 +1052,7 @@
                     </div>
                   </div>
                 </span>
+                
               </div>
             </div>
           </section>
@@ -1089,57 +1091,58 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
     <script type="text/javascript">
-	$("#profile-img").click(function() {
-		$("#status-options").toggleClass("active");
-	});
+    
+		$("#profile-img").click(function() {
+			$("#status-options").toggleClass("active");
+		});
+	
+		$(".expand-button").click(function() {
+			$("#profile").toggleClass("expanded");
+			$("#contacts").toggleClass("expanded");
+		});
+	
+		$("#status-options ul li").click(function() {
+		  $("#profile-img").removeClass();
+		  $("#status-online").removeClass("active");
+		  $("#status-away").removeClass("active");
+		  $("#status-busy").removeClass("active");
+		  $("#status-offline").removeClass("active");
+		  $(this).addClass("active");
+		  
+		  if($("#status-online").hasClass("active")) {
+		    $("#profile-img").addClass("online");
+		  } else if ($("#status-away").hasClass("active")) {
+		    $("#profile-img").addClass("away");
+		  } else if ($("#status-busy").hasClass("active")) {
+		    $("#profile-img").addClass("busy");
+		  } else if ($("#status-offline").hasClass("active")) {
+		    $("#profile-img").addClass("offline");
+		  } else {
+		    $("#profile-img").removeClass();
+		  };
+		  
+		  $("#status-options").removeClass("active");
+		});
 
-	$(".expand-button").click(function() {
-		$("#profile").toggleClass("expanded");
-		$("#contacts").toggleClass("expanded");
-	});
-
-$("#status-options ul li").click(function() {
-  $("#profile-img").removeClass();
-  $("#status-online").removeClass("active");
-  $("#status-away").removeClass("active");
-  $("#status-busy").removeClass("active");
-  $("#status-offline").removeClass("active");
-  $(this).addClass("active");
+// (function(){
   
-  if($("#status-online").hasClass("active")) {
-    $("#profile-img").addClass("online");
-  } else if ($("#status-away").hasClass("active")) {
-    $("#profile-img").addClass("away");
-  } else if ($("#status-busy").hasClass("active")) {
-    $("#profile-img").addClass("busy");
-  } else if ($("#status-offline").hasClass("active")) {
-    $("#profile-img").addClass("offline");
-  } else {
-    $("#profile-img").removeClass();
-  };
-  
-  $("#status-options").removeClass("active");
-});
-
-(function(){
-  
-  var searchFilter = {
-    options: { valueNames: ['name'] },
-    init: function() {
-      var userList = new List('people-list', this.options);
-      var noItems = $('<li id="no-items-found">No items found</li>');
+//   var searchFilter = {
+//     options: { valueNames: ['name'] },
+//     init: function() {
+//       var userList = new List('people-list', this.options);
+//       var noItems = $('<li id="no-items-found">No items found</li>');
       
-      userList.on('updated', function(list) {
-        if (list.matchingItems.length === 0) {
-          $(list.list).append(noItems);
-        } else {
-          noItems.detach();
-        }
-      });
-    }
-  };
+//       userList.on('updated', function(list) {
+//         if (list.matchingItems.length === 0) {
+//           $(list.list).append(noItems);
+//         } else {
+//           noItems.detach();
+//         }
+//       });
+//     }
+//   };
   
-  searchFilter.init();
+//   searchFilter.init();
   
-})();
+// })();
     </script>

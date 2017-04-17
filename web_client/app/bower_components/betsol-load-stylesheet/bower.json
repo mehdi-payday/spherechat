@@ -1,0 +1,34 @@
+{
+  "name": "betsol-load-stylesheet",
+  "description": "Loads stylesheets on demand with consistent callback support",
+  "version": "1.0.0",
+  "main": "dist/betsol-load-stylesheet.js",
+  "ignore": [
+    "demo",
+    "src",
+    ".*",
+    "gulpfile.js",
+    "package.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/betsol/load-stylesheet.git"
+  },
+  "keywords": [
+    "network",
+    "networking",
+    "http",
+    "request",
+    "ajax",
+    "on-demand",
+    "resource",
+    "lazy-load",
+    "lazy-loading",
+    "lazy",
+    "load",
+    "loading",
+    "css",
+    "javascript",
+    "browser"
+  ]
+}

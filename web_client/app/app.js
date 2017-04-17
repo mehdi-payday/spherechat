@@ -14,7 +14,7 @@ angular
 		'myApp.main',
 		'myApp.webclient',
 		'ui.router',
-		'uiRouterStyles',
+		'betsol.uiRouterStyles',
 		'ngAnimate',
 		'ngStorage',
 		'api',
@@ -61,17 +61,86 @@ angular
 			.state('404', {
 				url: '/404',
 				templateUrl: 'website/404/404.html',
-			    controller: '404Ctrl'
+			    controller: '404Ctrl',
+			    data: {
+			    	css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
+						  'http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800',
+						  'https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext',
+						  'http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751',
+						  'lib/font-awesome-4.6.3/css/font-awesome.css',
+						  'lib/font-awesome-4.6.3/css/font-awesome.min.css',
+						  'css/animate.css',
+						  'css/preloader.css',
+						  'css/uncss.css',
+						  'css/bootstrap.min.css',
+						  'css/main.css',
+						  'css/style.css',
+					  	  'css/style2.css',
+						  'css/testimony.css',
+						  'css/common.min.css',
+						  'css/home.min.css',
+						  'css/apps.min.css',
+						  'css/intro.css',
+						  'css/social.css',
+						  'css/steps.css',
+						  'css/integrations.css']
+			    }
 			})
 			.state('502', {
 				url: '/502',
 				templateUrl: 'website/502/502.html',
-			    controller: '502Ctrl'
+			    controller: '502Ctrl',
+			    data: {
+			    	css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
+						  'http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800',
+						  'https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext',
+						  'http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751',
+						  'lib/font-awesome-4.6.3/css/font-awesome.css',
+						  'lib/font-awesome-4.6.3/css/font-awesome.min.css',
+						  'css/animate.css',
+						  'css/preloader.css',
+						  'css/uncss.css',
+						  'css/bootstrap.min.css',
+						  'css/main.css',
+						  'css/style.css',
+					  	  'css/style2.css',
+						  'css/testimony.css',
+						  'css/common.min.css',
+						  'css/home.min.css',
+						  'css/apps.min.css',
+						  'css/intro.css',
+						  'css/social.css',
+						  'css/steps.css',
+						  'css/integrations.css']
+			    }
 			})
 			.state('about', {
 				url: '/about',
 				templateUrl: 'website/about/about.html',
-			    controller: 'AboutCtrl'
+			    controller: 'AboutCtrl',
+			    data: {
+			    	css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
+						  'http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800',
+						  'https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext',
+						  'http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751',
+						  'lib/font-awesome-4.6.3/css/font-awesome.css',
+						  'lib/font-awesome-4.6.3/css/font-awesome.min.css',
+						  'css/animate.css',
+						  'css/preloader.css',
+						  'css/uncss.css',
+						  'css/bootstrap.min.css',
+						  'css/main.css',
+						  'css/style.css',
+					  	  'css/style2.css',
+						  'css/testimony.css',
+						  'css/common.min.css',
+						  'css/home.min.css',
+						  'css/apps.min.css',
+						  'css/intro.css',
+						  'css/social.css',
+						  'css/steps.css',
+						  'css/integrations.css']
+			    }
 			})
 			.state('comingsoon', {
 				url: '/comingsoon',
