@@ -71,7 +71,6 @@
             this.label1.Size = new System.Drawing.Size(80, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "First name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button1
             // 
@@ -94,7 +93,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(257, 20);
             this.textBox1.TabIndex = 10;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 

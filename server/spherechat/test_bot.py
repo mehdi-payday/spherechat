@@ -5,7 +5,7 @@ chatbot = ChatBot(
 	trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
 	input_adapter='chatterbot.input.TerminalAdapter')
 
-chatbot.train("chatterbot.corpus.english")
+# chatbot.train("chatterbot.corpus.english")
 # chatbot.train('chatterbot.corpus.english')
 print "Type something man.."
 

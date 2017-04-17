@@ -30,8 +30,6 @@
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel8 = new SphereClient.Components.GroupListPanel();
-            this.panel7 = new SphereClient.Components.DiscussionListPanel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.sendMessage = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -70,9 +68,11 @@
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.label42 = new System.Windows.Forms.Label();
             this.panel4 = new SphereClient.Components.MessageListPanel();
-            this.pictureBox22 = new System.Windows.Forms.PictureBox();
+            this.panel8 = new SphereClient.Components.GroupListPanel();
+            this.panel7 = new SphereClient.Components.DiscussionListPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
@@ -165,24 +165,6 @@
             this.panel2.Size = new System.Drawing.Size(235, 583);
             this.panel2.TabIndex = 1;
             // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.Transparent;
-            this.panel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
-            this.panel8.Location = new System.Drawing.Point(0, 275);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(235, 308);
-            this.panel8.TabIndex = 5;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.Transparent;
-            this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
-            this.panel7.Location = new System.Drawing.Point(0, 1);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(235, 276);
-            this.panel7.TabIndex = 4;
-            // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
@@ -244,6 +226,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(563, 40);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "Type a message";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // panel5
             // 
@@ -634,6 +617,18 @@
             this.panel3.Size = new System.Drawing.Size(666, 117);
             this.panel3.TabIndex = 1;
             // 
+            // pictureBox22
+            // 
+            this.pictureBox22.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.pictureBox22.BackgroundImage = global::SphereClient.Properties.Resources.main_900;
+            this.pictureBox22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox22.Location = new System.Drawing.Point(13, 14);
+            this.pictureBox22.Name = "pictureBox22";
+            this.pictureBox22.Size = new System.Drawing.Size(85, 85);
+            this.pictureBox22.TabIndex = 37;
+            this.pictureBox22.TabStop = false;
+            // 
             // label42
             // 
             this.label42.AutoSize = true;
@@ -654,18 +649,25 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(666, 531);
             this.panel4.TabIndex = 2;
+            this.panel4.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.panel4_ControlAdded);
             // 
-            // pictureBox22
+            // panel8
             // 
-            this.pictureBox22.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox22.BackgroundImage = global::SphereClient.Properties.Resources.main_900;
-            this.pictureBox22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox22.Location = new System.Drawing.Point(13, 14);
-            this.pictureBox22.Name = "pictureBox22";
-            this.pictureBox22.Size = new System.Drawing.Size(85, 85);
-            this.pictureBox22.TabIndex = 37;
-            this.pictureBox22.TabStop = false;
+            this.panel8.BackColor = System.Drawing.Color.Transparent;
+            this.panel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
+            this.panel8.Location = new System.Drawing.Point(0, 275);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(235, 308);
+            this.panel8.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.Transparent;
+            this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
+            this.panel7.Location = new System.Drawing.Point(0, 1);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(235, 276);
+            this.panel7.TabIndex = 4;
             // 
             // Form1
             // 

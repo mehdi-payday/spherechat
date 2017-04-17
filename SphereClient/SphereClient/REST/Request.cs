@@ -32,14 +32,14 @@ namespace SphereClient.REST {
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
-                string query = "?";
+                List<string> query = new List<string>();
                 if (qs != null) {
                     foreach (var q in qs) {
-                        query += q.Key + "=" + Regex.Unescape(q.Value);
+                        query.Add(q.Key + "=" + Regex.Unescape(q.Value));
                     }
                 }
 
-                Payload = JSON.Parse(wc.DownloadString(API + Method + (query != "?" ? query : "")));
+                Payload = JSON.Parse(wc.DownloadString(API + Method + (query.Count > 0 ? "?" + string.Join("&", query) : "")));
             }
             return this;
         }
@@ -64,14 +64,14 @@ namespace SphereClient.REST {
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
-                string query = "?";
+                List<string> query = new List<string>();
                 if (qs != null) {
                     foreach (var q in qs) {
-                        query += q.Key + "=" + Regex.Unescape(q.Value);
+                        query.Add(q.Key + "=" + Regex.Unescape(q.Value));
                     }
                 }
 
-                Payload = JSON.Parse(wc.UploadString(API + Method + (query != "?" ? query : ""), "DELETE", "{}"));
+                Payload = JSON.Parse(wc.UploadString(API + Method + (query.Count > 0 ? "?" + string.Join("&", query) : ""), "DELETE", "{}"));
             }
             return this;
         }

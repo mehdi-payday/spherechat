@@ -57,6 +57,7 @@ namespace SphereClient.Components {
             this.textPane.BackgroundImage = Constants.TRANSPARENT_GRADIENT_VERTICAL;
             this.textPane.BackgroundImageLayout = ImageLayout.Stretch;
 
+            this.textPane.MinimumSize = new Size(100, 0);
 
             this.text.Left = Constants.MARGIN_SMALL.Left;
             this.text.Top = Constants.MARGIN_SMALL.Top;
