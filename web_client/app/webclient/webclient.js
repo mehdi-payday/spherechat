@@ -45,4 +45,6 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		messaging.createChannel(channel);
 		$('body').removeClass('mode-panel');
 	}
+	
+	$scope.retrieveChannels();
 }]);
