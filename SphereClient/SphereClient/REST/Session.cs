@@ -39,7 +39,7 @@ namespace SphereClient.REST {
         public Entities.Friendship[] GetAllFriendships() {
             Cursor<Entities.Friendship> cursor = new Cursor<Entities.Friendship>();
             do {
-                using (var request = new Friendship.Friendship.Base() {
+                using (var request = new Friendship.Base() {
                     DefaultHeaders = new WebHeaderCollection() {
                         { HttpRequestHeader.Accept, "application/json" },
                         { HttpRequestHeader.ContentType, "application/json" },
@@ -56,7 +56,7 @@ namespace SphereClient.REST {
 
         public Cursor<Entities.Friendship> GetFriendships(string pageUrl = null) {
             Cursor<Entities.Friendship> cursor = new Cursor<Entities.Friendship>();
-            using (var request = new Friendship.Friendship.Base() {
+            using (var request = new Friendship.Base() {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
@@ -108,7 +108,7 @@ namespace SphereClient.REST {
 
         public Cursor<Message> GetMessages(Channel channel, string pageUrl = null) {
             Cursor<Message> cursor = new Cursor<Message>();
-            using (var request = new Messaging.Channel.Message.Base(channel.ChannelId) {
+            using (var request = new Messaging.Channel.Message.Base(channel.ThreadId) {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
@@ -143,7 +143,7 @@ namespace SphereClient.REST {
         public Message[] GetAllMessages(Channel channel) {
             Cursor<Message> cursor = new Cursor<Message>();
             do {
-                using (var request = new Messaging.Channel.Message.Base(channel.ChannelId) {
+                using (var request = new Messaging.Channel.Message.Base(channel.ThreadId) {
                     DefaultHeaders = new WebHeaderCollection() {
                         { HttpRequestHeader.Accept, "application/json" },
                         { HttpRequestHeader.ContentType, "application/json" },
@@ -177,7 +177,7 @@ namespace SphereClient.REST {
         }
 
         public void PostMessageToChannel(Message message, Channel channel) {
-            using (var request = new Messaging.Channel.Message.Base(channel.ChannelId) {
+            using (var request = new Messaging.Channel.Message.Base(channel.ThreadId) {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
@@ -197,7 +197,7 @@ namespace SphereClient.REST {
         }
 
         public void PostMessageToPrivateDiscussion(Entities.Message message, Entities.PrivateDiscussion PrivateDiscussion) {
-            using (var request = new Messaging.PrivateDiscussion.Message.Base(PrivateDiscussion.ChannelId) {
+            using (var request = new Messaging.PrivateDiscussion.Message.Base(PrivateDiscussion.ThreadId) {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
