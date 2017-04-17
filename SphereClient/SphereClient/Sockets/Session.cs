@@ -7,7 +7,7 @@ namespace SphereClient.Sockets {
 
     public delegate void MessageReceived(Message message);
     public delegate void DiscussionChange(PrivateDiscussion privatediscussion);
-    public delegate void ChannelChange(PrivateDiscussion privatediscussion);
+    public delegate void ChannelChange(Channel channel);
     public delegate void NewFriendRequest(FriendRequest friendrequest);
     public delegate void FriendshipAdressed(Friendship friendship);
 

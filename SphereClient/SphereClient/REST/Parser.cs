@@ -16,7 +16,8 @@ namespace SphereClient.REST {
                     membership = EntitytoJSON(channel.Membership, typeof(Membership)),
                     memberships = EntitytoJSON(channel.Memberships ?? new Membership[] { }, typeof(Membership[])),
                     manager_user = channel.ManagerUser,
-                    manager_details = EntitytoJSON(channel.ManagerDetails, typeof(User))
+                    manager_details = EntitytoJSON(channel.ManagerDetails, typeof(User)),
+                    members = channel.Members
                 };
             }
             else if (type == typeof(Channel[])) {
@@ -220,6 +221,7 @@ namespace SphereClient.REST {
                         CreatorUser = ParseInt(json.creator_user.ToString()),
                         ManagerUser = ParseInt(json.manager_user.ToString()),
                         ManagerDetails = JSONtoEntity(json.manager_details, typeof(User)),
+                        Members = (int[])(string.IsNullOrEmpty(json.members?.ToString() ) ? new int[0] : json.members),
 
                         IsNull = false
                     };

@@ -10,6 +10,7 @@ namespace SphereClient.Entities {
         public User ManagerDetails { get; set; }
         public Membership Membership { get; set; }
         public Membership[] Memberships { get; set; }
+        public int[] Members { get; set; }
         public bool IsNull { get; set; }
 
         public string ToText() {

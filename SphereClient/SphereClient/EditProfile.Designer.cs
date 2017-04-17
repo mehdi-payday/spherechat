@@ -145,6 +145,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.pictureBox19);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "EditProfile";
             this.Text = "EditProfile";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();

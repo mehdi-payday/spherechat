@@ -35,6 +35,7 @@ namespace SphereClient.Components {
             this.textPane = new Panel();
             this.text = new Label();
             this.timestampLabel = new Label();
+            this.usernameLabel = new Label();
 
             this.Width = this.parent.Width;
 
@@ -45,7 +46,11 @@ namespace SphereClient.Components {
             this.image.SizeMode = PictureBoxSizeMode.Zoom;
             
             Entities.User usr = channel.Memberships.Where( m => m.UserDetails.UserId == message.UserId ).First().UserDetails;
-            this.image.LoadAsync( usr.ProfilePicture ?? "https://help.sketchbook.com/knowledgebase/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" );
+            if(!string.IsNullOrEmpty( usr.ProfilePicture )) {
+                this.image.LoadAsync( usr.ProfilePicture);
+            } else {
+                this.image.Image = Properties.Resources.default_user_image;
+            }            
             
             this.textPane.Left = this.image.Left + this.image.Width + Constants.MARGIN_SMALL.Right;
             this.textPane.Top = Constants.MARGIN_SMALL.Top;
@@ -53,6 +58,7 @@ namespace SphereClient.Components {
             this.textPane.BackColor = message_bg_color;
             this.textPane.BackgroundImage = Constants.TRANSPARENT_GRADIENT_VERTICAL;
             this.textPane.BackgroundImageLayout = ImageLayout.Stretch;
+            this.textPane.AutoSize = true;
 
             this.text.Left = Constants.MARGIN_SMALL.Left;
             this.text.Top = Constants.MARGIN_SMALL.Top;
@@ -74,20 +80,28 @@ namespace SphereClient.Components {
                 this.image.Top = this.textPane.Top + this.textPane.Height - this.image.Height;
             }
 
-            this.timestampLabel.Text = this.message.SentDate.ToString() + "   " + this.message.UserId;
+            this.timestampLabel.Text = this.message.SentDate.ToString();
             this.timestampLabel.Left = this.Width - this.timestampLabel.Width - Constants.MARGIN_SMALL.Right;
             this.timestampLabel.Top = this.Height - this.timestampLabel.Height;
             this.timestampLabel.ForeColor = Constants.DARK_GRAY;
 
             if (this.ismine) {
                 this.image.Left = this.timestampLabel.Left - Constants.MARGIN_SMALL.Left - this.image.Width - Constants.MARGIN_SMALL.Right;
-                this.textPane.Left = this.image.Left - this.textPane.Width - Constants.MARGIN_SMALL.Left;
+                this.textPane.Left = this.image.Left - (Constants.MARGIN_SMALL.Left +
+                   this.textPane.Width);
 
             }
+
+            this.usernameLabel.Left = this.textPane.Left;
+            this.usernameLabel.Font = Constants.MESSAGE_USERNAME_FONT;
+            this.usernameLabel.Text = channel.Memberships.Where( m => m.UserId == message.UserId ).Select( m => m.UserDetails.Username ).FirstOrDefault();
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Top = this.textPane.Top - (this.usernameLabel.Height + Constants.MARGIN_SMALL.Bottom);
 
             this.Controls.Add(this.image);
             this.Controls.Add( this.textPane );
             this.Controls.Add( this.timestampLabel );
+            this.Controls.Add( this.usernameLabel );
             
         }
 

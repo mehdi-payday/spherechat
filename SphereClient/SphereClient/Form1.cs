@@ -16,7 +16,7 @@ namespace SphereClient {
         public Session session;
         public User? user;
         public IList<Entity> fetchedChannels;
-        public Channel currentChannel;
+        public Channel? currentChannel;
         public Panel preloader;
         /// <summary>
         /// Static initializer
@@ -31,15 +31,14 @@ namespace SphereClient {
         /// </summary>
         /// <param name="username">username to use to create a session</param>
         /// <param name="password">password for the username's account</param>
-        protected Form1(string username, string password) {
-            InitializeComponent();
-            MakePreloader();
+        protected Form1(string username, string password) :this(){
             Connect(username, password);
         }
+        
         /// <summary>
         /// Default contructor for the Form1 class.
         /// </summary>
-        protected Form1() {
+        protected Form1():base() {
             InitializeComponent();
             MakePreloader();
         }
@@ -75,16 +74,21 @@ namespace SphereClient {
         }
 
         /// <summary>
-        /// Attempts to connect to the server. This method throws
-        /// upon failure.
+        /// Attempts to connect to the server, if successfull, will set the top right profile
+        /// picture and name to the logged in user's. This method throws upon failure.
         /// </summary>
         /// <param name="username">the username to use</param>
         /// <param name="password">the password to use</param>
         public void Connect(string username, string password) {
             this.session = new Session(username, password);
             this.user = this.session.REST.GetProfile();
-            this.label1.Text = this.user.Value.FirstName + " " + this.user.Value.LastName;
-            this.pictureBox19.LoadAsync(this.user.Value.ProfilePicture ?? "https://www.smashingmagazine.com/wp-content/uploads/2015/06/10-dithering-opt.jpg" );
+            this.label1.Text = this.user?.Username;
+            this.pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
+            if (!string.IsNullOrEmpty( this.user?.ProfilePicture )) {
+                this.pictureBox19.LoadAsync( this.user?.ProfilePicture );
+            } else {
+                this.pictureBox19.Image = Properties.Resources.default_user_image;
+            }   
         }
 
         /// <summary>
@@ -95,30 +99,32 @@ namespace SphereClient {
             this.session.WS.OnMessageReceived += ( Entities.Message message ) => {
                 this.panel4.OnNewMessage( message );
             };
+            this.session.WS.OnChannelChange += OnChannelChanged;
+            this.session.WS.OnDiscussionChange += OnDiscussionChanged;
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
             });
             t.Start();
-
         }
 
         /// <summary>
         /// Gets the Channels from the server and updates both
         /// the Direct and Group message panels.
         /// </summary>
-        public void FetchChannels() {
+        public void FetchChannels(bool fetchmessages = true) {
             if (InvokeRequired) {
-                Invoke(new Action(FetchChannels));
+                Invoke(new Action(()=> { FetchChannels( fetchmessages ); } ));
                 return;
             }
             this.fetchedChannels = new List<Entity>();
-            foreach (var c in this.session.REST.GetChannels()) {
+            foreach (var c in this.session.REST.GetAllChannels()) {
                 this.fetchedChannels.Add(c);
             }
-
             try {
-                this.currentChannel = (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel() );
-                panel4.FetchMessages( this.currentChannel );
+                this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel() );
+                if (fetchmessages) {
+                    panel4.FetchMessages( (Channel)this.currentChannel );
+                }
                 if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                     MessageBox.Show("failed to create the sidepanel(s).");
                     Application.Exit();
@@ -127,12 +133,6 @@ namespace SphereClient {
                 MessageBox.Show( ex.Message );
             }
             
-            
-
-            
-
-
-
         }
 
         /// <summary>
@@ -144,12 +144,12 @@ namespace SphereClient {
                 Invoke(new Action(() => { SetCurrentViewedChannel(id); }));
                 return;
             }
-            if (id == this.currentChannel.ThreadId) {
+            if (id == this.currentChannel?.ThreadId) {
                 return;
             }
             IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ThreadId == id);
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
-            this.panel4.FetchMessages(this.currentChannel);
+            this.panel4.FetchMessages((Channel)this.currentChannel);
         }
 
         /// <summary>
@@ -175,6 +175,7 @@ namespace SphereClient {
         public static void Create(string username, string password) {
             Form1.Instance = new Form1(username, password);
         }
+
         /// <summary>
         /// Creates the singleton instance of Form1.
         /// </summary>
@@ -199,11 +200,27 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e) {
+        private void Send_Message_Click(object sender, EventArgs e) {
             Entities.Message msg = new Entities.Message();
             msg.Contents = this.richTextBox1.Text;
-            this.session.REST.PostMessageToChannel(msg, this.currentChannel);
+            this.session.REST.PostMessageToChannel(msg, (Channel)this.currentChannel);
+            this.richTextBox1.Text = "";
+        }
 
+        /// <summary>
+        /// Triggered when the websocket detects that a channel changed.
+        /// </summary>
+        /// <param name=""></param>
+        private void OnChannelChanged(Entities.Channel c) {
+            FetchChannels(false);
+        }
+
+        /// <summary>
+        /// Tirggered when the websocket detects that a discussion changed.
+        /// </summary>
+        /// <param name=""></param>
+        private void OnDiscussionChanged( Entities.PrivateDiscussion d) {
+            FetchChannels(false);
         }
 
         /// <summary>
@@ -218,6 +235,28 @@ namespace SphereClient {
         }
 
         /// <summary>
+        /// Triggered when the user clicks on the "+" sign
+        /// besides the "Direct messages" label.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="e"></param>
+        public void OnCreateDirectMessageThread(object s, EventArgs e ) {
+            MessageBox.Show( "create direct" );
+
+        }
+
+        /// <summary>
+        /// Triggered when the user clicks on the "+" sign
+        /// besides the "Group messages" label.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        public void OnCreateGroupDiscussionThread(object s, EventArgs e ) {
+            CreateDiscussion.Instance.ShowDialog();
+        }
+
+
+        /// <summary>
         /// Hides the preloader.
         /// </summary>
         public void HidePreloader() {
@@ -228,7 +267,13 @@ namespace SphereClient {
             this.preloader.SendToBack();
         }
 
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+        /// <summary>
+        /// Triggers when the user clicks on the "edit profile"
+        /// button in the top right section.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             EditProfile.Instance.ShowDialog();
         }
     }

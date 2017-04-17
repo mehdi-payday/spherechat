@@ -852,6 +852,369 @@ body.mode-files-panel #sidebar-black-overlay {
         left: 0
     }
 }
+/* groups */
+
+html.clipper #groups-panel,
+html.clipper #reader {
+    width: calc(1 - sidebarWidth)!important;
+    width: calc(100% - var(--sidebarWidth, sidebarWidth))!important
+}
+.themeDark #main .button,
+.themeDark #groups-panel .button,
+.themeDark #pop-body .button,
+.themeDark #reader .button,
+.themeDark #sidebar .button {
+    color: hsla(0, 0%, 100%, .5)
+}
+.themeDark #main .button.blue,
+.themeDark #groups-panel .button.blue,
+.themeDark #pop-body .button.blue,
+.themeDark #reader .button.blue,
+.themeDark #sidebar .button.blue {
+    color: #303030
+}
+.themeDark #main .button.flat b,
+.themeDark #groups-panel .button.flat b,
+.themeDark #pop-body .button.flat b,
+.themeDark #reader .button.flat b,
+.themeDark #sidebar .button.flat b {
+    background: hsla(0, 0%, 100%, .1)
+}
+.themeDark #main .button.default.input,
+.themeDark #main .button.default b,
+.themeDark #groups-panel .button.default.input,
+.themeDark #groups-panel .button.default b,
+.themeDark #pop-body .button.default.input,
+.themeDark #pop-body .button.default b,
+.themeDark #reader .button.default.input,
+.themeDark #reader .button.default b,
+.themeDark #sidebar .button.default.input,
+.themeDark #sidebar .button.default b {
+    background: #454545;
+    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .15)
+}
+.themeDark #main .button.default.input:active,
+.themeDark #main .button.default b:active,
+.themeDark #groups-panel .button.default.input:active,
+.themeDark #groups-panel .button.default b:active,
+.themeDark #pop-body .button.default.input:active,
+.themeDark #pop-body .button.default b:active,
+.themeDark #reader .button.default.input:active,
+.themeDark #reader .button.default b:active,
+.themeDark #sidebar .button.default.input:active,
+.themeDark #sidebar .button.default b:active {
+    background: #3a3a3a;
+    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .15)
+}
+.themeDark #main .button.active,
+.themeDark #groups-panel .button.active,
+.themeDark #pop-body .button.active,
+.themeDark #reader .button.active,
+.themeDark #sidebar .button.active {
+    color: #dcc28f
+}
+.themeDark #main .button.active.input,
+.themeDark #groups-panel .button.active.input,
+.themeDark #pop-body .button.active.input,
+.themeDark #reader .button.active.input,
+.themeDark #sidebar .button.active.input {
+    color: #303030!important
+}
+.themeDark #main .button.active b,
+.themeDark #groups-panel .button.active b,
+.themeDark #pop-body .button.active b,
+.themeDark #reader .button.active b,
+.themeDark #sidebar .button.active b {
+    color: #303030!important;
+    background: #dcc28f
+}
+.themeDark #main .fieldLink:after,
+.themeDark #main .fieldWrap:not(.no-border):after,
+.themeDark #groups-panel .fieldLink:after,
+.themeDark #groups-panel .fieldWrap:not(.no-border):after,
+.themeDark #pop-body .fieldLink:after,
+.themeDark #pop-body .fieldWrap:not(.no-border):after,
+.themeDark #reader .fieldLink:after,
+.themeDark #reader .fieldWrap:not(.no-border):after,
+.themeDark #sidebar .fieldLink:after,
+.themeDark #sidebar .fieldWrap:not(.no-border):after {
+    box-shadow: 0 1px 0 hsla(0, 0%, 100%, .1)
+}
+.themeDark #main .fieldName .title,
+.themeDark #groups-panel .fieldName .title,
+.themeDark #pop-body .fieldName .title,
+.themeDark #reader .fieldName .title,
+.themeDark #sidebar .fieldName .title {
+    color: #fff
+}
+.themeDark #main .selectButton,
+.themeDark #groups-panel .selectButton,
+.themeDark #pop-body .selectButton,
+.themeDark #reader .selectButton,
+.themeDark #sidebar .selectButton {
+    background: hsla(0, 0%, 100%, .06);
+    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .1)
+}
+.themeDark #main .superForm figure:after,
+.themeDark #main .superForm section:after,
+.themeDark #groups-panel .superForm figure:after,
+.themeDark #groups-panel .superForm section:after,
+.themeDark #pop-body .superForm figure:after,
+.themeDark #pop-body .superForm section:after,
+.themeDark #reader .superForm figure:after,
+.themeDark #reader .superForm section:after,
+.themeDark #sidebar .superForm figure:after,
+.themeDark #sidebar .superForm section:after {
+    box-shadow: 0 1px 0 hsla(0, 0%, 100%, .1)
+}
+html.retina.chrome .themeDark #main .superForm figure:after,
+html.retina.chrome .themeDark #main .superForm section:after,
+html.retina.chrome .themeDark #groups-panel .superForm figure:after,
+html.retina.chrome .themeDark #groups-panel .superForm section:after,
+html.retina.chrome .themeDark #sidebar .superForm figure:after,
+html.retina.chrome .themeDark #sidebar .superForm section:after {
+    box-shadow: 0 .5px 0 hsla(0, 0%, 100%, .1)
+}
+html.retina.chrome .themeDark #main .selectButton,
+html.retina.chrome .themeDark #groups-panel .selectButton,
+html.retina.chrome .themeDark #sidebar .selectButton {
+    box-shadow: 0 0 0 .5px hsla(0, 0%, 100%, .2)
+}
+#main,
+#groups-panel,
+#reader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    transition: left .3s ease-in-out, right .3s ease-in-out, max-width .3s ease-in-out, width .3s ease-in-out, box-shadow .3s ease-in-out
+}
+#groups-panel {
+    transform: translateX(-300px);
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2));
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    width: 375px;
+    z-index: 9;
+    transition: transform .3s ease-in-out, width .3s ease-in-out, box-shadow .3s ease-in-out
+}
+#groups-panel,
+#groupsPanelContent {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+#groupsPanelContent {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+    transition-delay: .15s;
+    overflow: visible!important;
+    overflow: initial!important
+}
+#groupsPanelContent>div {
+    -ms-flex: 1;
+    flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+#groupsPanelContent>div .superHeight {
+    -ms-flex: 1;
+    flex: 1
+}
+body.mode-groups-panel #groups-panel {
+    transform: translateX(270px)!important;
+    transform: translateX(var(--sidebarWidth, 270px))!important
+}
+body.mode-groups-panel #groupsPanelContent {
+    transform: translateX(0);
+    opacity: 1
+}
+body.mode-groups-panel.mode-reader:not(.mode-force-sidebar) #groups-panel {
+    transform: translateX(0)!important
+}
+#main footer,
+#main header,
+#groups-panel footer,
+#groups-panel header,
+#reader footer,
+#reader header,
+#sidebar footer,
+#sidebar header {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    overflow: hidden
+}
+#main footer *,
+#main header *,
+#groups-panel footer *,
+#groups-panel header *,
+#reader footer *,
+#reader header *,
+#sidebar footer *,
+#sidebar header * {
+    -webkit-user-select: none;
+    -webkit-app-region: drag
+}
+#markup.disable-layout-transition #clipperToolbar,
+#markup.disable-layout-transition #clipperToolbar *,
+#markup.disable-layout-transition #main,
+#markup.disable-layout-transition #main *,
+#markup.disable-layout-transition #groups-panel,
+#markup.disable-layout-transition #groups-panel *,
+#markup.disable-layout-transition #reader,
+#markup.disable-layout-transition #reader *,
+#markup.disable-layout-transition #sidebar,
+#markup.disable-layout-transition #sidebar *,
+#markup.disable-layout-transition #sidebar-black-overlay {
+    transition: none!important
+}
+#mainBody,
+#groupsPanelContent,
+#sidebarContent,
+.readerContent {
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    overflow-y: overlay;
+    -webkit-overflow-scrolling: touch;
+    position: initial;
+    z-index: 1;
+    min-height: 60%
+}
+.themeDark #main,
+.themeDark #groups-panel,
+.themeDark #reader:not([data-tab=preview]),
+.themeDark>.themePreviewMain {
+    box-shadow: none!important;
+    background-color: #303030;
+    color: hsla(0, 0%, 100%, .8)
+}
+.themeDark #main::-webkit-scrollbar-thumb,
+.themeDark #groups-panel::-webkit-scrollbar-thumb,
+.themeDark #reader:not([data-tab=preview])::-webkit-scrollbar-thumb,
+.themeDark>.themePreviewMain::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 5px hsla(0, 0%, 100%, .3)
+}
+.themeDark #main header,
+.themeDark #groups-panel header,
+.themeDark #reader:not([data-tab=preview]) header,
+.themeDark>.themePreviewMain header {
+    background: transparent
+}
+.themeDark #main a,
+.themeDark #groups-panel a,
+.themeDark #reader:not([data-tab=preview]) a,
+.themeDark>.themePreviewMain a {
+    color: hsla(0, 0%, 100%, .8)
+}
+@media only screen and (min-width: 650px) {
+    html.electron.mac #markup {
+        transition: background .2s ease-in-out
+    }
+    html.electron.mac body:not(.mode-groups-panel) #groups-panel,
+    html.electron.mac body:not(.mode-groups-panel) #sidebar-black-overlay {
+        transition: none!important
+    }
+    html.electron.mac body:not(.mode-groups-panel) #markup.theme-sidebar-default,
+    html.electron.mac body:not(.mode-groups-panel) #markup.theme-sidebar-default #sidebar {
+        background: transparent
+    }
+}
+html.electron.mac:not(.electron-full-screen) body.mode-reader.mode-reader-fullscreen #reader>header .headerWrap,
+html.electron.mac:not(.electron-full-screen) body.mode-reader:not(.mode-force-sidebar):not(.mode-reader-fullscreen):not(.mode-reader-modal) #main>header .headerWrap,
+html.electron.mac:not(.electron-full-screen) body.mode-reader:not(.mode-force-sidebar):not(.mode-reader-fullscreen):not(.mode-reader-modal) #groups-panel>header .headerWrap {
+    padding-left: 69px
+}
+body:not(.mode-reader-fullscreen):not(.mode-reader-modal).mode-reader #groups-panel {
+    transform: translateX(-300px);
+    transform: translateX(calc(panelWidth * -2));
+    transform: translateX(calc(var(--panelWidth, panelWidth) * -2))
+}
+body.mode-groups-panel #groups-panel {
+    box-shadow: 1px 0 0 rgba(0, 0, 0, .1), 15px 0 25px -10px rgba(0, 0, 0, .05)
+}
+body.mode-groups-panel #sidebar-black-overlay {
+    opacity: 1;
+    pointer-events: auto
+}
+@media only screen and (max-width: 999px) {
+    #js_markup_status {
+        width: 2px
+    }
+    body.mode-reader:not(.mode-reader-fullscreen):not(.mode-reader-modal) #main {
+        left: 0;
+        max-width: 45%
+    }
+    #reader {
+        width: 55%
+    }
+    body.mode-reader #reader {
+        left: 45%
+    }
+    body.mode-force-sidebar.mode-reader:not(.mode-groups-panel) #sidebar {
+        box-shadow: 1px 0 0 rgba(0, 0, 0, .1), 15px 0 25px -10px rgba(0, 0, 0, .05)
+    }
+    body.mode-force-sidebar.mode-reader #sidebar-black-overlay {
+        opacity: 1;
+        pointer-events: auto
+    }
+}
+@media only screen and (max-width: 600px) {
+    #js_markup_status {
+        width: 1px
+    }
+    #groups-panel,
+    #sidebar {
+        transform: translateX(-360px)!important;
+        transform: translateX(calc(panelWidth * -2))!important;
+        transform: translateX(calc(var(--panelWidth, panelWidth) * -2))!important
+    }
+    #main {
+        left: 0!important;
+        max-width: 100%!important
+    }
+    body.mode-force-sidebar #sidebar-black-overlay {
+        opacity: 1;
+        pointer-events: auto
+    }
+    body.mode-groups-panel #sidebar {
+        transform: translateX(-270px)!important;
+        transform: translateX(calc(sidebarWidth * -1))!important;
+        transform: translateX(calc(var(--sidebarWidth, sidebarWidth) * -2))!important
+    }
+    body.mode-groups-panel #groups-panel {
+        transform: translateX(0)!important;
+        width: 100%
+    }
+    #markup .hide-on-extension {
+        display: none!important
+    }
+    #markup .show-on-extension {
+        display: block
+    }
+    .button-toggle-sidebar {
+        margin-right: 0!important;
+        max-width: 48px!important;
+        pointer-events: auto!important
+    }
+    .button-toggle-sidebar.button-toggle-sidebar-autowidth {
+        max-width: 200px!important
+    }
+    html.electron.mac:not(.electron-full-screen) #main>header .headerWrap,
+    html.electron.mac:not(.electron-full-screen) #groups-panel>header .headerWrap,
+    html.electron.mac:not(.electron-full-screen) #reader>header .headerWrap {
+        padding-left: 69px
+    }
+    #reader .preview.preview-type-image {
+        left: 0
+    }
+}
 /* user */
 
 html.clipper #user-panel,

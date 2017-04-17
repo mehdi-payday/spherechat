@@ -26,6 +26,7 @@ SECRET_KEY = '4)a9pku98p7v1nm)5o-%91$b^@+#liy^$913gu6q6rh#-#ra76'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+OMNIBUS_SERVER_PORT = 8080
 ALLOWED_HOSTS = [
     '144.217.80.36',
     'spherechat.tk',

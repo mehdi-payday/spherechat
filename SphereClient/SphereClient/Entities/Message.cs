@@ -9,10 +9,20 @@ namespace SphereClient.Entities {
         public DateTime SentDate { get; set; }
         public Types Type { get; set; }
         public MessageTag[] Tags { get; set; }
+
         public bool IsNull { get; set; }
 
         public string ToText() {
             return Contents;
+        }
+
+        public string ToText(Channel channel) {
+            string message = Contents;
+            for (int a = 0; a < Tags.Length; a++) {
+                MessageTag tag = Tags[a];
+                message = message.Replace("${" + tag.PlaceholderPosition + "}", "@" + tag.TaggedUserDetails.Username);
+            }
+            return message;
         }
 
         public enum Types {
