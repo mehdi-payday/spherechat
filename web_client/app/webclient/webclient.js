@@ -46,5 +46,13 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		$('body').removeClass('mode-panel');
 	}
 	
+	$scope.setChannelSelected = function(channelId){
+		$scope.channelSelected = channelId;
+	}
+	
+	$scope.cancelChannelSelection = function(){
+		delete $scope.channelSelected;
+	}
+	
 	$scope.retrieveChannels();
 }]);
