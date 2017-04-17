@@ -44,18 +44,28 @@ namespace SphereClient.Sockets {
         public Configuration Configuration { get; set; }
         #endregion Get/Set
 
-
+        /// <summary>
+        /// Connexion du WS
+        /// </summary>
         public void Connect() {
             OnConnecting?.Invoke();
             Socket.BeginConnect(Configuration.EP, beginConnect, new Buffers.HTTP.Read(new byte[4096]));
         }
 
+        /// <summary>
+        /// Envoi de données dans le WS
+        /// </summary>
+        /// <param name="buffer">Objet d'écriture du WS</param>
         public void Send(Buffers.WebSocket.Write buffer) {
             var parsed = buffer.Parsed;
             Socket.BeginSend(parsed, 0, parsed.Length, 0, beginSend, buffer);
             OnSending?.Invoke();
         }
 
+        /// <summary>
+        /// Envoi de données async
+        /// </summary>
+        /// <param name="result"></param>
         private void beginSend(IAsyncResult result) {
             Buffers.WebSocket.Write buffer = (Buffers.WebSocket.Write)result.AsyncState;
 
@@ -65,6 +75,10 @@ namespace SphereClient.Sockets {
                 OnSent?.Invoke();
         }
 
+        /// <summary>
+        /// Début de la connexion async
+        /// </summary>
+        /// <param name="result"></param>
         private void beginConnect(IAsyncResult result) {
             Socket.EndConnect(result);
 
@@ -75,6 +89,10 @@ namespace SphereClient.Sockets {
             Socket.BeginReceive(buffer.Buffer, 0, buffer.Size, 0, beginReceive, buffer);
         }
 
+        /// <summary>
+        /// Début de la réception async
+        /// </summary>
+        /// <param name="result"></param>
         private void beginReceive(IAsyncResult result) {
             Buffers.Read buffer = (Buffers.Read)result.AsyncState;
 
