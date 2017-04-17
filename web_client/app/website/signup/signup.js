@@ -26,7 +26,7 @@ angular.module('myApp.signup', ['api', 'auth', 'session'])
 					var user = successResponse;
 					session.setCurrentUser(user);
 					
-					$location.path('#!/');
+					$location.path('/');
 					
 				}, function(errorResponse){
 					$('#verification').text("An error occured while trying to login in to your account. Please try later.");

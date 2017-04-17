@@ -43,7 +43,7 @@ namespace SphereClient.Sockets {
             string command = data.Split(':')[0];
             dynamic json = JSON.Parse(data.Substring(data.IndexOf(':') + 1));
 
-            switch (json.type.ToString()) {
+            switch ((string)json.type.ToString()) {
                 case "authenticate":
                     if (json.success == true) {
                         foreach (var channel in session.GetAllChannels()) {

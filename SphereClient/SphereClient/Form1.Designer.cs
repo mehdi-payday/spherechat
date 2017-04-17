@@ -38,10 +38,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -170,6 +169,7 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.Transparent;
+            this.panel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
             this.panel8.Location = new System.Drawing.Point(0, 275);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(235, 308);
@@ -178,6 +178,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Transparent;
+            this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
             this.panel7.Location = new System.Drawing.Point(0, 1);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(235, 276);
@@ -248,14 +249,22 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.linkLabel3);
             this.panel5.Controls.Add(this.pictureBox19);
-            this.panel5.Controls.Add(this.label39);
-            this.panel5.Controls.Add(this.label38);
             this.panel5.Location = new System.Drawing.Point(900, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 114);
             this.panel5.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 56);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "label1";
             // 
             // linkLabel3
             // 
@@ -266,10 +275,11 @@
             this.linkLabel3.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
             this.linkLabel3.Location = new System.Drawing.Point(5, 91);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(79, 13);
+            this.linkLabel3.Size = new System.Drawing.Size(56, 13);
             this.linkLabel3.TabIndex = 3;
             this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Edit description";
+            this.linkLabel3.Text = "Edit profile";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // pictureBox19
             // 
@@ -281,28 +291,6 @@
             this.pictureBox19.Size = new System.Drawing.Size(102, 100);
             this.pictureBox19.TabIndex = 0;
             this.pictureBox19.TabStop = false;
-            // 
-            // label39
-            // 
-            this.label39.ForeColor = System.Drawing.Color.Gray;
-            this.label39.Location = new System.Drawing.Point(5, 28);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(83, 58);
-            this.label39.TabIndex = 2;
-            this.label39.Text = "description blabl sdgasdf kjhgsajhawe kj jhsd a";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.BackColor = System.Drawing.Color.Transparent;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.Black;
-            this.label38.Location = new System.Drawing.Point(43, 6);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(41, 20);
-            this.label38.TabIndex = 1;
-            this.label38.Text = "You";
             // 
             // panel6
             // 
@@ -779,8 +767,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label38;
         private System.Windows.Forms.PictureBox pictureBox19;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.PictureBox pictureBox20;
@@ -790,6 +776,7 @@
         private System.Windows.Forms.PictureBox pictureBox21;
         private System.Windows.Forms.TextBox textBox1;
         private Components.GroupListPanel panel8;
+        private System.Windows.Forms.Label label1;
     }
 }
 

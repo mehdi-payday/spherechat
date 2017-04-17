@@ -51,11 +51,11 @@
                                   </div>
                                   <div id="expanded">
                                     <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-                                    <input name="twitter" type="text" value="mikeross" />
+                                    <input name="twitter" type="text" ng-value="session.getCurrentUser().username" />
                                     <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-                                    <input name="twitter" type="text" value="ross81" />
+                                    <input name="twitter" type="text" ng-value="session.getCurrentUser().username" />
                                     <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-                                    <input name="twitter" type="text" value="mike.ross" />
+                                    <input name="twitter" type="text" ng-value="session.getCurrentUser().username" />
                                   </div>
                                 </div>
                               </div>
@@ -73,7 +73,8 @@
                         </nav>
                       </div>
                       <div class="conversations-body-conversations">
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="2.4s">
+                      
+                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="0.8s">
                           <div class="conversation-summary-avatar">
                             <div class="team-avatar-container">
                               <img class="team-avatar team-avatar-large" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
@@ -92,256 +93,39 @@
                             </div>
                           </div>
                         </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="2.6s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-large" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Alex</div>
-                              <div class="conversation-summary-timestamp">40m ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Okedou!</div>
-                                <notif class="card-face__bullet">2</notif>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="2.8s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-large" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Katherynn</div>
-                              <div class="conversation-summary-timestamp">5h ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Hola!😊</div>
-                                <notif class="card-face__bullet">1</notif>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="3s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                                <notif class="card-face__bullet">5</notif>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="3.2s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="3.4s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="3.6s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="3.8s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.2s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.4s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="4.6s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Test</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversations-footer wow bounceIn" data-wow-delay="4.2s">
-                      <button class="conversations-new-conversation-button">
-                      <span>New Conversation</span>
-                      </button>
-                    </div>
-                  </div>
+                        
+	                    <div class="conversations-footer wow fadeInUp" data-wow-delay="0.8s">
+	                      <button class="conversations-new-conversation-button">
+	                      <span>New Conversation</span>
+	                      </button>
+	                    </div>
+                    
+                  	</div>
                 </span>
               </div>
             </div>
           </div>
         </aside>
+        
+        
         <aside class="mobile-hidden" id="sidemenumain">
           <div id="sidebarContent" data-super-overflow="true" data-scrolling="false">
             <div class="wrapper1" id="sidemenumain">
               <aside class="Sidebar">
                 <nav class="Sidebar-nav" id="master-nav" role="navigation">
                   <ul class="Sidebar-nav-list">
-                    <li class="Sidebar-nav-list-item ion-person-add wow fadeInLeft" data-wow-delay="0.2s"></li>
-                    <li class="Sidebar-nav-list-item ion-person-stalker wow fadeInLeft" data-wow-delay="0.4s"></li>
-                    <li class="Sidebar-nav-list-item ion-android-notifications wow fadeInLeft" data-wow-delay="0.8s">
+                    <li class="Sidebar-nav-list-item ion-person-add wow fadeInLeft" data-wow-delay="0.1s"></li>
+                    <li class="Sidebar-nav-list-item ion-person-stalker wow fadeInLeft" data-wow-delay="0.2s"></li>
+                    <li class="Sidebar-nav-list-item ion-android-notifications wow fadeInLeft" data-wow-delay="0.3s">
                       <notif class="card-face__bullet friend-request-notif">3</notif>
                     </li>
-                    <li class="Sidebar-nav-list-item ion-levels wow fadeInLeft" data-wow-delay="1.2s"></li>
-                    <li class="Sidebar-nav-list-item ion-chatboxes Sidebar-nav-list-item-active wow fadeInLeft" data-wow-delay="1.6s">
+                    <li class="Sidebar-nav-list-item ion-levels wow fadeInLeft" data-wow-delay="0.4s"></li>
+                    <li class="Sidebar-nav-list-item ion-chatboxes Sidebar-nav-list-item-active wow fadeInLeft" data-wow-delay="0.5s">
                       <notif class="card-face__bullet friend-request-notif">8</notif>
                     </li>
                     <!-- Sidebar-nav-list-item-active -->
-                    <li class="Sidebar-nav-list-item ion-document wow fadeInLeft" data-wow-delay="2s"></li>
-                    <li class="Sidebar-nav-list-item ion-log-out wow fadeInLeft" data-wow-delay="2.2s" data-toggle="modal" data-target=".bs-example-modal-sm"></li>
+                    <li class="Sidebar-nav-list-item ion-document wow fadeInLeft" data-wow-delay="0.6s"></li>
+                    <li class="Sidebar-nav-list-item ion-log-out wow fadeInLeft" data-wow-delay="0.7s" data-toggle="modal" data-target="#bs-example-modal-sm"></li>
                     <li id="active-line"></li>
                   </ul>
                 </nav>
@@ -349,6 +133,8 @@
             </div>
           </div>
         </aside>
+        
+        
         <aside id="panel">
           <header>
             <div class="headerWrap">
@@ -376,6 +162,8 @@
               </div>
             </div>
           </header>
+          
+          
           <div id="panelContent" data-super-overflow="true" data-scrolling="false">
             <div class="drop-files">
               <div class="superForm urlPanel">
@@ -446,6 +234,8 @@
             </div>
           </div>
         </aside>
+        
+        
         <aside id="user-panel">
           <header>
             <div class="headerWrap">
@@ -503,6 +293,8 @@
             </div>
           </div>
         </aside>
+        
+        
         <aside id="settings-panel">
           <header>
             <div class="headerWrap">
@@ -769,6 +561,8 @@
             </div>
           </div>
         </aside>
+        
+        
         <aside id="files-panel">
           <header>
             <div class="headerWrap">
@@ -831,6 +625,8 @@
             </div>
           </div>
         </aside>
+        
+        
         <div id="sidebar-black-overlay"></div>
         <div id="sidemenumain-black-overlay"></div>
         <div class="drop-files">
@@ -875,6 +671,7 @@
                         </li>
                       </div>
                       <!-- End -->  
+                      
                       <!-- Template for the mesages you're sending -->
                       <div class="">
                         <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
@@ -892,6 +689,7 @@
                         </li>
                       </div>
                       <!-- End -->
+                      
                       <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
@@ -908,6 +706,7 @@
                         </li>
                       </div>
                       <!-- End -->  
+                      
                       <!-- Template for the mesages you're sending -->
                       <div class="">
                         <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
@@ -925,6 +724,7 @@
                         </li>
                       </div>
                       <!-- End -->
+                      
                       <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
@@ -941,6 +741,7 @@
                         </li>
                       </div>
                       <!-- End --> 
+                      
                       <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
@@ -957,6 +758,7 @@
                         </li>
                       </div>
                       <!-- End --> 
+                      
                       <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
@@ -973,6 +775,7 @@
                         </li>
                       </div>
                       <!-- End --> 
+                      
                       <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
@@ -989,6 +792,7 @@
                         </li>
                       </div>
                       <!-- End --> 
+                      
                       <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
@@ -1005,7 +809,8 @@
                         </li>
                       </div>
                       <!-- End -->
-                                            <!-- Template for the incoming messages -->
+                      
+                      <!-- Template for the incoming messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -1028,6 +833,7 @@
                         </li>
                       </div>
                       <!-- End -->  
+                      
                     </ul>
                   </div>
                 </div>
@@ -1036,11 +842,12 @@
             <div id="intercom-container" style="z-index: 8;">
               <div class="intercom-messenger">
                 <div class="intercom-messenger-background"></div>
+                
                 <span>
                   <div class="intercom-conversation">
                     <div class="intercom-conversation-footer" style="margin-top: -400px;">
                       <div class="intercom-composer">
-                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" onkeyup="textAreaAdjust(this)" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
+                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
                         <div class="intercom-composer-buttons">
                           <button class="intercom-composer-gif-button"></button>
                           <button class="intercom-composer-emoji-button"></button>
@@ -1051,6 +858,7 @@
                     </div>
                   </div>
                 </span>
+                
               </div>
             </div>
           </section>
@@ -1058,7 +866,7 @@
       </div>
     </div>
     
-    <div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal bs-example-modal-sm" id="bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
@@ -1089,57 +897,58 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
     <script type="text/javascript">
-	$("#profile-img").click(function() {
-		$("#status-options").toggleClass("active");
-	});
+    
+		$("#profile-img").click(function() {
+			$("#status-options").toggleClass("active");
+		});
+	
+		$(".expand-button").click(function() {
+			$("#profile").toggleClass("expanded");
+			$("#contacts").toggleClass("expanded");
+		});
+	
+		$("#status-options ul li").click(function() {
+		  $("#profile-img").removeClass();
+		  $("#status-online").removeClass("active");
+		  $("#status-away").removeClass("active");
+		  $("#status-busy").removeClass("active");
+		  $("#status-offline").removeClass("active");
+		  $(this).addClass("active");
+		  
+		  if($("#status-online").hasClass("active")) {
+		    $("#profile-img").addClass("online");
+		  } else if ($("#status-away").hasClass("active")) {
+		    $("#profile-img").addClass("away");
+		  } else if ($("#status-busy").hasClass("active")) {
+		    $("#profile-img").addClass("busy");
+		  } else if ($("#status-offline").hasClass("active")) {
+		    $("#profile-img").addClass("offline");
+		  } else {
+		    $("#profile-img").removeClass();
+		  };
+		  
+		  $("#status-options").removeClass("active");
+		});
 
-	$(".expand-button").click(function() {
-		$("#profile").toggleClass("expanded");
-		$("#contacts").toggleClass("expanded");
-	});
-
-$("#status-options ul li").click(function() {
-  $("#profile-img").removeClass();
-  $("#status-online").removeClass("active");
-  $("#status-away").removeClass("active");
-  $("#status-busy").removeClass("active");
-  $("#status-offline").removeClass("active");
-  $(this).addClass("active");
+// (function(){
   
-  if($("#status-online").hasClass("active")) {
-    $("#profile-img").addClass("online");
-  } else if ($("#status-away").hasClass("active")) {
-    $("#profile-img").addClass("away");
-  } else if ($("#status-busy").hasClass("active")) {
-    $("#profile-img").addClass("busy");
-  } else if ($("#status-offline").hasClass("active")) {
-    $("#profile-img").addClass("offline");
-  } else {
-    $("#profile-img").removeClass();
-  };
-  
-  $("#status-options").removeClass("active");
-});
-
-(function(){
-  
-  var searchFilter = {
-    options: { valueNames: ['name'] },
-    init: function() {
-      var userList = new List('people-list', this.options);
-      var noItems = $('<li id="no-items-found">No items found</li>');
+//   var searchFilter = {
+//     options: { valueNames: ['name'] },
+//     init: function() {
+//       var userList = new List('people-list', this.options);
+//       var noItems = $('<li id="no-items-found">No items found</li>');
       
-      userList.on('updated', function(list) {
-        if (list.matchingItems.length === 0) {
-          $(list.list).append(noItems);
-        } else {
-          noItems.detach();
-        }
-      });
-    }
-  };
+//       userList.on('updated', function(list) {
+//         if (list.matchingItems.length === 0) {
+//           $(list.list).append(noItems);
+//         } else {
+//           noItems.detach();
+//         }
+//       });
+//     }
+//   };
   
-  searchFilter.init();
+//   searchFilter.init();
   
-})();
+// })();
     </script>
