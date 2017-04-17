@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.signup', ['ngRoute', 'api', 'auth', 'session'])
+angular.module('myApp.signup', ['api', 'auth', 'session'])
 
 .controller('SignupCtrl', ['$rootScope', '$scope', '$location', 'api', 'auth', 'session', function($rootScope, $scope, $location, api, auth, session) {
 	$rootScope.hideNavbar = true;

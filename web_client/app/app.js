@@ -13,23 +13,29 @@ angular
 		'myApp.signup',
 		'myApp.main',
 		'myApp.webclient',
-		'ngRoute',
+		'ui.router',
+		'uiRouterStyles',
 		'ngAnimate',
 		'ngStorage',
-		'routeStyles',
 		'api',
 		'auth',
-		'session'
+		'session',
+		'messagingService'
 	])
 
-	.config(['$locationProvider', '$routeProvider', '$resourceProvider', function($locationProvider, $routeProvider, $resourceProvider) {
+	.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$resourceProvider', function($locationProvider, $stateProvider, $urlRouterProvider, $resourceProvider) {
 		$locationProvider.hashPrefix('!');
 		$resourceProvider.defaults.stripTrailingSlashes = false;
-		$routeProvider
-			.when('/', {
+		
+		$urlRouterProvider.otherwise('/');
+		
+		$stateProvider
+			.state('main', {
+				url: '/',
 			    templateUrl: 'website/main/main.html',
 			    controller: 'MainCtrl',
-			    css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
+			    data: {
+			    	css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
 					  'http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800',
 					  'https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext',
 					  'http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751',
@@ -50,23 +56,29 @@ angular
 					  'css/social.css',
 					  'css/steps.css',
 					  'css/integrations.css']
+			    }
 			})
-			.when('/404', {
-			    templateUrl: 'website/404/404.html',
+			.state('404', {
+				url: '/404',
+				templateUrl: 'website/404/404.html',
 			    controller: '404Ctrl'
 			})
-			.when('/502', {
-			    templateUrl: 'website/502/502.html',
+			.state('502', {
+				url: '/502',
+				templateUrl: 'website/502/502.html',
 			    controller: '502Ctrl'
 			})
-			.when('/about', {
-			    templateUrl: 'website/about/about.html',
+			.state('about', {
+				url: '/about',
+				templateUrl: 'website/about/about.html',
 			    controller: 'AboutCtrl'
 			})
-			.when('/comingsoon', {
-			    templateUrl: 'website/comingsoon/comingsoon.html',
+			.state('comingsoon', {
+				url: '/comingsoon',
+				templateUrl: 'website/comingsoon/comingsoon.html',
 			    controller: 'ComingsoonCtrl',
-			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300',
+			    data: {
+			    	css: ['http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300',
 			          'http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,700,700italic,600,600italic',
 			          'http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600',
 			          'css/normalize.css',
@@ -75,16 +87,22 @@ angular
 					  'clock/css/clock.css',
 					  'css/main.css',
 					  'css/responsive.css']
+			    }
 			})
-			.when('/downloads', {
-			    templateUrl: 'website/downloads/downloads.html',
+			.state('downloads', {
+				url: '/downloads',
+				templateUrl: 'website/downloads/downloads.html',
 			    controller: 'DownloadsCtrl',
-			    css: ['css/downloads.css']
+			    data: {
+			    	css: ['css/downloads.css']
+			    }
 			})
-			.when('/faq', {
-			    templateUrl: 'website/faq/faq.html',
+			.state('faq', {
+				url: '/faq',
+				templateUrl: 'website/faq/faq.html',
 			    controller: 'FaqCtrl',
-			    css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
+			    data: {
+			    	css: ['https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700,800,900',
 			          'http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800',
 			          'https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700&amp;subset=latin,latin-ext',
 			          'http://fonts.googleapis.com/css?family=Varela+Round%3A400%7CHind%3A700%2C300%7CMontserrat%3A700%7CPlayfair+Display%3A400&#038;subset=latin&#038;ver=1490464751',
@@ -103,37 +121,49 @@ angular
 			          'css/apps.min.css',
 			          'css/intro.css',
 			          'css/social.css']
+			    }
 			})
-			.when('/login', {
-			    templateUrl: 'website/login/login.html',
+			.state('login', {
+				url: '/login',
+				templateUrl: 'website/login/login.html',
 			    controller: 'LoginCtrl',
 			    redirectIfLoggedIn: true,
-			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
+			    data: {
+			    	css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/login.css',
 			          'css/particules.css',
 			          'css/checkbox.css']
+			    }
 			})
-			.when('/resetpassword', {
-			    templateUrl: 'website/resetpassword/resetpassword.html',
+			.state('resetpassword', {
+				url: '/resetpassword',
+				templateUrl: 'website/resetpassword/resetpassword.html',
 			    controller: 'ResetpasswordCtrl',
-			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
+			    data: {
+			    	css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/resetpassword.css',
 			          'css/particules.css']
+			    }
 			})
-			.when('/signup', {
-			    templateUrl: 'website/signup/signup.html',
+			.state('signup', {
+				url: '/signup',
+				templateUrl: 'website/signup/signup.html',
 			    controller: 'SignupCtrl',
 			    redirectIfLoggedIn: true,
-			    css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
+			    data: {
+			    	css: ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,600',
 			          'css/confetti.css',
 			          'css/signup.css',
 			          'css/checkbox.css']
+			    }
 			})
 			
-			.when('/webclient', {
-			    templateUrl: 'webclient/webclient.html',
+			.state('webclient', {
+				url: '/webclient',
+				templateUrl: 'webclient/webclient.html',
 			    controller: 'WebclientCtrl',
-			    css: ['https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css',
+			    data: {
+			    	css: ['https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css',
 			    	  'css/update.css',
 			    	  'css/checkbox.css',
 			    	  'css/chatheader.css',
@@ -153,10 +183,9 @@ angular
 			          'lib/font-awesome-4.6.3/css/font-awesome.css',
 			          'lib/octicons/octicons.min.css',
 			          'css/animate.css',
-			          'css/confetti.css',
-			          ]
-			})
-			.otherwise({redirectTo: '/'});
+			          'css/confetti.css']
+			    }
+			});
 	}])
 	
     .run(function($rootScope, $location, session, auth) {
@@ -168,7 +197,7 @@ angular
     		$location.path('#!/');
     	}
     	
-	    $rootScope.$on("$routeChangeStart", function(event, next, current) {
+	    $rootScope.$on("$stateChangeStart", function(event, next, current) {
 	    	$rootScope.hideNavbar = false;
 	    	$rootScope.hideFooter = false;
 	    	
@@ -219,7 +248,6 @@ angular
 		}
 		
 		this.getCurrentUser = function(){
-			console.log($localStorage.user);
 			return $localStorage.user;
 		}
 	}]);

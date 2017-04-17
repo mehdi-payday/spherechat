@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp.main', ['ngRoute'])
+angular.module('myApp.main', [])
 
 .controller('MainCtrl', [function() {
-
+	
 }]);

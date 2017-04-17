@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.faq', ['ngRoute'])
+angular.module('myApp.faq', [])
 
 .controller('FaqCtrl', [function() {
 

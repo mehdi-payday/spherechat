@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.downloads', ['ngRoute'])
+angular.module('myApp.downloads', [])
 
 .controller('DownloadsCtrl', [function() {
 

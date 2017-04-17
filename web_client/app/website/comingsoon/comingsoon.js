@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.comingsoon', ['ngRoute'])
+angular.module('myApp.comingsoon', [])
 
 .controller('ComingsoonCtrl', [function() {
 

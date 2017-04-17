@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.resetpassword', ['ngRoute'])
+angular.module('myApp.resetpassword', [])
 
 .controller('ResetpasswordCtrl', ['$rootScope', function($rootScope) {
 	$rootScope.hideNavbar = true;

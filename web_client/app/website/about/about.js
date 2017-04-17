@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.about', ['ngRoute'])
+angular.module('myApp.about', [])
 
 .controller('AboutCtrl', [function() {
 
