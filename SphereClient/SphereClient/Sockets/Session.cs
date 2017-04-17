@@ -6,10 +6,10 @@ using System.Text;
 namespace SphereClient.Sockets {
 
     public delegate void MessageReceived(Message message);
-    public delegate void DiscussionChange(Thread thread);
-    public delegate void ChannelChange(Channel channel);
+    public delegate void DiscussionChange(PrivateDiscussion privatediscussion);
+    public delegate void ChannelChange(PrivateDiscussion privatediscussion);
     public delegate void NewFriendRequest(FriendRequest friendrequest);
-    public delegate void FriendRequestAdressed(FriendRequest friendrequest);
+    public delegate void FriendshipAdressed(Friendship friendship);
 
     public class Session : IDisposable {
         private Connection conn { get; set; }
@@ -19,7 +19,7 @@ namespace SphereClient.Sockets {
         public event DiscussionChange OnDiscussionChange;
         public event ChannelChange OnChannelChange;
         public event NewFriendRequest OnNewFriendshipRequest;
-        public event FriendRequestAdressed OnFriendRequestAdressed;
+        public event FriendshipAdressed OnFriendshipAdressed;
 
         public Session(Configuration config, REST.Session session) {
             conn = new Connection(config, false);
@@ -42,11 +42,12 @@ namespace SphereClient.Sockets {
         private void Conn_OnReceive(string data) {
             string command = data.Split(':')[0];
             dynamic json = JSON.Parse(data.Substring(data.IndexOf(':') + 1));
+
             switch (json.type.ToString()) {
                 case "authenticate":
                     if (json.success == true) {
                         foreach (var channel in session.GetAllChannels()) {
-                            Send("!subscribe:messaging,threads." + channel.ChannelId);
+                            Send("!subscribe:messaging,threads." + channel.ThreadId);
                         }
 
                         foreach (var friendship in session.GetAllFriendships()) {
@@ -68,8 +69,17 @@ namespace SphereClient.Sockets {
                         Console.WriteLine("Unable to subscribe to " + json.payload.channel);
                     }
                     break;
+                case "discussion_change":
+                    OnDiscussionChange?.Invoke(Parser.JSONtoEntity(json.payload, typeof(PrivateDiscussion)));
+                    break;
                 case "channel_change":
                     OnChannelChange?.Invoke(Parser.JSONtoEntity(json.payload, typeof(Channel)));
+                    break;
+                case "new_friend_request":
+                    OnNewFriendshipRequest?.Invoke(Parser.JSONtoEntity(json.payload, typeof(FriendRequest)));
+                    break;
+                case "friendship_addressed":
+                    OnFriendshipAdressed?.Invoke(Parser.JSONtoEntity(json.payload, typeof(Friendship)));
                     break;
                 case "message":
                     OnMessageReceived?.Invoke(Parser.JSONtoEntity(json.payload, typeof(Message)));

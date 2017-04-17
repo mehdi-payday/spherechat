@@ -39,7 +39,7 @@ namespace SphereClient.REST {
         public Entities.Friendship[] GetAllFriendships() {
             Cursor<Entities.Friendship> cursor = new Cursor<Entities.Friendship>();
             do {
-                using (var request = new Friendship.Friendship.Base() {
+                using (var request = new Friendship.Base() {
                     DefaultHeaders = new WebHeaderCollection() {
                         { HttpRequestHeader.Accept, "application/json" },
                         { HttpRequestHeader.ContentType, "application/json" },
@@ -56,7 +56,7 @@ namespace SphereClient.REST {
 
         public Cursor<Entities.Friendship> GetFriendships(string pageUrl = null) {
             Cursor<Entities.Friendship> cursor = new Cursor<Entities.Friendship>();
-            using (var request = new Friendship.Friendship.Base() {
+            using (var request = new Friendship.Base() {
                 DefaultHeaders = new WebHeaderCollection() {
                     { HttpRequestHeader.Accept, "application/json" },
                     { HttpRequestHeader.ContentType, "application/json" },
