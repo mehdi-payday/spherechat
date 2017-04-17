@@ -125,7 +125,7 @@
                     </li>
                     <!-- Sidebar-nav-list-item-active -->
                     <li class="Sidebar-nav-list-item ion-document wow fadeInLeft" data-wow-delay="0.6s"></li>
-                    <li class="Sidebar-nav-list-item ion-log-out wow fadeInLeft" data-wow-delay="0.7s" data-toggle="modal" data-target=".bs-example-modal-sm"></li>
+                    <li class="Sidebar-nav-list-item ion-log-out wow fadeInLeft" data-wow-delay="0.7s" data-toggle="modal" data-target="#bs-example-modal-sm"></li>
                     <li id="active-line"></li>
                   </ul>
                 </nav>
@@ -847,7 +847,7 @@
                   <div class="intercom-conversation">
                     <div class="intercom-conversation-footer" style="margin-top: -400px;">
                       <div class="intercom-composer">
-                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" onkeyup="textAreaAdjust(this)" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
+                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
                         <div class="intercom-composer-buttons">
                           <button class="intercom-composer-gif-button"></button>
                           <button class="intercom-composer-emoji-button"></button>
@@ -866,7 +866,7 @@
       </div>
     </div>
     
-    <div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal bs-example-modal-sm" id="bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">

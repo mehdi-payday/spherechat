@@ -283,10 +283,6 @@ angular
 			return session.getCurrentUser() !== undefined && session.getCurrentUser() !== null;
 		}
 		
-		this.login = function(token, user, callback){
-			
-		}
-		
 		this.logout = function(){
 			session.removeAuthToken();
 			session.removeCurrentUser();
@@ -296,6 +292,11 @@ angular
 angular
 	.module('session', ['ngStorage'])
 	.service('session',  ['$localStorage', '$sessionStorage', function($localStorage, $sessionStorage){	
+		// Auth Token
+		this.getAuthToken = function(){
+			return $localStorage.token;
+		}
+		
 		this.setAuthToken = function(token){
 			$localStorage.token = token;
 		}
@@ -304,8 +305,9 @@ angular
 			delete $localStorage.token;
 		}
 		
-		this.getAuthToken = function(){
-			return $localStorage.token;
+		// Current User
+		this.getCurrentUser = function(){
+			return $localStorage.user;
 		}
 		
 		this.setCurrentUser = function(user){
@@ -315,16 +317,36 @@ angular
 		this.removeCurrentUser = function(){
 			delete $localStorage.user;
 		}
-		
-		this.getCurrentUser = function(){
-			return $localStorage.user;
-		}
 	}]);
 
 angular
 	.module('messagingService', ['api'])
 	.service('messaging', ['api', function(api){
+		// Channels
+		this.getChannels = function(){
+			return api.channel.query();
+		}
 		
+		this.getChannel = function(id){
+			return api.channel.getOne({id: id});
+		}
+		
+		this.getChannelMessages = function(id){
+			return api.channel.getMessages({id: id});
+		}
+		
+		// Private Discussions 
+		this.getPrivateDiscussions = function(){
+			return api.privateDiscussion.query();
+		}
+		
+		this.getPrivateDiscussion = function(id){
+			return api.privateDiscussion.getOne({id: id});
+		}
+		
+		this.getPrivateDiscussionMessages = function(id){
+			return api.privateDiscussion.getMessages({id: id});
+		}
 	}])
 	
 
@@ -335,12 +357,15 @@ angular
     	
     	var api = {};
     	
+    	// Auth
     	api.login = $resource(serverAddress + 'api/auth/login/');
     	api.register = $resource(serverAddress + 'api/auth/registration/');
     	
+    	// Friends
     	api.friendship = $resource(serverAddress + 'api/friendship/friendship/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});
     	api.friendrequest = $resource(serverAddress + 'api/friendship/friendrequest/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}});
     	
+    	// Users
     	api.user = $resource(serverAddress + 'api/users/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getCurrent': {
     			method: 'GET',
@@ -355,6 +380,7 @@ angular
     		}
     	});
     	
+    	// Channels
     	api.channel = $resource(serverAddress + 'api/messaging/channel/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getOne': {
     			method: 'GET',
@@ -366,7 +392,8 @@ angular
 				method: 'GET',
 				url: serverAddress + 'api/messaging/channel/:id/message/',
 				params: {id: '@id'},
-    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}, 
+    			isArray: true
 			},
     		'getOneMessage': {
     			method: 'GET',
@@ -400,6 +427,7 @@ angular
     		}
     	});
     	
+    	// Private Disscussions
     	api.privateDiscussion = $resource(serverAddress + 'api/messaging/privatediscussion/', {headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}}, {
     		'getOne': {
     			method: 'GET',
@@ -411,7 +439,8 @@ angular
     			method: 'GET',
     			url: serverAddress + 'api/messaging/privatediscussion/:id/message/',
     			params: {id: '@id'},
-    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}, 
+    			isArray: true
     		},
     		'getOneMessage': {
     			method: 'GET',
