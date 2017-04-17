@@ -2848,7 +2848,7 @@ body:hover .designer {
 }
 #has-message{
     display: none;
-
+}
 
 
 body {
@@ -2883,7 +2883,6 @@ body {
 }
 #sidemenumain {
     left: 0;
-    width: 360px;
     z-index: 10;
     will-change: transform;
     transition: transform .3s ease-in-out, width .3s ease-in-out
@@ -5341,45 +5340,44 @@ body:hover .designer {
     display: none;
 }
 
+body {
+overflow-y: hidden;
+}
 
+#fullname-output,
+#comment-output,
+#contenteditable-output,
+#contenteditable2-output {
+min-height: 43px;
+padding: 10px;
+background-color: rgba(255, 255, 0, 0.14);
+}
 
-
-      body {
-      overflow-y: hidden;
-      }
-      #fullname-output,
-      #comment-output,
-      #contenteditable-output,
-      #contenteditable2-output {
-      min-height: 43px;
-      padding: 10px;
-      background-color: rgba(255, 255, 0, 0.14);
-      }
-      #head-title .emoji-outer {
-      width: 64px;
-      height: 64px;
-      }
-      .form-control {
-      padding-right: 27px;
-      }
-      div.form-control {
-      height: auto;
-      }
-      .todo-list li {
-      line-height: 26px;
-      }
-      .bottom-text .emoji-sizer {
-      width: 14px;
-      height: 14px;
-      }
-      .mobile-notice {
-      background: #ffff00;
-      padding: 10px;
-      border-radius: 20px
-      }
-      .set-changers {
-      margin: 20px 0;
-      }
+#head-title .emoji-outer {
+width: 64px;
+height: 64px;
+}
+.form-control {
+padding-right: 27px;
+}
+div.form-control {
+height: auto;
+}
+.todo-list li {
+line-height: 26px;
+}
+.bottom-text .emoji-sizer {
+width: 14px;
+height: 14px;
+}
+.mobile-notice {
+background: #ffff00;
+padding: 10px;
+border-radius: 20px
+}
+.set-changers {
+margin: 20px 0;
+}
     .chat-bubble-typing {
   height: 72px;
   width: 46px;

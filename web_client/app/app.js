@@ -283,7 +283,7 @@ angular
 		}
 		
 		this.sendChannelMessage = function(id, message){
-			api.channel.postMessage({channelId: id}, {contents: message});
+			return api.channel.postMessage({channelId: id}, {contents: message, tags: []});
 		}
 		
 		// Private Discussions 
@@ -304,7 +304,7 @@ angular
 		}
 		
 		this.sendPrivateDiscussionMessage = function(id, message){
-			api.privateDiscussion.postMessage({discussionId: id}, {contents: message});
+			return api.privateDiscussion.postMessage({discussionId: id}, {contents: message});
 		}
 	}]);
 	
@@ -357,20 +357,19 @@ angular
     		},
 	    	'getMessages': {
 				method: 'GET',
-				url: api.serverAddress + 'api/messaging/channel/:id/message/',
+				url: api.serverAddress + 'api/messaging/channel/:id/messages/',
 				params: {id: '@id'},
-    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}, 
-    			isArray: true
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
 			},
     		'getOneMessage': {
     			method: 'GET',
-    			url: api.serverAddress + 'api/messaging/channel/:channelId/message/:messageId/',
+    			url: api.serverAddress + 'api/messaging/channel/:channelId/messages/:messageId/',
     			params: {channelId: '@channelId', messageId: '@messageId'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
 			'postMessage': {
     			method: 'POST',
-    			url: api.serverAddress + 'api/messaging/channel/:channelId/message/',
+    			url: api.serverAddress + 'api/messaging/channel/:channelId/messages/',
     			params: {channelId: '@channelId'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
@@ -402,7 +401,6 @@ angular
     		},
     		'query': {
     			method: 'GET',
-    			isArray: true,
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'getOne': {
@@ -413,20 +411,19 @@ angular
     		},
     		'getMessages': {
     			method: 'GET',
-    			url: api.serverAddress + 'api/messaging/privatediscussion/:id/message/',
+    			url: api.serverAddress + 'api/messaging/privatediscussion/:id/messages/',
     			params: {id: '@id'},
-    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}, 
-    			isArray: true
+    			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'getOneMessage': {
     			method: 'GET',
-    			url: api.serverAddress + 'api/messaging/privatediscussion/:discussionId/message/:messageId/',
+    			url: api.serverAddress + 'api/messaging/privatediscussion/:discussionId/messages/:messageId/',
     			params: {discussionId: '@discussionId', messageId: '@messageId'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},
     		'postMessage': {
     			method: 'POST',
-    			url: api.serverAddress + 'api/messaging/privatediscussion/:discussionId/message/',
+    			url: api.serverAddress + 'api/messaging/privatediscussion/:discussionId/messages/',
     			params: {discussionId: '@discussionId'},
     			headers: {'Authorization': function(){return 'Token ' + session.getAuthToken()}}
     		},

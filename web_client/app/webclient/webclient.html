@@ -661,69 +661,74 @@
                     </div>
                   </div>
                   
-                  <div id="has-message" class="comments-wrapper">
+<!--                   <div id="has-message" class="comments-wrapper"> -->
+                  <div class="comments-wrapper">
                     <ul class="medias py-md-5 my-md-5 px-sm-0">
                     
+                    <div ng-show="channelSelected" ng-repeat="message in currentMessages | orderBy:'message.sent_date' ">
                     
                     
-                      <!-- Template for the Sender messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">Is that HomerunHitz?<span class="meta">11 April 2017, 17 h 57</span></p>
-                            </div>
-                          </div>
-                        </li>
+	                      <div class="parent">
+	                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
+	                          <div class="wrapper">
+	                            <div class="avatar">
+	                              <a data-toggle="tooltip" ng-attr-data-placement="message.user_sender == session.getCurrentUser().id ? left : right" data-html="true" class="media-object float-left" data-original-title="aymene">
+	                              	<img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
+	                              </a>
+	                            </div>
+	                            <div id="div-comment-15" class="comment-self left">
+	                              <p class="messenger-bulle hoverable">{{message.contents}}</p>
+	                              <span class="meta">{{message.sent_date | date:'fullDate' }}</span>
+	                            </div>
+	                          </div>
+	                        </li>
+	                      </div>
+	                      
+<!-- 	                      Template for the receiver mesages -->
+<!-- 	                      <div class=""> -->
+<!-- 	                        <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy"> -->
+<!-- 	                          <div class="wrapper"> -->
+<!-- 	                            <div class="avatar"> -->
+<!-- 	                              <a data-toggle="tooltip" data-placement="right" data-html="true" class="media-object float-left" data-original-title="aymene"> -->
+<!-- 	                              <img alt="" src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40"> -->
+<!-- 	                              </a> -->
+<!-- 	                            </div> -->
+<!-- 	                            <div class="comment-self right"> -->
+<!-- 	                              <p class="messenger-bulle hoverable"> -->
+<!-- 	                              	Yea it is!! This web app is dope af Im proud of you lil bro<span class="meta meta-right"><i class="seen ion-checkmark verified-color" style="font-size: 15px;"></i> 11 April 2017, 17 h 58</span> -->
+<!-- 	                              </p> -->
+<!-- 	                            </div> -->
+<!-- 	                          </div> -->
+<!-- 	                        </li> -->
+<!-- 	                      </div> -->
+<!-- 	                      End -->
+
                       </div>
-                      <!-- End -->  
                       
-                      <!-- Template for the receiver mesages -->
-                      <div class="">
-                        <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="right" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div class="comment-self right">
-                              <p class="messenger-bulle hoverable">Yea it is!! This web app is dope af Im proud of you lil bro<span class="meta meta-right"><i class="seen ion-checkmark verified-color" style="font-size: 15px;"></i> 11 April 2017, 17 h 58</span>
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End -->
                       
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <div class="chat-bubble-typing">
-                                <div class="loading-typing">
-                                  <div class="dot-typing one-typing"></div>
-                                  <div class="dot-typing two-typing"></div>
-                                  <div class="dot-typing three-typing"></div>
-                                </div>
-                                <div class="tail-typing"></div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End -->  
+<!--                       Template for the incoming messages -->
+<!--                       <div class="parent"> -->
+<!--                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy"> -->
+<!--                           <div class="wrapper"> -->
+<!--                             <div class="avatar"> -->
+<!--                               <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene"> -->
+<!--                               <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40"> -->
+<!--                               </a> -->
+<!--                             </div> -->
+<!--                             <div id="div-comment-15" class="comment-self left"> -->
+<!--                               <div class="chat-bubble-typing"> -->
+<!--                                 <div class="loading-typing"> -->
+<!--                                   <div class="dot-typing one-typing"></div> -->
+<!--                                   <div class="dot-typing two-typing"></div> -->
+<!--                                   <div class="dot-typing three-typing"></div> -->
+<!--                                 </div> -->
+<!--                                 <div class="tail-typing"></div> -->
+<!--                               </div> -->
+<!--                             </div> -->
+<!--                           </div> -->
+<!--                         </li> -->
+<!--                       </div> -->
+<!--                       End   -->
                       
                     </ul>
                     
