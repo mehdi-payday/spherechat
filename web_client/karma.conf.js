@@ -27,7 +27,8 @@ module.exports = function(config) {
 		'website/signup/signup.js',
 		'webclient/webclient.js',
 		
-		'tests/api.spec.js'
+		'tests/api.spec.js',
+		'tests/messaging.spec.js'
     ],
 
     autoWatch: true,
