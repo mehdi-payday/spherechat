@@ -107,6 +107,7 @@
           </div>
         </aside>
         
+        <!-- Side Menu with Icons -->
         
         <aside class="mobile-hidden" id="sidemenumain">
           <div id="sidebarContent" data-super-overflow="true" data-scrolling="false">
@@ -115,7 +116,7 @@
                 <nav class="Sidebar-nav" id="master-nav" role="navigation">
                   <ul class="Sidebar-nav-list">
                     <li class="Sidebar-nav-list-item ion-person-add wow fadeInLeft" data-wow-delay="0.1s"></li>
-                    <li class="Sidebar-nav-list-item ion-person-stalker wow fadeInLeft" data-wow-delay="0.2s"></li>
+                    <li class="Sidebar-nav-list-item ion-person-stalker wow fadeInLeft" data-wow-delay="0.2s" ng-click="retrieveChannels()"></li>
                     <li class="Sidebar-nav-list-item ion-android-notifications wow fadeInLeft" data-wow-delay="0.3s">
                       <notif class="card-face__bullet friend-request-notif">3</notif>
                     </li>
@@ -134,7 +135,8 @@
           </div>
         </aside>
         
-        
+		<!-- Create Channel Panel -->
+		
         <aside id="panel">
           <header>
             <div class="headerWrap">
@@ -212,7 +214,7 @@
                     </a>
                   </section>
                   <div class="create-group wow bounceIn" data-wow-delay="4.2s">
-                    <button class="new-group-button">
+                    <button class="new-group-button" ng-click="createChannel()"> 
                     <span>Create Channel</span>
                     </button>
                   </div>
@@ -232,6 +234,9 @@
             </div>
           </div>
         </aside>
+        
+		<!-- search user panel -->
+        
         <aside id="user-panel">
           <header>
             <div class="headerWrap">
@@ -289,6 +294,9 @@
             </div>
           </div>
         </aside>
+        
+        <!-- ssettings panel -->
+        
         <aside id="settings-panel">
           <header>
             <div class="headerWrap">
@@ -555,6 +563,9 @@
             </div>
           </div>
         </aside>
+        
+        <!-- files panel -->
+        
         <aside id="files-panel">
           <header>
             <div class="headerWrap">
@@ -617,6 +628,9 @@
             </div>
           </div>
         </aside>
+        
+        <!-- Channel Pannel -->
+        
         <aside id="groups-panel">
           <div id="groupsPanelContent" data-super-overflow="true" data-scrolling="false">
             <div id="container">
@@ -665,32 +679,38 @@
                         </nav>
                       </div>
                       <div class="conversations-body-conversations">
-                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="3s">
-                          <div class="conversation-summary-avatar">
-                            <div class="team-avatar-container">
-                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
-                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
-                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
-                            </div>
-                          </div>
-                          <div class="conversation-summary-body">
-                            <div class="conversation-summary-meta">
-                              <div class="conversation-summary-body-author">Group : TeamAhuntsic</div>
-                              <div class="conversation-summary-timestamp">2d ago</div>
-                            </div>
-                            <div class="conversation-summary-content">
-                              <div class="conversation-summary-content-container">
-                                <div class="conversation-summary-content-text">Java</div>
-                                <notif class="card-face__bullet">5</notif>
-                              </div>
-                            </div>
-                          </div>
+                      
+                      	<div ng-repeat="channel in userChannels.results">
+                      	
+	                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="1s">
+	                          <div class="conversation-summary-avatar">
+	                            <div class="team-avatar-container">
+	                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg">
+	                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024">
+	                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61">
+	                            </div>
+	                          </div>
+	                          <div class="conversation-summary-body">
+	                            <div class="conversation-summary-meta">
+	                              <div class="conversation-summary-body-author">Channel: {{channel.title}}</div>
+	                              <div class="conversation-summary-timestamp" ng-show="getUnseenMessagesCount(channel.memberships) > 0">{{getLastSeenDateDelta(channel.memberships)}}d ago</div>
+	                            </div>
+	                            <div class="conversation-summary-content">
+	                              <div class="conversation-summary-content-container">
+	                                <div class="conversation-summary-content-text">{{channel.description}}</div>
+	                                <notif class="card-face__bullet" ng-show="getUnseenMessagesCount(channel.memberships) > 0">{{getUnseenMessagesCount(channel.memberships)}}</notif>
+	                              </div>
+	                            </div>
+	                          </div>
+	                        </div>
+	                        
                         </div>
+                        
                       </div>
                     </div>
-                    <div class="conversations-footer wow bounceIn" data-wow-delay="4.2s">
+                    <div class="conversations-footer wow bounceIn" data-wow-delay="1s">
                       <button class="conversations-new-conversation-button">
-                      <span>New Channel</span>
+                      	<span>New Channel</span>
                       </button>
                     </div>
                   </div>
