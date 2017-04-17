@@ -175,7 +175,7 @@
                       </div>
                       <div class="conversations-body-conversations">
                       
-                      	<div ng-repeat="channel in userChannels.results">
+                      	<div ng-repeat="channel in userChannels.results track by channel.id">
                       	
 	                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="1s" ng-click="setChannelSelected(channel.id)" ng-class="channelSelected == channel.id ? 'conversation-summary-selected':''">
 	                          <div class="conversation-summary-avatar">
