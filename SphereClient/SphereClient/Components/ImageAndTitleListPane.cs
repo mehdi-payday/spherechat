@@ -17,7 +17,7 @@ namespace SphereClient.Components {
         Panel group_section_panel;
 
         public leftSection() {
-            Channel[] allchannels = Form1.Instance.session?.GetAllChannels();
+            Channel[] allchannels = Form1.Instance.session.REST?.GetAllChannels();
             this.discussions = allchannels.Where(c => c.Type == Channel.Types.DISCUSSION).ToList();
             this.group_discussions = allchannels.Except(this.discussions).ToList();
         }
@@ -69,7 +69,7 @@ namespace SphereClient.Components {
             try {
                 this.list = Form1.Instance.fetchedChannels;
                 this.filter();
-                
+
                 if (null == this.contents || this.contents.IsDisposed) {
                     this.contents = new Panel();
                     this.Controls.Add(this.contents);
@@ -95,7 +95,7 @@ namespace SphereClient.Components {
                     row.Click += OnRowLabelClick;
                     //row.MouseEnter += OnRowLabelEnter;
                     //row.MouseLeave += OnRowLabelLeave;
-                
+
                     this.contents.Controls.Add(row);
 
                     entityIndex++;
@@ -109,49 +109,50 @@ namespace SphereClient.Components {
             }
             return status;
         }
-/*
-        /// <summary>
-        /// Triggered when the mouse enters a row.
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="e"></param>
-        public void OnRowLabelEnter(object s, EventArgs e) {
-            if (InvokeRequired) {
-                Invoke(new Action(delegate () { OnRowLabelEnter(s, e); }));
-                return;
-            }
+        /*
+                /// <summary>
+                /// Triggered when the mouse enters a row.
+                /// </summary>
+                /// <param name="s"></param>
+                /// <param name="e"></param>
+                public void OnRowLabelEnter(object s, EventArgs e) {
+                    if (InvokeRequired) {
+                        Invoke(new Action(delegate () { OnRowLabelEnter(s, e); }));
+                        return;
+                    }
 
-            ((Panel)s).Font = this.HoverFont;
+                    ((Panel)s).Font = this.HoverFont;
 
-        }
-        /// <summary>
-        /// Triggered when the mouse leaves a row.
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="e"></param>
-        public void OnRowLabelLeave(object s, EventArgs e) {
-            if (InvokeRequired) {
-                Invoke(new Action(delegate () { OnRowLabelLeave(s, e); }));
-                return;
-            }
-            ((Panel)s).Font = this.RegularFont;
-        }
+                }
+                /// <summary>
+                /// Triggered when the mouse leaves a row.
+                /// </summary>
+                /// <param name="s"></param>
+                /// <param name="e"></param>
+                public void OnRowLabelLeave(object s, EventArgs e) {
+                    if (InvokeRequired) {
+                        Invoke(new Action(delegate () { OnRowLabelLeave(s, e); }));
+                        return;
+                    }
+                    ((Panel)s).Font = this.RegularFont;
+                }
 
-        */
+                */
         /// <summary>
         /// Triggered when the user clicks on a row.
         /// </summary>
         /// <param name="s"></param>
         /// <param name="e"></param>
         public void OnRowLabelClick(object s, EventArgs e) {
-            System.Threading.Thread t = new System.Threading.Thread( delegate () {
+            System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 if (null != ((ImageAndTitleRow)s).entity) {
-                    Form1.Instance.SetCurrentViewedChannel( ((Channel)((ImageAndTitleRow)s).entity).ChannelId );
-                }else {
-                    MessageBox.Show( "an entity was null in the group imageandtitlelistpane" );
+                    Form1.Instance.SetCurrentViewedChannel(((Channel)((ImageAndTitleRow)s).entity).ChannelId);
                 }
-                
-            } );
+                else {
+                    MessageBox.Show("an entity was null in the group imageandtitlelistpane");
+                }
+
+            });
             t.Start();
         }
 
@@ -204,7 +205,7 @@ namespace SphereClient.Components {
             this.ForeColor = Constants.DARK_PURPLE;
 
             //plus sign on click
-            this._head.Controls[1].Click += ( object s, EventArgs e ) => { /*create channel */};
+            this._head.Controls[1].Click += (object s, EventArgs e) => { /*create channel */};
 
         }
         /// <summary>
@@ -222,7 +223,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are not of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.DISCUSSION == ((Channel)c).Type ).ToList<Entity>();
+            this.list = this.list.Where(c => Channel.Types.DISCUSSION == ((Channel)c).Type).ToList<Entity>();
         }
 
     }

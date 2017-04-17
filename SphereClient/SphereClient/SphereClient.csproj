@@ -110,6 +110,7 @@
     <Compile Include="REST\Request.cs" />
     <Compile Include="REST\Session.cs" />
     <Compile Include="REST\Users\Users.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Sockets\Buffers\Buffers.cs" />
     <Compile Include="Sockets\Buffers\HTTP\Read.cs" />
     <Compile Include="Sockets\Buffers\HTTP\Write.cs" />

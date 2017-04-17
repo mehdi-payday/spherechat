@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace SphereClient.Sockets.Buffers.HTTP {
-    class Read : Buffers.Read {
+    public class Read : Buffers.Read {
         private const string NEW_LINE = "\r\n";
 
         public Read(byte[] buffer) : base(buffer) {

@@ -4,7 +4,7 @@ using System.Net;
 
 namespace SphereClient.REST {
     public class Session : IDisposable {
-        public Entities.Channel CurrentChannel;
+        public Channel CurrentChannel;
 
         public Session(string username, string password) {
             Auth = Login(username, password);
@@ -215,8 +215,6 @@ namespace SphereClient.REST {
                 }
             }.POST(Parser.EntitytoJSON(message, message.GetType()))) { }
         }
-
-
 
         public Entities.Auth Auth { get; private set; }
 

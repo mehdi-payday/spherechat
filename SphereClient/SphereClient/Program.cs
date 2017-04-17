@@ -1,5 +1,3 @@
-
-using SphereClient.Entities;
 using System;
 using System.Windows.Forms;
 
@@ -19,24 +17,15 @@ namespace SphereClient {
             }
             else if (mode == "console") {
                 Console.Title = "SphereChat";
-                using (var rest = new REST.Session("sphereman", "spherique")) {
-                    var curr = rest.GetChannels()[0];
-                    using (var ws = new Sockets.Session(new Sockets.Configuration("spherechat.tk", 4242, "/ec", "123456789"), rest)) {
-                        ws.OnMessageReceived += (SphereClient.Entities.Message message) => {
-                            Console.WriteLine(message.UserId + " => " + message.Contents);
-                        };
+                using (var session = new Session("sphereman", "spherique")) {
+                    var curr = session.REST.GetChannels()[0];
 
-                        ws.OnChannelChange += (Channel channel) => {
-                            Console.WriteLine(channel.Title + " changed");
-                        };
-
-                        string line;
-                        while ((line = Console.ReadLine()) != null) {
-                            rest.PostMessageToChannel(new Entities.Message() {
-                                Contents = line,
-                                Tags = new Entities.MessageTag[] { }
-                            }, curr);
-                        }
+                    string line;
+                    while (!string.IsNullOrEmpty((line = Console.ReadLine()))) {
+                        session.REST.PostMessageToChannel(new Entities.Message() {
+                            Contents = line,
+                            Tags = new Entities.MessageTag[] { }
+                        }, curr);
                     }
                 }
             }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace SphereClient.Sockets.Buffers.WebSocket {
-    class Write : Buffers.Read {
+    public class Write : Buffers.Read {
         public Write(byte[] buffer, bool masked = true) : base(buffer) {
             Type = DataType.TXT;
             Masked = masked;

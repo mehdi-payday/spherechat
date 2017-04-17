@@ -40,7 +40,7 @@ namespace SphereClient.Components {
             this.messages.Clear();
             this.Controls.Clear();
             this.channel = channel;
-            Entities.Message[] fetchedMessages = Form1.Instance.session.GetAllMessages(channel);
+            Entities.Message[] fetchedMessages = Form1.Instance.session.REST.GetAllMessages(channel);
             int hoffset = 0;
             foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
                 MessageRow mr = new MessageRow(msg, this.channel, this);
@@ -63,7 +63,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="channel"> the channel to fetch the messages from</param>
         public void FetchMessagesSinceLastTime(Entities.Channel channel) {
-            Entities.Message[] fetchedMessages = Form1.Instance.session.GetAllMessages(channel);
+            Entities.Message[] fetchedMessages = Form1.Instance.session.REST.GetAllMessages(channel);
             foreach (Entities.Message msg in fetchedMessages.OrderBy(m => m.SentDate)) {
                 OnNewMessage(msg);
             }

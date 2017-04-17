@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace SphereClient.Sockets.Buffers {
-    abstract class Read : IDisposable {
+    public abstract class Read : IDisposable {
         public Read(byte[] buffer) { Buffer = buffer; Data = new List<byte>(); }
 
         public List<byte> Data { get; set; }
@@ -26,7 +26,7 @@ namespace SphereClient.Sockets.Buffers {
         }
     }
 
-    abstract class Write : IDisposable {
+    public abstract class Write : IDisposable {
         public Write(byte[] buffer) { Buffer = buffer; }
 
         public byte[] Buffer { get; set; }

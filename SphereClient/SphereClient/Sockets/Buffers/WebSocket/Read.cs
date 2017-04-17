@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace SphereClient.Sockets.Buffers.WebSocket {
-
-    class Read : Buffers.Read {
+    public class Read : Buffers.Read {
         public Read(byte[] buffer) : base(buffer) { }
 
         public void Parse() {
