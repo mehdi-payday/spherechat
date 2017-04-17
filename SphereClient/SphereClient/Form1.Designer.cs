@@ -70,10 +70,9 @@
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label43 = new System.Windows.Forms.Label();
-            this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.label42 = new System.Windows.Forms.Label();
             this.panel4 = new SphereClient.Components.MessageListPanel();
+            this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
@@ -208,7 +207,7 @@
             this.sendMessage.Size = new System.Drawing.Size(23, 34);
             this.sendMessage.TabIndex = 1;
             this.sendMessage.UseVisualStyleBackColor = false;
-            this.sendMessage.Click += new System.EventHandler(this.button1_Click);
+            this.sendMessage.Click += new System.EventHandler(this.Send_Message_Click);
             // 
             // button3
             // 
@@ -628,35 +627,12 @@
             this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.BackgroundImage = global::SphereClient.Properties.Resources.Capture1;
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel3.Controls.Add(this.label43);
             this.panel3.Controls.Add(this.pictureBox22);
             this.panel3.Controls.Add(this.label42);
             this.panel3.Location = new System.Drawing.Point(234, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(666, 117);
             this.panel3.TabIndex = 1;
-            // 
-            // label43
-            // 
-            this.label43.BackColor = System.Drawing.Color.Transparent;
-            this.label43.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label43.Location = new System.Drawing.Point(105, 36);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(213, 33);
-            this.label43.TabIndex = 38;
-            this.label43.Text = "description blabl sdgasdf kjhgsajhawe kj jhsd a";
-            // 
-            // pictureBox22
-            // 
-            this.pictureBox22.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox22.BackgroundImage = global::SphereClient.Properties.Resources.main_900;
-            this.pictureBox22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox22.Location = new System.Drawing.Point(13, 14);
-            this.pictureBox22.Name = "pictureBox22";
-            this.pictureBox22.Size = new System.Drawing.Size(85, 85);
-            this.pictureBox22.TabIndex = 37;
-            this.pictureBox22.TabStop = false;
             // 
             // label42
             // 
@@ -678,6 +654,18 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(666, 531);
             this.panel4.TabIndex = 2;
+            // 
+            // pictureBox22
+            // 
+            this.pictureBox22.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.pictureBox22.BackgroundImage = global::SphereClient.Properties.Resources.main_900;
+            this.pictureBox22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox22.Location = new System.Drawing.Point(13, 14);
+            this.pictureBox22.Name = "pictureBox22";
+            this.pictureBox22.Size = new System.Drawing.Size(85, 85);
+            this.pictureBox22.TabIndex = 37;
+            this.pictureBox22.TabStop = false;
             // 
             // Form1
             // 
@@ -770,13 +758,12 @@
         private System.Windows.Forms.PictureBox pictureBox19;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.PictureBox pictureBox20;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.PictureBox pictureBox22;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.PictureBox pictureBox21;
         private System.Windows.Forms.TextBox textBox1;
         private Components.GroupListPanel panel8;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox22;
     }
 }
 

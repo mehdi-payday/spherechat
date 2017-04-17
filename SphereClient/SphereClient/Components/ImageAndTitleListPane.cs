@@ -8,25 +8,12 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SphereClient.Components {
-
-    public class leftSection {
-        IList<Channel> discussions;
-        IList<Channel> group_discussions;
-
-        Panel discussion_section_panel;
-        Panel group_section_panel;
-
-        public leftSection() {
-            Channel[] allchannels = Form1.Instance.session.REST?.GetAllChannels();
-            this.discussions = allchannels.Where(c => c.Type == Channel.Types.DISCUSSION).ToList();
-            this.group_discussions = allchannels.Except(this.discussions).ToList();
-        }
-
-
-
-    };
-
+    /// <summary>
+    /// Base class for the "direct messages" and 
+    /// "group messages" panels.
+    /// </summary>
     public abstract partial class ImageAndTitleListPane : Panel {
+        public delegate void PlusClick( object s, EventArgs e );
         public Panel title_pane;
         public Panel contents;
         public IList<Entity> list;
@@ -37,6 +24,7 @@ namespace SphereClient.Components {
         public int rowlabel_left_margin = 5;
         public int rowBottomMargin = 0;
         public int rowTopMargin = 0;
+        public event PlusClick OnPlusClick;
         private int selected = 0;
 
         /// <summary>
@@ -44,14 +32,12 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="titlepane">the panel that will serve as a header. must not be null</param>
         /// <param name="list">the <see cref="SphereClient.Entities.Entity"/> list to represent. must not be null</param>
-        public ImageAndTitleListPane(Panel titlepane, IList<Entity> list) : base() {
+        public ImageAndTitleListPane( IList<Entity> list) : base() {
             InitializeComponent();
             this.list = list;
-            this.title_pane = titlepane;
             this.contents = new Panel();
-            this.Controls.Add(this.title_pane);
             this.Controls.Add(this.contents);
-
+            this.OnPlusClick += ( object s, EventArgs e )=>{ };
         }
 
         /// <summary>
@@ -65,7 +51,6 @@ namespace SphereClient.Components {
                 Invoke(new Action(delegate () { status = TryCreateComponents(); }));
                 return status;
             }
-
             try {
                 this.list = Form1.Instance.fetchedChannels;
                 this.filter();
@@ -95,9 +80,7 @@ namespace SphereClient.Components {
                     row.Click += OnRowLabelClick;
                     //row.MouseEnter += OnRowLabelEnter;
                     //row.MouseLeave += OnRowLabelLeave;
-
                     this.contents.Controls.Add(row);
-
                     entityIndex++;
                 }
 
@@ -109,35 +92,7 @@ namespace SphereClient.Components {
             }
             return status;
         }
-        /*
-                /// <summary>
-                /// Triggered when the mouse enters a row.
-                /// </summary>
-                /// <param name="s"></param>
-                /// <param name="e"></param>
-                public void OnRowLabelEnter(object s, EventArgs e) {
-                    if (InvokeRequired) {
-                        Invoke(new Action(delegate () { OnRowLabelEnter(s, e); }));
-                        return;
-                    }
-
-                    ((Panel)s).Font = this.HoverFont;
-
-                }
-                /// <summary>
-                /// Triggered when the mouse leaves a row.
-                /// </summary>
-                /// <param name="s"></param>
-                /// <param name="e"></param>
-                public void OnRowLabelLeave(object s, EventArgs e) {
-                    if (InvokeRequired) {
-                        Invoke(new Action(delegate () { OnRowLabelLeave(s, e); }));
-                        return;
-                    }
-                    ((Panel)s).Font = this.RegularFont;
-                }
-
-                */
+        
         /// <summary>
         /// Triggered when the user clicks on a row.
         /// </summary>
@@ -157,11 +112,24 @@ namespace SphereClient.Components {
         }
 
         /// <summary>
+        /// Exposes the invokation of the OnPlusClick event to
+        /// all subclasses.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        protected void InvokePlusClick(object s, EventArgs e) {
+            if (InvokeRequired) {
+                Invoke(new Action(()=> { this.InvokePlusClick( s, e ); } ));
+                return;
+            }
+            this.OnPlusClick( s, e );
+        }
+
+        /// <summary>
         /// This method should filter off all the unwanted entities in 
         /// this.list.
         /// </summary>
         public abstract void filter();
-
 
     }
 
@@ -169,15 +137,15 @@ namespace SphereClient.Components {
     /// "Direct messages" Panel class.
     /// </summary>
     public class DiscussionListPanel : ImageAndTitleListPane {
-        protected static Panel header;
         private Panel _head;
         private static int leftIconOffset = 210;
 
         /// <summary>
-        /// Static initializer.
+        /// Constructor for the DiscussionListPanel class.
         /// </summary>
-        static DiscussionListPanel() {
-            DiscussionListPanel.header = new Panel();
+        /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
+        public DiscussionListPanel(IList<Entity> list) : base(list) {
+            base.title_pane = new Panel();
             Label title = new Label();
             Label plus = new Label();
             title.Text = "Direct messages";
@@ -185,40 +153,31 @@ namespace SphereClient.Components {
             title.Top = Constants.MARGIN_SMALL.Top;
             title.AutoSize = true;
             plus.Text = "+";
-            
             plus.Left = DiscussionListPanel.leftIconOffset;
             plus.Top = Constants.MARGIN_SMALL.Top;
-            DiscussionListPanel.header.Height = 37;
-            DiscussionListPanel.header.Controls.Add(title);
-            DiscussionListPanel.header.Controls.Add(plus);
-            DiscussionListPanel.header.BackColor = Constants.LIGHT_PURPLE;
-            DiscussionListPanel.header.ForeColor = Constants.DARK_PURPLE;
-            DiscussionListPanel.header.Font = Constants.SECTION_TITLE_FONT;
-        }
-
-        /// <summary>
-        /// Constructor for the DiscussionListPanel class.
-        /// </summary>
-        /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
-        public DiscussionListPanel(IList<Entity> list) : base(DiscussionListPanel.header, list) {
+            base.title_pane.Height = 37;
+            base.title_pane.Controls.Add( title );
+            base.title_pane.Controls.Add( plus );
+            base.title_pane.BackColor = Constants.LIGHT_PURPLE;
+            base.title_pane.ForeColor = Constants.DARK_PURPLE;
+            base.title_pane.Font = Constants.SECTION_TITLE_FONT;
             this.BackColor = Constants.PURPLE;
-            this._head = DiscussionListPanel.header;
+            this._head = base.title_pane;
             this.ForeColor = Constants.DARK_PURPLE;
-            //plus sign on click
-            this._head.Controls[1].Click += Form1.Instance.OnCreateDirectMessageThread;
-
+            plus.Click += ( object s, EventArgs e ) => {
+                base.InvokePlusClick( this, e );
+            };
+            base.Controls.Add( base.title_pane );
+           
         }
+
         /// <summary>
         /// Constructor for the DiscussionListPanel class.
         /// will fetch the Channel list from <see cref="Form1.Instance.session"/>'s GetChannels
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
-        public DiscussionListPanel() : base(DiscussionListPanel.header, new List<Entity>()) {//
-            this.BackColor = Constants.PURPLE;
-            this._head = DiscussionListPanel.header;
-            this.ForeColor = Constants.DARK_PURPLE;
-            //plus sign on click
-            this._head.Controls[1].Click += Form1.Instance.OnCreateDirectMessageThread;
+        public DiscussionListPanel() : this( new List<Entity>()) {
+            //void
         }
 
         /// <summary>
@@ -234,16 +193,16 @@ namespace SphereClient.Components {
     /// "Group message" Panel class.
     /// </summary>
     public class GroupListPanel : ImageAndTitleListPane {
-        protected static Panel header;
+        
         private Panel _head;
         private static int leftIconOffset = 210;
 
-
         /// <summary>
-        /// Static initializer.
+        /// Constructor for the DiscussionListPanel class.
         /// </summary>
-        static GroupListPanel() {
-            GroupListPanel.header = new Panel();
+        /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
+        public GroupListPanel(IList<Entity> list) :  base( list) {
+            base.title_pane = new Panel();
             Label title = new Label();
             Label plus = new Label();
             title.Text = "Group messages";
@@ -253,36 +212,28 @@ namespace SphereClient.Components {
             plus.Text = "+";
             plus.Left = GroupListPanel.leftIconOffset;
             plus.Top = Constants.MARGIN_SMALL.Top;
-            GroupListPanel.header.Height = 37;
-            GroupListPanel.header.Controls.Add(title);
-            GroupListPanel.header.Controls.Add(plus);
-            GroupListPanel.header.BackColor = Constants.LIGHT_PURPLE;
-            GroupListPanel.header.ForeColor = Constants.DARK_PURPLE;
-            GroupListPanel.header.Font = Constants.SECTION_TITLE_FONT;
+            base.title_pane.Height = 37;
+            base.title_pane.Controls.Add( title );
+            base.title_pane.Controls.Add( plus );
+            base.title_pane.BackColor = Constants.LIGHT_PURPLE;
+            base.title_pane.ForeColor = Constants.DARK_PURPLE;
+            base.title_pane.Font = Constants.SECTION_TITLE_FONT;
+            this.BackColor = Constants.PURPLE;
+            this._head = base.title_pane;
+            this.ForeColor = Constants.DARK_PURPLE;
+            plus.Click += ( object s, EventArgs e ) => {
+                base.InvokePlusClick( this, e );
+            };
+            base.Controls.Add( base.title_pane );
         }
 
-        /// <summary>
-        /// Constructor for the DiscussionListPanel class.
-        /// </summary>
-        /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
-        public GroupListPanel(IList<Entity> list) : base(GroupListPanel.header, list) {
-            this.BackColor = Constants.PURPLE;
-            this._head = GroupListPanel.header;
-            this.ForeColor = Constants.DARK_PURPLE;
-            //plus sign on click
-            this._head.Controls[1].Click += Form1.Instance.OnCreateGroupDiscussionThread;
-        }
         /// <summary>
         /// Constructor for the DiscussionListPanel class.
         /// will fetch the Channel list from <see cref="Form1.Instance.session"/>'s GetChannels
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
-        public GroupListPanel() : base(GroupListPanel.header, new List<Entity>()) {//
-            this.BackColor = Constants.PURPLE;
-            this._head = GroupListPanel.header;
-            this.ForeColor = Constants.DARK_PURPLE;
-            //plus sign on click
-            this._head.Controls[1].Click += Form1.Instance.OnCreateGroupDiscussionThread;
+        public GroupListPanel() : this( new List<Entity>()) {
+            //void
         }
 
         /// <summary>
