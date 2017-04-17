@@ -27,7 +27,7 @@ from messaging.exceptions import (UnmanagedThread,
 import re
 
 
-# Every 60 seconds, a ``listening to Thread` signal should be sent by the client in order for him to be considered as connected to thread
+# Every 60 seconds, a "listening to Thread" signal should be sent by the client in order for him to be considered as connected to thread
 LISTENING_RENEWAL_RATE = 60
 
 class MembershipManager(ObservableManagerMixin, Manager):

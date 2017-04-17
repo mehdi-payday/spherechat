@@ -1,4 +1,5 @@
 from messaging.models import Message, TuneManager, Membership, MessageTag
+from core.models import User
 # from messaging.serializers import ChannelSerializer, PrivateDiscussionSerializer
 # from core.channels import personal_user
 
@@ -29,6 +30,25 @@ class MessageTagObserver(object):
             bot = message_tag.tagged_user
             # TODO : Generate a bot response
 
+class BotObservingMessages(object):
+    @classmethod
+    def on_create(self, message):
+        thread = message.thread
+        bots = message.thread.members.filter(type=User.BOT)
 
+        if len(bots) == 0:
+            return
+
+        from chatterbot import ChatBot
+        chatbot = ChatBot(
+        	"Lucy", 
+	        trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
+	        input_adapter='chatterbot.input.TerminalAdapter')
+        contents = chatbot.get_response(message.contents)
+
+        for bot in bots:
+            thread.send(Message(contents=contents), bot)
+
+Message.objects.register_observer(BotObservingMessages)
 Message.objects.register_observer(MembershipSeenUpdater)
 MessageTag.objects.register_observer(MessageTagObserver)
