@@ -4,7 +4,7 @@ using System.Net;
 using System.Security.Cryptography;
 
 namespace SphereClient.Sockets {
-    class Configuration {
+    public class Configuration {
         public Configuration(string hostname, int port, string path, string key) {
             EP = new IPEndPoint(Dns.GetHostAddresses(hostname)[0], port);
             Hostname = hostname;

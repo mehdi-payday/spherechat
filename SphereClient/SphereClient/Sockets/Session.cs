@@ -11,7 +11,7 @@ namespace SphereClient.Sockets {
     public delegate void NewFriendRequest(FriendRequest friendrequest);
     public delegate void FriendRequestAdressed(FriendRequest friendrequest);
 
-    class Session : IDisposable {
+    public class Session : IDisposable {
         private Connection conn { get; set; }
         private REST.Session session { get; set; }
 
@@ -33,15 +33,7 @@ namespace SphereClient.Sockets {
             conn.Connect();
         }
 
-        public void Send(Entity entity) {
-            conn.Send(
-                new Buffers.WebSocket.Write(
-                    Encoding.UTF8.GetBytes(
-                        JSON.Stringify(
-                            Parser.EntitytoJSON(entity, entity.GetType())))));
-        }
-
-        public void Send(string data) {
+        private void Send(string data) {
             conn.Send(
                 new Buffers.WebSocket.Write(
                     Encoding.UTF8.GetBytes(data)));
@@ -100,10 +92,11 @@ namespace SphereClient.Sockets {
             Console.WriteLine("Connecting..");
         }
 
+        private Guid guid = Guid.NewGuid();
         private void Conn_OnConnected() {
             conn.Send(
                 new Buffers.WebSocket.Write(
-                    Encoding.UTF8.GetBytes("!authenticate:" + Guid.NewGuid().ToString() + ":" + session.Auth.Token)));
+                    Encoding.UTF8.GetBytes("!authenticate:" + guid.ToString() + ":" + session.Auth.Token)));
         }
 
         public void Dispose() {

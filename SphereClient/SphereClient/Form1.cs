@@ -1,17 +1,10 @@
-﻿using System;
+﻿using SphereClient.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using SphereClient.REST;
-using SphereClient.Logger;
-using SphereClient.Components;
-using SphereClient.Entities;
-using System.Net;
 
 namespace SphereClient {
     /// <summary>
@@ -28,10 +21,10 @@ namespace SphereClient {
         /// <summary>
         /// Static initializer
         /// </summary>
-        static Form1(){
+        static Form1() {
 
         }
-        
+
         /// <summary>
         /// Constructor for the Form1 class. Initializes the object
         /// and creates a session.
@@ -41,12 +34,12 @@ namespace SphereClient {
         protected Form1(string username, string password) {
             InitializeComponent();
             MakePreloader();
-            Connect( username, password );
+            Connect(username, password);
         }
         /// <summary>
         /// Default contructor for the Form1 class.
         /// </summary>
-        protected Form1( ) {
+        protected Form1() {
             InitializeComponent();
             MakePreloader();
         }
@@ -63,12 +56,12 @@ namespace SphereClient {
             PictureBox pb = new PictureBox();
             pb.Image = Properties.Resources._25;
             pb.SizeMode = PictureBoxSizeMode.CenterImage;
-            pb.Size = new Size( 200, 200 );
+            pb.Size = new Size(200, 200);
             pb.Parent = preloader;
             pb.Left = (int)(preloader.Width - pb.Width) / 2;
             pb.Top = (int)(preloader.Height - pb.Height) / 2;
-            preloader.Controls.Add( pb );
-            this.Controls.Add( preloader );
+            preloader.Controls.Add(pb);
+            this.Controls.Add(preloader);
         }
 
         /// <summary>
@@ -77,7 +70,7 @@ namespace SphereClient {
         /// <param name="username">the username to use</param>
         /// <param name="password">the password to use</param>
         public void ConnectAndStart(string username, string password) {
-            Connect( username, password );
+            Connect(username, password);
             Start();
         }
 
@@ -87,21 +80,21 @@ namespace SphereClient {
         /// </summary>
         /// <param name="username">the username to use</param>
         /// <param name="password">the password to use</param>
-        public void Connect( string username, string password ) {
-            this.session = new REST.Session( username, password );
-            this.user = this.session.GetProfile();
-            
+        public void Connect(string username, string password) {
+            this.session = new Session(username, password);
+            this.user = this.session.REST.GetProfile();
+
         }
 
         /// <summary>
         /// Starts the main application logic loop.
         /// </summary>
-        public void Start() {      
-            System.Threading.Thread t = new System.Threading.Thread( delegate () {
+        public void Start() {
+            System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
-            } );
+            });
             t.Start();
-            
+
         }
 
         /// <summary>
@@ -110,22 +103,22 @@ namespace SphereClient {
         /// </summary>
         public void FetchChannels() {
             if (InvokeRequired) {
-                Invoke( new Action( FetchChannels) );
+                Invoke(new Action(FetchChannels));
                 return;
             }
             this.fetchedChannels = new List<Entity>();
-            foreach (var c in this.session.GetChannels()) {
-                this.fetchedChannels.Add( c );
+            foreach (var c in this.session.REST.GetChannels()) {
+                this.fetchedChannels.Add(c);
             }
             this.currentChannel = (Channel)fetchedChannels[0];
-            panel4.FetchMessages( this.currentChannel);
+            panel4.FetchMessages(this.currentChannel);
 
             if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                 Application.Exit();
             }
 
-            
-            
+
+
         }
 
         /// <summary>
@@ -134,15 +127,15 @@ namespace SphereClient {
         /// <param name="index">the id of the channel</param>
         public void SetCurrentViewedChannel(int id) {
             if (InvokeRequired) {
-                Invoke(new Action(()=> { SetCurrentViewedChannel( id); } ));
+                Invoke(new Action(() => { SetCurrentViewedChannel(id); }));
                 return;
             }
-            if(id == this.currentChannel.ChannelId) {
+            if (id == this.currentChannel.ChannelId) {
                 return;
             }
-            IEnumerable<Entity> list = this.fetchedChannels.Where( c => ((Channel)c).ChannelId == id );
+            IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ChannelId == id);
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
-            this.panel4.FetchMessages( this.currentChannel );
+            this.panel4.FetchMessages(this.currentChannel);
         }
 
         /// <summary>
@@ -150,7 +143,7 @@ namespace SphereClient {
         /// </summary>
         public static Form1 Instance {
             get {
-                if(null == Form1._instance) {
+                if (null == Form1._instance) {
                     Form1.Create();
                 }
                 return Form1._instance;
@@ -182,7 +175,7 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_FormClosed( object sender, FormClosedEventArgs e ) {
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             Application.Exit();
         }
 
@@ -192,11 +185,11 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click( object sender, EventArgs e ) {
+        private void button1_Click(object sender, EventArgs e) {
             Entities.Message msg = new Entities.Message();
             msg.Contents = this.richTextBox1.Text;
-            this.session.PostMessageToChannel( msg, this.currentChannel );
-            
+            this.session.REST.PostMessageToChannel(msg, this.currentChannel);
+
         }
 
         /// <summary>
@@ -204,7 +197,7 @@ namespace SphereClient {
         /// </summary>
         public void ShowPreloader() {
             if (InvokeRequired) {
-                Invoke( new Action( ShowPreloader ) );
+                Invoke(new Action(ShowPreloader));
                 return;
             }
             this.preloader.BringToFront();
@@ -215,7 +208,7 @@ namespace SphereClient {
         /// </summary>
         public void HidePreloader() {
             if (InvokeRequired) {
-                Invoke( new Action( HidePreloader ) );
+                Invoke(new Action(HidePreloader));
                 return;
             }
             this.preloader.SendToBack();

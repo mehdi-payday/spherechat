@@ -16,7 +16,7 @@ namespace SphereClient.Sockets {
     public delegate void Receive(string data);
     #endregion Delegates
 
-    class Connection : IDisposable {
+    public class Connection : IDisposable {
         #region Constructors
         public Connection(Configuration config, bool connect = true) {
             Configuration = config;

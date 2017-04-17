@@ -3,8 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace SphereClient.Sockets.Buffers.HTTP {
-
-    class Write : Buffers.Write {
+    public class Write : Buffers.Write {
         private const string NEW_LINE = "\r\n";
 
         public Write(byte[] buffer) : base(buffer) {
