@@ -83,6 +83,7 @@
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\MessageTag.cs" />
     <Compile Include="Entities\PrivateDiscussion.cs" />
+    <Compile Include="Entities\Search.cs" />
     <Compile Include="Entities\Thread.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="FeedBox.cs">

@@ -361,11 +361,12 @@ namespace SphereClient.REST {
         }
 
         public Search SearchAll(string search) {
-            Search s = new Search();
-            s.Channels = GetAllChannels(search);
-            s.Users = GetAllUsers(search);
-            s.IsNull = false;
-            return s;
+            return new Search() {
+                Channels = GetAllChannels(search),
+                Users = GetAllUsers(search),
+
+                IsNull = false
+            };
         }
 
         public Entities.Auth Auth { get; private set; }
