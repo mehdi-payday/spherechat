@@ -99,6 +99,8 @@ namespace SphereClient {
             this.session.WS.OnMessageReceived += OnMessage;
             this.session.WS.OnChannelChange += OnChannelChanged;
             this.session.WS.OnDiscussionChange += OnDiscussionChanged;
+            this.panel7.OnPlusClick += OnCreateDirectMessageThread;
+            this.panel8.OnPlusClick += OnCreateGroupDiscussionThread;
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
             });
@@ -253,7 +255,7 @@ namespace SphereClient {
         /// <param name="e"></param>
         /// <param name="e"></param>
         public void OnCreateDirectMessageThread(object s, EventArgs e ) {
-            MessageBox.Show( "create direct" );
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.DISCUSSION);
 
         }
 
@@ -264,7 +266,7 @@ namespace SphereClient {
         /// <param name="s"></param>
         /// <param name="e"></param>
         public void OnCreateGroupDiscussionThread(object s, EventArgs e ) {
-            CreateDiscussion.Instance.ShowDialog();
+            CreateDiscussion.Instance.Show( Entities.Channel.Types.PRIVATE_CHANNEL);
         }
 
 

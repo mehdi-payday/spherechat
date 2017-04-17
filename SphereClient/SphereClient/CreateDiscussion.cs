@@ -10,6 +10,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SphereClient {
+    struct listItem {
+        public object o;
+        public string s;
+
+        /// <summary>
+        /// struc constructor
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="s"></param>
+        public listItem(object o, string s ) {
+            this.o = o;
+            this.s = s;
+        }
+
+        /// <summary>
+        /// string representation of the object,
+        /// given by the object's "s" property.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
+            return s;
+        }
+    }
+
     public partial class CreateDiscussion : Form {
         private static CreateDiscussion _instance;
 
@@ -18,12 +42,11 @@ namespace SphereClient {
         /// </summary>
         protected CreateDiscussion() {
             InitializeComponent();
-            User[] users = Form1.Instance.session.REST.GetAllUsers().Where( u => u.UserId != Form1.Instance.user?.UserId).ToArray();
+            User[] users = Form1.Instance.session.REST.GetAllUsers().ToArray();
+            MessageBox.Show( users.Count().ToString() );
             foreach(User u in users) {
-                TreeNode t = new TreeNode();
-                t.Text = u.Username;
-                t.Tag = u;
-                this.treeView2.Nodes.Add(t);
+                
+                listBox1.Items.Add( new listItem(u, u.Username) );
             }
         }
 
@@ -42,7 +65,26 @@ namespace SphereClient {
             }
         }
 
+        /// <summary>
+        /// Shows Dialog and sets the default discussion type.
+        /// </summary>
+        /// <param name="type"></param>
+        public void Show(Entities.Channel.Types type) {
+            this.listBox1.SelectedItems.Clear();
+            switch (type) {
+                case Entities.Channel.Types.DISCUSSION:
+                    this.comboBox1.SelectedIndex = 0;
+                    break;
+                case Entities.Channel.Types.PRIVATE_CHANNEL:
+                    this.comboBox1.SelectedIndex = 0;
+                    break;
+                case Entities.Channel.Types.PUBLIC_CHANNEL:
+                    this.comboBox1.SelectedIndex = 0;
+                    break;
+            }
+            this.ShowDialog();
 
+        }
 
         /// <summary>
         /// Triggers when the user clicks on the "Cancel" button.
@@ -72,15 +114,13 @@ namespace SphereClient {
             }
             List<int> checkedNodes = new List<int>();
             checkedNodes.Add((int)Form1.Instance.user?.UserId);
-            foreach(TreeNode t in this.treeView2.Nodes) {
-                if (t.Checked) {
-                    checkedNodes.Add( (int)( (User)t.Tag ).UserId );
-                }
+            foreach( object t in this.listBox1.SelectedItems) {
+                checkedNodes.Add( (int)((User)((listItem)t).o).UserId );
             }
             Channel c = new Channel();
             c.Title = this.textBox1.Text;
             c.ManagerUser = (int)Form1.Instance.user?.UserId;
-
+            c.Members = checkedNodes.ToArray();
             try {
                 Form1.Instance.session.REST.PostChannel( c );
                 MessageBox.Show( "Discussion created successfully." );
