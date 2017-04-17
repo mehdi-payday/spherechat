@@ -79,7 +79,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_listening_date = models.DateTimeField(null=True)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email', ]
 
     def is_human(self):
         return self.type == self.__class__.HUMAN
