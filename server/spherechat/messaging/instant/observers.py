@@ -18,8 +18,16 @@ class ThreadBroadcaster(object):
     def on_message_saved(cls, message):
         thread = message.thread
         thread_comm_service = ThreadCommunicationService()
-        thread_comm_service.thread_change(thread)       
+        thread_comm_service.thread_change(thread)
+
+class MembershipBroadcaster(object):
+    @classmethod
+    def on_create(self, membership):
+        thread = membership.thread
+        thread_comm_service = ThreadCommunicationService()
+        thread_comm_service.thread_change(thread)
 
 Message.objects.register_observer(MessageBroadcaster)
 Message.objects.register_observer(ThreadBroadcaster)
 Membership.objects.register_observer(ThreadBroadcaster)
+Membership.objects.register_observer(MembershipBroadcaster)

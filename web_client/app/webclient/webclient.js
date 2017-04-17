@@ -10,7 +10,9 @@ angular.module('myApp.webclient', ['session', 'auth'])
 	$rootScope.hideFooter = true;
 	
 	$scope.retrieveChannels = function(){
-		$scope.userChannels = messaging.getChannels();
+		messaging.getChannels().$promise.then(function(channels){
+			$scope.userChannels = channels;
+		});
 	}
 	
 	$scope.getUnseenMessagesCount = function(membershipArray){
@@ -42,7 +44,9 @@ angular.module('myApp.webclient', ['session', 'auth'])
 			description: 'descriptionTest',
 			members: []
 		};
-		messaging.createChannel(channel);
+		messaging.createChannel(channel).$promise.then(function(){
+			$scope.retrieveChannels();
+		});
 		$('body').removeClass('mode-panel');
 	}
 	
