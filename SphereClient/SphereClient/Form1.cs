@@ -96,15 +96,24 @@ namespace SphereClient {
         /// and assigns event handlers.
         /// </summary>
         public void Start() {
-            this.session.WS.OnMessageReceived += ( Entities.Message message ) => {
-                this.panel4.OnNewMessage( message );
-            };
+            this.session.WS.OnMessageReceived += OnMessage;
             this.session.WS.OnChannelChange += OnChannelChanged;
             this.session.WS.OnDiscussionChange += OnDiscussionChanged;
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
             });
             t.Start();
+        }
+
+        /// <summary>
+        /// Triggers when a message is received, will add the message
+        /// to the message pane if this the currently viewed pane
+        /// </summary>
+        /// <param name="m"></param>
+        private void OnMessage(Entities.Message m ) {
+            if (this.currentChannel?.ThreadId == m.ThreadId) {
+                this.panel4.OnNewMessage( m );
+            }
         }
 
         /// <summary>
@@ -201,6 +210,9 @@ namespace SphereClient {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Send_Message_Click(object sender, EventArgs e) {
+            if(string.IsNullOrEmpty(this.richTextBox1.Text) || string.IsNullOrWhiteSpace( this.richTextBox1.Text )) {
+                return;
+            }
             Entities.Message msg = new Entities.Message();
             msg.Contents = this.richTextBox1.Text;
             this.session.REST.PostMessageToChannel(msg, (Channel)this.currentChannel);
@@ -275,6 +287,29 @@ namespace SphereClient {
         /// <param name="e"></param>
         private void editProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             EditProfile.Instance.ShowDialog();
+        }
+
+        /// <summary>
+        /// Triggered when the text in the "send message" richtextbox changes.
+        /// Disables or enables the send button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void richTextBox1_TextChanged( object sender, EventArgs e ) {
+            if(this.richTextBox1.Text.Length > 0) {
+                this.sendMessage.Enabled = true;
+            }else {
+                this.sendMessage.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Scrolls the messagebox to the newly added control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panel4_ControlAdded( object sender, ControlEventArgs e ) {
+            this.panel4.ScrollControlIntoView( e.Control );
         }
     }
 }

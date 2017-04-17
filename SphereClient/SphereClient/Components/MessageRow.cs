@@ -39,6 +39,8 @@ namespace SphereClient.Components {
 
             this.Width = this.parent.Width;
 
+            this.usernameLabel.Height = 15;
+
             this.image.Size = Constants.MEDIUM_IMAGE_SIZE;
             this.image.Left = Constants.MARGIN_SMALL.Left;
             this.image.Top = Constants.MARGIN_SMALL.Top;
@@ -50,15 +52,14 @@ namespace SphereClient.Components {
                 this.image.LoadAsync( usr.ProfilePicture);
             } else {
                 this.image.Image = Properties.Resources.default_user_image;
-            }            
-            
+            }
             this.textPane.Left = this.image.Left + this.image.Width + Constants.MARGIN_SMALL.Right;
-            this.textPane.Top = Constants.MARGIN_SMALL.Top;
+            this.textPane.Top = Constants.MARGIN_SMALL.Bottom + this.usernameLabel.Height;
             this.textPane.MaximumSize = new Size((int)(0.8f * this.Width), int.MaxValue);
             this.textPane.BackColor = message_bg_color;
             this.textPane.BackgroundImage = Constants.TRANSPARENT_GRADIENT_VERTICAL;
             this.textPane.BackgroundImageLayout = ImageLayout.Stretch;
-            this.textPane.AutoSize = true;
+            this.textPane.MinimumSize = new Size( 100, 0 );
 
             this.text.Left = Constants.MARGIN_SMALL.Left;
             this.text.Top = Constants.MARGIN_SMALL.Top;
@@ -68,17 +69,18 @@ namespace SphereClient.Components {
             this.text.ForeColor = message_text_color;
             
             this.textPane.Height = Constants.MARGIN_SMALL.Top + this.text.Height + Constants.MARGIN_SMALL.Bottom;
-            this.textPane.Width = Constants.MARGIN_SMALL.Left + this.text.Width + Constants.MARGIN_SMALL.Right;
+            this.textPane.Width = Constants.MARGIN_SMALL.Left + this.text.PreferredSize.Width + Constants.MARGIN_SMALL.Right;
             this.textPane.Controls.Add( this.text );
             this.textPane.AutoSize = true;
 
-            if(this.textPane.Height < this.image.Height) {
+            if(this.textPane.Height + this.usernameLabel.Height < this.image.Height) {
                 this.Height = this.image.Height + Constants.MARGIN_SMALL.Top + Constants.MARGIN_SMALL.Bottom;
                 this.textPane.Top = this.image.Top + this.image.Height - this.textPane.Height;
             } else {
-                this.Height = this.textPane.Height + Constants.MARGIN_SMALL.Top + Constants.MARGIN_SMALL.Bottom;
+                this.Height = this.textPane.Height + this.usernameLabel.Height + Constants.MARGIN_SMALL.Top + Constants.MARGIN_SMALL.Bottom;
                 this.image.Top = this.textPane.Top + this.textPane.Height - this.image.Height;
             }
+            this.Height += Constants.MARGIN_SMALL.Top;
 
             this.timestampLabel.Text = this.message.SentDate.ToString();
             this.timestampLabel.Left = this.Width - this.timestampLabel.Width - Constants.MARGIN_SMALL.Right;
@@ -87,16 +89,16 @@ namespace SphereClient.Components {
 
             if (this.ismine) {
                 this.image.Left = this.timestampLabel.Left - Constants.MARGIN_SMALL.Left - this.image.Width - Constants.MARGIN_SMALL.Right;
-                this.textPane.Left = this.image.Left - (Constants.MARGIN_SMALL.Left +
-                   this.textPane.Width);
+                this.textPane.Left = this.image.Left -
+                    (Constants.MARGIN_SMALL.Left + this.textPane.PreferredSize.Width);
 
             }
 
             this.usernameLabel.Left = this.textPane.Left;
             this.usernameLabel.Font = Constants.MESSAGE_USERNAME_FONT;
-            this.usernameLabel.Text = channel.Memberships.Where( m => m.UserId == message.UserId ).Select( m => m.UserDetails.Username ).FirstOrDefault();
-            this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Top = this.textPane.Top - (this.usernameLabel.Height + Constants.MARGIN_SMALL.Bottom);
+            this.usernameLabel.Text = channel.Memberships.Where( m => m.UserId == message.UserId ).Select( m => m.UserDetails.Username ).First() ?? string.Empty;
+            this.usernameLabel.Width = this.textPane.Width;
+            
 
             this.Controls.Add(this.image);
             this.Controls.Add( this.textPane );

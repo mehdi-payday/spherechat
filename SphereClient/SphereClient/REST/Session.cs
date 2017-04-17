@@ -115,6 +115,43 @@ namespace SphereClient.REST {
             }.POST(Parser.EntitytoJSON(channel, typeof(Channel)))) { }
         }
 
+        public Cursor<PrivateDiscussion> GetPrivateDiscussions(string page = "1") {
+            Cursor<PrivateDiscussion> cursor = new Cursor<PrivateDiscussion>();
+            using (var request = new Messaging.PrivateDiscussion.Base() {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.GET(page != null ? new Dictionary<string, string>() {
+                { "page", page }
+            } : null)) {
+                cursor.AddRange((PrivateDiscussion[])Parser.JSONtoEntity(request.Payload, typeof(PrivateDiscussion[])));
+                cursor.Next = request.Payload.next.ToString();
+                cursor.Previous = request.Payload.previous.ToString();
+
+                return cursor;
+            }
+        }
+
+        public PrivateDiscussion[] GetAllPrivateDiscussions() {
+            Cursor<PrivateDiscussion> cursor = new Cursor<PrivateDiscussion>();
+            do {
+                using (var request = new Messaging.PrivateDiscussion.Base() {
+                    DefaultHeaders = new WebHeaderCollection() {
+                        { HttpRequestHeader.Accept, "application/json" },
+                        { HttpRequestHeader.ContentType, "application/json" },
+                        { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                    }
+                }.GET(!string.IsNullOrEmpty(cursor.Next) ? ExtractQueryString(cursor.Next) : null)) {
+                    cursor.AddRange((PrivateDiscussion[])Parser.JSONtoEntity(request.Payload, typeof(PrivateDiscussion[])));
+                    cursor.Next = request.Payload.next.ToString();
+                    cursor.Previous = request.Payload.previous.ToString();
+                }
+            } while (!string.IsNullOrEmpty(cursor.Next));
+            return cursor.ToArray();
+        }
+
         public Cursor<Channel> GetChannels(string page = "1") {
             Cursor<Channel> cursor = new Cursor<Channel>();
             using (var request = new Messaging.Channel.Base() {

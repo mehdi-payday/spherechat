@@ -1,6 +1,7 @@
 ﻿using SphereClient.Entities;
 using SphereClient.REST;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace SphereClient.Sockets {
@@ -21,6 +22,13 @@ namespace SphereClient.Sockets {
         public event NewFriendRequest OnNewFriendshipRequest;
         public event FriendshipAdressed OnFriendshipAdressed;
 
+        private Dictionary<int, Entity> subscriptions = new Dictionary<int, Entity>();
+
+        /// <summary>
+        /// Contructeur de la session WS
+        /// </summary>
+        /// <param name="config">Objet de configurtion du WS</param>
+        /// <param name="session">Objet du REST API pour l'authentification</param>
         public Session(Configuration config, REST.Session session) {
             conn = new Connection(config, false);
             this.session = session;
@@ -33,27 +41,40 @@ namespace SphereClient.Sockets {
             conn.Connect();
         }
 
+        /// <summary>
+        /// Envoie un message dans la connexion du WS
+        /// </summary>
+        /// <param name="data">Données a envoyer</param>
         private void Send(string data) {
             conn.Send(
                 new Buffers.WebSocket.Write(
                     Encoding.UTF8.GetBytes(data)));
         }
 
+        /// <summary>
+        /// Évènement déclenché lors de la réception de données du serveur
+        /// </summary>
+        /// <param name="data">Données venant du serveur</param>
         private void Conn_OnReceive(string data) {
             string command = data.Split(':')[0];
             dynamic json = JSON.Parse(data.Substring(data.IndexOf(':') + 1));
 
+            Console.WriteLine(data);
             switch ((string)json.type.ToString()) {
                 case "authenticate":
                     if (json.success == true) {
-                        foreach (var channel in session.GetAllChannels()) {
-                            Send("!subscribe:messaging,threads." + channel.ThreadId);
+                        Send("!subscribe:messaging,users." + session.GetProfile().UserId);
+
+                        foreach (var c in session.GetAllChannels()) {
+                            Send("!subscribe:messaging,threads." + c.ThreadId);
+                            subscriptions.Add(c.ThreadId, c);
                         }
 
-                        foreach (var friendship in session.GetAllFriendships()) {
-                            if (friendship.Active)
-                                Send("!subscribe:messaging,users." + friendship.Addresser);
+                        foreach (var p in session.GetAllPrivateDiscussions()) {
+                            Send("!subscribe:messaging,threads." + p.ThreadId);
+                            subscriptions.Add(p.ThreadId, p);
                         }
+
 
                         Console.WriteLine("Authenticated !");
                     }
@@ -67,13 +88,26 @@ namespace SphereClient.Sockets {
                     }
                     else {
                         Console.WriteLine("Unable to subscribe to " + json.payload.channel);
+                        subscriptions.Remove(Convert.ToInt32(((string)json.payload.channel).Split('.')[1]));
                     }
                     break;
                 case "discussion_change":
+                    PrivateDiscussion discussion = Parser.JSONtoEntity(json.payload, typeof(PrivateDiscussion));
+                    if (!subscriptions.ContainsKey(discussion.ThreadId)) {
+                        subscriptions.Add(discussion.ThreadId, discussion);
+                        Send("!subscribe:messaging,threads." + discussion.ThreadId);
+                    }
+
                     OnDiscussionChange?.Invoke(Parser.JSONtoEntity(json.payload, typeof(PrivateDiscussion)));
                     break;
                 case "channel_change":
-                    OnChannelChange?.Invoke(Parser.JSONtoEntity(json.payload, typeof(Channel)));
+                    Channel channel = Parser.JSONtoEntity(json.payload, typeof(Channel));
+                    if (!subscriptions.ContainsKey(channel.ThreadId)) {
+                        subscriptions.Add(channel.ThreadId, channel);
+                        Send("!subscribe:messaging,threads." + channel.ThreadId);
+                    }
+
+                    OnChannelChange?.Invoke(channel);
                     break;
                 case "new_friend_request":
                     OnNewFriendshipRequest?.Invoke(Parser.JSONtoEntity(json.payload, typeof(FriendRequest)));
@@ -90,6 +124,9 @@ namespace SphereClient.Sockets {
             }
         }
 
+        /// <summary>
+        /// Évènement déclenché lors de la déconnexion du WS
+        /// </summary>
         private void Conn_OnDisconnect() {
             Console.WriteLine("WebSocket disconnected.. Reconnecting in 5 seconds");
             new System.Threading.Thread(() => {
@@ -98,10 +135,16 @@ namespace SphereClient.Sockets {
             }).Start();
         }
 
+        /// <summary>
+        /// Évènement déclenché lors du handshake du WS
+        /// </summary>
         private void Conn_OnConnecting() {
             Console.WriteLine("Connecting..");
         }
 
+        /// <summary>
+        /// Évènement déclenché lors de la connexion du WS
+        /// </summary>
         private Guid guid = Guid.NewGuid();
         private void Conn_OnConnected() {
             conn.Send(

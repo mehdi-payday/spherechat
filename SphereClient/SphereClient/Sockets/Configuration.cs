@@ -19,6 +19,9 @@ namespace SphereClient.Sockets {
         public int Port { get; set; }
         public string Hostname { get; set; }
 
+        /// <summary>
+        /// Identifieur unique pour le WS
+        /// </summary>
         static private string guid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
         private string AcceptKey(string key) {
             string longKey = key + guid;
@@ -27,6 +30,9 @@ namespace SphereClient.Sockets {
             return Convert.ToBase64String(hashBytes);
         }
 
+        /// <summary>
+        /// Handshake pour passer de HTTP à WS
+        /// </summary>
         public Buffers.HTTP.Write HelloServer {
             get {
                 return new Buffers.HTTP.Write(new byte[] { }, new Dictionary<string, string>() {
