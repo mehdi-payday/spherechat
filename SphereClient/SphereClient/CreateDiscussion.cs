@@ -18,7 +18,6 @@ namespace SphereClient {
         /// </summary>
         protected CreateDiscussion() {
             InitializeComponent();
-            this.treeView2.BeginUpdate();
             User[] users = Form1.Instance.session.REST.GetAllUsers().Where( u => u.UserId != Form1.Instance.user?.UserId).ToArray();
             foreach(User u in users) {
                 TreeNode t = new TreeNode();
@@ -26,8 +25,6 @@ namespace SphereClient {
                 t.Tag = u;
                 this.treeView2.Nodes.Add(t);
             }
-            this.treeView2.EndUpdate();
-            this.treeView2.ExpandAll();
         }
 
         /// <summary>
