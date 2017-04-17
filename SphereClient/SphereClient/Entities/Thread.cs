@@ -6,9 +6,12 @@ namespace SphereClient.Entities {
         public string Title { get; set; }
         public Types Type { get; set; }
         public string Description { get; set; }
+        public int CreatorUser { get; set; }
         public int ManagerUser { get; set; }
         public User ManagerDetails { get; set; }
         public Membership Membership { get; set; }
+        public Membership[] Memberships { get; set; }
+
         public bool IsNull { get; set; }
 
         public string ToText() {

@@ -146,7 +146,7 @@ namespace SphereClient.Components {
         public void OnRowLabelClick(object s, EventArgs e) {
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 if (null != ((ImageAndTitleRow)s).entity) {
-                    Form1.Instance.SetCurrentViewedChannel(((Channel)((ImageAndTitleRow)s).entity).ChannelId);
+                    Form1.Instance.SetCurrentViewedChannel(((Channel)((ImageAndTitleRow)s).entity).ThreadId);
                 }
                 else {
                     MessageBox.Show("an entity was null in the group imageandtitlelistpane");

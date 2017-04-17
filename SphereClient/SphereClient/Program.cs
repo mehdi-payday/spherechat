@@ -8,7 +8,7 @@ namespace SphereClient {
         /// </summary>
         [STAThread]
         static void Main() {
-            string mode = "console";
+            string mode = "form";
 
             if (mode == "form") {
                 Application.EnableVisualStyles();
@@ -18,14 +18,14 @@ namespace SphereClient {
             else if (mode == "console") {
                 Console.Title = "SphereChat";
                 using (var session = new Session("sphereman", "spherique")) {
-                    var curr = session.REST.GetChannels()[0];
+                    var channels = session.REST.GetAllChannels();
 
                     string line;
                     while (!string.IsNullOrEmpty((line = Console.ReadLine()))) {
                         session.REST.PostMessageToChannel(new Entities.Message() {
                             Contents = line,
                             Tags = new Entities.MessageTag[] { }
-                        }, curr);
+                        }, channels[0]);
                     }
                 }
             }

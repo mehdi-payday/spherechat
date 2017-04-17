@@ -83,13 +83,18 @@ namespace SphereClient {
         public void Connect(string username, string password) {
             this.session = new Session(username, password);
             this.user = this.session.REST.GetProfile();
-
+            this.label1.Text = this.user.Value.FirstName + " " + this.user.Value.LastName;
+            this.pictureBox19.LoadAsync(this.user.Value.ProfilePicture ?? "https://www.smashingmagazine.com/wp-content/uploads/2015/06/10-dithering-opt.jpg" );
         }
 
         /// <summary>
-        /// Starts the main application logic loop.
+        /// Starts the main application logic loop
+        /// and assigns event handlers.
         /// </summary>
         public void Start() {
+            this.session.WS.OnMessageReceived += ( Entities.Message message ) => {
+                this.panel4.OnNewMessage( message );
+            };
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
             });
@@ -110,12 +115,21 @@ namespace SphereClient {
             foreach (var c in this.session.REST.GetChannels()) {
                 this.fetchedChannels.Add(c);
             }
-            this.currentChannel = (Channel)fetchedChannels[0];
-            panel4.FetchMessages(this.currentChannel);
 
-            if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
-                Application.Exit();
+            try {
+                this.currentChannel = (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel() );
+                panel4.FetchMessages( this.currentChannel );
+                if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
+                    MessageBox.Show("failed to create the sidepanel(s).");
+                    Application.Exit();
+                }
+            } catch (Exception ex) {
+                MessageBox.Show( ex.Message );
             }
+            
+            
+
+            
 
 
 
@@ -130,10 +144,10 @@ namespace SphereClient {
                 Invoke(new Action(() => { SetCurrentViewedChannel(id); }));
                 return;
             }
-            if (id == this.currentChannel.ChannelId) {
+            if (id == this.currentChannel.ThreadId) {
                 return;
             }
-            IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ChannelId == id);
+            IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ThreadId == id);
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
             this.panel4.FetchMessages(this.currentChannel);
         }
@@ -212,6 +226,10 @@ namespace SphereClient {
                 return;
             }
             this.preloader.SendToBack();
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            EditProfile.Instance.ShowDialog();
         }
     }
 }
