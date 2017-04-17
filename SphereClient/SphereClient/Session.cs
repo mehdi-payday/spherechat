@@ -7,6 +7,9 @@ namespace SphereClient {
 
         public Session(string username, string password) {
             REST = new REST.Session(username, password);
+        }
+
+        public void ConnectWS() {
             WS = new Sockets.Session(new Sockets.Configuration("spherechat.tk", 4242, "/ec", DateTime.Now.Ticks.ToString()), REST);
         }
 
