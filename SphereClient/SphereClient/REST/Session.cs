@@ -360,6 +360,18 @@ namespace SphereClient.REST {
             return cursor.ToArray();
         }
 
+        public void PostUserToChannel(int cId, int[] users) {
+            using (var request = new Messaging.Channel.AddMembers.Base(cId) {
+                DefaultHeaders = new WebHeaderCollection() {
+                    { HttpRequestHeader.Accept, "application/json" },
+                    { HttpRequestHeader.ContentType, "application/json" },
+                    { HttpRequestHeader.Authorization, "Token " + Auth.Token }
+                }
+            }.POST(JSON.Stringify(new {
+                members = users
+            }))) { }
+        }
+
         public Search SearchAll(string search) {
             return new Search() {
                 Channels = GetAllChannels(search),
