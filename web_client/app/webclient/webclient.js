@@ -58,5 +58,9 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		delete $scope.channelSelected;
 	}
 	
+	$scope.sendMessage = function(){
+		
+	}
+	
 	$scope.retrieveChannels();
 }]);

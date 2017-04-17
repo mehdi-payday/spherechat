@@ -1,114 +1,5 @@
     <div id="react">
       <div data-reactroot="" id="markup" class="theme-sidebar-default" style="display: table-row-group;">
-        
-        
-        
-<!--         <aside id="sidebar" style="margin-left: 0"> -->
-<!--           <div id="sidebarContent" data-super-overflow="true" data-scrolling="false"> -->
-<!--             <div id="container"> -->
-<!--               <div class="messenger" style="background-color: #fff;"> -->
-<!--                 <div class="messenger-background"></div> -->
-<!--                 <span> -->
-<!--                   <div class="conversations"> -->
-<!--                     <div class="conversations-header"> -->
-<!--                       <div class="header-buttons"> -->
-<!--                         <div id="closeConvo" class="header-buttons-back hide-desktop"> -->
-<!--                           <div class="header-buttons-back-contents"></div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                       <div class="conversations-header-body"> -->
-<!--                         <div class="conversations-header-title">ShereChat</div> -->
-<!--                         <div class="conversations-header-app-name">Inbox</div> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                     <div class="conversations-body"> -->
-<!--                       <div id="sidepanel"> -->
-<!--                         <div class="app-wrapp" id="people-list"> -->
-<!--                           <div class="app-container"> -->
-<!--                             <div class="view-main"> -->
-<!--                               <div id="profile"> -->
-<!--                                 <div class="wrap"> -->
-<!--                                   <img id="profile-img" src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B" class="online" alt="" /> -->
-                                  
-<!--                                   <p>@{{session.getCurrentUser().username}}  <span class="octicon octicon-verified verified-color"></span></p> -->
-<!--                                   <i class="ion-ios-arrow-down expand-button" aria-hidden="true"></i> -->
-<!--                                   <div id="status-options"> -->
-<!--                                     <ul> -->
-<!--                                       <li id="status-online" class="active"> -->
-<!--                                         <span class="status-circle"></span>  -->
-<!--                                         <p>Online</p> -->
-<!--                                       </li> -->
-<!--                                       <li id="status-away"> -->
-<!--                                         <span class="status-circle"></span>  -->
-<!--                                         <p>Away</p> -->
-<!--                                       </li> -->
-<!--                                       <li id="status-busy"> -->
-<!--                                         <span class="status-circle"></span>  -->
-<!--                                         <p>Busy</p> -->
-<!--                                       </li> -->
-<!--                                       <li id="status-offline"> -->
-<!--                                         <span class="status-circle"></span>  -->
-<!--                                         <p>Offline</p> -->
-<!--                                       </li> -->
-<!--                                     </ul> -->
-<!--                                   </div> -->
-<!--                                   <div id="expanded"> -->
-<!--                                     <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label> -->
-<!--                                     <input name="twitter" type="text" ng-value="session.getCurrentUser().username" /> -->
-<!--                                     <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label> -->
-<!--                                     <input name="twitter" type="text" ng-value="session.getCurrentUser().username" /> -->
-<!--                                     <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label> -->
-<!--                                     <input name="twitter" type="text" ng-value="session.getCurrentUser().username" /> -->
-<!--                                   </div> -->
-<!--                                 </div> -->
-<!--                               </div> -->
-<!--                             </div> -->
-<!--                           </div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                       <div class="contacts"> -->
-<!--                         <nav  class="contacts-nav"> -->
-<!--                           <ul> -->
-<!--                             <li><a href="">Contacts</a></li> -->
-<!--                             <li class="active"><a href="">Recent</a></li> -->
-<!--                             <li>All <i class="ion-ios-arrow-down expand-button" aria-hidden="true"></i></li> -->
-<!--                           </ul> -->
-<!--                         </nav> -->
-<!--                       </div> -->
-<!--                       <div class="conversations-body-conversations"> -->
-                      
-<!--                         <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="0.8s"> -->
-<!--                           <div class="conversation-summary-avatar"> -->
-<!--                             <div class="team-avatar-container"> -->
-<!--                               <img class="team-avatar team-avatar-large" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61"> -->
-<!--                             </div> -->
-<!--                           </div> -->
-<!--                           <div class="conversation-summary-body"> -->
-<!--                             <div class="conversation-summary-meta"> -->
-<!--                               <div class="conversation-summary-body-author">Sash</div> -->
-<!--                               <div class="conversation-summary-timestamp">Just Now</div> -->
-<!--                             </div> -->
-<!--                             <div class="conversation-summary-content"> -->
-<!--                               <div class="conversation-summary-content-container"> -->
-<!--                                 <div class="conversation-summary-content-text">Welcome to ShereChat!</div> -->
-<!--                                 <notif class="card-face__bullet">5</notif> -->
-<!--                               </div> -->
-<!--                             </div> -->
-<!--                           </div> -->
-<!--                         </div> -->
-                        
-<!-- 	                    <div class="conversations-footer wow fadeInUp" data-wow-delay="0.8s"> -->
-<!-- 	                      <button class="conversations-new-conversation-button"> -->
-<!-- 	                      <span>New Conversation</span> -->
-<!-- 	                      </button> -->
-<!-- 	                    </div> -->
-                    
-<!--                   	</div> -->
-<!--                 </span> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--           </div> -->
-<!--         </aside> -->
 
         <aside id="sidebar" style="margin-left: 0">
           <div id="sidebarContent" data-super-overflow="true" data-scrolling="false">
@@ -119,7 +10,7 @@
                   <div class="conversations">
                     <div class="conversations-header">
                       <div class="header-buttons">
-                        <div id="closeConvo" class="header-buttons-back hide-desktop">
+                        <div id="closeConvo" class="header-buttons-back hide-desktop" ui-sref="main">
                           <div class="header-buttons-back-contents"></div>
                         </div>
                       </div>
@@ -227,14 +118,13 @@
                   <ul class="Sidebar-nav-list">
                     <li class="Sidebar-nav-list-item ion-person-add wow fadeInLeft" data-wow-delay="0.1s"></li>
 <!--                     <li class="Sidebar-nav-list-item ion-person-stalker wow fadeInLeft" data-wow-delay="0.2s" ng-click="retrieveChannels()"></li> -->
-                    <li class="Sidebar-nav-list-item ion-android-notifications wow fadeInLeft" data-wow-delay="0.3s">
-                      <notif class="card-face__bullet friend-request-notif">3</notif>
-                    </li>
+<!--                     <li class="Sidebar-nav-list-item ion-android-notifications wow fadeInLeft" data-wow-delay="0.3s"> -->
+<!--                       <notif class="card-face__bullet friend-request-notif">3</notif> -->
+<!--                     </li> -->
                     <li class="Sidebar-nav-list-item ion-levels wow fadeInLeft" data-wow-delay="0.4s"></li>
                     <li class="Sidebar-nav-list-item ion-chatboxes Sidebar-nav-list-item-active wow fadeInLeft" data-wow-delay="0.5s">
-                      <notif class="card-face__bullet friend-request-notif">8</notif>
+                      <notif class="card-face__bullet friend-request-notif">*X*</notif>
                     </li>
-                    <!-- Sidebar-nav-list-item-active -->
                     <li class="Sidebar-nav-list-item ion-document wow fadeInLeft" data-wow-delay="0.6s"></li>
                     <li class="Sidebar-nav-list-item ion-log-out wow fadeInLeft" data-wow-delay="0.7s" data-toggle="modal" data-target="#bs-example-modal-sm"></li>
                     <li id="active-line"></li>
@@ -739,97 +629,7 @@
           </div>
         </aside>
         
-<!--         Channel Pannel -->
-        
-<!--         <aside id="groups-panel"> -->
-<!--           <div id="groupsPanelContent" data-super-overflow="true" data-scrolling="false"> -->
-<!--             <div id="container"> -->
-<!--               <div class="messenger" style="background-color: #fff;"> -->
-<!--                 <div class="messenger-background"></div> -->
-<!--                 <span> -->
-<!--                   <div class="conversations"> -->
-<!--                     <div class="conversations-header"> -->
-<!--                       <div class="header-buttons"> -->
-<!--                         <div id="closeConvo" class="header-buttons-back hide-desktop"> -->
-<!--                           <div class="header-buttons-back-contents"></div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                       <div class="conversations-header-body"> -->
-<!--                         <div class="conversations-header-title">ShereChat</div> -->
-<!--                         <div class="conversations-header-app-name">Channels</div> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                     <div class="conversations-body"> -->
-<!--                       <div id="sidepanel"> -->
-<!--                         <div class="app-wrapp" id="people-list"> -->
-<!--                           <div class="app-container"> -->
-<!--                             <div class="view-main"> -->
-<!--                               <div id="profile"> -->
-<!--                                 <div class="wrap"> -->
-<!--                                   <p>@HomerunHitz <span class="octicon octicon-verified verified-color"></span></p> -->
-<!--                                   <i class="ion-ios-arrow-down expand-button expand-button-settings" aria-hidden="true"></i> -->
-<!--                                   <div id="expanded2"> -->
-<!--                                     <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label> -->
-<!--                                     <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label> -->
-<!--                                     <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label> -->
-<!--                                   </div> -->
-<!--                                 </div> -->
-<!--                               </div> -->
-<!--                             </div> -->
-<!--                           </div> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                       <div class="contacts"> -->
-<!--                         <nav  class="contacts-nav"> -->
-<!--                           <ul> -->
-<!--                             <li><a href="">Contacts</a></li> -->
-<!--                             <li class="active"><a href="">Recent</a></li> -->
-<!--                             <li>All <i class="ion-ios-arrow-down expand-button" aria-hidden="true"></i></li> -->
-<!--                           </ul> -->
-<!--                         </nav> -->
-<!--                       </div> -->
-<!--                       <div class="conversations-body-conversations"> -->
-                      
-<!--                       	<div ng-repeat="channel in userChannels.results"> -->
-                      	
-<!-- 	                        <div class="conversation-summary conversation-summary-0 wow fadeInDown" data-wow-delay="1s"> -->
-<!-- 	                          <div class="conversation-summary-avatar"> -->
-<!-- 	                            <div class="team-avatar-container"> -->
-<!-- 	                              <img class="team-avatar team-avatar-small first-of-three-admins" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/17437883_248906178905726_5491842417877319680_n.jpg"> -->
-<!-- 	                              <img class="team-avatar team-avatar-small second-of-three-admins" src="https://ca.slack-edge.com/T0RTZFLE6-U0RTNPV2T-c65a8dc1343f-1024"> -->
-<!-- 	                              <img class="team-avatar team-avatar-small third-of-three-admins" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61"> -->
-<!-- 	                            </div> -->
-<!-- 	                          </div> -->
-<!-- 	                          <div class="conversation-summary-body"> -->
-<!-- 	                            <div class="conversation-summary-meta"> -->
-<!-- 	                              <div class="conversation-summary-body-author">Channel: {{channel.title}}</div> -->
-<!-- 	                              <div class="conversation-summary-timestamp" ng-show="getUnseenMessagesCount(channel.memberships) > 0">{{getLastSeenDateDelta(channel.memberships)}}d ago</div> -->
-<!-- 	                            </div> -->
-<!-- 	                            <div class="conversation-summary-content"> -->
-<!-- 	                              <div class="conversation-summary-content-container"> -->
-<!-- 	                                <div class="conversation-summary-content-text">{{channel.description}}</div> -->
-<!-- 	                                <notif class="card-face__bullet" ng-show="getUnseenMessagesCount(channel.memberships) > 0">{{getUnseenMessagesCount(channel.memberships)}}</notif> -->
-<!-- 	                              </div> -->
-<!-- 	                            </div> -->
-<!-- 	                          </div> -->
-<!-- 	                        </div> -->
-	                        
-<!--                         </div> -->
-                        
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                     <div class="conversations-footer wow bounceIn" data-wow-delay="1s"> -->
-<!--                       <button class="conversations-new-conversation-button"> -->
-<!--                       	<span>New Channel</span> -->
-<!--                       </button> -->
-<!--                     </div> -->
-<!--                   </div> -->
-<!--                 </span> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--           </div> -->
-<!--         </aside> -->
-        
+		<!-- Conversation -->
         
         <div id="sidebar-black-overlay"></div>
         <div id="sidemenumain-black-overlay"></div>
@@ -847,7 +647,10 @@
             <div id="mainBody2" class="status-no_items">
               <div class="centerContentWrap desktop-behavior content-wrap chat-bg">
                 <div class="centerContent">
-                  <div id="no-message" class="centerContentBlock">
+                  
+				<!-- Middle empty section -->
+				
+                  <div id="no-message" class="centerContentBlock" ng-hide="channelSelected">
                     <div>
                       <img srcset="img/content.png 1x, img/content.png 2x" src="img/content.png" height="154">
                       <h2 class="headLabel">No Messages selected</h2>
@@ -857,9 +660,13 @@
                       </a>
                     </div>
                   </div>
+                  
                   <div id="has-message" class="comments-wrapper">
                     <ul class="medias py-md-5 my-md-5 px-sm-0">
-                      <!-- Template for the incoming messages -->
+                    
+                    
+                    
+                      <!-- Template for the Sender messages -->
                       <div class="parent">
                         <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -876,7 +683,7 @@
                       </div>
                       <!-- End -->  
                       
-                      <!-- Template for the mesages you're sending -->
+                      <!-- Template for the receiver mesages -->
                       <div class="">
                         <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
                           <div class="wrapper">
@@ -888,126 +695,6 @@
                             <div class="comment-self right">
                               <p class="messenger-bulle hoverable">Yea it is!! This web app is dope af Im proud of you lil bro<span class="meta meta-right"><i class="seen ion-checkmark verified-color" style="font-size: 15px;"></i> 11 April 2017, 17 h 58</span>
                               </p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End -->
-                      
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">Hey wassup bro how you doing?<span class="meta">11 April 2017, 18 h 00</span></p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End -->  
-                      
-                      <!-- Template for the mesages you're sending -->
-                      <div class="">
-                        <li class="children comment byuser comment-author-aymene bypostauthor odd alt depth-2  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="right" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div class="comment-self right">
-                              <p class="messenger-bulle hoverable">Im bless bro thanks! Bro how did you do all this? Im impressed<span class="meta meta-right"><i class="seen ion-checkmark verified-color" style="font-size: 15px;"></i> 11 April 2017, 18 h 00</span>
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End -->
-                      
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">It wasnt easy you know<span class="meta">11 April 2017, 18 h 01</span></p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End --> 
-                      
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">Me and my team did it SphereChat using multiple technologies<span class="meta">11 April 2017, 18 h 01</span></p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End --> 
-                      
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">And we only had 5 weeks to complete it!<span class="meta">11 April 2017, 18 h 02</span></p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End --> 
-                      
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">I'll tell you more when we meet.<span class="meta">11 April 2017, 18 h 02</span></p>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                      <!-- End --> 
-                      
-                      <!-- Template for the incoming messages -->
-                      <div class="parent">
-                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
-                          <div class="wrapper">
-                            <div class="avatar">
-                              <a data-toggle="tooltip" data-placement="left" data-html="true" title="" href="" class="media-object float-left" data-original-title="aymene">
-                              <img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-                              </a>
-                            </div>
-                            <div id="div-comment-15" class="comment-self left">
-                              <p class="messenger-bulle hoverable">Welcome to ShereChat!<span class="meta">11 April 2017, 18 h 03</span></p>
                             </div>
                           </div>
                         </li>
@@ -1039,11 +726,18 @@
                       <!-- End -->  
                       
                     </ul>
+                    
+                    
+                    
                   </div>
+                  
+                  
+                  
                 </div>
               </div>
             </div>
-            <div id="intercom-container" style="z-index: 8;">
+            
+            <div id="intercom-container" style="z-index: 8;" ng-show="channelSelected">
               <div class="intercom-messenger">
                 <div class="intercom-messenger-background"></div>
                 
@@ -1051,12 +745,14 @@
                   <div class="intercom-conversation">
                     <div class="intercom-conversation-footer" style="margin-top: -400px;">
                       <div class="intercom-composer">
+                        
                         <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
+                        
                         <div class="intercom-composer-buttons">
                           <button class="intercom-composer-gif-button"></button>
                           <button class="intercom-composer-emoji-button"></button>
                           <div class="intercom-composer-upload-button"></div>
-                          <button class="intercom-composer-send-button"></button>
+                          <button class="intercom-composer-send-button" ng-click="sendMessage()"></button>
                         </div>
                       </div>
                     </div>
@@ -1065,6 +761,8 @@
                 
               </div>
             </div>
+            
+            
           </section>
         </div>
       </div>
@@ -1077,7 +775,9 @@
             <h4>Logout <i class="fa fa-lock"></i></h4>
           </div>
           <div class="modal-body">Are you sure you want to log-off?</div>
-          <div class="modal-footer"><a href="javascript:;" class="btn btn-primary btn-block">Logout</a></div>
+          <div class="modal-footer">
+          	<a class="btn btn-primary btn-block" ng-click="logout()">Logout</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1133,26 +833,4 @@
 		  
 		  $("#status-options").removeClass("active");
 		});
-
-// (function(){
-  
-//   var searchFilter = {
-//     options: { valueNames: ['name'] },
-//     init: function() {
-//       var userList = new List('people-list', this.options);
-//       var noItems = $('<li id="no-items-found">No items found</li>');
-      
-//       userList.on('updated', function(list) {
-//         if (list.matchingItems.length === 0) {
-//           $(list.list).append(noItems);
-//         } else {
-//           noItems.detach();
-//         }
-//       });
-//     }
-//   };
-  
-//   searchFilter.init();
-  
-// })();
     </script>
