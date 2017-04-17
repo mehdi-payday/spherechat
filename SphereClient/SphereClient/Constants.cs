@@ -32,6 +32,7 @@ namespace SphereClient {
         //FONTS
         public static readonly Font BIG_BOLD_FONT = new Font( "Microsoft Sans Serif", 12.0f, FontStyle.Bold, GraphicsUnit.Point );
         public static readonly Font SECTION_TITLE_FONT = new Font( "Microsoft Sans Serif", 14.25f, FontStyle.Bold, GraphicsUnit.Point );
+        public static readonly Font MESSAGE_USERNAME_FONT = new Font( "Microsoft Sans Serif", 10.0f, FontStyle.Bold, GraphicsUnit.Point );
 
         //MESSAGES
         public static readonly int MAX_MESSAGE_PANE_WIDTH = 500;

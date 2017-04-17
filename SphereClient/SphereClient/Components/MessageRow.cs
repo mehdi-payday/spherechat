@@ -35,6 +35,7 @@ namespace SphereClient.Components {
             this.textPane = new Panel();
             this.text = new Label();
             this.timestampLabel = new Label();
+            this.usernameLabel = new Label();
 
             this.Width = this.parent.Width;
 
@@ -79,7 +80,7 @@ namespace SphereClient.Components {
                 this.image.Top = this.textPane.Top + this.textPane.Height - this.image.Height;
             }
 
-            this.timestampLabel.Text = this.message.SentDate.ToString() + "   " + this.message.UserId;
+            this.timestampLabel.Text = this.message.SentDate.ToString();
             this.timestampLabel.Left = this.Width - this.timestampLabel.Width - Constants.MARGIN_SMALL.Right;
             this.timestampLabel.Top = this.Height - this.timestampLabel.Height;
             this.timestampLabel.ForeColor = Constants.DARK_GRAY;
@@ -87,13 +88,20 @@ namespace SphereClient.Components {
             if (this.ismine) {
                 this.image.Left = this.timestampLabel.Left - Constants.MARGIN_SMALL.Left - this.image.Width - Constants.MARGIN_SMALL.Right;
                 this.textPane.Left = this.image.Left - (Constants.MARGIN_SMALL.Left +
-                    this.textPane.Controls[0].Width + this.textPane.Controls[0].Left + Constants.MARGIN_SMALL.Right);
+                   this.textPane.Width);
 
             }
+
+            this.usernameLabel.Left = this.textPane.Left;
+            this.usernameLabel.Font = Constants.MESSAGE_USERNAME_FONT;
+            this.usernameLabel.Text = channel.Memberships.Where( m => m.UserId == message.UserId ).Select( m => m.UserDetails.Username ).FirstOrDefault();
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Top = this.textPane.Top - (this.usernameLabel.Height + Constants.MARGIN_SMALL.Bottom);
 
             this.Controls.Add(this.image);
             this.Controls.Add( this.textPane );
             this.Controls.Add( this.timestampLabel );
+            this.Controls.Add( this.usernameLabel );
             
         }
 

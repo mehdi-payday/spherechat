@@ -16,7 +16,7 @@ namespace SphereClient {
         public Session session;
         public User? user;
         public IList<Entity> fetchedChannels;
-        public Channel currentChannel;
+        public Channel? currentChannel;
         public Panel preloader;
         /// <summary>
         /// Static initializer
@@ -99,6 +99,8 @@ namespace SphereClient {
             this.session.WS.OnMessageReceived += ( Entities.Message message ) => {
                 this.panel4.OnNewMessage( message );
             };
+            this.session.WS.OnChannelChange += OnChannelChanged;
+            this.session.WS.OnDiscussionChange += OnDiscussionChanged;
             System.Threading.Thread t = new System.Threading.Thread(delegate () {
                 FetchChannels();
             });
@@ -109,9 +111,9 @@ namespace SphereClient {
         /// Gets the Channels from the server and updates both
         /// the Direct and Group message panels.
         /// </summary>
-        public void FetchChannels() {
+        public void FetchChannels(bool fetchmessages = true) {
             if (InvokeRequired) {
-                Invoke(new Action(FetchChannels));
+                Invoke(new Action(()=> { FetchChannels( fetchmessages ); } ));
                 return;
             }
             this.fetchedChannels = new List<Entity>();
@@ -119,8 +121,10 @@ namespace SphereClient {
                 this.fetchedChannels.Add(c);
             }
             try {
-                this.currentChannel = (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel() );
-                panel4.FetchMessages( this.currentChannel );
+                this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel() );
+                if (fetchmessages) {
+                    panel4.FetchMessages( (Channel)this.currentChannel );
+                }
                 if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                     MessageBox.Show("failed to create the sidepanel(s).");
                     Application.Exit();
@@ -140,12 +144,12 @@ namespace SphereClient {
                 Invoke(new Action(() => { SetCurrentViewedChannel(id); }));
                 return;
             }
-            if (id == this.currentChannel.ThreadId) {
+            if (id == this.currentChannel?.ThreadId) {
                 return;
             }
             IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ThreadId == id);
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
-            this.panel4.FetchMessages(this.currentChannel);
+            this.panel4.FetchMessages((Channel)this.currentChannel);
         }
 
         /// <summary>
@@ -199,8 +203,24 @@ namespace SphereClient {
         private void Send_Message_Click(object sender, EventArgs e) {
             Entities.Message msg = new Entities.Message();
             msg.Contents = this.richTextBox1.Text;
-            this.session.REST.PostMessageToChannel(msg, this.currentChannel);
+            this.session.REST.PostMessageToChannel(msg, (Channel)this.currentChannel);
             this.richTextBox1.Text = "";
+        }
+
+        /// <summary>
+        /// Triggered when the websocket detects that a channel changed.
+        /// </summary>
+        /// <param name=""></param>
+        private void OnChannelChanged(Entities.Channel c) {
+            FetchChannels(false);
+        }
+
+        /// <summary>
+        /// Tirggered when the websocket detects that a discussion changed.
+        /// </summary>
+        /// <param name=""></param>
+        private void OnDiscussionChanged( Entities.PrivateDiscussion d) {
+            FetchChannels(false);
         }
 
         /// <summary>
@@ -253,7 +273,7 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+        private void editProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             EditProfile.Instance.ShowDialog();
         }
     }

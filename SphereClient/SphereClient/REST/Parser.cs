@@ -221,7 +221,7 @@ namespace SphereClient.REST {
                         CreatorUser = ParseInt(json.creator_user.ToString()),
                         ManagerUser = ParseInt(json.manager_user.ToString()),
                         ManagerDetails = JSONtoEntity(json.manager_details, typeof(User)),
-                        Members = (int[])(string.IsNullOrEmpty(json.members.ToString()) ? new int[0] : json.members),
+                        Members = (int[])(string.IsNullOrEmpty(json.members?.ToString() ) ? new int[0] : json.members),
 
                         IsNull = false
                     };
