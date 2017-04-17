@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace SphereClient.REST {
     public class Request : IDisposable {
@@ -24,13 +26,20 @@ namespace SphereClient.REST {
             return this;
         }
 
-        public Request GET(string qs = null, WebHeaderCollection additionalHeaders = null) {
+        public Request GET(Dictionary<string, string> qs = null, WebHeaderCollection additionalHeaders = null) {
             using (var wc = new WebClient()) {
                 if (additionalHeaders != null)
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
-                Payload = JSON.Parse(wc.DownloadString(API + Method + (qs != null ? "?" + qs : "")));
+                string query = "?";
+                if (qs != null) {
+                    foreach (var q in qs) {
+                        query += q.Key + "=" + Regex.Unescape(q.Value);
+                    }
+                }
+
+                Payload = JSON.Parse(wc.DownloadString(API + Method + (query != "?" ? query : "")));
             }
             return this;
         }
@@ -49,13 +58,20 @@ namespace SphereClient.REST {
             return this;
         }
 
-        public Request DELETE(string qs = null, WebHeaderCollection additionalHeaders = null) {
+        public Request DELETE(Dictionary<string, string> qs = null, WebHeaderCollection additionalHeaders = null) {
             using (var wc = new WebClient()) {
                 if (additionalHeaders != null)
                     wc.Headers.Add(additionalHeaders);
                 wc.Headers.Add(DefaultHeaders);
 
-                Payload = JSON.Parse(wc.UploadString(API + Method + (qs != null ? "?" + qs : ""), "DELETE", "{}"));
+                string query = "?";
+                if (qs != null) {
+                    foreach (var q in qs) {
+                        query += q.Key + "=" + Regex.Unescape(q.Value);
+                    }
+                }
+
+                Payload = JSON.Parse(wc.UploadString(API + Method + (query != "?" ? query : ""), "DELETE", "{}"));
             }
             return this;
         }
