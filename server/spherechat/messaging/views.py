@@ -107,7 +107,7 @@ class TuneMixin(object):
         data = request.data
         data['thread'] = thread.pk
         data['user'] = user.pk
-        data["last_seen_message"] = last_seen_message
+        data["last_seen_message"] = last_seen_message.pk
         
         serializer = SeeThreadSerializer(data=data, context={'request': request})
 
