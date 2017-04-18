@@ -54,16 +54,18 @@ class BotObservingMessages(object):
         if bot.pk == message.user_sender.pk:
             return
 
-        chat_session_id = thread.pk
-        chat_session = cls.chatterbot.conversation_sessions.get(chat_session_id, None)
-        if not chat_session:
-            chat_session = cls.chatterbot.conversation_sessions.new()
+#        chat_session_id = thread.pk
+#        chat_session = cls.chatterbot.conversation_sessions.get(chat_session_id, None)
+#        if not chat_session:
+#            chat_session = cls.chatterbot.conversation_sessions.new()
 
 #       	"Lucy", 
 #	        trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
 #	        input_adapter='chatterbot.input.TerminalAdapter',
 #            silence_performance_warning=True)
-        contents = cls.chatterbot.get_response(message.contents, chat_session.id_string)
+#        contents = cls.chatterbot.get_response(message.contents, chat_session.id_string)
+        contents = cls.chatterbot.get_response(message.contents) # , chat_session.id_string)
+
         print "Response : %s" % contents
 
         thread.send(Message(contents=contents), bot)
