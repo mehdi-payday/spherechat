@@ -21,32 +21,24 @@ namespace SphereClient {
         protected EditProfile(Entities.User? user) {
             this.user = user;
             InitializeComponent();
-            this.textBox1.Text = this.user.Value.ProfilePicture.ToString();
-            this.textBox2.Text = this.user.Value.FirstName;
-            this.textBox3.Text = this.user.Value.LastName;
+            this.pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
+            this.textBox1.Text = ((bool)this.user?.ProfilePicture.StartsWith( "http://" ) ? "" : "http://") + this.user?.ProfilePicture?.ToString() ?? "";
+            this.textBox2.Text = this.user?.FirstName;
+            this.textBox3.Text = this.user?.LastName;
         }
 
         /// <summary>
-        /// Updates the image when typing.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBox1_KeyPress( object sender, KeyPressEventArgs e ) {
-            this.pictureBox19.LoadAsync( textBox1.Text );
-        }
-
-        /// <summary>
-        /// Saves the description and image  of the
-        /// profile url to the server.
+        /// Saves the properties (images, names, etc.) of the
+        /// profile to the server.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button1_Click( object sender, EventArgs e ) {
-            Entities.User u = new Entities.User();
-            u.LastName = this.textBox3.Text;
-            u.FirstName = this.textBox2.Text;
-            u.ProfilePicture = this.textBox1.Text;
-            Form1.Instance.user = u;
+            Entities.User u = (Entities.User)Form1.Instance.user ;
+            u.LastName = (string.IsNullOrWhiteSpace(this.textBox3.Text)? this.textBox3.Text: u.LastName);
+            u.FirstName = (string.IsNullOrWhiteSpace( this.textBox2.Text ) ? this.textBox2.Text : u.FirstName); ;
+            u.ProfilePicture = (string.IsNullOrWhiteSpace( this.textBox1.Text ) ? this.textBox1.Text : u.LastName); ;
+            Form1.Instance.session.REST.PostProfile( u );
             
         }
 
@@ -74,7 +66,18 @@ namespace SphereClient {
             }
         }
 
-        private void label1_Click( object sender, EventArgs e ) {
+        /// <summary>
+        /// Triggers when the text in the image url field changes,
+        /// it updates the preview image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox1_TextChanged( object sender, EventArgs e ) {
+            if (string.IsNullOrWhiteSpace(this.textBox1.Text)) {
+                this.pictureBox19.Image = Properties.Resources.default_user_image;
+            }else {
+                this.pictureBox19.LoadAsync(this.textBox1.Text);
+            }
 
         }
     }

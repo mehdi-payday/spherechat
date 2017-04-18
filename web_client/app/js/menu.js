@@ -179,23 +179,23 @@ $('#buttonfiles').on('click', function(){
   $('body').addClass('mode-files-panel');
 });
 
-$('.conversation-summary.conversation-summary-0').on('click', function(){
-    $('#intercom-container').addClass("wow fadeInUp");
-    $('#intercom-container').fadeIn('slow');
-    $('#no-message').fadeOut('slow');
-    $(this).find(".card-face__bullet").fadeOut('slow');
-    $('.conversation-summary.conversation-summary-0.conversation-summary-selected').removeClass('conversation-summary-selected');
-    $(this).addClass('conversation-summary-selected');
-});
+//$('.conversation-summary.conversation-summary-0').on('click', function(){
+//    $('#intercom-container').addClass("wow fadeInUp");
+//    $('#intercom-container').fadeIn('slow');
+//    $('#no-message').fadeOut('slow');
+//    $(this).find(".card-face__bullet").fadeOut('slow');
+//    $('.conversation-summary.conversation-summary-0.conversation-summary-selected').removeClass('conversation-summary-selected');
+//    $(this).addClass('conversation-summary-selected');
+//});
 
 
 // groups
-
-$('.Sidebar-nav-list-item.ion-person-stalker').on('click', function(){
-    $('body').find(".Sidebar-nav-list-item-active").removeClass('Sidebar-nav-list-item-active');
-    $(this).addClass('Sidebar-nav-list-item-active');  
-    $('body').toggleClass('mode-groups-panel');
-});
+//
+//$('.Sidebar-nav-list-item.ion-person-stalker').on('click', function(){
+//    $('body').find(".Sidebar-nav-list-item-active").removeClass('Sidebar-nav-list-item-active');
+//    $(this).addClass('Sidebar-nav-list-item-active');  
+//    $('body').toggleClass('mode-groups-panel');
+//});
 
 $('#closegroups').on('click', function(){
     $('body').removeClass('mode-groups-panel');
