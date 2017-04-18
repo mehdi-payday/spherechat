@@ -216,7 +216,7 @@ a[data-disabled=true]:hover {
     -ms-border-radius: 64px;
     -o-border-radius: 64px;
     border-radius: 64px;
-    text-transform: uppercase;
+    
     letter-spacing: 1.4px;
     display: inline-block;
     -webkit-transition: .25s ease-in-out;

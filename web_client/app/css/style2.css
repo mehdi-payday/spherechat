@@ -842,7 +842,7 @@ header .menu .menu-icon.on span {
     margin-bottom: 2.5vw;
 }
 .portfolio-filters ul li a {
-    text-transform: uppercase;
+    
     display: inline-block;
     transition: all 0.3s ease;
     padding: 0;

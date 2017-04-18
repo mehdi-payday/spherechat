@@ -504,7 +504,7 @@ mark,
   text-transform: lowercase;
 }
 .dn {
-  text-transform: uppercase;
+  
 }
 .do {
   text-transform: capitalize;
@@ -648,7 +648,7 @@ abbr[data-original-title] {
 }
 .ee {
   font-size: 90%;
-  text-transform: uppercase;
+  
 }
 blockquote {
   padding: 11px 22px;

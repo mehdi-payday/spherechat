@@ -777,7 +777,7 @@ p.spacing-bottom
     padding: 3px 18px 0 18px;
 
     letter-spacing: .04em;
-    text-transform: uppercase;
+    
 
     color: #a347b7;
 }
@@ -997,7 +997,7 @@ p.spacing-bottom
     padding: 4px 0 6px 0;
 
     letter-spacing: .02em;
-    text-transform: uppercase;
+    
 
     color: #767e8c;
 }
