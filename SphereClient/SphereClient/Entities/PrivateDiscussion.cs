@@ -1,8 +1,14 @@
 namespace SphereClient.Entities {
     public struct PrivateDiscussion : Entity {
+        public string title;
         public int ThreadId { get; set; }
         public string Slug { get; set; }
-        public string Title { get; set; }
+        public string Title {
+            get {
+                return this.title;
+            }
+            set { this.title = value; }
+        }
         public Types Type { get; set; }
         public string Description { get; set; }
         public int CreatorUser { get; set; }
@@ -14,7 +20,7 @@ namespace SphereClient.Entities {
         public bool IsNull { get; set; }
 
         public string ToText() {
-            return JSON.Stringify(this);
+            return Title;//JSON.Stringify(this);
         }
 
         public enum Types {

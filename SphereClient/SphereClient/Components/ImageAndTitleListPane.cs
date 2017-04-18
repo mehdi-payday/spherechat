@@ -45,14 +45,13 @@ namespace SphereClient.Components {
         /// and places them where they belong.
         /// </summary>
         /// <returns>whether the creation and placement succeeded</returns>
-        public bool TryCreateComponents() {
+        public bool TryCreateComponents<T>(IList<Entities.Entity> list) {
             bool status = false;
             if (InvokeRequired) {
-                Invoke(new Action(delegate () { status = TryCreateComponents(); }));
+                Invoke(new Action(delegate () { status = TryCreateComponents<T>(list); }));
                 return status;
             }
             try {
-                this.list = Form1.Instance.fetchedChannels;
                 this.filter();
 
                 if (null == this.contents || this.contents.IsDisposed) {
@@ -74,12 +73,11 @@ namespace SphereClient.Components {
 
                 int entityIndex = 0;
                 //TODO and move events to objects
-                foreach (Entity entity in this.list) {
-                    ImageAndTitleRow row = new ImageAndTitleRow(((Channel)entity).Title, "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
+                foreach (Entity entity in list) {
+                    ImageAndTitleRow row = new ImageAndTitleRow(entity.ToText(), "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
                     row.entity = entity;
                     row.Click += OnRowLabelClick;
-                    //row.MouseEnter += OnRowLabelEnter;
-                    //row.MouseLeave += OnRowLabelLeave;
+                    row.Top = (this.contents.Controls.Count) * row.PreferredSize.Height;
                     this.contents.Controls.Add(row);
                     entityIndex++;
                 }
@@ -185,7 +183,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are not of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.discussion == ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c => PrivateDiscussion.Types.private_channel == ((PrivateDiscussion)c).Type).ToList<Entity>();
         }
 
     }
@@ -242,7 +240,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.discussion != ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c => Channel.Types.public_channel == ((Channel)c).Type).ToList<Entity>();
         }
 
     }
