@@ -116,15 +116,15 @@
               <aside class="Sidebar">
                 <nav class="Sidebar-nav" id="master-nav" role="navigation">
                   <ul class="Sidebar-nav-list">
+                  	<li class="Sidebar-nav-list-item ion-chatboxes Sidebar-nav-list-item-active wow fadeInLeft" data-wow-delay="0.5s">
+                      <notif class="card-face__bullet friend-request-notif" ng-show="glocalCountUnseen > 0">{{glocalCountUnseen}}</notif>
+                    </li>
                     <li class="Sidebar-nav-list-item ion-person-add wow fadeInLeft" data-wow-delay="0.1s"></li>
 <!--                     <li class="Sidebar-nav-list-item ion-person-stalker wow fadeInLeft" data-wow-delay="0.2s" ng-click="retrieveChannels()"></li> -->
 <!--                     <li class="Sidebar-nav-list-item ion-android-notifications wow fadeInLeft" data-wow-delay="0.3s"> -->
 <!--                       <notif class="card-face__bullet friend-request-notif">3</notif> -->
 <!--                     </li> -->
                     <li class="Sidebar-nav-list-item ion-levels wow fadeInLeft" data-wow-delay="0.4s"></li>
-                    <li class="Sidebar-nav-list-item ion-chatboxes Sidebar-nav-list-item-active wow fadeInLeft" data-wow-delay="0.5s">
-                      <notif class="card-face__bullet friend-request-notif">*X*</notif>
-                    </li>
                     <li class="Sidebar-nav-list-item ion-document wow fadeInLeft" data-wow-delay="0.6s"></li>
                     <li class="Sidebar-nav-list-item ion-log-out wow fadeInLeft" data-wow-delay="0.7s" data-toggle="modal" data-target="#bs-example-modal-sm"></li>
                     <li id="active-line"></li>
@@ -170,17 +170,21 @@
                 <br>
                 <div class="promo convo-promo"><img srcset="img/newConvo.png 1x, img/newConvo2.png 2x" src="img/newConvo2.png" width="510" height="230"></div>
                 <form class="fieldWrap urlWrap">
-                  <label class="fieldName urlLabel" for="publicLink"><span>Description</span></label>
-                  <input type="text" id="publicLink" class="field title urlField" value="" autocomplete="off" placeholder="Channel Name" required="">
+                  
+                  <label class="fieldName urlLabel" for="publicLink"><span>Channel Name</span></label>
+                  <input type="text" id="publicLink" class="field title urlField" autocomplete="off" placeholder="Channel Name">
+                  
+                  <label class="fieldName urlLabel" for="publicLinkD"><span>Description</span></label>
+                  <input type="text" id="publicLinkD" class="field title urlField" autocomplete="off" placeholder="Description">
                 </form>
                 <div class="fieldsGroup">
                   <figure class="fieldWrap no-border"><label class="fieldName" for="bookmarkTags">Info</label></figure>
                   <section class="fieldLink no-desktop">
                     <div class="button active select">
                       <span class="button-icon">
-                      <span class="svgIcon svgIcon-size-default undefined">
-                      <i class="ion-plus-circled" style="font-size: 2em;"></i>
-                      </span>
+	                      <span class="svgIcon svgIcon-size-default undefined">
+	                      	<i class="ion-plus-circled" style="font-size: 2em;"></i>
+	                      </span>
                       </span>
                       <span>Inser Channel Image</span>
                       <input type="file" accept="image/png,image/jpeg,image/jpg,image/gif">
@@ -295,7 +299,7 @@
           </div>
         </aside>
         
-        <!-- ssettings panel -->
+        <!-- settings panel -->
         
         <aside id="settings-panel">
           <header>
@@ -671,12 +675,13 @@
 	                      <div class="parent">
 	                        <li class="comment byuser comment-author-aymene bypostauthor odd alt thread-even depth-1  bubble bubble-secondary list-unstyled yyy">
 	                          <div class="wrapper">
-	                            <div class="avatar">
-	                              <a data-toggle="tooltip" ng-attr-data-placement="message.user_sender == session.getCurrentUser().id ? left : right" data-html="true" class="media-object float-left" data-original-title="aymene">
-	                              	<img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40">
-	                              </a>
-	                            </div>
-	                            <div id="div-comment-15" class="comment-self left">
+<!-- 	                            <div class="avatar"> -->
+<!-- 	                              <a data-toggle="tooltip" ng-attr-data-placement="message.user_sender == session.getCurrentUser().id ? left : right" data-html="true" class="media-object float-left" data-original-title="aymene"> -->
+<!-- 	                              	<img alt="" src="https://scontent.fyhu1-1.fna.fbcdn.net/v/t1.0-9/425_10207479822667634_4454484605592612829_n.jpg?oh=9a88e42a0f269caa45af127b3f39011a&oe=59634A61" class="avatar avatar-40 photo comment_avatar rounded-circle" height="40" width="40"> -->
+<!-- 	                              </a> -->
+<!-- 	                            </div> -->
+	                            <span>{{channelSelectedUsers[message.user_sender].username}}: </span>
+	                            <div id="div-comment-15" class="comment-self" ng-class="message.user_sender == session.getCurrentUser().id ? left : right">
 	                              <p class="messenger-bulle hoverable">{{message.contents}}</p>
 	                              <span class="meta">{{message.sent_date | date:'fullDate' }}</span>
 	                            </div>
@@ -751,7 +756,7 @@
                     <div class="intercom-conversation-footer" style="margin-top: -400px;">
                       <div class="intercom-composer">
                         
-                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;"></textarea>
+                        <textarea id="comment" name="comment" class="form-control wdt-emoji-bundle-enabled" placeholder="Write a reply..." style="overflow-y: hidden; border-radius: 10px;" ng-click="sendHeartbeat()"></textarea>
                         
                         <div class="intercom-composer-buttons">
                           <button class="intercom-composer-gif-button"></button>
