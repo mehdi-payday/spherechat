@@ -99,7 +99,7 @@ namespace SphereClient.REST
             else if (type == typeof(Membership[]))
             {
                 List<dynamic> memberships = new List<dynamic>();
-                foreach (var membership in (entity as Membership[]))
+                foreach (var membership in (entity as Membership[] ?? new Membership[0]))
                 {
                     memberships.Add(EntitytoJSON(membership, typeof(Membership)));
                 }
@@ -628,7 +628,7 @@ namespace SphereClient.REST
         {
             try
             {
-                return (T)Convert.ChangeType(Enum.Parse(typeof(T), data.ToString().ToUpper()), typeof(T));
+                return (T)Convert.ChangeType(Enum.Parse(typeof(T), data.ToString().ToLower()), typeof(T));
             }
             catch
             {

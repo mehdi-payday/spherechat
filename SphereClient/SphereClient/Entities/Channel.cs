@@ -30,5 +30,8 @@ namespace SphereClient.Entities {
             private_channel = 1,
             public_channel = 2
         }
+        public string ToTypeString() {
+            return Type == Types.private_channel ? "private_channel":"public_channel";
+        }
     }
 }

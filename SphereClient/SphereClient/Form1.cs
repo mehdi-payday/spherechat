@@ -15,7 +15,7 @@ namespace SphereClient {
 
         public Session session;
         public User? user;
-        public IList<Entity> fetchedChannels;
+        public IList<Channel> fetchedChannels;
         public Channel? currentChannel;
         public Panel preloader;
         /// <summary>
@@ -128,20 +128,19 @@ namespace SphereClient {
                 Invoke(new Action(() => { FetchChannels(fetchmessages); }));
                 return;
             }
-            this.fetchedChannels = new List<Entity>();
+            this.fetchedChannels = new List<Channel>();
+            this.fetchedDiscussions = new List<PrivateDiscussion>();
             foreach (var c in this.session.REST.GetAllChannels()) {
                 this.fetchedChannels.Add(c);
-            }
-            foreach (var d in this.session.REST.GetAllPrivateDiscussions()) {
-                this.fetchedChannels.Add(d);
+                
             }
             try {
                 this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel());
                 if (fetchmessages) {
                     panel4.FetchMessages((Channel)this.currentChannel);
                 }
-                if (!this.panel7.TryCreateComponents<PrivateDiscussion>( this.session.REST.GetAllPrivateDiscussions().Select( c => (Entity)c).ToList() ) 
-                    || !this.panel8.TryCreateComponents<Channel>( this.session.REST.GetAllChannels().Select(e=>(Entity)e).ToList())) {
+                if (!this.panel7.TryCreateComponents<Channel>( this.fetchedChannels ) 
+                    || !this.panel8.TryCreateComponents<Channel>( this.fetchedChannels) ) {
                     MessageBox.Show("failed to create the sidepanel(s).");
                     Application.Exit();
                 }
@@ -164,7 +163,7 @@ namespace SphereClient {
             if (id == this.currentChannel?.ThreadId) {
                 return;
             }
-            IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ThreadId == id);
+            IEnumerable<Entity> list = this.fetchedChannels.Any(u => u.ThreadId == id)? this.fetchedChannels.Where(u => u.ThreadId == id).Select(u => (Entity)u).ToList<Entity>():null;
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
             this.panel4.FetchMessages((Channel)this.currentChannel);
         }

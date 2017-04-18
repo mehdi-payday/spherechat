@@ -107,23 +107,25 @@ namespace SphereClient {
             foreach (object t in this.listBox1.SelectedItems) {
                 checkedNodes.Add((int)((User)((listItem)t).o).UserId);
             }
-            
             switch (this.comboBox1.SelectedIndex) {
                 case 0:
                     PrivateDiscussion d = new PrivateDiscussion();
                     d.Type = PrivateDiscussion.Types.private_channel;
                     d.Title = this.textBox1.Text;
-                    
+                    d.Description = this.textBox2.Text;
+                    d.Members = checkedNodes.ToArray();
+                    Form1.Instance.session.REST.PostPrivateDiscussion( d );
                     break;
                 case 1:
                     Channel c = new Channel();
                     c.Title = this.textBox1.Text;
                     c.Members = checkedNodes.ToArray();
                     c.Type = Channel.Types.public_channel;
+                    c.Description = this.textBox2.Text;
+                    Form1.Instance.session.REST.PostChannel( c );
                     break;
             }
-            c.Description = this.textBox2.Text;
-            Form1.Instance.session.REST.PostChannel(c);
+            
             MessageBox.Show("Discussion created successfully.");
             this.Close();
 

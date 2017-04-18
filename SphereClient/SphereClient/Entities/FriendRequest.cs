@@ -14,5 +14,8 @@ namespace SphereClient.Entities {
         public string ToText() {
             return FriendDetails.ToText();
         }
+        public string ToTypeString() {
+            return "FriendRequest";
+        }
     }
 }

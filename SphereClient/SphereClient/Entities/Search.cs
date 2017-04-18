@@ -9,5 +9,8 @@ namespace SphereClient.Entities {
         public string ToText() {
             throw new Exception("Dude");
         }
+        public string ToTypeString() {
+            return "Search";
+        }
     }
 }

@@ -6,5 +6,9 @@
         public string ToText() {
             return JSON.Stringify(this);
         }
+
+        public string ToTypeString() {
+            return "Auth";
+        }
     }
 }

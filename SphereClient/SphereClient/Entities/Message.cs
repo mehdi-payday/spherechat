@@ -29,5 +29,8 @@ namespace SphereClient.Entities {
             SYSTEM = 0,
             USER = 1
         }
+        public string ToTypeString() {
+            return "Message";
+        }
     }
 }

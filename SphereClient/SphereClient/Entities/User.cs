@@ -22,5 +22,8 @@ namespace SphereClient.Entities {
             HUM = 0,
             BOT = 1
         }
+        public string ToTypeString() {
+            return "User";
+        }
     }
 }

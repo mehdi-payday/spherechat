@@ -27,5 +27,9 @@ namespace SphereClient.Entities
             private_channel = 1,
             public_channel = 2
         }
+
+        public string ToTypeString() {
+            return "Thread";
+        }
     }
 }
