@@ -9,6 +9,34 @@ angular.module('myApp.webclient', ['session', 'auth'])
 	$rootScope.hideNavbar = true;
 	$rootScope.hideFooter = true;
 	
+	// Membership
+	$scope.getMembershipArrayFromUserChannels = function(channelId){
+		var result;
+		Array.from($scope.userChannels.results).forEach(function(channel){
+			if(channel.id === channelId){
+				result = channel.memberships;
+			}
+		});
+		return result;
+	}
+	
+	// Users
+	$scope.getUser = function(id){
+		messaging.getUser(id).$promise.then(function(value){
+			return value;
+		});
+	}
+	
+	$scope.setChannelUsers = function(channelId){
+		$scope.channelSelectedUsers = {};
+		var memberships = $scope.getMembershipArrayFromUserChannels(channelId);
+		memberships.forEach(function(membership){
+			messaging.getUser(membership.user).$promise.then(function(user){
+				$scope.channelSelectedUsers[user.id] = user;
+			});
+		});
+	}
+	
 	// Channels
 	$scope.retrieveChannels = function(){
 		messaging.getChannels().$promise.then(function(channels){
@@ -18,15 +46,16 @@ angular.module('myApp.webclient', ['session', 'auth'])
 	
 	$scope.createChannel = function(){
 		var title = document.getElementById('publicLink').value;
-		if(title === ''){
-			alert('Enter a channel name');
+		var description = document.getElementById('publicLinkD').value;
+		if(title === '' || description === ''){
+			alert('Enter a channel name and description');
 			return;
 		}
 		
 		var channel = {
 			title: title,
 			type: publicChannel,
-			description: 'descriptionTest',
+			description: description,
 			members: []
 		};
 		messaging.createChannel(channel).$promise.then(function(){
@@ -35,10 +64,16 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		$('body').removeClass('mode-panel');
 	}
 	
+	$scope.sendHeartbeat = function(){
+		messaging.sendChannelHeartbeat($scope.channelSelected);
+	}
+	
 	$scope.setChannelSelected = function(channelId){
 		$scope.channelSelected = channelId;
-		
+		$scope.setChannelUsers($scope.channelSelected);
 		$scope.retrieveMessages();
+		
+		messaging.sendChannelAllRead($scope.channelSelected);
 	}
 	
 	$scope.cancelChannelSelection = function(){
@@ -52,7 +87,6 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		}
 		messaging.getChannelMessages($scope.channelSelected).$promise.then(function(data){
 			$scope.currentMessages = data.results;
-			console.log(data);
 		});
 	}
 	
@@ -64,23 +98,39 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		messaging.sendChannelMessage($scope.channelSelected, message).$promise.then(function(){
 			$scope.retrieveMessages();
 		});
+		document.getElementById('comment').value = "";
 	}
 	
 	// Calculated values for DOM
 	$scope.getUnseenMessagesCount = function(membershipArray){
+		var count = 0;
 		membershipArray.forEach(function(value){
 			if(value.user === session.getCurrentUser().id){
-				return value.unchecked_count;
+				count = value.unchecked_count;
 			}
 		});
+		return count;
+	}
+	
+	$scope.getUnseenMessagesCountGlobal = function(){
+		var count = 0;
+		Array.from($scope.userChannels.results).forEach(function(channel){
+			var memberships = channel.memberships;
+			memberships.forEach(function(membership){
+				count += parseInt(membership.unchecked_count);
+			});
+		});
+		return count;
 	}
 	
 	$scope.getLastSeenDateDelta = function(membershipArray){
+		var delta;
 		membershipArray.forEach(function(value){
 			if(value.user === session.getCurrentUser().id){
-				return parseInt((new Date(value.last_seen_date).getTime() - new Date().getTime())/(24*3600*1000));
+				delta = parseInt((new Date(value.last_seen_date).getTime() - new Date().getTime())/(24*3600*1000));
 			}
 		});
+		return delta;
 	}
 	
 	// Actions at init
@@ -89,5 +139,6 @@ angular.module('myApp.webclient', ['session', 'auth'])
 	$interval(function(){
 		$scope.retrieveChannels();
 		$scope.retrieveMessages();
+		$scope.glocalCountUnseen = $scope.getUnseenMessagesCountGlobal();
 	}, 5000);
 }]);
