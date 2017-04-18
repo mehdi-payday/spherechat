@@ -132,12 +132,16 @@ namespace SphereClient {
             foreach (var c in this.session.REST.GetAllChannels()) {
                 this.fetchedChannels.Add(c);
             }
+            foreach (var d in this.session.REST.GetAllPrivateDiscussions()) {
+                this.fetchedChannels.Add(d);
+            }
             try {
                 this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel());
                 if (fetchmessages) {
                     panel4.FetchMessages((Channel)this.currentChannel);
                 }
-                if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
+                if (!this.panel7.TryCreateComponents<PrivateDiscussion>( this.session.REST.GetAllPrivateDiscussions().Select( c => (Entity)c).ToList() ) 
+                    || !this.panel8.TryCreateComponents<Channel>( this.session.REST.GetAllChannels().Select(e=>(Entity)e).ToList())) {
                     MessageBox.Show("failed to create the sidepanel(s).");
                     Application.Exit();
                 }
@@ -257,7 +261,7 @@ namespace SphereClient {
         /// <param name="e"></param>
         /// <param name="e"></param>
         public void OnCreateDirectMessageThread(object s, EventArgs e) {
-            CreateDiscussion.Instance.Show(Entities.Channel.Types.discussion);
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.private_channel);
 
         }
 
@@ -268,7 +272,7 @@ namespace SphereClient {
         /// <param name="s"></param>
         /// <param name="e"></param>
         public void OnCreateGroupDiscussionThread(object s, EventArgs e) {
-            CreateDiscussion.Instance.Show(Entities.Channel.Types.private_channel);
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.public_channel);
         }
 
 

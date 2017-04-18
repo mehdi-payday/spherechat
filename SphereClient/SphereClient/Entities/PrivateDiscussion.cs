@@ -1,3 +1,4 @@
+
 namespace SphereClient.Entities
 {
     public struct PrivateDiscussion : Entity
@@ -18,7 +19,7 @@ namespace SphereClient.Entities
 
         public string ToText()
         {
-            return JSON.Stringify(this);
+            return Title;//JSON.Stringify(this);
         }
 
         public enum Types

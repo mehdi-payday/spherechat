@@ -37,7 +37,7 @@ namespace SphereClient.Components {
             this.Height = this.image.Height + Constants.MARGIN_SMALL.Bottom + Constants.MARGIN_SMALL.Top;
             this.title.Text = title;
             this.title.AutoSize = true;
-            //this.title.Font = titleFont ?? Constants.BIG_BOLD_FONT;
+            this.title.Font = titleFont ?? Constants.BIG_BOLD_FONT;
             this.title.Click += (object s, EventArgs e) =>{ this.OnClick(e); };
             this.title.MouseEnter += (object s, EventArgs e) =>{ this.OnMouseEnter(e); };
             this.title.MouseLeave += ( object s, EventArgs e ) => { this.OnMouseLeave( e ); };

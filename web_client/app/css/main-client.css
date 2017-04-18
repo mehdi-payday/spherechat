@@ -338,7 +338,7 @@ textarea {
 }
 .miniHeader {
     font-size: .625rem;
-    text-transform: uppercase;
+    
     opacity: .5;
     margin: 0;
     padding: 0;
@@ -2730,7 +2730,7 @@ body.mode-disable-title .element.element-grid .cover-wrap {
 .domain b {
     font-weight: 400;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    
     font-size: 10px
 }
 .flip-horizontal {
@@ -3111,7 +3111,7 @@ html:not(.blur) #main .element:not(.element-grid).active[data-is-focus=true] .hi
     padding: .5rem 16px;
     padding-top: 1rem;
     font-size: .625rem;
-    text-transform: uppercase;
+    
     letter-spacing: 1px;
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
     opacity: 1;
@@ -3316,7 +3316,7 @@ body.mode-reader .element .actions {
     display: block;
     font-weight: 700;
     font-size: 14px;
-    text-transform: uppercase;
+    
     letter-spacing: 1px
 }
 .element-list .cover,
@@ -6473,7 +6473,7 @@ img.popCollectionCoverImg {
     font-weight: 700;
     color: rgba(0, 0, 0, .6);
     letter-spacing: 1px;
-    text-transform: uppercase;
+    
     padding: 8px 12px;
     background: rgba(0, 0, 0, .05)
 }
@@ -6577,7 +6577,7 @@ img.popCollectionCoverImg {
     text-align: center;
     font-size: 10px;
     font-weight: 700;
-    text-transform: uppercase;
+    
     text-decoration: none;
     padding: 0 10px;
     color: rgba(0, 0, 0, .6)

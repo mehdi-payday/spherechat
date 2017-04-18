@@ -75,7 +75,6 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ItemHeight = 13;
             this.comboBox1.Items.AddRange(new object[] {
-            "Private discussion",
             "Public group",
             "Private group"});
             this.comboBox1.Location = new System.Drawing.Point(157, 76);
@@ -115,7 +114,7 @@
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(257, 108);
-            this.listBox1.TabIndex = 13;
+            this.listBox1.TabIndex = 4;
             // 
             // button1
             // 

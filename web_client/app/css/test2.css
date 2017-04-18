@@ -5015,18 +5015,6 @@ section {
 .info li {
     width: 100%;
 }
-.hover,
-.click,
-.yeaa {
-    font-size: 14px;
-    line-height: 25px;
-    font-weight: 600;
-    
-    letter-spacing: 2px;
-    text-align: center;
-    bottom: 0;
-    opacity: 1;
-}
 .dribbble {
     position: relative;
     top: -60px;
