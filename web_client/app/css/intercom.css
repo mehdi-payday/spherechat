@@ -1760,7 +1760,6 @@ body>.container {
 #container .conversation-summary-body-author,
 #container .conversation-summary-timestamp {
     font-size: 13px;
-    max-width: 49%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
