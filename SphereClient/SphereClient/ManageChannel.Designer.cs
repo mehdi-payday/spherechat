@@ -90,9 +90,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ItemHeight = 13;
             this.comboBox1.Items.AddRange(new object[] {
-            "Private discussion",
-            "Public group",
-            "Private group"});
+            "Private group",
+            "Public group"});
             this.comboBox1.Location = new System.Drawing.Point(154, 70);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(115, 21);
@@ -125,6 +124,7 @@
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(136, 108);
             this.listBox1.TabIndex = 23;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -137,8 +137,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 33);
             this.button1.TabIndex = 21;
-            this.button1.Text = "Create !";
+            this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // linkLabel3
             // 

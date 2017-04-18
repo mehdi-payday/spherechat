@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SphereClient {
-    struct listItem {
+    public struct listItem {
         public object o;
         public string s;
 
@@ -64,20 +64,18 @@ namespace SphereClient {
         /// </summary>
         /// <param name="type"></param>
         public void Show(Entities.Channel.Types type) {
+            this.textBox1.Text = string.Empty;
+            this.textBox2.Text = string.Empty;
             this.listBox1.SelectedItems.Clear();
             switch (type) {
-                case Entities.Channel.Types.discussion:
-                    this.comboBox1.SelectedIndex = 0;
-                    break;
                 case Entities.Channel.Types.private_channel:
-                    this.comboBox1.SelectedIndex = 2;
+                    this.comboBox1.SelectedIndex = 0;
                     break;
                 case Entities.Channel.Types.public_channel:
                     this.comboBox1.SelectedIndex = 1;
                     break;
             }
             this.ShowDialog();
-
         }
 
         /// <summary>
@@ -111,22 +109,25 @@ namespace SphereClient {
             foreach (object t in this.listBox1.SelectedItems) {
                 checkedNodes.Add((int)((User)((listItem)t).o).UserId);
             }
-            Channel c = new Channel();
-            c.Title = this.textBox1.Text;
-            c.Members = checkedNodes.ToArray();
             switch (this.comboBox1.SelectedIndex) {
                 case 0:
-                    c.Type = Channel.Types.discussion;
+                    PrivateDiscussion d = new PrivateDiscussion();
+                    d.Type = PrivateDiscussion.Types.private_channel;
+                    d.Title = this.textBox1.Text;
+                    d.Description = this.textBox2.Text;
+                    d.Members = checkedNodes.ToArray();
+                    Form1.Instance.session.REST.PostPrivateDiscussion( d );
                     break;
                 case 1:
+                    Channel c = new Channel();
+                    c.Title = this.textBox1.Text;
+                    c.Members = checkedNodes.ToArray();
                     c.Type = Channel.Types.public_channel;
-                    break;
-                case 2:
-                    c.Type = Channel.Types.private_channel;
+                    c.Description = this.textBox2.Text;
+                    Form1.Instance.session.REST.PostChannel( c );
                     break;
             }
-            c.Description = this.textBox2.Text;
-            Form1.Instance.session.REST.PostChannel(c);
+            
             MessageBox.Show("Discussion created successfully.");
             this.Close();
 

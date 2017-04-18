@@ -35,6 +35,7 @@ namespace SphereClient {
                 u.ProfilePicture = (!string.IsNullOrEmpty(this.textBox1.Text.Trim()) ? this.textBox1.Text : u.ProfilePicture);
 
                 try {
+                    //ignore the passwords because the server and lib dont support it fully yet
                     new Session(Form1.Instance.user?.Username, this.textBox4.Text);
                 }
                 catch (System.Net.WebException ex2) {
@@ -52,7 +53,7 @@ namespace SphereClient {
 
             }
             catch (Exception ex) {
-                errorlbl.Text += "An error occured.\n";
+                errorlbl.Text += "An error occured.\n"+ ex.Message + ex.StackTrace;
             }
         }
 

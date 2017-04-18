@@ -207,7 +207,7 @@ class TuneManager(object):
             raise UserNotTuned("User '%s' must be tuned to thread '%s' in order to know his tuning date" % (user, thread))
         return user.last_listening_date 
 
-class ThreadManager(Manager):
+class ThreadManager(ObservableManagerMixin, Manager):
     def can_manage(self, user, thread):
         assert isinstance(user, User) and isinstance(thread, Thread)
 
@@ -254,7 +254,8 @@ class ThreadManager(Manager):
 
     def add_member(self, user, thread):
         assert thread.is_channel(), "Thread must be a channel in order to add members"
-        Membership.objects.create_membership(user, thread)
+        membership = Membership.objects.create_membership(user, thread)
+        self.notify_observers("on_member_added", membership)
 
     def _join(self, user, thread):
         Membership.objects.create_membership(user, thread)
@@ -284,6 +285,9 @@ class ThreadManager(Manager):
         if self.private_discussion_exists(initiator, target):
             raise ExistingDiscussion("Private discussion already existent between %s and %s" % (initiator, target))
 
+        if initiator.pk == target.pk:
+            raise ValueError("The initiator can't be the discussion target")
+
         title = "Private discussion between %s and %s" % (initiator, target)
         description = "Private discussion between %s and %s" % (initiator, target)
 
@@ -294,11 +298,15 @@ class ThreadManager(Manager):
             creator_user=initiator,
         )
         private_discussion = self.__create(**private_discussion)
+
         try:
             self._join(initiator, private_discussion)
             self._join(target, private_discussion)
         except:
             private_discussion.delete()
+            raise
+#            raise RuntimeException("Could not join ")
+        self.notify_observers("on_new_discussion", private_discussion)
 
         return private_discussion
 
@@ -327,6 +335,8 @@ class ThreadManager(Manager):
         except:
             channel.delete()
             raise
+
+        self.notify_observers("on_new_channel", channel)
 
         return channel
 
@@ -410,7 +420,7 @@ class ThreadManager(Manager):
                             order_by=order_by)
 
     def threads(self, participant_user=None, types=None, order_by='-unseen_mention'):
-        filters = dict()
+        filters = dict(active=True)
         if types:
 #            for thread_type in types:
 #                assert thread_type in (Thread.PRIVATE_CHANNEL, Thread.PUBLIC_CHANNEL, Thread.PRIVATE_DISCUSSION)
@@ -631,5 +641,6 @@ class Membership(Model):
     def cancel(self):
         self.objects.cancel_membership(self)
 
-from messaging.observers import *
 from messaging.instant.observers import *
+from messaging.observers import *
+

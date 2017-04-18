@@ -40,6 +40,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 INSTALLED_APPS = [
     'django_extensions',
+    'chatterbot.ext.django_chatterbot',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,6 +75,20 @@ REST_FRAMEWORK = {
     ),
     'PAGE_SIZE': 10
 }
+
+CHATTERBOT = {
+    'name': 'Lucy',
+    'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
+    'logic_adapters': [
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.TimeLogicAdapter',
+        'chatterbot.logic.BestMatch'
+    ],
+    'training_data': [
+        'chatterbot.corpus.english',
+    ]
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

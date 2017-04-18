@@ -32,7 +32,7 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="titlepane">the panel that will serve as a header. must not be null</param>
         /// <param name="list">the <see cref="SphereClient.Entities.Entity"/> list to represent. must not be null</param>
-        public ImageAndTitleListPane(IList<Entity> list) : base() {
+        public ImageAndTitleListPane(IList<Entities.Entity> list) : base() {
             InitializeComponent();
             this.list = list;
             this.contents = new Panel();
@@ -45,14 +45,14 @@ namespace SphereClient.Components {
         /// and places them where they belong.
         /// </summary>
         /// <returns>whether the creation and placement succeeded</returns>
-        public bool TryCreateComponents() {
+        public bool TryCreateComponents<T>(IList<T> list) {
             bool status = false;
             if (InvokeRequired) {
-                Invoke(new Action(delegate () { status = TryCreateComponents(); }));
+                Invoke(new Action(delegate () { status = TryCreateComponents(list); }));
                 return status;
             }
             try {
-                this.list = Form1.Instance.fetchedChannels;
+                this.list = list.Select(u=>(Entity)u).ToList();
                 this.filter();
 
                 if (null == this.contents || this.contents.IsDisposed) {
@@ -73,13 +73,11 @@ namespace SphereClient.Components {
                 this.contents.AutoScroll = true;
 
                 int entityIndex = 0;
-                //TODO and move events to objects
                 foreach (Entity entity in this.list) {
-                    ImageAndTitleRow row = new ImageAndTitleRow(((Channel)entity).Title, "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
+                    ImageAndTitleRow row = new ImageAndTitleRow(entity.ToText(), "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
                     row.entity = entity;
                     row.Click += OnRowLabelClick;
-                    //row.MouseEnter += OnRowLabelEnter;
-                    //row.MouseLeave += OnRowLabelLeave;
+                    row.Top = (this.contents.Controls.Count) * row.PreferredSize.Height;
                     this.contents.Controls.Add(row);
                     entityIndex++;
                 }
@@ -185,7 +183,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are not of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.discussion == ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c =>c.ToTypeString() == "private_channel").ToList<Entity>();
         }
 
     }
@@ -242,7 +240,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.discussion != ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c => c.ToTypeString() == "public_channel").ToList<Entity>();
         }
 
     }

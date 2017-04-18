@@ -1,4 +1,4 @@
-from messaging.models import Message, TuneManager, Membership
+from messaging.models import Message, TuneManager, Membership, Thread
 from messaging.instant.communication import ThreadCommunicationService
 
 class MessageBroadcaster(object):
@@ -20,9 +20,19 @@ class ThreadBroadcaster(object):
         thread_comm_service = ThreadCommunicationService()
         thread_comm_service.thread_change(thread)
 
-class MembershipBroadcaster(object):
+class ThreadMembershipsBroadcaster(object):
     @classmethod
-    def on_create(self, membership):
+    def on_new_channel(self, thread):
+        thread_comm_service = ThreadCommunicationService()
+        thread_comm_service.thread_change(thread)
+
+    @classmethod
+    def on_new_discussion(self, thread):
+        thread_comm_service = ThreadCommunicationService()
+        thread_comm_service.thread_change(thread)
+
+    @classmethod
+    def on_member_added(self, membership):
         thread = membership.thread
         thread_comm_service = ThreadCommunicationService()
         thread_comm_service.thread_change(thread)
@@ -30,4 +40,4 @@ class MembershipBroadcaster(object):
 Message.objects.register_observer(MessageBroadcaster)
 Message.objects.register_observer(ThreadBroadcaster)
 Membership.objects.register_observer(ThreadBroadcaster)
-Membership.objects.register_observer(MembershipBroadcaster)
+Thread.objects.register_observer(ThreadMembershipsBroadcaster)

@@ -10,7 +10,7 @@ namespace SphereClient {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(LoginForm.Instance);
         }
     }
 }

@@ -95,7 +95,7 @@ class TuneMixin(object):
 
     @detail_route(methods=['post'])
     def see(self, request, pk):
-        thread = self.get_object()
+        thread = Thread.objects.get(pk=pk)
         user = get_user_from_view(self)
 #        seen_date = request.data.pop("seen_date", timezone.now())
 
@@ -123,7 +123,9 @@ class TuneMixin(object):
                 dict(errors=str(unexistentMembership)),
                 status=status.HTTP_401_UNAUTHORIZED)
 
-        return self.retrieve(request, pk)
+        serializer = self.get_serializer(thread)
+
+        return Response(serializer.data)
 
 class ThreadFilter(django_filters.rest_framework.FilterSet):
     class Meta:
@@ -170,7 +172,8 @@ class ChannelViewSet(TuneMixin,
 
     @detail_route(methods=['POST'])
     def add_members(self, request, pk):
-        thread = self.get_object()
+#        thread = self.get_object()
+        thread = Thread.objects.get(pk=pk)
         user = get_user_from_view(self)
 
         if not Thread.objects.can_manage(user, thread):
@@ -190,8 +193,8 @@ class ChannelViewSet(TuneMixin,
                 status=status.HTTP_400_BAD_REQUEST)
 
         add_members_serializer.save()
-        
-        return self.retrieve(request, pk)
+
+        return Response(self.get_serializer(thread).data)
 
 class PrivateDiscussionViewSet(TuneMixin,
                                mixins.CreateModelMixin,
@@ -227,7 +230,7 @@ class MessageFilter(django_filters.rest_framework.FilterSet):
         return queryset.filter(attachment__icontains=value)
 
 class MessagePagination(CursorPagination):
-    page_size = 20
+    page_size = 50
     ordering = '-sent_date'
 
 class MessageViewSet(NestedViewSetMixin,
@@ -244,7 +247,7 @@ class MessageViewSet(NestedViewSetMixin,
                        filters.OrderingFilter)
     search_fields = ('contents', 'attachment')
 
-    pagination_class = CursorPagination
+    pagination_class = MessagePagination
 
     ordering_fields = ('sent_date',)
     ordering = ('-sent_date',)

@@ -15,7 +15,7 @@ namespace SphereClient {
 
         public Session session;
         public User? user;
-        public IList<Entity> fetchedChannels;
+        public IList<Channel> fetchedChannels;
         public Channel? currentChannel;
         public Panel preloader;
         /// <summary>
@@ -80,6 +80,7 @@ namespace SphereClient {
         /// <param name="username">the username to use</param>
         /// <param name="password">the password to use</param>
         public void Connect(string username, string password) {
+            this.session?.Dispose();
             this.session = new Session(username, password);
             this.user = this.session.REST.GetProfile();
             this.label1.Text = this.user?.Username;
@@ -128,16 +129,19 @@ namespace SphereClient {
                 Invoke(new Action(() => { FetchChannels(fetchmessages); }));
                 return;
             }
-            this.fetchedChannels = new List<Entity>();
+            this.fetchedChannels = new List<Channel>();
             foreach (var c in this.session.REST.GetAllChannels()) {
                 this.fetchedChannels.Add(c);
+                
             }
             try {
-                this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel());
+                this.currentChannel = this.currentChannel ?? this.fetchedChannels?[0];
                 if (fetchmessages) {
-                    panel4.FetchMessages((Channel)this.currentChannel);
+                    SetCurrentViewedChannel( (int)this.currentChannel?.ThreadId );
+
                 }
-                if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
+                if (!this.panel7.TryCreateComponents<Channel>( this.fetchedChannels ) 
+                    || !this.panel8.TryCreateComponents<Channel>( this.fetchedChannels) ) {
                     MessageBox.Show("failed to create the sidepanel(s).");
                     Application.Exit();
                 }
@@ -160,8 +164,17 @@ namespace SphereClient {
             if (id == this.currentChannel?.ThreadId) {
                 return;
             }
-            IEnumerable<Entity> list = this.fetchedChannels.Where(c => ((Channel)c).ThreadId == id);
+            IEnumerable<Entity> list = this.fetchedChannels.Any(u => u.ThreadId == id)? this.fetchedChannels.Where(u => u.ThreadId == id).Select(u => (Entity)u).ToList<Entity>():null;
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
+            this.label42.Text = this.currentChannel?.Title;
+            this.label2.Text = this.currentChannel?.Description;
+            if(this.currentChannel?.ManagerUser == this.user?.UserId) {
+                this.button1.Enabled = true;
+                this.button1.Visible = true;
+            }else {
+                this.button1.Enabled = false;
+                this.button1.Visible = false;
+            }
             this.panel4.FetchMessages((Channel)this.currentChannel);
         }
 
@@ -257,7 +270,7 @@ namespace SphereClient {
         /// <param name="e"></param>
         /// <param name="e"></param>
         public void OnCreateDirectMessageThread(object s, EventArgs e) {
-            CreateDiscussion.Instance.Show(Entities.Channel.Types.discussion);
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.private_channel);
 
         }
 
@@ -268,7 +281,7 @@ namespace SphereClient {
         /// <param name="s"></param>
         /// <param name="e"></param>
         public void OnCreateGroupDiscussionThread(object s, EventArgs e) {
-            CreateDiscussion.Instance.Show(Entities.Channel.Types.private_channel);
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.public_channel);
         }
 
 
@@ -315,6 +328,33 @@ namespace SphereClient {
         /// <param name="e"></param>
         private void panel4_ControlAdded(object sender, ControlEventArgs e) {
             this.panel4.ScrollControlIntoView(e.Control);
+        }
+
+        /// <summary>
+        /// Triggers when the user clicks on the manage a channel button,
+        /// brings up the management form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click( object sender, EventArgs e ) {
+            ManageChannel mc = new ManageChannel((Channel)this.currentChannel);
+            mc.ShowDialog();
+        }
+
+        /// <summary>
+        /// Triggers when the user clicks on the Logout label.
+        /// Logs the user out and shows the login form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void label3_Click( object sender, EventArgs e ) {
+            this.Hide();
+            this.session = null;
+            this.user = null;
+            this.fetchedChannels = null;
+            
+            LoginForm.Instance.Show();
+
         }
     }
 }
