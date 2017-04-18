@@ -22,7 +22,7 @@ namespace SphereClient {
             this.user = user;
             InitializeComponent();
             this.pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
-            this.textBox1.Text = this.user?.ProfilePicture?.ToString() ?? "";
+            this.textBox1.Text = ((bool)this.user?.ProfilePicture.StartsWith( "http://" ) ? "" : "http://") + this.user?.ProfilePicture?.ToString() ?? "";
             this.textBox2.Text = this.user?.FirstName;
             this.textBox3.Text = this.user?.LastName;
         }

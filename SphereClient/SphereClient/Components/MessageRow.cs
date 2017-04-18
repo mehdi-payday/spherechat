@@ -45,7 +45,7 @@ namespace SphereClient.Components {
 
             Entities.User usr = channel.Memberships.Where(m => m.UserDetails.UserId == message.UserId).First().UserDetails;
             if (!string.IsNullOrEmpty(usr.ProfilePicture)) {
-                this.image.LoadAsync(usr.ProfilePicture);
+                this.image.LoadAsync( ((bool)usr.ProfilePicture.StartsWith( "http://" ) ? "" : "http://") + usr.ProfilePicture);
             }
             else {
                 this.image.Image = Properties.Resources.default_user_image;

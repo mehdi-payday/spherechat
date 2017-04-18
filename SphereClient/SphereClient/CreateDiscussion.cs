@@ -76,10 +76,10 @@ namespace SphereClient {
                     this.comboBox1.SelectedIndex = 0;
                     break;
                 case Entities.Channel.Types.PRIVATE_CHANNEL:
-                    this.comboBox1.SelectedIndex = 0;
+                    this.comboBox1.SelectedIndex = 2;
                     break;
                 case Entities.Channel.Types.PUBLIC_CHANNEL:
-                    this.comboBox1.SelectedIndex = 0;
+                    this.comboBox1.SelectedIndex = 1;
                     break;
             }
             this.ShowDialog();
@@ -121,13 +121,25 @@ namespace SphereClient {
             c.Title = this.textBox1.Text;
             c.ManagerUser = (int)Form1.Instance.user?.UserId;
             c.Members = checkedNodes.ToArray();
-            try {
+            switch (this.comboBox1.SelectedIndex) {
+                case 0:
+                    c.Type = Channel.Types.DISCUSSION;
+                    break;
+                case 1:
+                    c.Type = Channel.Types.PUBLIC_CHANNEL;
+                    break;
+                case 2:
+                    c.Type = Channel.Types.PRIVATE_CHANNEL;
+                    break;
+            }
+            c.Description = this.textBox2.Text;
+            c.CreatorUser = c.ManagerUser;
+            c.ManagerDetails = (User)Form1.Instance.user;
+            
                 Form1.Instance.session.REST.PostChannel( c );
                 MessageBox.Show( "Discussion created successfully." );
                 this.Close();
-            } catch (Exception ex) {
-                MessageBox.Show( "create channel exception \n" + ex.Message );
-            }
+            
 
         }
 

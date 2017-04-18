@@ -22,6 +22,7 @@ namespace SphereClient.REST {
                     json = JSON.Stringify(json);
 
                 Payload = JSON.Parse(wc.UploadString(API + Method, "POST", json ?? "{}"));
+
             }
             return this;
         }

@@ -85,7 +85,7 @@ namespace SphereClient {
             this.label1.Text = this.user?.Username;
             this.pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
             if (!string.IsNullOrEmpty( this.user?.ProfilePicture )) {
-                this.pictureBox19.LoadAsync( this.user?.ProfilePicture );
+                this.pictureBox19.LoadAsync( ((bool)this.user?.ProfilePicture.StartsWith("http://")? "": "http://") + this.user?.ProfilePicture );
             } else {
                 this.pictureBox19.Image = Properties.Resources.default_user_image;
             }   
