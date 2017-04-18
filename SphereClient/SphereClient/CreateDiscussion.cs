@@ -117,9 +117,7 @@ namespace SphereClient {
             }
             Channel c = new Channel();
             c.Title = this.textBox1.Text;
-            c.ManagerUser = (int)Form1.Instance.user?.UserId;
             c.Members = checkedNodes.ToArray();
-            c.Slug = "afsjdlk";
             switch (this.comboBox1.SelectedIndex) {
                 case 0:
                     c.Type = Channel.Types.DISCUSSION;
@@ -132,12 +130,11 @@ namespace SphereClient {
                     break;
             }
             c.Description = this.textBox2.Text;
-            c.CreatorUser = c.ManagerUser;
-            c.ManagerDetails = (User)Form1.Instance.user;
             
-                Form1.Instance.session.REST.PostChannel( c );
-                MessageBox.Show( "Discussion created successfully." );
-                this.Close();
+            
+            Form1.Instance.session.REST.PostChannel( c );
+            MessageBox.Show( "Discussion created successfully." );
+            this.Close();
             
 
         }
