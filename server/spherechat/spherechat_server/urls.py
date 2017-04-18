@@ -15,6 +15,8 @@ Including another URLconf
 """
 
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.conf import settings
 from rest_framework import routers
 from django.contrib import admin
 from core import views
@@ -36,4 +38,4 @@ urlpatterns = [
     url(r'^api/me/', views.MeUserView.as_view()),
     url(r'^api/auth/', include('rest_auth.urls')),
     url(r'^api/auth/registration/', include('rest_auth.registration.urls'))
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
