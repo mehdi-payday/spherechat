@@ -16,6 +16,14 @@ class UserSerializer(serializers.ModelSerializer):
         }
 #    listening_thread_details = ThreadSerializer(read_only=True, source="listening_thread")
 
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
