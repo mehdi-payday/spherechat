@@ -13,5 +13,7 @@ namespace SphereClient {
         public ManageChannel() {
             InitializeComponent();
         }
+
+
     }
 }

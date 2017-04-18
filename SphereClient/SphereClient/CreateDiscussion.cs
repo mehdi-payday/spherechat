@@ -42,10 +42,8 @@ namespace SphereClient {
         /// </summary>
         protected CreateDiscussion() {
             InitializeComponent();
-            User[] users = Form1.Instance.session.REST.GetAllUsers().ToArray();
-            MessageBox.Show( users.Count().ToString() );
+            User[] users = Form1.Instance.session.REST.GetAllUsers().Where(u=>u.UserId != Form1.Instance.user?.UserId).ToArray();
             foreach(User u in users) {
-                
                 listBox1.Items.Add( new listItem(u, u.Username) );
             }
         }
@@ -100,7 +98,7 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click( object sender, EventArgs e ) {
+        private void CreateChannel_Click( object sender, EventArgs e ) {
             if (string.IsNullOrWhiteSpace(this.textBox1.Text) || string.IsNullOrEmpty(this.textBox1.Text)) {
                 this.textBox1.BackColor = Constants.RED;
                 System.Threading.Thread t = new System.Threading.Thread( () => {
@@ -121,6 +119,7 @@ namespace SphereClient {
             c.Title = this.textBox1.Text;
             c.ManagerUser = (int)Form1.Instance.user?.UserId;
             c.Members = checkedNodes.ToArray();
+            c.Slug = "afsjdlk";
             switch (this.comboBox1.SelectedIndex) {
                 case 0:
                     c.Type = Channel.Types.DISCUSSION;
