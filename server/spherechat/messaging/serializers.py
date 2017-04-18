@@ -144,7 +144,7 @@ class MessageSerializer(serializers.ModelSerializer):
 #            "thread": {"read_only": True},
         }
 
-    sender_details = UserSerializer(source="sender", read_only=True)
+    sender_details = UserSerializer(source="user_sender", read_only=True)
     tags = MessageTagSerializer(many=True)
 
     def validate_context(self):

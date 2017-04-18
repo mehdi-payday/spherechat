@@ -1,5 +1,8 @@
 from messaging.models import Message, TuneManager, Membership, MessageTag
 from core.models import User
+from chatterbot import ChatBot
+from chatterbot.ext.django_chatterbot import settings
+
 # from messaging.serializers import ChannelSerializer, PrivateDiscussionSerializer
 # from core.channels import personal_user
 
@@ -31,24 +34,39 @@ class MessageTagObserver(object):
             # TODO : Generate a bot response
 
 class BotObservingMessages(object):
+    chatterbot = ChatBot(**settings.CHATTERBOT)
+
     @classmethod
-    def on_create(self, message):
+    def on_message_saved(cls, message):
         thread = message.thread
         bots = message.thread.members.filter(type=User.BOT)
+        print "A message has been intercepted"
+        print "Searching for bots"
+        print bots
 
         if len(bots) == 0:
             return
+        
+        bot = bots[0]
 
-        from chatterbot import ChatBot
-        chatbot = ChatBot(
-        	"Lucy", 
-	        trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
-	        input_adapter='chatterbot.input.TerminalAdapter')
-        contents = chatbot.get_response(message.contents)
+        if bot.pk == message.user_sender.pk:
+            return
 
-        for bot in bots:
-            if bot.pk != message.user_sender.pk:
-                thread.send(Message(contents=contents), bot)
+        chat_session_id = thread.pk
+        chat_session = cls.chatterbot.conversation_sessions.get(chat_session_id, None)
+        if not chat_session:
+            chat_session = cls.chatterbot.conversation_sessions.new()
+
+#       	"Lucy", 
+#	        trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
+#	        input_adapter='chatterbot.input.TerminalAdapter',
+#            silence_performance_warning=True)
+        contents = cls.chatterbot.get_response(message.contents, chat_session.id_string)
+        print "Response : %s" % contents
+
+        thread.send(Message(contents=contents), bot)
+        print "Sent !!"
+        print
 
 Message.objects.register_observer(BotObservingMessages)
 Message.objects.register_observer(MembershipSeenUpdater)
