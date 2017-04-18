@@ -1,12 +1,8 @@
 ﻿using SphereClient.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SphereClient {
@@ -19,7 +15,7 @@ namespace SphereClient {
         /// </summary>
         /// <param name="o"></param>
         /// <param name="s"></param>
-        public listItem(object o, string s ) {
+        public listItem(object o, string s) {
             this.o = o;
             this.s = s;
         }
@@ -43,10 +39,10 @@ namespace SphereClient {
         protected CreateDiscussion() {
             InitializeComponent();
             User[] users = Form1.Instance.session.REST.GetAllUsers().ToArray();
-            MessageBox.Show( users.Count().ToString() );
-            foreach(User u in users) {
-                
-                listBox1.Items.Add( new listItem(u, u.Username) );
+            MessageBox.Show(users.Count().ToString());
+            foreach (User u in users) {
+
+                listBox1.Items.Add(new listItem(u, u.Username));
             }
         }
 
@@ -72,13 +68,13 @@ namespace SphereClient {
         public void Show(Entities.Channel.Types type) {
             this.listBox1.SelectedItems.Clear();
             switch (type) {
-                case Entities.Channel.Types.DISCUSSION:
+                case Entities.Channel.Types.discussion:
                     this.comboBox1.SelectedIndex = 0;
                     break;
-                case Entities.Channel.Types.PRIVATE_CHANNEL:
+                case Entities.Channel.Types.private_channel:
                     this.comboBox1.SelectedIndex = 2;
                     break;
-                case Entities.Channel.Types.PUBLIC_CHANNEL:
+                case Entities.Channel.Types.public_channel:
                     this.comboBox1.SelectedIndex = 1;
                     break;
             }
@@ -91,7 +87,7 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void linkLabel3_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             this.Close();
         }
 
@@ -100,22 +96,22 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click( object sender, EventArgs e ) {
+        private void button1_Click(object sender, EventArgs e) {
             if (string.IsNullOrWhiteSpace(this.textBox1.Text) || string.IsNullOrEmpty(this.textBox1.Text)) {
                 this.textBox1.BackColor = Constants.RED;
-                System.Threading.Thread t = new System.Threading.Thread( () => {
-                    System.Threading.Thread.Sleep( 3000 );
-                    this.textBox1.Invoke( new Action( () => {
+                System.Threading.Thread t = new System.Threading.Thread(() => {
+                    System.Threading.Thread.Sleep(3000);
+                    this.textBox1.Invoke(new Action(() => {
                         this.BackColor = Color.White;
-                    } ) );
-                } );
+                    }));
+                });
                 t.Start();
                 return;
             }
             List<int> checkedNodes = new List<int>();
             checkedNodes.Add((int)Form1.Instance.user?.UserId);
-            foreach( object t in this.listBox1.SelectedItems) {
-                checkedNodes.Add( (int)((User)((listItem)t).o).UserId );
+            foreach (object t in this.listBox1.SelectedItems) {
+                checkedNodes.Add((int)((User)((listItem)t).o).UserId);
             }
             Channel c = new Channel();
             c.Title = this.textBox1.Text;
@@ -123,23 +119,23 @@ namespace SphereClient {
             c.Members = checkedNodes.ToArray();
             switch (this.comboBox1.SelectedIndex) {
                 case 0:
-                    c.Type = Channel.Types.DISCUSSION;
+                    c.Type = Channel.Types.discussion;
                     break;
                 case 1:
-                    c.Type = Channel.Types.PUBLIC_CHANNEL;
+                    c.Type = Channel.Types.public_channel;
                     break;
                 case 2:
-                    c.Type = Channel.Types.PRIVATE_CHANNEL;
+                    c.Type = Channel.Types.private_channel;
                     break;
             }
             c.Description = this.textBox2.Text;
             c.CreatorUser = c.ManagerUser;
             c.ManagerDetails = (User)Form1.Instance.user;
-            
-                Form1.Instance.session.REST.PostChannel( c );
-                MessageBox.Show( "Discussion created successfully." );
-                this.Close();
-            
+
+            Form1.Instance.session.REST.PostChannel(c);
+            MessageBox.Show("Discussion created successfully.");
+            this.Close();
+
 
         }
 

@@ -18,9 +18,9 @@ namespace SphereClient.Entities {
         }
 
         public enum Types {
-            DISCUSSION = 0,
-            PRIVATE_CHANNEL = 1,
-            PUBLIC_CHANNEL = 2
+            discussion = 0,
+            private_channel = 1,
+            public_channel = 2
         }
     }
 }
