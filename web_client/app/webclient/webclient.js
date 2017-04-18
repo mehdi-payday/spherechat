@@ -41,6 +41,7 @@ angular.module('myApp.webclient', ['session', 'auth'])
 	$scope.retrieveChannels = function(){
 		messaging.getChannels().$promise.then(function(channels){
 			$scope.userChannels = channels;
+			$scope.glocalCountUnseen = $scope.getUnseenMessagesCountGlobal();
 		});
 	}
 	
@@ -115,9 +116,10 @@ angular.module('myApp.webclient', ['session', 'auth'])
 	$scope.getUnseenMessagesCountGlobal = function(){
 		var count = 0;
 		Array.from($scope.userChannels.results).forEach(function(channel){
-			var memberships = channel.memberships;
-			memberships.forEach(function(membership){
-				count += parseInt(membership.unchecked_count);
+			channel.memberships.forEach(function(membership){
+				if(membership.user === session.getCurrentUser().id){
+					count += membership.unchecked_count;
+				}
 			});
 		});
 		return count;
