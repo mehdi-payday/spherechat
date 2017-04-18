@@ -50,7 +50,11 @@ class MembershipManager(ObservableManagerMixin, Manager):
 
     @preconditions(lambda user, thread: isinstance(user, User) and isinstance(thread,Thread))
     def has_seen_thread(self, user, thread):
-        seen = self.has_seen_message(user, thread.get_last_message())
+        try:
+            last_message = thread.get_last_message()
+        except IndexError:
+            last_message = None
+        seen = self.has_seen_message(user, last_message)
 
         return seen
 
