@@ -30,13 +30,15 @@ describe('api factory tests', function() {
 	});
 	
 	it('api login function', function(){
-		$httpBackend.expect('POST', serverAddress + 'api/auth/login/', {username: 'test', password: 'test'}).respond(200, {key: 'x'});
+		$httpBackend.expect('POST', serverAddress + 'api/auth/login/', 
+				{username: 'test', password: 'test'}).respond(200, {key: 'x'});
 		api.login.save({}, {username: 'test', password: 'test'});
 		$httpBackend.flush();
 	});
 	
 	it('api register function', function(){
-		$httpBackend.expect('POST', serverAddress + 'api/auth/registration/', {username: 'test', email: 'test', password1: 'test', password2: 'test'}).respond(200, {key: 'x'});
+		$httpBackend.expect('POST', serverAddress + 'api/auth/registration/', 
+				{username: 'test', email: 'test', password1: 'test', password2: 'test'}).respond(200, {key: 'x'});
 		api.register.save({}, {username: 'test', email: 'test', password1: 'test', password2: 'test'});
 		$httpBackend.flush();
 	});
