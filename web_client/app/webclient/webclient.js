@@ -142,5 +142,5 @@ angular.module('myApp.webclient', ['session', 'auth'])
 		$scope.retrieveChannels();
 		$scope.retrieveMessages();
 		$scope.glocalCountUnseen = $scope.getUnseenMessagesCountGlobal();
-	}, 5000);
+	}, 1000);
 }]);
