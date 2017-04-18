@@ -47,7 +47,8 @@ class BotObservingMessages(object):
         contents = chatbot.get_response(message.contents)
 
         for bot in bots:
-            thread.send(Message(contents=contents), bot)
+            if bot.pk != message.user_sender.pk:
+                thread.send(Message(contents=contents), bot)
 
 Message.objects.register_observer(BotObservingMessages)
 Message.objects.register_observer(MembershipSeenUpdater)

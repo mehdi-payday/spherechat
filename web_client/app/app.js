@@ -286,6 +286,14 @@ angular
 			return api.channel.postMessage({channelId: id}, {contents: message, tags: []});
 		}
 		
+		this.sendChannelHeartbeat = function(id){
+			return api.channel.postHeartbeat({id: id}, {});
+		}
+		
+		this.sendChannelAllRead = function(id){
+			return api.channel.postAllRead({id: id});
+		}
+		
 		// Private Discussions 
 		this.createPrivateDiscussion = function(){
 			return api.privateDiscussion.save();
@@ -305,6 +313,19 @@ angular
 		
 		this.sendPrivateDiscussionMessage = function(id, message){
 			return api.privateDiscussion.postMessage({discussionId: id}, {contents: message});
+		}
+		
+		this.sendPrivateDiscussionHeartbeat = function(id){
+			return api.privateDiscussion.postHeartbeat({id: id});
+		}
+		
+		this.sendPrivateDiscussionAllRead = function(id){
+			return api.privateDiscussion.postAllRead({id: id});
+		}
+		
+		// Users
+		this.getUser = function(id){
+			return api.user.getOne({id: id});
 		}
 	}]);
 	
