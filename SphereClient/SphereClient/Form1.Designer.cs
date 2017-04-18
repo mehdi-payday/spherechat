@@ -30,6 +30,8 @@
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel8 = new SphereClient.Components.GroupListPanel();
+            this.panel7 = new SphereClient.Components.DiscussionListPanel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.sendMessage = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -71,8 +73,6 @@
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.label42 = new System.Windows.Forms.Label();
             this.panel4 = new SphereClient.Components.MessageListPanel();
-            this.panel8 = new SphereClient.Components.GroupListPanel();
-            this.panel7 = new SphereClient.Components.DiscussionListPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
@@ -165,6 +165,24 @@
             this.panel2.Size = new System.Drawing.Size(235, 583);
             this.panel2.TabIndex = 1;
             // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.Transparent;
+            this.panel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
+            this.panel8.Location = new System.Drawing.Point(0, 275);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(235, 308);
+            this.panel8.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.Transparent;
+            this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
+            this.panel7.Location = new System.Drawing.Point(0, 1);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(235, 276);
+            this.panel7.TabIndex = 4;
+            // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
@@ -222,6 +240,7 @@
             this.richTextBox1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Location = new System.Drawing.Point(6, 9);
+            this.richTextBox1.MaxLength = 512;
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(563, 40);
             this.richTextBox1.TabIndex = 0;
@@ -650,24 +669,6 @@
             this.panel4.Size = new System.Drawing.Size(666, 531);
             this.panel4.TabIndex = 2;
             this.panel4.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.panel4_ControlAdded);
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.Transparent;
-            this.panel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
-            this.panel8.Location = new System.Drawing.Point(0, 275);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(235, 308);
-            this.panel8.TabIndex = 5;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.Transparent;
-            this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
-            this.panel7.Location = new System.Drawing.Point(0, 1);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(235, 276);
-            this.panel7.TabIndex = 4;
             // 
             // Form1
             // 

@@ -34,11 +34,32 @@ namespace SphereClient {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button1_Click( object sender, EventArgs e ) {
-            Entities.User u = (Entities.User)Form1.Instance.user ;
-            u.LastName = (string.IsNullOrWhiteSpace(this.textBox3.Text)? this.textBox3.Text: u.LastName);
-            u.FirstName = (string.IsNullOrWhiteSpace( this.textBox2.Text ) ? this.textBox2.Text : u.FirstName); ;
-            u.ProfilePicture = (string.IsNullOrWhiteSpace( this.textBox1.Text ) ? this.textBox1.Text : u.LastName); ;
-            Form1.Instance.session.REST.PostProfile( u );
+            errorlbl.Text = "";
+            try {
+                Entities.User u = (Entities.User)Form1.Instance.user;
+                u.LastName = (!string.IsNullOrEmpty( this.textBox3.Text.Trim() ) ? this.textBox3.Text : u.LastName);
+                u.FirstName = (!string.IsNullOrEmpty( this.textBox2.Text.Trim() ) ? this.textBox2.Text : u.FirstName);
+                u.ProfilePicture = (!string.IsNullOrEmpty( this.textBox1.Text.Trim() ) ? this.textBox1.Text : u.ProfilePicture);
+                
+                try {
+                    new Session( Form1.Instance.user?.Username, this.textBox4.Text );
+                }catch(System.Net.WebException ex2) {
+                    errorlbl.Text +=  "wrong password" + "\n";
+                    this.textBox4.Text = "";
+                    this.textBox5.Text = "";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty( u.LastName ) || string.IsNullOrEmpty( u.FirstName ) || string.IsNullOrEmpty( u.ProfilePicture ) ) {
+                    errorlbl.Text += "Please fill all the fields.\n";
+                    return;
+                }
+                Form1.Instance.session.REST.PostProfile( u );
+                
+            }catch(Exception ex) {
+                errorlbl.Text += "An error occured.\n";
+            }
+            
             
         }
 
