@@ -75,7 +75,7 @@ class SeeThreadSerializer(serializers.Serializer):
 
 class TuneMixin(object):
     @detail_route(methods=['post'])
-    def tune(self, request, pk):
+    def tune(self, request, pk=None):
         thread = self.get_object()
         user = get_user_from_view(self)
 
@@ -94,8 +94,9 @@ class TuneMixin(object):
             return Response(str(unexistentMembership), status=status.HTTP_401_UNAUTHORIZED)
 
     @detail_route(methods=['post'])
-    def see(self, request, pk):
-        thread = Thread.objects.get(pk=pk)
+    def see(self, request, pk=None):
+        thread = self.get_object()
+#        thread = Thread.objects.get(pk=pk)
         user = get_user_from_view(self)
 #        seen_date = request.data.pop("seen_date", timezone.now())
 
@@ -170,7 +171,7 @@ class ChannelViewSet(TuneMixin,
     def get_queryset(self):
         return Thread.objects.channels(get_user_from_view(self))
 
-    @detail_route(methods=['POST'])
+    @detail_route(methods=['post'])
     def add_members(self, request, pk):
 #        thread = self.get_object()
         thread = Thread.objects.get(pk=pk)

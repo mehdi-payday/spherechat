@@ -37,8 +37,8 @@ class BotObservingMessages(object):
 
     @classmethod
     def on_message_saved(cls, message):
-        if not hasattr(self, "chatterbot"):
-            self.chatterbot = ChatBot(**settings.CHATTERBOT)
+        if not hasattr(cls, "chatterbot"):
+            cls.chatterbot = ChatBot(**settings.CHATTERBOT)
 
         thread = message.thread
         bots = message.thread.members.filter(type=User.BOT)
