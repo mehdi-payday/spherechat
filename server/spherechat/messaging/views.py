@@ -123,7 +123,9 @@ class TuneMixin(object):
                 dict(errors=str(unexistentMembership)),
                 status=status.HTTP_401_UNAUTHORIZED)
 
-        return self.retrieve(request, pk)
+        serializer = self.get_serializer(thread)
+
+        return Response(serializer.data)
 
 class ThreadFilter(django_filters.rest_framework.FilterSet):
     class Meta:
@@ -190,8 +192,8 @@ class ChannelViewSet(TuneMixin,
                 status=status.HTTP_400_BAD_REQUEST)
 
         add_members_serializer.save()
-        
-        return self.retrieve(request, pk)
+
+        return Response(self.get_serializer(thread).data)
 
 class PrivateDiscussionViewSet(TuneMixin,
                                mixins.CreateModelMixin,
