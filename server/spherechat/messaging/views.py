@@ -102,12 +102,12 @@ class TuneMixin(object):
         try:
             last_seen_message = request.data.pop("last_seen_message")
         except KeyError:
-            last_seen_message = Thread.objects.get_last_message(thread)
+            last_seen_message = Thread.objects.get_last_message(thread).pk
         
         data = request.data
         data['thread'] = thread.pk
         data['user'] = user.pk
-        data["last_seen_message"] = last_seen_message.pk
+        data["last_seen_message"] = last_seen_message
         
         serializer = SeeThreadSerializer(data=data, context={'request': request})
 
