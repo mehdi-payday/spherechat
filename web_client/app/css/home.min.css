@@ -132,7 +132,7 @@
     -ms-border-radius: 64px;
     -o-border-radius: 64px;
     border-radius: 64px;
-    text-transform: uppercase;
+    
     letter-spacing: 1px;
     display: inline-block;
     -webkit-transition: .25s ease-in-out;
@@ -1237,7 +1237,7 @@
 }
 .integrations-showcase .integrations-showcase-one .integrations-showcase-one-title {
     font-size: 15.3px;
-    text-transform: uppercase;
+    
     letter-spacing: 1.86px;
     margin-top: 36px
 }
@@ -1454,7 +1454,7 @@
     -ms-border-radius: 64px;
     -o-border-radius: 64px;
     border-radius: 64px;
-    text-transform: uppercase;
+    
     letter-spacing: 2px;
     display: inline-block;
     -webkit-transition: .25s ease-in-out;
@@ -1619,7 +1619,7 @@
     -ms-border-radius: 64px;
     -o-border-radius: 64px;
     border-radius: 64px;
-    text-transform: uppercase;
+    
     letter-spacing: 2px;
     display: inline-block;
     -webkit-transition: .25s ease-in-out;
