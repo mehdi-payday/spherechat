@@ -34,10 +34,12 @@ class MessageTagObserver(object):
             # TODO : Generate a bot response
 
 class BotObservingMessages(object):
-    chatterbot = ChatBot(**settings.CHATTERBOT)
 
     @classmethod
     def on_message_saved(cls, message):
+        if not hasattr(self, "chatterbot"):
+            self.chatterbot = ChatBot(**settings.CHATTERBOT)
+
         thread = message.thread
         bots = message.thread.members.filter(type=User.BOT)
         print "A message has been intercepted"
