@@ -129,7 +129,6 @@ namespace SphereClient {
                 return;
             }
             this.fetchedChannels = new List<Channel>();
-            this.fetchedDiscussions = new List<PrivateDiscussion>();
             foreach (var c in this.session.REST.GetAllChannels()) {
                 this.fetchedChannels.Add(c);
                 
