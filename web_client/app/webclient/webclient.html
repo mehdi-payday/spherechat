@@ -674,7 +674,7 @@
 	                          <div class="wrapper">
 	                            <span style="width: 90px; text-align: left!important;">{{channelSelectedUsers[message.user_sender].username}}: </span>
 	                            <div id="div-comment-15" class="comment-self" ng-class="message.user_sender == session.getCurrentUser().id ? left : right">
-	                              <p class="messenger-bulle hoverable">{{message.contents}} <span class="meta">{{message.sent_date | date:'fullDate' }}</span></p>
+	                              <p class="messenger-bulle hoverable">{{message.contents}} <span class="meta">{{message.sent_date | date:'fullDate shortTime' }}</span></p>
 	                            </div>
 	                          </div>
 	                        </li>
