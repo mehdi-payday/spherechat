@@ -95,7 +95,7 @@ class TuneMixin(object):
 
     @detail_route(methods=['post'])
     def see(self, request, pk):
-        thread = self.get_object()
+        thread = Thread.objects.get(pk=pk)
         user = get_user_from_view(self)
 #        seen_date = request.data.pop("seen_date", timezone.now())
 
@@ -172,7 +172,8 @@ class ChannelViewSet(TuneMixin,
 
     @detail_route(methods=['POST'])
     def add_members(self, request, pk):
-        thread = self.get_object()
+#        thread = self.get_object()
+        thread = Thread.objects.get(pk=pk)
         user = get_user_from_view(self)
 
         if not Thread.objects.can_manage(user, thread):
