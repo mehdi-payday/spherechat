@@ -10,10 +10,21 @@ using System.Windows.Forms;
 
 namespace SphereClient {
     public partial class LoginForm : Form {
-        public LoginForm() {
+        private static LoginForm instance;
+
+        /// <summary>
+        /// The constructor for the LoginForm class
+        /// </summary>
+        protected LoginForm() {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Triggers when the user clicks on the Login button.
+        /// Attempts to login.s
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click( object sender, EventArgs e ) {
             try {
                 label2.Text = "";
@@ -39,8 +50,28 @@ namespace SphereClient {
             
         }
 
+        /// <summary>
+        /// Triggered when the user clicks on the register link.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void linkLabel1_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
             System.Diagnostics.Process.Start( "http://spherechat.tk/#!/signup" );
+        }
+
+        /// <summary>
+        /// The singleton accessor for the LoginForm class.
+        /// </summary>
+        public static LoginForm Instance {
+            get {
+                if(instance == null) {
+                    instance = new LoginForm();
+                }
+                return instance;
+            }
+            set {
+                instance = value;
+            }
         }
     }
 }

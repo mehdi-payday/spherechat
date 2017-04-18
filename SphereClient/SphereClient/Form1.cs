@@ -80,6 +80,7 @@ namespace SphereClient {
         /// <param name="username">the username to use</param>
         /// <param name="password">the password to use</param>
         public void Connect(string username, string password) {
+            this.session?.Dispose();
             this.session = new Session(username, password);
             this.user = this.session.REST.GetProfile();
             this.label1.Text = this.user?.Username;
@@ -134,9 +135,10 @@ namespace SphereClient {
                 
             }
             try {
-                this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel());
+                this.currentChannel = this.currentChannel ?? this.fetchedChannels?[0];
                 if (fetchmessages) {
-                    panel4.FetchMessages((Channel)this.currentChannel);
+                    SetCurrentViewedChannel( (int)this.currentChannel?.ThreadId );
+
                 }
                 if (!this.panel7.TryCreateComponents<Channel>( this.fetchedChannels ) 
                     || !this.panel8.TryCreateComponents<Channel>( this.fetchedChannels) ) {
@@ -328,9 +330,31 @@ namespace SphereClient {
             this.panel4.ScrollControlIntoView(e.Control);
         }
 
+        /// <summary>
+        /// Triggers when the user clicks on the manage a channel button,
+        /// brings up the management form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click( object sender, EventArgs e ) {
             ManageChannel mc = new ManageChannel((Channel)this.currentChannel);
             mc.ShowDialog();
+        }
+
+        /// <summary>
+        /// Triggers when the user clicks on the Logout label.
+        /// Logs the user out and shows the login form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void label3_Click( object sender, EventArgs e ) {
+            this.Hide();
+            this.session = null;
+            this.user = null;
+            this.fetchedChannels = null;
+            
+            LoginForm.Instance.Show();
+
         }
     }
 }

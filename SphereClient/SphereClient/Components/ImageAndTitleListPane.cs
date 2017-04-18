@@ -73,7 +73,6 @@ namespace SphereClient.Components {
                 this.contents.AutoScroll = true;
 
                 int entityIndex = 0;
-                //TODO and move events to objects
                 foreach (Entity entity in this.list) {
                     ImageAndTitleRow row = new ImageAndTitleRow(entity.ToText(), "http://vignette3.wikia.nocookie.net/reddeadredemption/images/8/88/Reddeadredemption_agentedgarross_256x256.jpg/revision/latest?cb=20110906163856", this);
                     row.entity = entity;

@@ -64,6 +64,10 @@ namespace SphereClient {
             this.channel.Title = this.textBox1.Text;
             this.channel.Description = this.textBox2.Text;
             this.channel.Type = this.comboBox1.SelectedIndex == 0 ? Channel.Types.private_channel : Channel.Types.public_channel;
+            if(string.IsNullOrWhiteSpace(this.channel.Title.Trim()) || string.IsNullOrWhiteSpace( this.channel.Description.Trim() )) {
+                MessageBox.Show( "Les champs Nom et Description sont necessaires" );
+                return;
+            }
             try {
                 //Le serveur ne peut pas supporter ce type de requete
                 //Form1.Instance.session.REST.PostUpdateChannel( this.channel );
