@@ -164,6 +164,7 @@ namespace SphereClient.Components {
             this.BackColor = Constants.PURPLE;
             this._head = base.title_pane;
             this.ForeColor = Constants.DARK_PURPLE;
+            plus.Cursor = Cursors.Hand;
             plus.Click += ( object s, EventArgs e ) => {
                 base.InvokePlusClick( this, e );
             };
@@ -221,6 +222,7 @@ namespace SphereClient.Components {
             this.BackColor = Constants.PURPLE;
             this._head = base.title_pane;
             this.ForeColor = Constants.DARK_PURPLE;
+            plus.Cursor = Cursors.Hand;
             plus.Click += ( object s, EventArgs e ) => {
                 base.InvokePlusClick( this, e );
             };

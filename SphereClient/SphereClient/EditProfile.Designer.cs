@@ -23,7 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditProfile));
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -33,7 +32,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // linkLabel3
@@ -43,7 +45,7 @@
             this.linkLabel3.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.linkLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
             this.linkLabel3.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(1)))), ((int)(((byte)(56)))));
-            this.linkLabel3.Location = new System.Drawing.Point(118, 311);
+            this.linkLabel3.Location = new System.Drawing.Point(123, 311);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(40, 13);
             this.linkLabel3.TabIndex = 6;
@@ -54,11 +56,12 @@
             // pictureBox19
             // 
             this.pictureBox19.BackColor = System.Drawing.Color.White;
-            this.pictureBox19.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox19.BackgroundImage")));
             this.pictureBox19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox19.Location = new System.Drawing.Point(90, 12);
+            this.pictureBox19.Image = global::SphereClient.Properties.Resources.default_user_image;
+            this.pictureBox19.Location = new System.Drawing.Point(112, 46);
             this.pictureBox19.Name = "pictureBox19";
-            this.pictureBox19.Size = new System.Drawing.Size(102, 100);
+            this.pictureBox19.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox19.TabIndex = 4;
             this.pictureBox19.TabStop = false;
             // 
@@ -79,7 +82,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(90, 275);
+            this.button1.Location = new System.Drawing.Point(96, 275);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 33);
             this.button1.TabIndex = 9;
@@ -89,7 +92,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 143);
+            this.textBox1.Location = new System.Drawing.Point(15, 146);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(257, 20);
             this.textBox1.TabIndex = 10;
@@ -129,12 +132,35 @@
             this.textBox3.Size = new System.Drawing.Size(257, 20);
             this.textBox3.TabIndex = 14;
             // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = global::SphereClient.Properties.Resources.Capture1;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Location = new System.Drawing.Point(-1, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(285, 40);
+            this.panel2.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(0, 1);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(285, 38);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Edit your Information";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // EditProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::SphereClient.Properties.Resources.chatting_bg;
             this.ClientSize = new System.Drawing.Size(284, 336);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label3);
@@ -148,6 +174,7 @@
             this.Name = "EditProfile";
             this.Text = "EditProfile";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,5 +191,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label4;
     }
 }

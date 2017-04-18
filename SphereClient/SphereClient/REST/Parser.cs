@@ -173,6 +173,7 @@ namespace SphereClient.REST {
                     username = user.Username,
                     first_name = user.FirstName,
                     last_name = user.LastName,
+                    picture_url = user.ProfilePicture,
                     type = EnumToString(user.Type, typeof(User.Types)),
                 };
             }
@@ -457,6 +458,7 @@ namespace SphereClient.REST {
                         Username = json.username.ToString(),
                         FirstName = json.first_name.ToString(),
                         LastName = json.last_name.ToString(),
+                        ProfilePicture = json.picture_url.ToString(),
                         Type = ParseEnum<User.Types>((json.type ?? "").ToString()),
 
                         IsNull = false

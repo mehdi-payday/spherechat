@@ -49,7 +49,7 @@ namespace SphereClient.Sockets {
         /// </summary>
         public void Connect() {
             OnConnecting?.Invoke();
-            Socket.BeginConnect(Configuration.EP, beginConnect, new Buffers.HTTP.Read(new byte[4096]));
+            Socket.BeginConnect(Configuration.EP, beginConnect, new Buffers.HTTP.Read(new byte[40960]));
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace SphereClient.Sockets {
             var hello = Encoding.UTF8.GetBytes(Configuration.HelloServer.Header("GET", Configuration.Path));
             Socket.Send(hello, hello.Length, 0);
 
-            Buffers.HTTP.Read buffer = new Buffers.HTTP.Read(new byte[4096]);
+            Buffers.HTTP.Read buffer = new Buffers.HTTP.Read(new byte[40960]);
             Socket.BeginReceive(buffer.Buffer, 0, buffer.Size, 0, beginReceive, buffer);
         }
 
@@ -122,7 +122,7 @@ namespace SphereClient.Sockets {
                         // Upgrade to websocket on server request
                         if (current.HTTP_STATUS == 101 && current.Headers.Contains(new KeyValuePair<string, string>("Upgrade", "websocket"))) {
                             OnConnected?.Invoke();
-                            next = new Buffers.WebSocket.Read(new byte[4096]);
+                            next = new Buffers.WebSocket.Read(new byte[40960]);
                         }
                         else {
                             string payload = current.Payload.Replace("\0", "").Trim();
@@ -156,7 +156,7 @@ namespace SphereClient.Sockets {
                             OnReceive?.Invoke(Encoding.UTF8.GetString(current.Payload));
                         }
 
-                        next = new Buffers.WebSocket.Read(new byte[4096]);
+                        next = new Buffers.WebSocket.Read(new byte[40960]);
                         Socket.BeginReceive(next.Buffer, 0, next.Size, 0, beginReceive, next);
                     }
                 }
