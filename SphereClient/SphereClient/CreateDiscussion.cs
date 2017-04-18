@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SphereClient {
-    struct listItem {
+    public struct listItem {
         public object o;
         public string s;
 
@@ -64,6 +64,8 @@ namespace SphereClient {
         /// </summary>
         /// <param name="type"></param>
         public void Show(Entities.Channel.Types type) {
+            this.textBox1.Text = string.Empty;
+            this.textBox2.Text = string.Empty;
             this.listBox1.SelectedItems.Clear();
             switch (type) {
                 case Entities.Channel.Types.private_channel:

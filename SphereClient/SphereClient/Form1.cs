@@ -164,6 +164,15 @@ namespace SphereClient {
             }
             IEnumerable<Entity> list = this.fetchedChannels.Any(u => u.ThreadId == id)? this.fetchedChannels.Where(u => u.ThreadId == id).Select(u => (Entity)u).ToList<Entity>():null;
             this.currentChannel = (Channel)(list.Any() ? list.First() : null);
+            this.label42.Text = this.currentChannel?.Title;
+            this.label2.Text = this.currentChannel?.Description;
+            if(this.currentChannel?.ManagerUser == this.user?.UserId) {
+                this.button1.Enabled = true;
+                this.button1.Visible = true;
+            }else {
+                this.button1.Enabled = false;
+                this.button1.Visible = false;
+            }
             this.panel4.FetchMessages((Channel)this.currentChannel);
         }
 
@@ -317,6 +326,11 @@ namespace SphereClient {
         /// <param name="e"></param>
         private void panel4_ControlAdded(object sender, ControlEventArgs e) {
             this.panel4.ScrollControlIntoView(e.Control);
+        }
+
+        private void button1_Click( object sender, EventArgs e ) {
+            ManageChannel mc = new ManageChannel((Channel)this.currentChannel);
+            mc.ShowDialog();
         }
     }
 }
