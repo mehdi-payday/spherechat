@@ -11,14 +11,14 @@
       <link rel="stylesheet" href="css/style.css">
 
   <style class="cp-pen-styles">/* Styles */
-  html,body {
-  height:100%;
-  margin:0;
-}
+	html,body {
+	  height:100%;
+	  margin:0;
+	}
 
 .content {
   height:100%;
-  min-height:100%;/*for mozilla*/
+  min-height:100%;
 }
 
 html>body .content {
@@ -26,25 +26,216 @@ html>body .content {
   background-color: rgba(255,255,255,.3);
 }
 
-#two {
+#pane {
   	width: 100%;
     height: 299px;
     overflow-y: auto;
     max-width: 100%;
     max-height: 100px;
     position: relative;
-    display: none;
 }
+/* Reset */
+@import url(http://codepen.io/chrisdothtml/pen/ojLzJK.css);
+/* Extenders */
+.clearfix:after, .user .user-element .element-content .content-post:after, .user .user-element .element-actions:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.animate, .user .user-element .element-content, .user .user-element .element-content .btn-more, .user .user-element .element-actions .btn-action, .user .user-element .element-actions .btn-action > i {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+/* General */
+button {
+  display: block;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+h1 {
+  display: block;
+  background-color: #fff;
+  width: 100%;
+  line-height: 1;
+  margin-bottom: 20px;
+  padding: 65px 50px;
+  font-weight: 700;
+  font-size: 32px;
+  color: #000;
+}
+
+.user {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+.user .user-element {
+  position: relative;
+}
+.user .user-element .element-content {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  border-bottom: 1px solid #d6d6d6;
+  position: relative;
+  right: 0;
+  z-index: 2;
+  -webkit-box-shadow: 22px 35px 38px #eef4fc;
+  -moz-box-shadow: 22px 35px 38px #eef4fc;
+  box-shadow: 22px 35px 38px #eef4fc;
+}
+.user .user-element .element-content .btn-more {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.user .user-element .element-content .btn-more > i {
+  font-size: 16px;
+  color: #929292;
+  vertical-align: middle;
+}
+.user .user-element .element-content .btn-more .icon-open,
+.user .user-element .element-content .btn-more .icon-hearted {
+  display: none;
+}
+.user .user-element .element-content .btn-more:hover {
+  background-color: #F9F9F9;
+}
+.user .user-element .element-content .content-post .post-avatar img{
+  background-color: #ededed;
+  width: 60px;
+  height: 60px;
+  float: left;
+  border-radius: 50%;
+}
+.user .user-element .element-content .content-post .post-content {
+  margin-left: 75px;
+  padding-top: 9px;
+}
+.user .user-element .element-content .content-post .post-content .post-title,
+.user .user-element .element-content .content-post .post-content .post-body {
+  display: block;
+}
+.user .user-element .element-content .content-post .post-content .post-title {
+  font-size: 14px;
+  color: #AFADAD;
+}
+.user .user-element .element-content .content-post .post-content .post-body {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #CCCBCB;
+}
+.user .user-element .element-content:hover .btn-more {
+  opacity: 1;
+}
+.user .user-element .element-actions {
+  width: 100px;
+  height: 45px;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  z-index: 1;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.user .user-element .element-actions .btn-action {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+}
+.user .user-element .element-actions .btn-action > i {
+  font-size: 20px;
+}
+.user .user-element .element-actions .btn-action.btn-hide {
+  border-color: #34495e;
+}
+.user .user-element .element-actions .btn-action.btn-hide > i {
+  color: #34495e;
+}
+.user .user-element .element-actions .btn-action.btn-hide:hover {
+  background-color: #34495e;
+}
+.user .user-element .element-actions .btn-action.btn-heart {
+  border-color: #e74c3c;
+}
+.user .user-element .element-actions .btn-action.btn-heart > i {
+  color: #e74c3c;
+}
+.user .user-element .element-actions .btn-action.btn-heart:hover {
+  background-color: #e74c3c;
+}
+.user .user-element .element-actions .btn-action:not(:last-child) {
+  margin-right: 10px;
+}
+.user .user-element .element-actions .btn-action:hover > i {
+  color: #fff;
+}
+.user .user-element:not(:first-child) {
+  margin-top: 15px;
+}
+.user .user-element.user-element-open .element-content {
+  right: 140px;
+}
+.user .user-element.user-element-open .element-content .btn-more {
+  opacity: 1;
+}
+.user .user-element.user-element-open .element-content .btn-more .icon-closed {
+  display: none;
+}
+.user .user-element.user-element-open .element-content .btn-more .icon-open {
+  display: inline-block;
+}
+.user .user-element.user-element-hearted .element-actions .btn-action.btn-heart {
+  background-color: #e74c3c;
+}
+.user .user-element.user-element-hearted .element-actions .btn-action.btn-heart > i {
+  color: #fff;
+}
+.user .user-element.user-element-hearted .element-content .btn-more {
+  opacity: 1;
+}
+.user .user-element.user-element-hearted .element-content .btn-more > i {
+  color: #e74c3c;
+}
+.user .user-element.user-element-hearted .element-content .btn-more .icon-open,
+.user .user-element.user-element-hearted .element-content .btn-more .icon-closed {
+  display: none;
+}
+.user .user-element.user-element-hearted .element-content .btn-more .icon-hearted {
+  display: inline-block;
+}
+
+@media screen and (max-width: 500px) {
+  .user .user-element .element-content .btn-more {
+    opacity: 1;
+  }
+  .user .user-element .element-content .btn-more:hover {
+    background-color: transparent;
+  }
+}
+
 </style>
 </head>
 
 <body style="background-color: #fff;">
-<div class='content' id='two'>
+<div class='content' id='pane'>
 <div class="user">
 	<div class="user-element">
 		<div class="element-actions">
 			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-			
+			<button class="btn btn-action btn-heart"><i class="fa fa-heart-o"></i></button>
 		</div>
 		
 		<div class="element-content">
@@ -68,6 +259,7 @@ html>body .content {
 	<div class="user-element">
 		<div class="element-actions">
 			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
+			<button class="btn btn-action btn-heart"><i class="fa fa-heart-o"></i></button>
 		</div>
 		
 		<div class="element-content">
@@ -87,305 +279,11 @@ html>body .content {
 			</div>
 		</div>
 	</div>
+
 	<div class="user-element">
 		<div class="element-actions">
 			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-		</div>
-		
-		<div class="element-content">
-			<button class="btn btn-more">
-				<i class="fa fa-ellipsis-h icon-closed"></i>
-				<i class="fa fa-times icon-open"></i>
-				<i class="fa fa-heart-o icon-hearted"></i>
-			</button>
-			
-			<div class="content-post">
-				<div class="post-avatar"><img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/15541639_10210861329118898_2718461393738381828_n.jpg?oh=8bd945a734bbde8bfec0562b82f85176&oe=598A581B"></div>
-
-				<div class="post-content">
-					<span class="post-title">{{ user.name }}</span>
-					<p class="post-body">{{ user.bio }}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="user-element">
-		<div class="element-actions">
-			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-			
+			<button class="btn btn-action btn-heart"><i class="fa fa-heart-o"></i></button>
 		</div>
 		
 		<div class="element-content">
@@ -409,7 +307,7 @@ html>body .content {
 	<div class="user-element">
 		<div class="element-actions">
 			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-			
+			<button class="btn btn-action btn-heart"><i class="fa fa-heart-o"></i></button>
 		</div>
 		
 		<div class="element-content">
@@ -433,7 +331,7 @@ html>body .content {
 	<div class="user-element">
 		<div class="element-actions">
 			<button class="btn btn-action btn-hide"><i class="fa fa-ban"></i></button>
-			
+			<button class="btn btn-action btn-heart"><i class="fa fa-heart-o"></i></button>
 		</div>
 		
 		<div class="element-content">
@@ -458,8 +356,71 @@ html>body .content {
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://hammerjs.github.io/dist/hammer.min.js'></script>
 <script src='http://hammerjs.github.io/dist/hammer-time.min.js'></script>
+<script type="text/javascript">
+	(function() {
+  var toggleElement;
 
-    <script src="js/index.js"></script>
+  toggleElement = function($el, type) {
+    if (type != null) {
+      if (type === 'open') {
+        $el.addClass('user-element-open');
+        $el.siblings('.user-element').removeClass('user-element-open');
+      } else if (type === 'close') {
+        $el.removeClass('user-element-open');
+      }
+    } else {
+      if ($el.hasClass('user-element-open')) {
+        toggleElement($el, 'close');
+      } else {
+        toggleElement($el, 'open');
+      }
+    }
+    return null;
+  };
+
+  $(document).ready(function() {
+    var hammertime;
+    $('.btn').click(function() {
+      var $parent;
+      $parent = $(this).parents('.user-element');
+      if ($(this).hasClass('btn-heart')) {
+        if ($parent.hasClass('user-element-hearted')) {
+          return $parent.removeClass('user-element-hearted');
+        } else {
+          $parent.addClass('user-element-hearted');
+          return toggleElement($parent, 'close');
+        }
+      } else if ($(this).hasClass('btn-hide')) {
+        toggleElement($parent, 'close');
+        return $parent.delay(200).fadeOut(300);
+      } else if ($(this).hasClass('btn-more')) {
+        if (!hammertime) {
+          return toggleElement($parent);
+        }
+      }
+    });
+    if ($(window).width() < 800) {
+      hammertime = $('.user-element .element-content').hammer();
+      return hammertime.on('swipeleft swiperight tap', function(e) {
+        var $parent;
+        $parent = $(e.currentTarget).parent();
+        if (e.type === 'tap') {
+          return toggleElement($parent);
+        } else if (e.type === 'swipeleft') {
+          if (!$parent.hasClass('user-element-open')) {
+            return toggleElement($parent, 'open');
+          }
+        } else {
+          if ($parent.hasClass('user-element-open')) {
+            return toggleElement($parent, 'close');
+          }
+        }
+      });
+    }
+  });
+
+}).call(this);
+</script>
 
 </body>
 </html>
