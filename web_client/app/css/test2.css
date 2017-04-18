@@ -2056,7 +2056,7 @@ body.mode-user-panel #sidebar-black-overlay {
     font-size: 10px;
     letter-spacing: .02em;
     overflow: hidden;
-    text-transform: uppercase;
+    
     transition: color .15s ease-in-out
 }
 .profile-card-stats-statValue {
@@ -2461,14 +2461,14 @@ section {
     font-size: 10px;
     line-height: 30px;
     font-weight: 600;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
 }
 .date {
     font-size: 40px;
     line-height: 40px;
     font-weight: 300;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
 }
 /*-----*/
@@ -2480,7 +2480,7 @@ section {
     font-size: 40px;
     line-height: 100px;
     font-weight: 300;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
     text-align: center;
     opacity: 0;
@@ -2495,7 +2495,7 @@ section {
     font-size: 14px;
     line-height: 30px;
     font-weight: 300;
-    text-transform: uppercase;
+    
     letter-spacing: 0;
     text-align: center;
     opacity: 0;
@@ -2509,7 +2509,7 @@ section {
     font-size: 14px;
     line-height: 30px;
     font-weight: 600;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
     text-align: center;
     opacity: 0;
@@ -2578,7 +2578,6 @@ em {
     font-size: 14px;
     line-height: 33px;
     font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 2px;
     white-space: nowrap;
 }
@@ -4534,7 +4533,6 @@ body.mode-user-panel #sidebar-black-overlay {
     font-size: 10px;
     letter-spacing: .02em;
     overflow: hidden;
-    text-transform: uppercase;
     transition: color .15s ease-in-out
 }
 .profile-card-stats-statValue {
@@ -4939,14 +4937,14 @@ section {
     font-size: 10px;
     line-height: 30px;
     font-weight: 600;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
 }
 .date {
     font-size: 40px;
     line-height: 40px;
     font-weight: 300;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
 }
 /*-----*/
@@ -4958,7 +4956,7 @@ section {
     font-size: 40px;
     line-height: 100px;
     font-weight: 300;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
     text-align: center;
     opacity: 0;
@@ -4973,7 +4971,7 @@ section {
     font-size: 14px;
     line-height: 30px;
     font-weight: 300;
-    text-transform: uppercase;
+    
     letter-spacing: 0;
     text-align: center;
     opacity: 0;
@@ -4987,7 +4985,7 @@ section {
     font-size: 14px;
     line-height: 30px;
     font-weight: 600;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
     text-align: center;
     opacity: 0;
@@ -5023,7 +5021,7 @@ section {
     font-size: 14px;
     line-height: 25px;
     font-weight: 600;
-    text-transform: uppercase;
+    
     letter-spacing: 2px;
     text-align: center;
     bottom: 0;
@@ -5068,7 +5066,7 @@ em {
     font-size: 14px;
     line-height: 33px;
     font-weight: 600;
-    text-transform: uppercase;
+    
     letter-spacing: 2px;
     white-space: nowrap;
 }
