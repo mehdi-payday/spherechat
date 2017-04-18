@@ -4,13 +4,13 @@
   toggleElement = function($el, type) {
     if (type != null) {
       if (type === 'open') {
-        $el.addClass('panel-element-open');
-        $el.siblings('.panel-element').removeClass('panel-element-open');
+        $el.addClass('user-element-open');
+        $el.siblings('.user-element').removeClass('user-element-open');
       } else if (type === 'close') {
-        $el.removeClass('panel-element-open');
+        $el.removeClass('user-element-open');
       }
     } else {
-      if ($el.hasClass('panel-element-open')) {
+      if ($el.hasClass('user-element-open')) {
         toggleElement($el, 'close');
       } else {
         toggleElement($el, 'open');
@@ -23,12 +23,12 @@
     var hammertime;
     $('.btn').click(function() {
       var $parent;
-      $parent = $(this).parents('.panel-element');
+      $parent = $(this).parents('.user-element');
       if ($(this).hasClass('btn-heart')) {
-        if ($parent.hasClass('panel-element-hearted')) {
-          return $parent.removeClass('panel-element-hearted');
+        if ($parent.hasClass('user-element-hearted')) {
+          return $parent.removeClass('user-element-hearted');
         } else {
-          $parent.addClass('panel-element-hearted');
+          $parent.addClass('user-element-hearted');
           return toggleElement($parent, 'close');
         }
       } else if ($(this).hasClass('btn-hide')) {
@@ -41,18 +41,18 @@
       }
     });
     if ($(window).width() < 800) {
-      hammertime = $('.panel-element .element-content').hammer();
+      hammertime = $('.user-element .element-content').hammer();
       return hammertime.on('swipeleft swiperight tap', function(e) {
         var $parent;
         $parent = $(e.currentTarget).parent();
         if (e.type === 'tap') {
           return toggleElement($parent);
         } else if (e.type === 'swipeleft') {
-          if (!$parent.hasClass('panel-element-open')) {
+          if (!$parent.hasClass('user-element-open')) {
             return toggleElement($parent, 'open');
           }
         } else {
-          if ($parent.hasClass('panel-element-open')) {
+          if ($parent.hasClass('user-element-open')) {
             return toggleElement($parent, 'close');
           }
         }

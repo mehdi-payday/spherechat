@@ -21,6 +21,8 @@ namespace SphereClient.REST {
                 if (json.GetType() != typeof(String))
                     json = JSON.Stringify(json);
 
+                Console.WriteLine();
+                Console.WriteLine( json );
                 Payload = JSON.Parse(wc.UploadString(API + Method, "POST", json ?? "{}"));
 
             }

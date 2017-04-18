@@ -35,7 +35,8 @@ urlpatterns = [
     url(r'^api/django-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/messaging/', include('messaging.urls')),
     url(r'^api/friendship/', include('friendship.urls')),
-    url(r'^api/me/', views.MeUserView.as_view()),
+    url(r'^api/me/$', views.MeUserView.as_view()),
+    url(r'^api/me/change_password/', views.ChangePasswordView.as_view()),
     url(r'^api/auth/', include('rest_auth.urls')),
     url(r'^api/auth/registration/', include('rest_auth.registration.urls'))
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

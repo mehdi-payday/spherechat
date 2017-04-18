@@ -75,9 +75,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ItemHeight = 13;
             this.comboBox1.Items.AddRange(new object[] {
-            "Private discussion",
-            "Public group",
-            "Private group"});
+            "Private group",
+            "Public group"});
             this.comboBox1.Location = new System.Drawing.Point(157, 76);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(115, 21);
@@ -115,7 +114,7 @@
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(257, 108);
-            this.listBox1.TabIndex = 13;
+            this.listBox1.TabIndex = 4;
             // 
             // button1
             // 
@@ -127,10 +126,10 @@
             this.button1.Location = new System.Drawing.Point(94, 280);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 33);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Create !";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.CreateChannel_Click);
             // 
             // linkLabel3
             // 
@@ -142,7 +141,7 @@
             this.linkLabel3.Location = new System.Drawing.Point(122, 316);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(40, 13);
-            this.linkLabel3.TabIndex = 10;
+            this.linkLabel3.TabIndex = 6;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Cancel";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);

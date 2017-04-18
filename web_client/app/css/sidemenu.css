@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   letter-spacing: 1px;
   text-align: center;
-  text-transform: uppercase;
+  
 }
 
 .Details-nav {
@@ -237,7 +237,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 16px 36px;
   position: relative;
   text-align: center;
-  text-transform: uppercase;
+  
   -webkit-transition: box-shadow 0.15s, background-color 0.15s;
   transition: box-shadow 0.15s, background-color 0.15s;
   -webkit-user-select: none;

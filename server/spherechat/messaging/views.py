@@ -227,7 +227,7 @@ class MessageFilter(django_filters.rest_framework.FilterSet):
         return queryset.filter(attachment__icontains=value)
 
 class MessagePagination(CursorPagination):
-    page_size = 20
+    page_size = 50
     ordering = '-sent_date'
 
 class MessageViewSet(NestedViewSetMixin,
@@ -244,7 +244,7 @@ class MessageViewSet(NestedViewSetMixin,
                        filters.OrderingFilter)
     search_fields = ('contents', 'attachment')
 
-    pagination_class = CursorPagination
+    pagination_class = MessagePagination
 
     ordering_fields = ('sent_date',)
     ordering = ('-sent_date',)

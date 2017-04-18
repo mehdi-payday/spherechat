@@ -5,4 +5,5 @@ namespace SphereClient.Entities {
         public string Next { get; set; }
         public string Previous { get; set; }
     }
+
 }

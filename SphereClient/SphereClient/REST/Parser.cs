@@ -2,12 +2,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace SphereClient.REST {
-    public class Parser {
-        public static dynamic EntitytoJSON(dynamic entity, Type type) {
-            if (type == typeof(Channel)) {
+namespace SphereClient.REST
+{
+    public class Parser
+    {
+        public static dynamic EntitytoJSON(dynamic entity, Type type)
+        {
+            if (type == typeof(Channel))
+            {
                 Channel channel = (Channel)entity;
-                return new {
+                return new
+                {
                     id = channel.ThreadId,
                     slug = channel.Slug,
                     title = channel.Title,
@@ -20,16 +25,20 @@ namespace SphereClient.REST {
                     members = channel.Members
                 };
             }
-            else if (type == typeof(Channel[])) {
+            else if (type == typeof(Channel[]))
+            {
                 List<dynamic> channels = new List<dynamic>();
-                foreach (var channel in (entity as Channel[])) {
+                foreach (var channel in (entity as Channel[]))
+                {
                     channels.Add(EntitytoJSON(channel, typeof(Channel)));
                 }
                 return channels.ToArray();
             }
-            else if (type == typeof(FriendRequest)) {
+            else if (type == typeof(FriendRequest))
+            {
                 FriendRequest friendrequest = (FriendRequest)entity;
-                return new {
+                return new
+                {
                     requester = friendrequest.Requester,
                     addresser = friendrequest.Addresser,
                     friend_detail = EntitytoJSON(friendrequest.FriendDetails, typeof(User)),
@@ -39,16 +48,20 @@ namespace SphereClient.REST {
                     active = friendrequest.Active
                 };
             }
-            else if (type == typeof(FriendRequest[])) {
+            else if (type == typeof(FriendRequest[]))
+            {
                 List<dynamic> friendrequests = new List<dynamic>();
-                foreach (var friendrequest in (entity as FriendRequest[])) {
+                foreach (var friendrequest in (entity as FriendRequest[]))
+                {
                     friendrequests.Add(EntitytoJSON(friendrequest, typeof(FriendRequest)));
                 }
                 return friendrequests;
             }
-            else if (type == typeof(Entities.Friendship)) {
+            else if (type == typeof(Entities.Friendship))
+            {
                 Entities.Friendship friendship = (Entities.Friendship)entity;
-                return new {
+                return new
+                {
                     id = friendship.FriendshipId,
                     requester_user = friendship.Requester,
                     addresser_user = friendship.Addresser,
@@ -58,16 +71,20 @@ namespace SphereClient.REST {
                     active = friendship.Active
                 };
             }
-            else if (type == typeof(Entities.Friendship[])) {
+            else if (type == typeof(Entities.Friendship[]))
+            {
                 List<dynamic> friendships = new List<dynamic>();
-                foreach (var friendship in (entity as Entities.Friendship[])) {
+                foreach (var friendship in (entity as Entities.Friendship[]))
+                {
                     friendships.Add(EntitytoJSON(friendship, typeof(Entities.Friendship)));
                 }
                 return friendships.ToArray();
             }
-            else if (type == typeof(Membership)) {
+            else if (type == typeof(Membership))
+            {
                 Membership membership = (Membership)entity;
-                return new {
+                return new
+                {
                     id = membership.MembershipId,
                     thread = membership.ThreadId,
                     user = membership.UserId,
@@ -79,16 +96,20 @@ namespace SphereClient.REST {
                     unchecked_count = membership.UncheckedCount
                 };
             }
-            else if (type == typeof(Membership[])) {
+            else if (type == typeof(Membership[]))
+            {
                 List<dynamic> memberships = new List<dynamic>();
-                foreach (var membership in (entity as Membership[])) {
+                foreach (var membership in (entity as Membership[] ?? new Membership[0]))
+                {
                     memberships.Add(EntitytoJSON(membership, typeof(Membership)));
                 }
                 return memberships.ToArray();
             }
-            else if (type == typeof(Message)) {
+            else if (type == typeof(Message))
+            {
                 Message message = (Message)entity;
-                return new {
+                return new
+                {
                     id = message.MessageId,
                     thread = message.ThreadId,
                     user_sender = message.UserId,
@@ -98,32 +119,40 @@ namespace SphereClient.REST {
                     tags = EntitytoJSON(message.Tags ?? new MessageTag[] { }, typeof(MessageTag[]))
                 };
             }
-            else if (type == typeof(Message[])) {
+            else if (type == typeof(Message[]))
+            {
                 List<dynamic> messages = new List<dynamic>();
-                foreach (var message in (entity as Message[])) {
+                foreach (var message in (entity as Message[]))
+                {
                     messages.Add(JSONtoEntity(message, typeof(Message)));
                 }
                 return messages.ToArray();
             }
-            else if (type == typeof(MessageTag)) {
+            else if (type == typeof(MessageTag))
+            {
                 MessageTag tag = (MessageTag)entity;
-                return new {
+                return new
+                {
                     tagger_user = tag.TaggedUserId,
                     message = tag.MessageId,
                     placeholder_position = tag.PlaceholderPosition,
                     tagged_user_details = EntitytoJSON(tag.TaggedUserDetails, typeof(User))
                 };
             }
-            else if (type == typeof(MessageTag[])) {
+            else if (type == typeof(MessageTag[]))
+            {
                 List<dynamic> messagetags = new List<dynamic>();
-                foreach (var messagetag in (entity as MessageTag[])) {
+                foreach (var messagetag in (entity as MessageTag[]))
+                {
                     messagetags.Add(JSONtoEntity(messagetag, typeof(MessageTag)));
                 }
                 return messagetags.ToArray();
             }
-            else if (type == typeof(PrivateDiscussion)) {
+            else if (type == typeof(PrivateDiscussion))
+            {
                 PrivateDiscussion privatediscussion = (PrivateDiscussion)entity;
-                return new {
+                return new
+                {
                     id = privatediscussion.ThreadId,
                     slug = privatediscussion.Slug,
                     title = privatediscussion.Title,
@@ -134,19 +163,24 @@ namespace SphereClient.REST {
                     manager_details = EntitytoJSON(privatediscussion.ManagerDetails, typeof(User)),
                     membership = EntitytoJSON(privatediscussion.Membership, typeof(Membership)),
                     memberships = EntitytoJSON(privatediscussion.Memberships, typeof(Membership[])),
-                    interlocutor_membership = EntitytoJSON(privatediscussion.InterlocutorMembership, typeof(Membership))
+                    interlocutor_membership = EntitytoJSON(privatediscussion.InterlocutorMembership, typeof(Membership)),
+                    members = privatediscussion.Members
                 };
             }
-            else if (type == typeof(PrivateDiscussion[])) {
+            else if (type == typeof(PrivateDiscussion[]))
+            {
                 List<dynamic> privatediscussions = new List<dynamic>();
-                foreach (var privatediscussion in (entity as PrivateDiscussion[])) {
+                foreach (var privatediscussion in (entity as PrivateDiscussion[]))
+                {
                     privatediscussions.Add(EntitytoJSON(privatediscussion, typeof(PrivateDiscussion)));
                 }
                 return privatediscussions.ToArray();
             }
-            else if (type == typeof(Thread)) {
+            else if (type == typeof(Thread))
+            {
                 Thread thread = (Thread)entity;
-                return new {
+                return new
+                {
                     id = thread.ThreadId,
                     slug = thread.Slug,
                     title = thread.Title,
@@ -159,16 +193,20 @@ namespace SphereClient.REST {
                     memberships = EntitytoJSON(thread.Memberships, typeof(Membership[]))
                 };
             }
-            else if (type == typeof(Thread[])) {
+            else if (type == typeof(Thread[]))
+            {
                 List<dynamic> threads = new List<dynamic>();
-                foreach (var thread in (entity as Thread[])) {
+                foreach (var thread in (entity as Thread[]))
+                {
                     threads.Add(EntitytoJSON(thread, typeof(PrivateDiscussion)));
                 }
                 return threads.ToArray();
             }
-            else if (type == typeof(User)) {
+            else if (type == typeof(User))
+            {
                 User user = (User)entity;
-                return new {
+                return new
+                {
                     id = user.UserId,
                     username = user.Username,
                     first_name = user.FirstName,
@@ -177,41 +215,55 @@ namespace SphereClient.REST {
                     type = EnumToString(user.Type, typeof(User.Types)),
                 };
             }
-            else if (type == typeof(User[])) {
+            else if (type == typeof(User[]))
+            {
                 List<dynamic> users = new List<dynamic>();
-                foreach (var user in (entity as User[])) {
+                foreach (var user in (entity as User[]))
+                {
                     users.Add(EntitytoJSON(user, typeof(User)));
                 }
                 return users.ToArray();
             }
-            else {
+            else
+            {
                 throw new Exception("Unhandled Type " + type.ToString());
             }
         }
 
-        public static dynamic JSONtoEntity(dynamic json, Type type) {
-            if (type == typeof(Entities.Auth)) {
-                if (json == null || json.ToString() == "") {
-                    return new Entities.Auth() {
+        public static dynamic JSONtoEntity(dynamic json, Type type)
+        {
+            if (type == typeof(Entities.Auth))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new Entities.Auth()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new Entities.Auth() {
+                else
+                {
+                    return new Entities.Auth()
+                    {
                         Token = json.key,
 
                         IsNull = false
                     };
                 }
             }
-            else if (type == typeof(Channel)) {
-                if (json == null || json.ToString() == "") {
-                    return new Channel() {
+            else if (type == typeof(Channel))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new Channel()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new Channel() {
+                else
+                {
+                    return new Channel()
+                    {
                         ThreadId = ParseInt(json.id.ToString()),
                         Slug = json.slug.ToString(),
                         Title = json.title.ToString(),
@@ -228,23 +280,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(Channel[])) {
+            else if (type == typeof(Channel[]))
+            {
                 List<Channel> channels = new List<Channel>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         channels.Add(JSONtoEntity(a, typeof(Channel)));
                     }
                 }
                 return channels.ToArray();
             }
-            else if (type == typeof(Entities.Friendship)) {
-                if (json == null || json.ToString() == "") {
-                    return new Entities.Friendship() {
+            else if (type == typeof(Entities.Friendship))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new Entities.Friendship()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new Entities.Friendship() {
+                else
+                {
+                    return new Entities.Friendship()
+                    {
                         FriendshipId = ParseInt(json.id.ToString()),
                         Requester = ParseInt(json.requester_user.ToString()),
                         Addresser = ParseInt(json.addresser_user.ToString()),
@@ -257,23 +317,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(Entities.Friendship[])) {
+            else if (type == typeof(Entities.Friendship[]))
+            {
                 List<Entities.Friendship> friendships = new List<Entities.Friendship>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         friendships.Add(JSONtoEntity(a, typeof(Entities.Friendship)));
                     }
                 }
                 return friendships.ToArray();
             }
-            else if (type == typeof(FriendRequest)) {
-                if (json == null || json.ToString() == "") {
-                    return new FriendRequest() {
+            else if (type == typeof(FriendRequest))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new FriendRequest()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new FriendRequest() {
+                else
+                {
+                    return new FriendRequest()
+                    {
                         Requester = ParseInt(json.requester.ToString()),
                         Addresser = ParseInt(json.addresser.ToString()),
                         FriendDetails = JSONtoEntity(json.friend_detail, typeof(User)),
@@ -286,23 +354,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(FriendRequest[])) {
+            else if (type == typeof(FriendRequest[]))
+            {
                 List<FriendRequest> friendrequests = new List<FriendRequest>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         friendrequests.Add(JSONtoEntity(a, typeof(FriendRequest)));
                     }
                 }
                 return friendrequests.ToArray();
             }
-            else if (type == typeof(Membership)) {
-                if (json == null || json.ToString() == "") {
-                    return new Membership() {
+            else if (type == typeof(Membership))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new Membership()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new Membership() {
+                else
+                {
+                    return new Membership()
+                    {
                         MembershipId = ParseInt(json.id.ToString()),
                         ThreadId = ParseInt(json.thread.ToString()),
                         UserId = ParseInt(json.user.ToString()),
@@ -317,23 +393,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(Membership[])) {
+            else if (type == typeof(Membership[]))
+            {
                 List<Membership> memberships = new List<Membership>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json)
+                    {
                         memberships.Add(JSONtoEntity(a, typeof(Membership)));
                     }
                 }
                 return memberships.ToArray();
             }
-            else if (type == typeof(Message)) {
-                if (json == null || json.ToString() == "") {
-                    return new Message() {
+            else if (type == typeof(Message))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new Message()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new Message() {
+                else
+                {
+                    return new Message()
+                    {
                         MessageId = ParseInt(json.id.ToString()),
                         ThreadId = ParseInt(json.thread.ToString()),
                         UserId = ParseInt(json.user_sender.ToString()),
@@ -346,23 +430,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(Message[])) {
+            else if (type == typeof(Message[]))
+            {
                 List<Message> messages = new List<Message>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         messages.Add(JSONtoEntity(a, typeof(Message)));
                     }
                 }
                 return messages.ToArray();
             }
-            else if (type == typeof(MessageTag)) {
-                if (json == null || json.ToString() == "") {
-                    return new MessageTag() {
+            else if (type == typeof(MessageTag))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new MessageTag()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new MessageTag() {
+                else
+                {
+                    return new MessageTag()
+                    {
                         TaggedUserId = ParseInt(json.tagged_user.ToString()),
                         MessageId = ParseInt(json.messsage.ToString()),
                         PlaceholderPosition = ParseInt(json.placeholder_position.ToString()),
@@ -372,23 +464,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(MessageTag[])) {
+            else if (type == typeof(MessageTag[]))
+            {
                 List<MessageTag> messagetag = new List<MessageTag>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json)
+                    {
                         messagetag.Add(JSONtoEntity(a, typeof(MessageTag)));
                     }
                 }
                 return messagetag.ToArray();
             }
-            else if (type == typeof(PrivateDiscussion)) {
-                if (json == null || json.ToString() == "") {
-                    return new PrivateDiscussion() {
+            else if (type == typeof(PrivateDiscussion))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new PrivateDiscussion()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new PrivateDiscussion() {
+                else
+                {
+                    return new PrivateDiscussion()
+                    {
                         ThreadId = ParseInt(json.id.ToString()),
                         Slug = json.slug.ToString(),
                         Title = json.title.ToString(),
@@ -400,28 +500,37 @@ namespace SphereClient.REST {
                         Membership = JSONtoEntity(json.membership, typeof(Membership)),
                         Memberships = JSONtoEntity(json.memberships, typeof(Membership[])),
                         InterlocutorMembership = JSONtoEntity(json.interlocutor_membership, typeof(Membership)),
+                        Members = (int[])(string.IsNullOrEmpty(json.members?.ToString()) ? new int[0] : json.members),
 
                         IsNull = false
                     };
                 }
             }
-            else if (type == typeof(PrivateDiscussion[])) {
+            else if (type == typeof(PrivateDiscussion[]))
+            {
                 List<PrivateDiscussion> privatediscussions = new List<PrivateDiscussion>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         privatediscussions.Add(JSONtoEntity(a, typeof(PrivateDiscussion)));
                     }
                 }
                 return privatediscussions.ToArray();
             }
-            else if (type == typeof(Thread)) {
-                if (json == null || json.ToString() == "") {
-                    return new Thread() {
+            else if (type == typeof(Thread))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new Thread()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new Thread() {
+                else
+                {
+                    return new Thread()
+                    {
                         ThreadId = ParseInt(json.id.ToString()),
                         Slug = json.slug.ToString(),
                         Title = json.title.ToString(),
@@ -437,23 +546,31 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(Thread[])) {
+            else if (type == typeof(Thread[]))
+            {
                 List<Thread> threads = new List<Thread>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         threads.Add(JSONtoEntity(a, typeof(Thread)));
                     }
                 }
                 return threads.ToArray();
             }
-            else if (type == typeof(User)) {
-                if (json == null || json.ToString() == "") {
-                    return new User() {
+            else if (type == typeof(User))
+            {
+                if (json == null || json.ToString() == "")
+                {
+                    return new User()
+                    {
                         IsNull = true
                     };
                 }
-                else {
-                    return new User() {
+                else
+                {
+                    return new User()
+                    {
                         UserId = ParseInt(json.id.ToString()),
                         Username = json.username.ToString(),
                         FirstName = json.first_name.ToString(),
@@ -465,54 +582,68 @@ namespace SphereClient.REST {
                     };
                 }
             }
-            else if (type == typeof(User[])) {
+            else if (type == typeof(User[]))
+            {
                 List<User> users = new List<User>();
-                if (json == null || json.ToString() != "") {
-                    foreach (var a in json.results) {
+                if (json == null || json.ToString() != "")
+                {
+                    foreach (var a in json.results)
+                    {
                         users.Add(JSONtoEntity(a, typeof(User)));
                     }
                 }
                 return users.ToArray();
             }
-            else {
+            else
+            {
                 throw new Exception("Unhandled Type " + type.ToString());
             }
         }
 
-        private static DateTime ParseDate(string value) {
+        private static DateTime ParseDate(string value)
+        {
             DateTime result;
             return DateTime.TryParse(value, out result) ? result : new DateTime();
         }
 
-        private static double ParseDouble(string value) {
+        private static double ParseDouble(string value)
+        {
             double result;
             return double.TryParse(value, out result) ? result : -1;
         }
 
-        private static int ParseInt(string value) {
+        private static int ParseInt(string value)
+        {
             int result;
             return int.TryParse(value, out result) ? result : -1;
         }
 
-        private static bool ParseBool(string value) {
+        private static bool ParseBool(string value)
+        {
             bool result;
             return bool.TryParse(value, out result) ? result : false;
         }
 
-        private static T ParseEnum<T>(string data) {
-            try {
-                return (T)Convert.ChangeType(Enum.Parse(typeof(T), data.ToString().ToUpper()), typeof(T));
+        private static T ParseEnum<T>(string data)
+        {
+            try
+            {
+                return (T)Convert.ChangeType(Enum.Parse(typeof(T), data.ToString().ToLower()), typeof(T));
             }
-            catch {
+            catch
+            {
                 return default(T);
             }
         }
 
-        private static string EnumToString(Enum data, Type type) {
-            try {
+        private static string EnumToString(Enum data, Type type)
+        {
+            try
+            {
                 return Enum.GetName(type, data);
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
