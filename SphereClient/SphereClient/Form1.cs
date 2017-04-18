@@ -31,14 +31,14 @@ namespace SphereClient {
         /// </summary>
         /// <param name="username">username to use to create a session</param>
         /// <param name="password">password for the username's account</param>
-        protected Form1(string username, string password) :this(){
+        protected Form1(string username, string password) : this() {
             Connect(username, password);
         }
-        
+
         /// <summary>
         /// Default contructor for the Form1 class.
         /// </summary>
-        protected Form1():base() {
+        protected Form1() : base() {
             InitializeComponent();
             MakePreloader();
         }
@@ -84,11 +84,12 @@ namespace SphereClient {
             this.user = this.session.REST.GetProfile();
             this.label1.Text = this.user?.Username;
             this.pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
-            if (!string.IsNullOrEmpty( this.user?.ProfilePicture )) {
-                this.pictureBox19.LoadAsync( ((bool)this.user?.ProfilePicture.StartsWith("http://")? "": "http://") + this.user?.ProfilePicture );
-            } else {
+            if (!string.IsNullOrEmpty(this.user?.ProfilePicture)) {
+                this.pictureBox19.LoadAsync(((bool)this.user?.ProfilePicture.StartsWith("http://") ? "" : "http://") + this.user?.ProfilePicture);
+            }
+            else {
                 this.pictureBox19.Image = Properties.Resources.default_user_image;
-            }   
+            }
         }
 
         /// <summary>
@@ -112,9 +113,9 @@ namespace SphereClient {
         /// to the message pane if this the currently viewed pane
         /// </summary>
         /// <param name="m"></param>
-        private void OnMessage(Entities.Message m ) {
+        private void OnMessage(Entities.Message m) {
             if (this.currentChannel?.ThreadId == m.ThreadId) {
-                this.panel4.OnNewMessage( m );
+                this.panel4.OnNewMessage(m);
             }
         }
 
@@ -124,7 +125,7 @@ namespace SphereClient {
         /// </summary>
         public void FetchChannels(bool fetchmessages = true) {
             if (InvokeRequired) {
-                Invoke(new Action(()=> { FetchChannels( fetchmessages ); } ));
+                Invoke(new Action(() => { FetchChannels(fetchmessages); }));
                 return;
             }
             this.fetchedChannels = new List<Entity>();
@@ -132,18 +133,19 @@ namespace SphereClient {
                 this.fetchedChannels.Add(c);
             }
             try {
-                this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel() );
+                this.currentChannel = this.currentChannel ?? (fetchedChannels.Any() ? (Channel)fetchedChannels.First() : new Channel());
                 if (fetchmessages) {
-                    panel4.FetchMessages( (Channel)this.currentChannel );
+                    panel4.FetchMessages((Channel)this.currentChannel);
                 }
                 if (!this.panel7.TryCreateComponents() || !this.panel8.TryCreateComponents()) {
                     MessageBox.Show("failed to create the sidepanel(s).");
                     Application.Exit();
                 }
-            } catch (Exception ex) {
-                MessageBox.Show( ex.Message );
             }
-            
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         /// <summary>
@@ -212,7 +214,7 @@ namespace SphereClient {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Send_Message_Click(object sender, EventArgs e) {
-            if(string.IsNullOrEmpty(this.richTextBox1.Text) || string.IsNullOrWhiteSpace( this.richTextBox1.Text )) {
+            if (string.IsNullOrEmpty(this.richTextBox1.Text) || string.IsNullOrWhiteSpace(this.richTextBox1.Text)) {
                 return;
             }
             Entities.Message msg = new Entities.Message();
@@ -233,7 +235,7 @@ namespace SphereClient {
         /// Tirggered when the websocket detects that a discussion changed.
         /// </summary>
         /// <param name=""></param>
-        private void OnDiscussionChanged( Entities.PrivateDiscussion d) {
+        private void OnDiscussionChanged(Entities.PrivateDiscussion d) {
             FetchChannels(false);
         }
 
@@ -254,8 +256,8 @@ namespace SphereClient {
         /// </summary>
         /// <param name="e"></param>
         /// <param name="e"></param>
-        public void OnCreateDirectMessageThread(object s, EventArgs e ) {
-            CreateDiscussion.Instance.Show(Entities.Channel.Types.DISCUSSION);
+        public void OnCreateDirectMessageThread(object s, EventArgs e) {
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.discussion);
 
         }
 
@@ -265,8 +267,8 @@ namespace SphereClient {
         /// </summary>
         /// <param name="s"></param>
         /// <param name="e"></param>
-        public void OnCreateGroupDiscussionThread(object s, EventArgs e ) {
-            CreateDiscussion.Instance.Show( Entities.Channel.Types.PRIVATE_CHANNEL);
+        public void OnCreateGroupDiscussionThread(object s, EventArgs e) {
+            CreateDiscussion.Instance.Show(Entities.Channel.Types.private_channel);
         }
 
 
@@ -297,10 +299,11 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void richTextBox1_TextChanged( object sender, EventArgs e ) {
-            if(this.richTextBox1.Text.Length > 0) {
+        private void richTextBox1_TextChanged(object sender, EventArgs e) {
+            if (this.richTextBox1.Text.Length > 0) {
                 this.sendMessage.Enabled = true;
-            }else {
+            }
+            else {
                 this.sendMessage.Enabled = false;
             }
         }
@@ -310,8 +313,8 @@ namespace SphereClient {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void panel4_ControlAdded( object sender, ControlEventArgs e ) {
-            this.panel4.ScrollControlIntoView( e.Control );
+        private void panel4_ControlAdded(object sender, ControlEventArgs e) {
+            this.panel4.ScrollControlIntoView(e.Control);
         }
     }
 }

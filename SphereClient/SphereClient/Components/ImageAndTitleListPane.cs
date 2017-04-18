@@ -13,7 +13,7 @@ namespace SphereClient.Components {
     /// "group messages" panels.
     /// </summary>
     public abstract partial class ImageAndTitleListPane : Panel {
-        public delegate void PlusClick( object s, EventArgs e );
+        public delegate void PlusClick(object s, EventArgs e);
         public Panel title_pane;
         public Panel contents;
         public IList<Entity> list;
@@ -32,12 +32,12 @@ namespace SphereClient.Components {
         /// </summary>
         /// <param name="titlepane">the panel that will serve as a header. must not be null</param>
         /// <param name="list">the <see cref="SphereClient.Entities.Entity"/> list to represent. must not be null</param>
-        public ImageAndTitleListPane( IList<Entity> list) : base() {
+        public ImageAndTitleListPane(IList<Entity> list) : base() {
             InitializeComponent();
             this.list = list;
             this.contents = new Panel();
             this.Controls.Add(this.contents);
-            this.OnPlusClick += ( object s, EventArgs e )=>{ };
+            this.OnPlusClick += (object s, EventArgs e) => { };
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace SphereClient.Components {
             }
             return status;
         }
-        
+
         /// <summary>
         /// Triggered when the user clicks on a row.
         /// </summary>
@@ -119,10 +119,10 @@ namespace SphereClient.Components {
         /// <param name="e"></param>
         protected void InvokePlusClick(object s, EventArgs e) {
             if (InvokeRequired) {
-                Invoke(new Action(()=> { this.InvokePlusClick( s, e ); } ));
+                Invoke(new Action(() => { this.InvokePlusClick(s, e); }));
                 return;
             }
-            this.OnPlusClick( s, e );
+            this.OnPlusClick(s, e);
         }
 
         /// <summary>
@@ -156,8 +156,8 @@ namespace SphereClient.Components {
             plus.Left = DiscussionListPanel.leftIconOffset;
             plus.Top = Constants.MARGIN_SMALL.Top;
             base.title_pane.Height = 37;
-            base.title_pane.Controls.Add( title );
-            base.title_pane.Controls.Add( plus );
+            base.title_pane.Controls.Add(title);
+            base.title_pane.Controls.Add(plus);
             base.title_pane.BackColor = Constants.LIGHT_PURPLE;
             base.title_pane.ForeColor = Constants.DARK_PURPLE;
             base.title_pane.Font = Constants.SECTION_TITLE_FONT;
@@ -165,11 +165,11 @@ namespace SphereClient.Components {
             this._head = base.title_pane;
             this.ForeColor = Constants.DARK_PURPLE;
             plus.Cursor = Cursors.Hand;
-            plus.Click += ( object s, EventArgs e ) => {
-                base.InvokePlusClick( this, e );
+            plus.Click += (object s, EventArgs e) => {
+                base.InvokePlusClick(this, e);
             };
-            base.Controls.Add( base.title_pane );
-           
+            base.Controls.Add(base.title_pane);
+
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace SphereClient.Components {
         /// will fetch the Channel list from <see cref="Form1.Instance.session"/>'s GetChannels
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
-        public DiscussionListPanel() : this( new List<Entity>()) {
+        public DiscussionListPanel() : this(new List<Entity>()) {
             //void
         }
 
@@ -185,7 +185,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are not of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.DISCUSSION == ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c => Channel.Types.discussion == ((Channel)c).Type).ToList<Entity>();
         }
 
     }
@@ -194,7 +194,7 @@ namespace SphereClient.Components {
     /// "Group message" Panel class.
     /// </summary>
     public class GroupListPanel : ImageAndTitleListPane {
-        
+
         private Panel _head;
         private static int leftIconOffset = 210;
 
@@ -202,7 +202,7 @@ namespace SphereClient.Components {
         /// Constructor for the DiscussionListPanel class.
         /// </summary>
         /// <param name="list">the Sphereclient.Entities.Entity list to represent</param>
-        public GroupListPanel(IList<Entity> list) :  base( list) {
+        public GroupListPanel(IList<Entity> list) : base(list) {
             base.title_pane = new Panel();
             Label title = new Label();
             Label plus = new Label();
@@ -214,8 +214,8 @@ namespace SphereClient.Components {
             plus.Left = GroupListPanel.leftIconOffset;
             plus.Top = Constants.MARGIN_SMALL.Top;
             base.title_pane.Height = 37;
-            base.title_pane.Controls.Add( title );
-            base.title_pane.Controls.Add( plus );
+            base.title_pane.Controls.Add(title);
+            base.title_pane.Controls.Add(plus);
             base.title_pane.BackColor = Constants.LIGHT_PURPLE;
             base.title_pane.ForeColor = Constants.DARK_PURPLE;
             base.title_pane.Font = Constants.SECTION_TITLE_FONT;
@@ -223,10 +223,10 @@ namespace SphereClient.Components {
             this._head = base.title_pane;
             this.ForeColor = Constants.DARK_PURPLE;
             plus.Cursor = Cursors.Hand;
-            plus.Click += ( object s, EventArgs e ) => {
-                base.InvokePlusClick( this, e );
+            plus.Click += (object s, EventArgs e) => {
+                base.InvokePlusClick(this, e);
             };
-            base.Controls.Add( base.title_pane );
+            base.Controls.Add(base.title_pane);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace SphereClient.Components {
         /// will fetch the Channel list from <see cref="Form1.Instance.session"/>'s GetChannels
         /// method and filter them to only take those being Thread.Types.DISCUSSION 
         /// </summary>
-        public GroupListPanel() : this( new List<Entity>()) {
+        public GroupListPanel() : this(new List<Entity>()) {
             //void
         }
 
@@ -242,7 +242,7 @@ namespace SphereClient.Components {
         /// Filters off all entities that are of type Thread.Types.DISCUSSION
         /// </summary>
         public override void filter() {
-            this.list = this.list.Where(c => Channel.Types.DISCUSSION != ((Channel)c).Type).ToList<Entity>();
+            this.list = this.list.Where(c => Channel.Types.discussion != ((Channel)c).Type).ToList<Entity>();
         }
 
     }
