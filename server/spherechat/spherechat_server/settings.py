@@ -76,6 +76,43 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+ #       'file': {
+ #           'level': 'DEBUG',
+ #           'class': 'logging.FileHandler',
+ #           'filename': os.path.join(BASE_DIR, 'sphere.log'),
+ #           'formatter': 'simple'
+ #       },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
+
+if DEBUG:
+    # make all loggers use the console.
+    for logger in LOGGING['loggers']:
+        LOGGING['loggers'][logger]['handlers'] = ['console']
+
 CHATTERBOT = {
     'name': 'Lucy',
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
@@ -132,13 +169,22 @@ WSGI_APPLICATION = 'spherechat_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'spherechat',
-        'USER': 'spherechat',
-        'PASSWORD': 'payday',
-        'HOST': 'localhost',
+        'NAME': 'sphere',
+        'USER': 'chatter',
+        'PASSWORD': 'spherechatter31',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
+
+# In the flexible environment, you connect to CloudSQL using a unix socket.
+# Locally, you can use the CloudSQL proxy to proxy a localhost connection
+# to the instance
+DATABASES['default']['HOST'] = '/cloudsql/optical-realm-167819:us-central1:sphere'
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+    pass
+else:
+    DATABASES['default']['HOST'] = '127.0.0.1'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

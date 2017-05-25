@@ -17,4 +17,14 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spherechat_server.settings")
 
-application = get_wsgi_application()
+print 'IMPORTING', __name__, 'from', __file__, 'in', os.getpid()
+
+try:
+    application = get_wsgi_application()
+except Exception:
+    # Error loading applications.
+
+    if 'mod_wsgi' in sys.modules:
+        os.kill(os.getpid(), signal.SIGINT)
+        
+    raise
