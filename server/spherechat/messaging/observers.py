@@ -40,11 +40,9 @@ class BotObservingMessages(object):
         if not hasattr(cls, "chatterbot"):
             cls.chatterbot = ChatBot(**settings.CHATTERBOT)
 
+        # Search for bot(s) participating to the thread in order to send a bot answer
         thread = message.thread
         bots = message.thread.members.filter(type=User.BOT)
-        print "A message has been intercepted"
-        print "Searching for bots"
-        print bots
 
         if len(bots) == 0:
             return
@@ -54,23 +52,11 @@ class BotObservingMessages(object):
         if bot.pk == message.user_sender.pk:
             return
 
-#        chat_session_id = thread.pk
-#        chat_session = cls.chatterbot.conversation_sessions.get(chat_session_id, None)
-#        if not chat_session:
-#            chat_session = cls.chatterbot.conversation_sessions.new()
-
-#       	"Lucy", 
-#	        trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
-#	        input_adapter='chatterbot.input.TerminalAdapter',
-#            silence_performance_warning=True)
-#        contents = cls.chatterbot.get_response(message.contents, chat_session.id_string)
+        # Generate a bot response
         contents = cls.chatterbot.get_response(message.contents) # , chat_session.id_string)
 
-        print "Response : %s" % contents
-
+        # Send the bot response
         thread.send(Message(contents=contents), bot)
-        print "Sent !!"
-        print
 
 Message.objects.register_observer(BotObservingMessages)
 Message.objects.register_observer(MembershipSeenUpdater)
