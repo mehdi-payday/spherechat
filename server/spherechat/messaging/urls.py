@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import include
-# from rest_framework_nested import routers as nested_routers
 from rest_framework_extensions.routers import ExtendedSimpleRouter
 from messaging import views
 
