@@ -20,9 +20,6 @@ channel_router.register(r'messages',
                         base_name='channel-messages',
                         parents_query_lookups=['thread'] )
 
-# channel_router.register(r'memberships', views.MembershipViewSet, base_name='channel-memberships',  parents_query_lookups=['thread'])
-# channel_router.register(r'member_relations', views.MemberThreadViewSet, base_name='channel-members-relation',  parents_query_lookups=['thread'] )
-
 privatediscussion_router.register(r'messages',
                                   views.MessageViewSet,
                                   base_name='privatediscussion-messages',
