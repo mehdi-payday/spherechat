@@ -62,12 +62,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-#    picture = models.ImageField(
-#        'profile_picture',
-#        upload_to='uploads',
-#        null=True,
-#        blank=True
-#    )
     picture_url = models.CharField(null=True, blank=True, max_length=255)
     HUMAN = "HUM"
     BOT = "BOT"
