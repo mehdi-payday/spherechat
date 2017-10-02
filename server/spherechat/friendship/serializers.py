@@ -23,8 +23,6 @@ class FriendshipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Friendship
         fields = ("id", "requester_user", "addresser_user", "status", "request_date", "approval_date", "friendship_end_date", "active")
-
-        requester_user = UserSerializer(source="manager_user", read_only=True)
         extra_kwargs = {
             "requester_user": {"read_only": True},
             "request_date": {"read_only": True},
@@ -33,4 +31,5 @@ class FriendshipSerializer(serializers.ModelSerializer):
             "active": {"read_only": True},
             "status": {"read_only": True},
         }
+    requester_user = UserSerializer(source="manager_user", read_only=True)
 
