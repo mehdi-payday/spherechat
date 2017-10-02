@@ -20,18 +20,18 @@ class FriendshipManager(Manager):
         else:
             return self.create(addresser_user=addresser_user,
                                requester_user=requester_user,
-                               status="PEND")
+                               status=Friendship.STATUS_PENDING)
 
-    def accept_friend_request(self, pending_friendship):      
-        pending_friendship.status = "ACPT"
+    def accept_friend_requests(self, pending_friendship):      
+        pending_friendship.status = Friendship.STATUS_ACCEPTED
         if pending_friendship.approval_date == None:
             pending_friendship.approval_date = datetime.now()
      
         pending_friendship.save()
         return pending_friendship
 
-    def decline_friend_request(self, pending_friendship):
-        pending_friendship.status = "RJCT"
+    def decline_friend_requests(self, pending_friendship):
+        pending_friendship.status = Friendship.STATUS_REJECTED
         pending_friendship.active = False
         pending_friendship.save()
 
@@ -45,19 +45,20 @@ class FriendshipManager(Manager):
         return friendship
     
     def get_friendships(self, user):
-        return self.filter(Q(addresser_user=user) | Q(requester_user=user) , status="ACPT", active=True)
-    # Get pending friend requests
+        return self.filter(Q(addresser_user=user) | Q(requester_user=user) , status=Friendship.STATUS_ACCEPTED, active=True)
+    
     def get_friend_requests(self, user):
-        return self.filter(addresser_user=user, status="PEND", active=True)
-    # TODO Get list of your accepted friend requests
-    def get_friends(self, user):
-        accepted_users = self.filter(addresser_user=user, status="ACPT", active=True)
+        """
+        Get pending friend requests
+        """
+        return self.filter(addresser_user=user, status=Friendship.STATUS_PENDING, active=True)
+    
+    def get_accepted_friend_requests(self, user):
+        """
+        Get list of your accepted friend requests
+        """
         
-        #return User.objects.filter(requester_user__in=accepted_users)
-        return self.filter(addresser_user=user, status="ACPT", active=True)
-
-    def belongs(self, addresser_user, requester_user):
-        return self.filter(requester_user=requester_user, addresser_user=addresser_user , active=True).exists()
+        return self.filter(addresser_user=user, status=Friendship.STATUS_ACCEPTED, active=True)
 
 class Friendship(Model):
     objects = FriendshipManager()
