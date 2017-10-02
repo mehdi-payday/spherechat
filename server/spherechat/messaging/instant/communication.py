@@ -1,6 +1,4 @@
 from messaging.channels import (
-#    discussion_channels as discussion_channels_comm,
-#    private_discussions as private_discussions_comm,
     threads as threads_comm,
     users as users_comm)
 from messaging.serializers import (
